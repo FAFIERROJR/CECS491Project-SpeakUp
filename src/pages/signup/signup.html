@@ -14,34 +14,40 @@
 
 
 <ion-content padding>
+  
+  <ion-row>
+  <ion-grid col-md-4>
+      <form>
+          <ion-item >
+            <ion-label>First Name</ion-label>
+            <ion-input type="text"></ion-input>
+          </ion-item>
+      
+          <ion-item>
+            <ion-label>Last Name</ion-label>
+            <ion-input type="text"></ion-input>
+          </ion-item>
 
-  <form>
-    <ion-item>
-      <ion-label>First Name</ion-label>
-      <ion-input type="text"></ion-input>
-    </ion-item>
-
-    <ion-item>
-        <ion-label>Last Name</ion-label>
-        <ion-input type="text"></ion-input>
-    </ion-item>
-
-    <ion-item>
-        <ion-label>Campus ID</ion-label>
-        <ion-input type="text"></ion-input>
-    </ion-item>
-
-    <ion-item>
-        <ion-label>Campus Email</ion-label>
-        <ion-input type="text"></ion-input>
-    </ion-item>
-
-    <ion-item>
-        <ion-label>Password</ion-label>
-        <ion-input type="text"></ion-input>
-    </ion-item>
-    
-    <button ion-button color="primary" type="submit">Create Account</button>
-    
-  </form>
+          <ion-item>
+            <ion-label>Campus ID</ion-label>
+            <ion-input type="text"></ion-input>
+          </ion-item>
+      
+          <ion-item>
+            <ion-label>Campus Email</ion-label>
+            <ion-input type="text"></ion-input>
+          </ion-item>
+      
+          <ion-item>
+            <ion-label>Password</ion-label>
+            <ion-input type="password"></ion-input>
+          </ion-item>
+          
+          <button ion-button color="primary" type="submit">Create Account</button>
+      
+        </form>
+  </ion-grid>
+  <ion-grid col-md-8 id="splash-image">Hello</ion-grid>
+</ion-row>
+  
 </ion-content>
