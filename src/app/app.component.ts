@@ -5,11 +5,12 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 import { AngularFireDatabase } from 'angularfire2/database';
 
 import { HomePage } from '../pages/home/home';
+import { SignupPage } from '../pages/signup/signup';
 @Component({
   templateUrl: 'app.html'
 })
 export class MyApp {
-  rootPage:any = HomePage;
+  rootPage:any = SignupPage;
 
   constructor(platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen, db: AngularFireDatabase) {
     platform.ready().then(() => {
