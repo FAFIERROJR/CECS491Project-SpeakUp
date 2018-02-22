@@ -4,16 +4,18 @@ page-signup {
     }
 
     ion-col#splash-image {
-        height: 100vh;
+        
         width: 100%;
         background-color: rgb(144, 227, 252);
+    
+    }
+    ion-row#signup-row{
+        height: 100%;
     }
 
     div#app-logo{
         height: 20%;
         width: 100%;
-        background-color: rgb(116, 235, 169);
-
     }
 
 }
