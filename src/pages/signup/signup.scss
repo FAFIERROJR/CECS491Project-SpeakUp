@@ -1,4 +1,6 @@
 page-signup {
+    @import url('https://fonts.googleapis.com/css?family=Nunito:800');
+
     ion-grid#signup-grid {
         height: 100%;
     }
@@ -14,8 +16,36 @@ page-signup {
     }
 
     div#app-logo{
-        height: 20%;
+        margin-left: auto;
+        margin-right: auto;
+        width: 200px;
+
+    }
+
+    div#app-logo img{
+        height: 60%;
+        text-align: center;
+
+    }
+
+    .brand-name {
+        font-family: Nunito, Arial, San-Serif;
+        font-weight: 800;
+        font-size: 2.5em;
+        text-align: center;
+    }
+
+    ion-col#input-pane form{
+        padding: 20px;
+    }
+
+    ion-col#input-pane button{
+        // padding: 20px;
+        margin: 20px 0px 20px 0px;
         width: 100%;
     }
 
+    ion-col#input-pane form ion-item{
+        padding: 0px;
+    }
 }

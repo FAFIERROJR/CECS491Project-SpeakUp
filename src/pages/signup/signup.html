@@ -18,8 +18,11 @@
   <ion-grid id="signup-grid">
     <ion-row id="signup-row">
       <!-- Signup form on the left -->
-      <ion-col col-md-4>
-        <div id="app-logo"></div>
+      <ion-col align-self-stretch id="input-pane" col-md-4>
+        <div id="app-logo">
+          <div id="logo"><img src="assets/imgs/speakup-hand-logo.svg"></div>
+          <h2 class="brand-name">SPEAKUP</h2>
+        </div>
         <form>
           <ion-item>
             <ion-label>First Name</ion-label>
@@ -46,13 +49,13 @@
             <ion-input type="password"></ion-input>
           </ion-item>
 
-          <button ion-button color="primary" type="submit">Create Account</button>
+          <button ion-button block clear larger color="primary" type="submit">Create Account</button>
 
         </form>
       </ion-col>
 
       <!-- Splash Image on the right -->
-      <ion-col col-md-8 id="splash-image">
+      <ion-col align-self-stretch col-md-8 id="splash-image">
       </ion-col>
     </ion-row>
   </ion-grid>
