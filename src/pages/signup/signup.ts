@@ -71,6 +71,13 @@ export class SignupPage
         });
     }
 
+    /*
+    login()
+    {
+        this
+    }
+    */
+
     createProfile()
     {
         let userProfileDB_Ref = this.afdb.object('userProfile');
