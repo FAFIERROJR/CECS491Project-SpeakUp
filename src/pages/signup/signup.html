@@ -7,7 +7,7 @@
 <ion-header>
 
   <ion-navbar>
-    <ion-title>signup</ion-title>
+    <ion-title>Signup</ion-title>
   </ion-navbar>
 
 </ion-header>
@@ -15,33 +15,53 @@
 
 <ion-content padding>
 
-  <form>
-    <ion-item>
-      <ion-label>First Name</ion-label>
-      <ion-input type="text"></ion-input>
-    </ion-item>
+  <ion-grid id="signup-grid">
+    <ion-row id="signup-row">
+      <!-- Signup form on the left -->
+      <ion-col align-self-stretch id="input-pane" col-md-4>
+        <div id="app-logo">
+          <div id="logo"><img src="assets/imgs/speakup-hand-logo.svg"></div>
+          <h2 class="brand-name">SPEAKUP</h2>
+        </div>
+        <form>
+          <ion-item>
+            <ion-label>First Name</ion-label>
+            <ion-input type="text"></ion-input>
+          </ion-item>
 
-    <ion-item>
-        <ion-label>Last Name</ion-label>
-        <ion-input type="text"></ion-input>
-    </ion-item>
+          <ion-item>
+            <ion-label>Last Name</ion-label>
+            <ion-input type="text"></ion-input>
+          </ion-item>
 
-    <ion-item>
-        <ion-label>Campus ID</ion-label>
-        <ion-input type="text"></ion-input>
-    </ion-item>
+          <ion-item>
+            <ion-label>Campus ID</ion-label>
+            <ion-input type="text"></ion-input>
+          </ion-item>
 
-    <ion-item>
-        <ion-label>Campus Email</ion-label>
-        <ion-input type="text"></ion-input>
-    </ion-item>
+          <ion-item>
+            <ion-label>Campus Email</ion-label>
+            <ion-input type="text"></ion-input>
+          </ion-item>
 
-    <ion-item>
-        <ion-label>Password</ion-label>
-        <ion-input type="text"></ion-input>
-    </ion-item>
-    
-    <button ion-button color="primary" type="submit">Create Account</button>
-    
-  </form>
+          <ion-item>
+            <ion-label>Password</ion-label>
+            <ion-input type="password"></ion-input>
+          </ion-item>
+
+          <ion-item>
+            <ion-label>Confirm Password</ion-label>
+            <ion-input type="password"></ion-input>
+          </ion-item>
+
+          <button ion-button block clear larger color="primary" type="submit">Create Account</button>
+
+        </form>
+      </ion-col>
+
+      <!-- Splash Image on the right -->
+      <ion-col align-self-stretch col-md-8 id="splash-image">
+      </ion-col>
+    </ion-row>
+  </ion-grid>
 </ion-content>
