@@ -23,20 +23,23 @@ export class SignupPage
 {
     user: User;
     password: string;
+    password2: string;
 
     constructor(public navCtrl: NavController, public navParams: NavParams, public afAuth: AngularFireAuth,
         public afdb: AngularFireDatabase, public alertCtrl: AlertController)
     {
-        /*
+
+        
         this.user = new User();
         this.user.first_name = "Kyle";
         this.user.last_name = "Pamintuan";
         this.user.uni_email = "kp@gmail.com";
         this.user.uni_id = "008830924";
         this.password = "CECS491B";
+        this.password2 = "cecs4444";
 
-        this.signUp();
-        */
+        this.verifyPassword()
+        
     }
 
     signUp()
@@ -89,6 +92,19 @@ export class SignupPage
     }
 
     //this.navCtrl.push(WelcomePage, {'username': this.username, 'uid': this.data.user.uid, 'randomTempID': this.randomTempID});
+    verifyPassword()
+    {
+      if (this.password === this.password2){
+        this.signUp()
+      } else {
+        let alert = this.alertCtrl.create({
+          title: 'Verification Error',
+          subTitle: 'Passwords do not match',
+          buttons: ['Dismiss']
+        });
+        alert.present();
+      }
+    }
 
     ionViewDidLoad()
     {
