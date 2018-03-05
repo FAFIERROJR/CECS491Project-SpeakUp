@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import {FormsModule} from '@angular/forms';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { AngularFireAuth } from 'angularfire2/auth';
 import { AngularFireDatabase } from 'angularfire2/database';
@@ -29,6 +30,10 @@ export class SignupPage
         public afdb: AngularFireDatabase, public alertCtrl: AlertController)
     {
 
+        this.user = new User;
+        this.password = "";
+        this.password2 = "";
+
         //test code
         // this.user = new User();
         // this.user.first_name = "Kyle";
@@ -44,6 +49,8 @@ export class SignupPage
 
     signUp()
     {
+        console.log('signup/signup()/email: ', this.user.uni_email);
+        console.log('signup/signup()/passwords: ', this.password, this.password2);
         this.afAuth.auth.createUserWithEmailAndPassword(this.user.uni_email, this.password).then((success) =>
         {
             this.user.uid = this.afAuth.auth.currentUser.uid;
@@ -60,6 +67,8 @@ export class SignupPage
             {
                 //do something
             });
+
+            this.navCtrl.setRoot(HomePage);
 
         }).catch((err) =>
         {
@@ -94,6 +103,7 @@ export class SignupPage
     //this.navCtrl.push(WelcomePage, {'username': this.username, 'uid': this.data.user.uid, 'randomTempID': this.randomTempID});
     verifyPassword()
     {
+        console.log("verifyPassword() called");
       if (this.password === this.password2){
         this.signUp()
       } else {
@@ -103,6 +113,8 @@ export class SignupPage
           buttons: ['Dismiss']
         });
         alert.present();
+        this.password = "";
+        this.password = "";
       }
     }
 
