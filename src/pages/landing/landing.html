@@ -15,17 +15,34 @@
   <ion-content padding>
     
   <!-- Splash Image on the right -->
-  <img id="splash-image" src="assets/imgs/bluebackground.jpg">
-  
+  <!-- <img id="splashImage" src="assets/imgs/bluebackground.jpg"> -->
+
     <ion-split-pane>
-      <ion-grid main id="signup-grid" col-md-4>
-        <ion-row id="signup-row">
+      <ion-grid main id="signUpGrid" col-md-4>
+        <ion-row id="signUpRow">
           <!-- Signup form on the left -->
-          <ion-col align-self-stretch id="input-pane">
-            <div id="app-logo">
+          <ion-col align-self-stretch id="inputPane">
+            <div id="appLogo">
               <div id="logo"><img src="assets/imgs/speakup-hand-logo.svg"></div>
               <h2 class="brand-name">SPEAKUP</h2>
             </div>
+            <!-- <form id="loginForm">
+              <ion-item style="border-top-left-radius: 10px;border-top-right-radius: 10px;">
+                <ion-label >Email</ion-label>
+                <ion-input type="text" name="first_name" [(ngModel)]="user.first_name"></ion-input>
+              </ion-item>
+
+              <ion-item style="border-bottom-left-radius: 10px;border-bottom-right-radius: 10px;">
+                <ion-label>Password</ion-label>
+                <ion-input type="password" name="password2" [(ngModel)]="password2"></ion-input>
+              </ion-item>
+
+              <button ion-button round outline color="primary" type="submit">Login</button>
+              <span>Not Register? </span>
+              <span>
+                <button ion-button round clear color="primary" type="submit">Create Account</button>
+              </span>
+            </form> -->
             <form (ngSubmit)="verifyPassword()">
               <ion-item style="border-top-left-radius: 10px;border-top-right-radius: 10px;">
                 <ion-label >First Name</ion-label>

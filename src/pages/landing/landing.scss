@@ -1,12 +1,18 @@
 page-landing {
     @import url('https://fonts.googleapis.com/css?family=Nunito:800');
 
-    ion-grid#signup-grid {
+    ion-content{
+        background-image: url('../assets/imgs/bluebackground.jpg');
+        background-position: center;
+        background-size: cover;
+    }
+
+    ion-grid#signUpGrid {
         height: 100%;
         width: 100%;
     }
 
-    img#splash-image {
+    img#splashImage {
         top:0;
         left:0;
         height: 100%;
@@ -18,13 +24,13 @@ page-landing {
     //     height: 100%;
     // }
 
-    div#app-logo{
+    div#appLogo{
         margin-left: auto;
         margin-right: auto;
         width: 200px;
     }
 
-    div#app-logo img{
+    div#appLogo img{
         height: 30%;
         text-align: center;
 
@@ -37,18 +43,18 @@ page-landing {
         text-align: center;
     }
 
-    ion-col#input-pane form{
+    ion-col#inputPane form{
         padding: 0px;
         
     }
 
-    ion-col#input-pane button{
+    ion-col#inputPane button{
         // padding: 20px;
         margin: 5px 0px 5px 0px;
         width: 100%;
     }
 
-    ion-col#input-pane form ion-item{
+    ion-col#inputPane form ion-item{
         padding-left: 10px;
     }
 }
