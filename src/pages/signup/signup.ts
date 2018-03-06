@@ -28,8 +28,7 @@ export class SignupPage
     constructor(public navCtrl: NavController, public navParams: NavParams, public afAuth: AngularFireAuth,
         public afdb: AngularFireDatabase, public alertCtrl: AlertController)
     {
-
-        
+        /*
         this.user = new User();
         this.user.first_name = "Kyle";
         this.user.last_name = "Pamintuan";
@@ -38,8 +37,10 @@ export class SignupPage
         this.password = "CECS491B";
         this.password2 = "cecs4444";
 
-        this.verifyPassword()
-        
+        // this.signUp()
+        // this.verifyPassword()
+        //this.login()
+        */
     }
 
     signUp()
@@ -51,14 +52,14 @@ export class SignupPage
 
             this.createProfile();
 
-            //update the display with the firstname and lastname
+            // update the display with the firstname and lastname
             this.afAuth.auth.currentUser.updateProfile
             ({
                 displayName: this.user.username,
                 photoURL: ""
             }).then((success) =>
             {
-                //do something
+                // do something
             });
 
         }).catch((err) =>
@@ -74,12 +75,28 @@ export class SignupPage
         });
     }
 
-    /*
     login()
     {
-        this
+        this.afAuth.auth.signInWithEmailAndPassword(this.user.uni_email, this.password)
+            .then((success) =>
+            {          
+                this.user.username = this.afAuth.auth.currentUser.displayName;
+                this.user.uid = this.afAuth.auth.currentUser.uid;
+
+                console.log('Login: ' + this.user.uid);
+            }).catch((err) =>
+            {
+                let alert = this.alertCtrl.create(({
+                    title: 'Login Failed',
+                    subTitle: err,
+                    buttons: ['Dismiss']
+                }));
+                alert.present();
+                this.user.uni_email = '';
+                this.password = '';
+            }
+            );
     }
-    */
 
     createProfile()
     {
@@ -91,7 +108,6 @@ export class SignupPage
         })
     }
 
-    //this.navCtrl.push(WelcomePage, {'username': this.username, 'uid': this.data.user.uid, 'randomTempID': this.randomTempID});
     verifyPassword()
     {
       if (this.password === this.password2){
