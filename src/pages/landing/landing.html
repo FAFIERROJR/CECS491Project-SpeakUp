@@ -1,0 +1,67 @@
+<!--
+  Generated template for the LandingPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+  <ion-header>
+
+    <ion-navbar>
+      <ion-title>Login</ion-title>
+    </ion-navbar>
+  
+  </ion-header>
+  
+  <ion-content padding>
+    
+  <!-- Splash Image on the right -->
+  <img id="splash-image" src="assets/imgs/bluebackground.jpg">
+  
+    <ion-split-pane>
+      <ion-grid main id="signup-grid" col-md-4>
+        <ion-row id="signup-row">
+          <!-- Signup form on the left -->
+          <ion-col align-self-stretch id="input-pane">
+            <div id="app-logo">
+              <div id="logo"><img src="assets/imgs/speakup-hand-logo.svg"></div>
+              <h2 class="brand-name">SPEAKUP</h2>
+            </div>
+            <form (ngSubmit)="verifyPassword()">
+              <ion-item style="border-top-left-radius: 10px;border-top-right-radius: 10px;">
+                <ion-label >First Name</ion-label>
+                <ion-input type="text" name="first_name" [(ngModel)]="user.first_name"></ion-input>
+              </ion-item>
+  
+              <ion-item>
+                <ion-label>Last Name</ion-label>
+                <ion-input type="text" name="last_name" [(ngModel)]="user.last_name"></ion-input>
+              </ion-item>
+  
+              <ion-item>
+                <ion-label>Campus ID</ion-label>
+                <ion-input type="text" name="uni_ID" [(ngModel)]="user.uni_id"></ion-input>
+              </ion-item>
+  
+              <ion-item>
+                <ion-label>Campus Email</ion-label>
+                <ion-input type="text" name="uni_email" [(ngModel)]="user.uni_email"></ion-input>
+              </ion-item>
+  
+              <ion-item>
+                <ion-label>Password</ion-label>
+                <ion-input type="password" name="password" [(ngModel)]="password"></ion-input>
+              </ion-item>
+  
+              <ion-item style="border-bottom-left-radius: 10px;border-bottom-right-radius: 10px;">
+                <ion-label>Confirm Password</ion-label>
+                <ion-input type="password" name="password2" [(ngModel)]="password2"></ion-input>
+              </ion-item>
+  
+              <button ion-button round outline color="primary" type="submit">Create Account</button>
+  
+            </form>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-split-pane>
+  </ion-content>
