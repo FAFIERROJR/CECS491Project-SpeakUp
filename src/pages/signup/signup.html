@@ -12,19 +12,21 @@
 
 </ion-header>
 
-
 <ion-content padding>
+  
+<!-- Splash Image on the right -->
+<img id="splash-image" src="assets/imgs/bluebackground.jpg">
 
-  <ion-grid id="signup-grid">
+  <ion-grid id="signup-grid" col-md-4>
     <ion-row id="signup-row">
       <!-- Signup form on the left -->
-      <ion-col align-self-stretch id="input-pane" col-md-4>
+      <ion-col align-self-center id="input-pane">
         <div id="app-logo">
           <div id="logo"><img src="assets/imgs/speakup-hand-logo.svg"></div>
           <h2 class="brand-name">SPEAKUP</h2>
         </div>
         <form>
-          <ion-item>
+          <ion-item style="border-top-left-radius: 10px;border-top-right-radius: 10px;">
             <ion-label>First Name</ion-label>
             <ion-input type="text"></ion-input>
           </ion-item>
@@ -49,18 +51,12 @@
             <ion-input type="password"></ion-input>
           </ion-item>
 
-          <ion-item>
+          <ion-item style="border-bottom-left-radius: 10px;border-bottom-right-radius: 10px;">
             <ion-label>Confirm Password</ion-label>
             <ion-input type="password"></ion-input>
           </ion-item>
-
-          <button ion-button block clear larger color="primary" type="submit">Create Account</button>
-
+          <button ion-button round outline color="primary" type="submit">Create Account</button>
         </form>
-      </ion-col>
-
-      <!-- Splash Image on the right -->
-      <ion-col align-self-stretch col-md-8 id="splash-image">
       </ion-col>
     </ion-row>
   </ion-grid>
