@@ -33,6 +33,7 @@ export class SignupPage
         this.user = new User;
         this.password = "";
         this.password2 = "";
+        this.user.uni_email= "";
 
         //test code
         // this.user = new User();
