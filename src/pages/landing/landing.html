@@ -24,26 +24,28 @@
           <ion-col align-self-stretch id="inputPane">
             <div id="appLogo">
               <div id="logo"><img src="assets/imgs/speakup-hand-logo.svg"></div>
-              <h2 class="brand-name">SPEAKUP</h2>
+              <h class="brand-name">SPEAKUP</h2>
             </div>
-            <!-- <form id="loginForm">
+
+            <form id="loginForm">
               <ion-item style="border-top-left-radius: 10px;border-top-right-radius: 10px;">
                 <ion-label >Email</ion-label>
-                <ion-input type="text" name="first_name" [(ngModel)]="user.first_name"></ion-input>
+                <ion-input type="text"></ion-input>
               </ion-item>
 
               <ion-item style="border-bottom-left-radius: 10px;border-bottom-right-radius: 10px;">
                 <ion-label>Password</ion-label>
-                <ion-input type="password" name="password2" [(ngModel)]="password2"></ion-input>
+                <ion-input type="password">
+                </ion-input>
               </ion-item>
-
               <button ion-button round outline color="primary" type="submit">Login</button>
-              <span>Not Register? </span>
-              <span>
-                <button ion-button round clear color="primary" type="submit">Create Account</button>
-              </span>
-            </form> -->
-            <form (ngSubmit)="verifyPassword()">
+
+              <button ion-button clear float-right color='primary'>Forgotten Password?</button>                                   
+
+              <button ion-button round clear color="primary" type="submit">Sign Up</button>
+            </form>
+
+            <form id="signUpForm" (ngSubmit)="verifyPassword()">
               <ion-item style="border-top-left-radius: 10px;border-top-right-radius: 10px;">
                 <ion-label >First Name</ion-label>
                 <ion-input type="text" name="first_name" [(ngModel)]="user.first_name"></ion-input>
