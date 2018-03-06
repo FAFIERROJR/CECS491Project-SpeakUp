@@ -12,11 +12,13 @@
 
 </ion-header>
 
-
 <ion-content padding>
+  
+<!-- Splash Image on the right -->
+<img id="splash-image" src="assets/imgs/bluebackground.jpg">
 
   <ion-split-pane>
-    <ion-grid main id="signup-grid">
+    <ion-grid main id="signup-grid" col-md-4>
       <ion-row id="signup-row">
         <!-- Signup form on the left -->
         <ion-col align-self-stretch id="input-pane">
@@ -25,7 +27,7 @@
             <h2 class="brand-name">SPEAKUP</h2>
           </div>
           <form (ngSubmit)="verifyPassword()">
-            <ion-item>
+            <ion-item style="border-top-left-radius: 10px;border-top-right-radius: 10px;">
               <ion-label >First Name</ion-label>
               <ion-input type="text" name="first_name" [(ngModel)]="user.first_name"></ion-input>
             </ion-item>
@@ -50,7 +52,7 @@
               <ion-input type="password" name="password" [(ngModel)]="password"></ion-input>
             </ion-item>
 
-            <ion-item>
+            <ion-item style="border-bottom-left-radius: 10px;border-bottom-right-radius: 10px;">
               <ion-label>Confirm Password</ion-label>
               <ion-input type="password" name="password2" [(ngModel)]="password2"></ion-input>
             </ion-item>
@@ -61,8 +63,5 @@
         </ion-col>
       </ion-row>
     </ion-grid>
-      <!-- Splash Image on the right -->
-      <ion-col align-self-stretch col-md-5 col-lg-8 id="splash-image">
-      </ion-col>
   </ion-split-pane>
 </ion-content>

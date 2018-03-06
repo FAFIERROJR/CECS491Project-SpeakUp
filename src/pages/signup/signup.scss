@@ -6,12 +6,14 @@ page-signup {
         width: 100%;
     }
 
-    ion-col#splash-image {
-        
+    img#splash-image {
+        top:0;
+        left:0;
+        height: 100%;
         width: 100%;
-        background-color: rgb(144, 227, 252);
-    
+        position: absolute;
     }
+
     // ion-row#signup-row{
     //     height: 100%;
     // }
@@ -20,11 +22,10 @@ page-signup {
         margin-left: auto;
         margin-right: auto;
         width: 200px;
-
     }
 
     div#app-logo img{
-        height: 60%;
+        height: 30%;
         text-align: center;
 
     }
@@ -37,16 +38,17 @@ page-signup {
     }
 
     ion-col#input-pane form{
-        padding: 20px;
+        padding: 0px;
+        
     }
 
     ion-col#input-pane button{
         // padding: 20px;
-        margin: 20px 0px 20px 0px;
+        margin: 5px 0px 5px 0px;
         width: 100%;
     }
 
     ion-col#input-pane form ion-item{
-        padding: 0px;
+        padding-left: 10px;
     }
 }
