@@ -122,4 +122,7 @@ export class LandingPage {
       console.log('ionViewDidLoad SignupPage');
     }
 
+    placeholder(){
+        console.log("nothing");
+    }
 }

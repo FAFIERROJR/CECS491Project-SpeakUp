@@ -48,7 +48,7 @@ page-landing {
         
     }
 
-    ion-col#inputPane #signUpForm button{
+    ion-col#inputPane #signUpForm {
         // padding: 20px;
         margin: 5px 0px 5px 0px;
         width: 100%;
@@ -56,5 +56,12 @@ page-landing {
 
     ion-col#inputPane form ion-item{
         padding-left: 10px;
+    }
+
+    .like-label{
+        margin: 9px 0px 10px 0;
+        display: inline-block;
+        // color: #edecec;
+        color:white;
     }
 }
