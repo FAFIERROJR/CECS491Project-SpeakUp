@@ -82,12 +82,29 @@ export class LandingPage {
         });
     }
 
-    /*
     login()
     {
-        this
+        this.afAuth.auth.signInWithEmailAndPassword(this.user.uni_email, this.password)
+            .then((success) =>
+            {          
+                this.user.username = this.afAuth.auth.currentUser.displayName;
+                this.user.uid = this.afAuth.auth.currentUser.uid;
+
+                console.log('Login: ' + this.user.uid);
+            }).catch((err) =>
+            {
+                let alert = this.alertCtrl.create(({
+                    title: 'Login Failed',
+                    subTitle: err,
+                    buttons: ['Dismiss']
+                }));
+                alert.present();
+                this.user.uni_email = '';
+                this.password = '';
+            }
+            );
     }
-    */
+
 
     createProfile()
     {
