@@ -5,19 +5,12 @@ page-landing {
         background-image: url('../assets/imgs/bluebackground.jpg');
         background-position: center;
         background-size: cover;
+        overflow: auto;
     }
 
     ion-grid#signUpGrid {
         height: 100%;
         width: 100%;
-    }
-
-    img#splashImage {
-        top:0;
-        left:0;
-        height: 100%;
-        width: 100%;
-        position: absolute;
     }
 
     // ion-row#signup-row{
@@ -33,7 +26,6 @@ page-landing {
     div#appLogo img{
         height: 30%;
         text-align: center;
-
     }
 
     .brand-name {
@@ -59,9 +51,15 @@ page-landing {
     }
 
     .like-label{
-        margin: 9px 0px 10px 0;
+        margin: 9px 0px 10px 0px;
         display: inline-block;
         // color: #edecec;
         color:white;
     }
+
+    .green-button{
+        background-color:#12b003; 
+        margin-top: 15px;
+    }
+
 }

@@ -6,14 +6,14 @@
 -->
   <ion-header>
 
-    <ion-navbar>
-      <ion-title>Login</ion-title>
+    <ion-navbar text-center>
+      <ion-title>Welcome to Speak Up!</ion-title>
     </ion-navbar>
   
   </ion-header>
   
   <ion-content padding>
-    
+
   <!-- Splash Image on the right -->
   <!-- <img id="splashImage" src="assets/imgs/bluebackground.jpg"> -->
 
@@ -24,7 +24,7 @@
           <ion-col align-self-stretch id="inputPane">
             <div id="appLogo">
               <div id="logo"><img src="assets/imgs/speakup-hand-logo.svg"></div>
-              <h2 class="brand-name">SPEAKUP</h2>
+              <h2 class="brand-name">SPEAK UP</h2>
             </div>
 
 <!-- Login  -->
@@ -40,14 +40,18 @@
                 <ion-input type="password"></ion-input>
               </ion-item>
 
-              <button ion-button block round style="background-color:#12b003; margin-top: 15px;" type="submit">Login</button>
+              <button ion-button block round class="green-button" type="submit">Login</button>
             </form>
 
             <div text-center>
-                <span class="like-label">Don't have an account?</span>
-                <button ion-button small clear>Sign Up.</button>
-                <span class="like-label">Or </span>
-                <button ion-button small clear>Forgotten Password?</button>
+              <div>
+                  <span class="like-label">Don't have an account?</span>
+                  <button ion-button small clear>Sign Up.</button>
+              </div>
+              <div>
+                  <span class="like-label">Or</span>
+                  <button ion-button small clear>Forgotten Password?</button>
+              </div>
             </div>
           </section>
 <!-- Sign Up -->
@@ -89,7 +93,7 @@
             <!-- might need to place extra ng-if in this div as well to hide this along with the signUpForm -->
             <div text-center>
                 <span class="like-label">I have an account.</span>
-                <button ion-button small clear (click)="placeholder()">Sign In.</button>
+                <button ion-button small clear>Sign In.</button>
             </div>
           </section>
           </ion-col>
