@@ -43,6 +43,8 @@ export class LandingPage {
         // this.password2 = "cecs4444";
 
         // this.verifyPassword()
+
+         // this.login();
         
     }
 
@@ -91,6 +93,9 @@ export class LandingPage {
                 this.user.uid = this.afAuth.auth.currentUser.uid;
 
                 console.log('Login: ' + this.user.uid);
+
+                this.navCtrl.push(HomePage);
+
             }).catch((err) =>
             {
                 let alert = this.alertCtrl.create(({
@@ -117,6 +122,7 @@ export class LandingPage {
     }
 
     //this.navCtrl.push(WelcomePage, {'username': this.username, 'uid': this.data.user.uid, 'randomTempID': this.randomTempID});
+
     verifyPassword()
     {
         console.log("verifyPassword() called");
