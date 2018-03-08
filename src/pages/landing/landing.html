@@ -13,92 +13,89 @@
   </ion-header>
   
   <ion-content padding>
-
-  <!-- Splash Image on the right -->
-  <!-- <img id="splashImage" src="assets/imgs/bluebackground.jpg"> -->
-
-    <ion-split-pane>
-      <ion-grid main id="signUpGrid" col-md-4>
-        <ion-row id="signUpRow">
-          <!-- Signup form on the left -->
-          <ion-col align-self-stretch id="inputPane">
-            <div id="appLogo">
-              <div id="logo"><img src="assets/imgs/speakup-hand-logo.svg"></div>
-              <h2 class="brand-name">SPEAK UP</h2>
-            </div>
-
-<!-- Login  -->
-          <section>
-            <form id="loginForm">
-              <ion-item style="border-top-left-radius: 10px;border-top-right-radius: 10px;">
-                <ion-label >Email</ion-label>
-                <ion-input type="text"></ion-input>
-              </ion-item>
-              
-              <ion-item style="border-bottom-left-radius: 10px;border-bottom-right-radius: 10px;">
-                <ion-label>Password</ion-label>
-                <ion-input type="password"></ion-input>
-              </ion-item>
-
-              <button ion-button block round class="green-button" type="submit">Login</button>
-            </form>
-
-            <div text-center>
-              <div>
-                  <span class="like-label">Don't have an account?</span>
-                  <button ion-button small clear>Sign Up.</button>
-                  <span style="display: inline-block;">
-                    <span class="like-label" >Or</span>
-                    <button ion-button small clear>Forgotten Password?</button>
-                  </span>
+    <div id="mainContent"></div>
+    <!-- Splash Image on the right -->
+    <!-- <img id="splashImage" src="assets/imgs/bluebackground.jpg"> -->
+      <ion-split-pane>
+        <ion-grid main id="signUpGrid" col-md-4>
+          <ion-row id="signUpRow">
+            <!-- Signup form on the left -->
+            <ion-col align-self-stretch id="inputPane">
+              <div id="appLogo">
+                <div id="logo"><img src="assets/imgs/speakup-hand-logo.svg"></div>
+                <h2 class="brand-name">SPEAK UP</h2>
               </div>
-              
-            </div>
-          </section>
-<!-- Sign Up -->
-          <section>
-            <form id="signUpForm" (ngSubmit)="verifyPassword()">
-              <ion-item style="border-top-left-radius: 10px;border-top-right-radius: 10px;">
-                <ion-label >First Name</ion-label>
-                <ion-input type="text" name="first_name" [(ngModel)]="user.first_name"></ion-input>
-              </ion-item>
-  
-              <ion-item>
-                <ion-label>Last Name</ion-label>
-                <ion-input type="text" name="last_name" [(ngModel)]="user.last_name"></ion-input>
-              </ion-item>
-  
-              <ion-item>
-                <ion-label>Campus ID</ion-label>
-                <ion-input type="text" name="uni_ID" [(ngModel)]="user.uni_id"></ion-input>
-              </ion-item>
-  
-              <ion-item>
-                <ion-label>Campus Email</ion-label>
-                <ion-input type="text" name="uni_email" [(ngModel)]="user.uni_email"></ion-input>
-              </ion-item>
-  
-              <ion-item>
-                <ion-label>Password</ion-label>
-                <ion-input type="password" name="password" [(ngModel)]="password"></ion-input>
-              </ion-item>
-  
-              <ion-item style="border-bottom-left-radius: 10px;border-bottom-right-radius: 10px;">
-                <ion-label>Confirm Password</ion-label>
-                <ion-input type="password" name="password2" [(ngModel)]="password2"></ion-input>
-              </ion-item>
 
-              <button ion-button round block outline color="primary" type="submit">Create Account</button>
-            </form>
+  <!-- Login  -->
+            <section>
+              <form id="loginForm">
+                <ion-item style="border-top-left-radius: 10px;border-top-right-radius: 10px;">
+                  <ion-label >Email</ion-label>
+                  <ion-input type="text"></ion-input>
+                </ion-item>
+                
+                <ion-item style="border-bottom-left-radius: 10px;border-bottom-right-radius: 10px;">
+                  <ion-label>Password</ion-label>
+                  <ion-input type="password"></ion-input>
+                </ion-item>
+                
+                <button ion-button block round class="green-button" type="submit">Login</button>
+              </form>
+              <div text-center>
+                <div>
+                    <span class="like-label">Don't have an account?</span>
+                    <button ion-button small clear>Sign Up.</button>
+                    <span style="display: inline-block;">
+                      <span class="like-label" >Or</span>
+                      <button ion-button small clear>Forgotten Password?</button>
+                    </span>
+                </div>
+              </div>
+            </section>
+  <!-- Sign Up -->
+            <section>
+              <form id="signUpForm" (ngSubmit)="verifyPassword()">
+                <ion-item style="border-top-left-radius: 10px;border-top-right-radius: 10px;">
+                  <ion-label >First Name</ion-label>
+                  <ion-input type="text" name="first_name" [(ngModel)]="user.first_name"></ion-input>
+                </ion-item>
+    
+                <ion-item>
+                  <ion-label>Last Name</ion-label>
+                  <ion-input type="text" name="last_name" [(ngModel)]="user.last_name"></ion-input>
+                </ion-item>
+    
+                <ion-item>
+                  <ion-label>Campus ID</ion-label>
+                  <ion-input type="text" name="uni_ID" [(ngModel)]="user.uni_id"></ion-input>
+                </ion-item>
+    
+                <ion-item>
+                  <ion-label>Campus Email</ion-label>
+                  <ion-input type="text" name="uni_email" [(ngModel)]="user.uni_email"></ion-input>
+                </ion-item>
+    
+                <ion-item>
+                  <ion-label>Password</ion-label>
+                  <ion-input type="password" name="password" [(ngModel)]="password"></ion-input>
+                </ion-item>
+    
+                <ion-item style="border-bottom-left-radius: 10px;border-bottom-right-radius: 10px;">
+                  <ion-label>Confirm Password</ion-label>
+                  <ion-input type="password" name="password2" [(ngModel)]="password2"></ion-input>
+                </ion-item>
 
-            <!-- might need to place extra ng-if in this div as well to hide this along with the signUpForm -->
-            <div text-center>
-                <span class="like-label">I have an account.</span>
-                <button ion-button small clear>Sign In.</button>
-            </div>
-          </section>
-          </ion-col>
-        </ion-row>
-      </ion-grid>
-    </ion-split-pane>
+                <button ion-button round block class="green-button" type="submit">Create Account</button>
+              </form>
+
+              <!-- might need to place extra ng-if in this div as well to hide this along with the signUpForm -->
+              <div text-center>
+                  <span class="like-label">I have an account.</span>
+                  <button ion-button small clear>Sign In.</button>
+              </div>
+            </section>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+      </ion-split-pane>
   </ion-content>
