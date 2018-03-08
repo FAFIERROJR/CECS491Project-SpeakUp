@@ -144,5 +144,4 @@ export class LandingPage {
     {
       console.log('ionViewDidLoad SignupPage');
     }
-
 }
