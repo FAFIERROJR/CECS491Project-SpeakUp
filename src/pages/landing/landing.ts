@@ -23,6 +23,8 @@ export class LandingPage {
     user: User;
     password: string;
     password2: string;
+    showLogin: boolean;
+    showSignUp: boolean;
 
     constructor(public navCtrl: NavController, public navParams: NavParams, public afAuth: AngularFireAuth,
         public afdb: AngularFireDatabase, public alertCtrl: AlertController)
@@ -32,6 +34,8 @@ export class LandingPage {
         this.password = "";
         this.password2 = "";
         this.user.uni_email= "";
+        this.showLogin = true;
+        this.showSignUp = false;
 
         //test code
         // this.user = new User();
@@ -94,7 +98,7 @@ export class LandingPage {
 
                 console.log('Login: ' + this.user.uid);
 
-                this.navCtrl.push(HomePage);
+                this.navCtrl.setRoot(HomePage);
 
             }).catch((err) =>
             {
@@ -138,6 +142,16 @@ export class LandingPage {
         this.password = "";
         this.password = "";
       }
+    }
+
+    setShowLogin(){
+        this.showLogin = true;
+        this.showSignUp = false;
+    }
+
+    setShowSignUp(){
+        this.showSignUp = true;
+        this.showLogin = false;
     }
 
     ionViewDidLoad()
