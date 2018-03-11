@@ -28,23 +28,23 @@
 
   <!-- Login  -->
             <section>
-              <form id="loginForm">
+              <form *ngIf="showLogin" id="loginForm" (ngSubmit)="login()">
                 <ion-item style="border-top-left-radius: 10px;border-top-right-radius: 10px;">
                   <ion-label >Email</ion-label>
-                  <ion-input type="text"></ion-input>
+                  <ion-input type="text" name="login_uni_email" [(ngModel)]="user.uni_email"></ion-input>
                 </ion-item>
                 
                 <ion-item style="border-bottom-left-radius: 10px;border-bottom-right-radius: 10px;">
                   <ion-label>Password</ion-label>
-                  <ion-input type="password"></ion-input>
+                  <ion-input type="password" name="login_password" [(ngModel)]="password"></ion-input>
                 </ion-item>
                 
                 <button ion-button block round class="green-button" type="submit">Login</button>
               </form>
-              <div text-center>
+              <div text-center *ngIf="showLogin">
                 <div>
                     <span class="like-label">Don't have an account?</span>
-                    <button ion-button small clear>Sign Up.</button>
+                    <button ion-button small clear (click)="setShowSignUp()">Sign Up.</button>
                     <span style="display: inline-block;">
                       <span class="like-label" >Or</span>
                       <button ion-button small clear>Forgotten Password?</button>
@@ -54,7 +54,7 @@
             </section>
   <!-- Sign Up -->
             <section>
-              <form id="signUpForm" (ngSubmit)="verifyPassword()">
+              <form id="signUpForm" *ngIf="showSignUp" (ngSubmit)="verifyPassword()">
                 <ion-item style="border-top-left-radius: 10px;border-top-right-radius: 10px;">
                   <ion-label >First Name</ion-label>
                   <ion-input type="text" name="first_name" [(ngModel)]="user.first_name"></ion-input>
@@ -89,9 +89,9 @@
               </form>
 
               <!-- might need to place extra ng-if in this div as well to hide this along with the signUpForm -->
-              <div text-center>
+              <div text-center *ngIf="showSignUp">
                   <span class="like-label">I have an account.</span>
-                  <button ion-button small clear>Sign In.</button>
+                  <button ion-button small clear (click)="setShowLogin()">Sign In.</button>
               </div>
             </section>
             </ion-col>

@@ -23,6 +23,8 @@ export class LandingPage {
     user: User;
     password: string;
     password2: string;
+    showLogin: boolean;
+    showSignUp: boolean;
 
     constructor(public navCtrl: NavController, public navParams: NavParams, public afAuth: AngularFireAuth,
         public afdb: AngularFireDatabase, public alertCtrl: AlertController)
@@ -32,6 +34,8 @@ export class LandingPage {
         this.password = "";
         this.password2 = "";
         this.user.uni_email= "";
+        this.showLogin = true;
+        this.showSignUp = false;
 
         //test code
         // this.user = new User();
@@ -43,6 +47,8 @@ export class LandingPage {
         // this.password2 = "cecs4444";
 
         // this.verifyPassword()
+
+         // this.login();
         
     }
 
@@ -82,12 +88,32 @@ export class LandingPage {
         });
     }
 
-    /*
     login()
     {
-        this
+        this.afAuth.auth.signInWithEmailAndPassword(this.user.uni_email, this.password)
+            .then((success) =>
+            {          
+                this.user.username = this.afAuth.auth.currentUser.displayName;
+                this.user.uid = this.afAuth.auth.currentUser.uid;
+
+                console.log('Login: ' + this.user.uid);
+
+                this.navCtrl.setRoot(HomePage);
+
+            }).catch((err) =>
+            {
+                let alert = this.alertCtrl.create(({
+                    title: 'Login Failed',
+                    subTitle: err,
+                    buttons: ['Dismiss']
+                }));
+                alert.present();
+                this.user.uni_email = '';
+                this.password = '';
+            }
+            );
     }
-    */
+
 
     createProfile()
     {
@@ -100,6 +126,7 @@ export class LandingPage {
     }
 
     //this.navCtrl.push(WelcomePage, {'username': this.username, 'uid': this.data.user.uid, 'randomTempID': this.randomTempID});
+
     verifyPassword()
     {
         console.log("verifyPassword() called");
@@ -115,6 +142,16 @@ export class LandingPage {
         this.password = "";
         this.password = "";
       }
+    }
+
+    setShowLogin(){
+        this.showLogin = true;
+        this.showSignUp = false;
+    }
+
+    setShowSignUp(){
+        this.showSignUp = true;
+        this.showLogin = false;
     }
 
     ionViewDidLoad()
