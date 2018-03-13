@@ -40,7 +40,7 @@ export class HomePage
 
     accessChatroom()
     {
-        if (this.accessCode == this.lastAccessCode_ref)
+        if (this.accessCode === this.lastAccessCode_ref)
         {
             //this.navCtrl.setRoot(ChatroomPage);
         }
