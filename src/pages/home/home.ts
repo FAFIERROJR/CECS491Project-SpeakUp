@@ -11,7 +11,9 @@ import { AngularFireDatabase } from 'angularfire2/database';
   templateUrl: 'home.html'
 })
 export class HomePage {
-  courses: Observable<any[]>;
+  
+  //courses: Observable<{}[]>;
+  courses: any;
   uid: string;
 
   constructor(public navCtrl: NavController, public afAuth: AngularFireAuth, public afdb: AngularFireDatabase) {
