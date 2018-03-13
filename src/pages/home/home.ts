@@ -19,7 +19,7 @@ export class HomePage
     constructor(public navCtrl: NavController, public afdb: AngularFireDatabase,
         public afAuth: AngularFireAuth, public alertCtrl: AlertController)
     {
-        this.generateAccessCode();
+        //this.generateAccessCode();
 
         //this.accessCode = "123456";
         //this.accessChatroom();
@@ -38,14 +38,28 @@ export class HomePage
         console.log('Last Access Code: ', this.lastAccessCode_ref);
     }
 
-    signOut(): void
-    {
-    this.afAuth.auth.signOut();
-    this.navCtrl.push(LandingPage);
-    }
-
     accessChatroom()
     {
+        if (this.accessCode == this.lastAccessCode_ref)
+        {
+            //this.navCtrl.setRoot(ChatroomPage);
+        }
+        else
+        {
+            let alert = this.alertCtrl.create
+            (({
+                title: 'Access Code Invalid',
+                subTitle: 'error',
+                buttons: ['Dismiss']
+            }));
+            alert.present();
+            this.accessCode = '';
+        }
+    }
 
+    signOut(): void
+    {
+       this.afAuth.auth.signOut();
+       this.navCtrl.push(LandingPage);
     }
 }
