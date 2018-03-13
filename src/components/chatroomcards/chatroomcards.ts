@@ -1,4 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
+import { AngularFireAuth } from 'angularfire2/auth'
+import { AngularFireDatabase } from 'angularfire2/database';
+import { Observable } from 'rxjs/Observable';
 
 /**
  * Generated class for the ChatroomcardsComponent component.
@@ -12,11 +15,18 @@ import { Component } from '@angular/core';
 })
 export class ChatroomcardsComponent {
 
-  text: string;
+  uid: string;
+  course: Observable<any>;
+  @Input() course_id: string;
 
-  constructor() {
-    console.log('Hello ChatroomcardsComponent Component');
-    this.text = 'Hello World';
+  constructor(public afAuth: AngularFireAuth, public afdb: AngularFireDatabase) {
+  }
+
+
+  ngOnInit(){
+    this.uid = this.afAuth.auth.currentUser.uid;
+    this.course = this.afdb.object("userProfile/" + this.uid + "/courses/" + this.course_id).valueChanges();
+    console.log(this.course);
   }
 
 }

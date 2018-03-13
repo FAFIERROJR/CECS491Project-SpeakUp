@@ -1,4 +1,12 @@
 <!-- Generated template for the ChatroomcardsComponent component -->
-<div>
-  {{text}}
-</div>
+<ion-card>
+    <img src="https://source.unsplash.com/user/eyyisac/likes/200x200" />
+    <ion-card-content>
+      <ion-card-title>
+        {{(course | async)?.name}}
+      </ion-card-title>
+      <p>
+        The most popular industrial group ever, and largely responsible for bringing the music to a mass audience.
+      </p>
+    </ion-card-content>
+  </ion-card>

@@ -1,33 +1,32 @@
 page-landing {
     @import url('https://fonts.googleapis.com/css?family=Nunito:800');
 
-    ion-grid#signup-grid {
-        height: 100%;
-        width: 100%;
+    ion-content{
+        // background-image: url('../assets/imgs/bluebackground.jpg');
+        background-image: url("https://source.unsplash.com/user/eyyisac/likes/2000x1000");
+        background-position: center;
+        background-size: cover;
+        overflow: auto;  
     }
 
-    img#splash-image {
-        top:0;
-        left:0;
+    ion-grid#signUpGrid {
         height: 100%;
         width: 100%;
-        position: absolute;
     }
 
     // ion-row#signup-row{
     //     height: 100%;
     // }
 
-    div#app-logo{
+    div#appLogo{
         margin-left: auto;
         margin-right: auto;
         width: 200px;
     }
 
-    div#app-logo img{
+    div#appLogo img{
         height: 30%;
         text-align: center;
-
     }
 
     .brand-name {
@@ -37,18 +36,31 @@ page-landing {
         text-align: center;
     }
 
-    ion-col#input-pane form{
+    ion-col#inputPane form{
         padding: 0px;
         
     }
 
-    ion-col#input-pane button{
+    ion-col#inputPane #signUpForm {
         // padding: 20px;
         margin: 5px 0px 5px 0px;
         width: 100%;
     }
 
-    ion-col#input-pane form ion-item{
+    ion-col#inputPane form ion-item{
         padding-left: 10px;
     }
+
+    .like-label{
+        margin: 9px 0px 10px 0px;
+        display: inline-block;
+        // color: #edecec;
+        color:rgb(95, 95, 95);
+    }
+
+    .green-button{
+        background-color:#12b003; 
+        margin-top: 15px;
+    }
+
 }
