@@ -15,8 +15,8 @@ export class HomePage
     // chatroom_db_ref: any;
     lastAccessCode_ref: any;
     accessCode: any;
-
-
+    
+    
     constructor(public navCtrl: NavController, public afdb: AngularFireDatabase,
         public afAuth: AngularFireAuth, public alertCtrl: AlertController)
     {
@@ -24,39 +24,38 @@ export class HomePage
 
         this.generateAccessCode();
 
-        //this.accessCode = "123456";
-        //this.accessChatroom();
+        //this.accessCode = "123466";
+        this.accessChatroom();
     }
 
     generateAccessCode()
     {
-
-        // let accessCode: number
-        // this.lastAccessCode_ref = this.afdb.object('lastAccessCode')
-
-        // this.lastAccessCode_ref.valueChanges().subscribe(data =>
-        //     {
-
-        //          this.accessCode = data.value
-        //          console.log(this.accessCode)
-        //     });
         this.lastAccessCode_ref = this.afdb.database.ref('lastAccessCode/value');
 
         this.lastAccessCode_ref.transaction(function(value) {
-            console.log(value)
-            return value = value+1
+            console.log("Value:" ,value)
+            this.accessCode = value
+            return value = value
 
         });
-
-        
+  
+  
     }
 
 
     accessChatroom()
-    {
-        if (this.accessCode == this.lastAccessCode_ref)
+    {   
+        let num: any
+        this.lastAccessCode_ref.transaction(function(value) { 
+            console.log(value)
+            num = value
+            return value 
+        });
+
+        if (this.accessCode == num)
         {
             //this.navCtrl.setRoot(ChatroomPage);
+            console.log("Success")
         }
         else
         {
