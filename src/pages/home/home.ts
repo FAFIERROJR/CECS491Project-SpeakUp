@@ -22,22 +22,13 @@ export class HomePage
     constructor(public navCtrl: NavController, public afdb: AngularFireDatabase,
         public afAuth: AngularFireAuth, public alertCtrl: AlertController)
     {
-<<<<<<< HEAD
+        this.generateAccessCode();
 
-
-        this.generateAccessCode()
-
-        //this.accessCode = "123466";
-        this.accessChatroom();
-=======
-        // this.generateAccessCode();
-
-        // this.chatroom = new Chatroom;
-        // this.chatroom.accessCode = "123456";
-        // this.createChatroom();
+        this.chatroom = new Chatroom;
+        this.chatroom.accessCode = "123456";
+        this.createChatroom();
         
-        // this.accessChatroom();
->>>>>>> ad5a91ed270fa048f26b5f5dd3ddcd1e5c63ece8
+        this.accessChatroom();
     }
 
     generateAccessCode()
@@ -49,11 +40,8 @@ export class HomePage
             this.accessCode = value
             return value = value+1
 
-<<<<<<< HEAD
         });
-  
-  
-=======
+    }
     createChatroom()
     {
         let chatroomDB_Ref = this.afdb.object('chatroom');
@@ -62,45 +50,27 @@ export class HomePage
             ({
                 [this.chatroom.accessCode]: this.chatroom
             })
->>>>>>> ad5a91ed270fa048f26b5f5dd3ddcd1e5c63ece8
     }
 
-
     accessChatroom()
-<<<<<<< HEAD
     {   
+        this.chatroom_accessCode_ref = this.afdb.database.ref('chatroom/accessCode');
+
         let num: any
-        this.lastAccessCode_ref.transaction(function(value) { 
+        this.chatroom_accessCode_ref.transaction(function(value) { 
             console.log(value)
             num = value
             return value 
         });
 
-        if (this.accessCode == num)
-        {
-            //this.navCtrl.setRoot(ChatroomPage);
+        if (this.accessCode === num)
+        {            
             console.log("Success")
-        }
-        else
-        {
-            let alert = this.alertCtrl.create
-            (({
-                title: 'Access Code Invalid',
-                subTitle: 'error',
-                buttons: ['Dismiss']
-            }));
-            alert.present();
-            this.accessCode = '';
-        }
-    }
-
-=======
-    {
-        this.chatroom_accessCode_ref = this.afdb.object('chatroom/accessCode');
-        if (this.accessCode === this.chatroom_accessCode_ref)
-        {
             //this.navCtrl.setRoot(ChatroomPage);
+
+
         }
+
         else
         {
             let alert = this.alertCtrl.create
@@ -114,7 +84,6 @@ export class HomePage
         }
     }
 
->>>>>>> ad5a91ed270fa048f26b5f5dd3ddcd1e5c63ece8
     signOut(): void
     {
        this.afAuth.auth.signOut();
