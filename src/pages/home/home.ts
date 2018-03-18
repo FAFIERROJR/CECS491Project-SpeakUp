@@ -22,7 +22,7 @@ export class HomePage
     {
 
 
-        this.generateAccessCode();
+        this.generateAccessCode()
 
         //this.accessCode = "123466";
         this.accessChatroom();
@@ -35,7 +35,7 @@ export class HomePage
         this.lastAccessCode_ref.transaction(function(value) {
             console.log("Value:" ,value)
             this.accessCode = value
-            return value = value
+            return value = value+1
 
         });
   
