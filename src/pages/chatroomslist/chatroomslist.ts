@@ -132,27 +132,6 @@ export class ChatroomslistPage {
     }
   }
 
-  deleteOrRemove(course_id){
-    console.log(this.user.is_instructor);
-    if(this.user.is_instructor != null){
-      console.log("is instructor not null");
-      this.is_instructor = this.user.is_instructor;
-      console.log(this.is_instructor)
-      if(this.is_instructor === true){
-        this.deleteCourse(course_id);
-      }
-      removeCourse(course_id);
-    }
-  }
-
-  deleteCourse(course_id){
-    this.afdb.object("course/" + course_id).remove();
-  }
-
-  removeCourse(course_id){
-    this.afdb.object("userProfile/" + this.uid + "courses/" + course_id).remove();
-  }
-
   ionViewDidLoad() {
     console.log('ionViewDidLoad ChatroomslistPage');
   }
