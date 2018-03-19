@@ -123,8 +123,6 @@ export class LandingPage {
         })
     }
 
-    //this.navCtrl.push(WelcomePage, {'username': this.username, 'uid': this.data.user.uid, 'randomTempID': this.randomTempID});
-
     verifyPassword()
     {
         console.log("verifyPassword() called");

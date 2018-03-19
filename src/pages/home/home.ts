@@ -18,38 +18,39 @@ export class HomePage
     chatroom_accessCode_ref: any;
     accessCode: any;
     
-    
     constructor(public navCtrl: NavController, public afdb: AngularFireDatabase,
         public afAuth: AngularFireAuth, public alertCtrl: AlertController)
     {
-        this.generateAccessCode();
+        // this.generateAccessCode();
 
-        this.chatroom = new Chatroom;
-        this.chatroom.accessCode = "123456";
-        this.createChatroom();
+        // this.chatroom = new Chatroom;
+        // this.chatroom.accessCode = "123456";
+        // this.createChatroom();
         
-        this.accessChatroom();
+        // this.accessChatroom();
     }
 
     generateAccessCode()
     {
         this.lastAccessCode_ref = this.afdb.database.ref('lastAccessCode/value');
 
-        this.lastAccessCode_ref.transaction(function(value) {
-            console.log("Value:" ,value)
+        this.lastAccessCode_ref.transaction(function (value)
+        {
+            console.log("Value: ", value)
             this.accessCode = value
-            return value = value+1
+            return value = value + 1
 
         });
     }
+
     createChatroom()
     {
         let chatroomDB_Ref = this.afdb.object('chatroom');
 
         chatroomDB_Ref.update
-            ({
-                [this.chatroom.accessCode]: this.chatroom
-            })
+        ({
+            [this.chatroom.accessCode]: this.chatroom
+        })
     }
 
     accessChatroom()
@@ -57,7 +58,8 @@ export class HomePage
         this.chatroom_accessCode_ref = this.afdb.database.ref('chatroom/accessCode');
 
         let num: any
-        this.chatroom_accessCode_ref.transaction(function(value) { 
+        this.chatroom_accessCode_ref.transaction(function (value)
+        { 
             console.log(value)
             num = value
             return value 
@@ -67,10 +69,7 @@ export class HomePage
         {            
             console.log("Success")
             //this.navCtrl.setRoot(ChatroomPage);
-
-
         }
-
         else
         {
             let alert = this.alertCtrl.create
