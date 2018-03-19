@@ -29,7 +29,6 @@ export class LandingPage {
     constructor(public navCtrl: NavController, public navParams: NavParams, public afAuth: AngularFireAuth,
         public afdb: AngularFireDatabase, public alertCtrl: AlertController)
     {
-
         this.user = new User;
         this.password = "";
         this.password2 = "";
@@ -48,8 +47,7 @@ export class LandingPage {
 
         // this.verifyPassword()
 
-         // this.login();
-        
+        // this.login();
     }
 
     signUp()
@@ -124,8 +122,6 @@ export class LandingPage {
                 [this.user.uid]: this.user
         })
     }
-
-    //this.navCtrl.push(WelcomePage, {'username': this.username, 'uid': this.data.user.uid, 'randomTempID': this.randomTempID});
 
     verifyPassword()
     {
