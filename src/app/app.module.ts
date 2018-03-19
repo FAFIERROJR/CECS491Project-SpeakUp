@@ -9,6 +9,7 @@ import { StatusBar } from '@ionic-native/status-bar';
 import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
 import { LandingPage } from '../pages/landing/landing';
+import { ChatroomslistPage } from '../pages/chatroomslist/chatroomslist'
 
 
 //firebase and angular fire imports
@@ -30,7 +31,8 @@ export const firebase_config = {
     MyApp,
     HomePage,
     LandingPage,
-    ChatroomcardsComponent
+    ChatroomcardsComponent,
+    ChatroomslistPage
   ],
   imports: [
     BrowserModule,
@@ -45,7 +47,8 @@ export const firebase_config = {
     MyApp,
     HomePage,
     LandingPage,
-    ChatroomcardsComponent
+    ChatroomcardsComponent,
+    ChatroomslistPage
   ],
   providers: [
     StatusBar,

@@ -8,4 +8,5 @@ export class User
     uni_email:  string
     username:   string
     courses:    Course[]
+    is_instructor: boolean = false;
 }
