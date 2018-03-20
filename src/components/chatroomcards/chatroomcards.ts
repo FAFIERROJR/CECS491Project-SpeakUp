@@ -29,27 +29,30 @@ export class ChatroomcardsComponent {
   ngOnInit(){
     this.uid = this.afAuth.auth.currentUser.uid;
     this.course = this.afdb.object("userProfile/" + this.uid + "/courses/" + this.course_id).valueChanges();
-    console.log(this.course);
+    this.userProfile = this.afdb.object('userProfile/' + this.uid).valueChanges().subscribe(user =>
+      this.user = user);
   }
 
-  deleteOrRemove(course_id){
-    console.log(this.user.is_instructor);
+  deleteOrRemove(){
+    console.log(this.course_id);
     if(this.user.is_instructor != null){
       console.log("is instructor not null");
       this.is_instructor = this.user.is_instructor;
       console.log(this.is_instructor)
       if(this.is_instructor === true){
-        this.deleteCourse(course_id);
+        this.deleteCourse(this.course_id);
       }
-      this.removeCourse(course_id);
+      this.removeCourse(this.course_id);
     }
   }
 
   deleteCourse(course_id){
-    this.afdb.object("course/" + course_id).remove();
+    console.log("deleting course...");
+    this.afdb.object('course/' + course_id).remove();
   }
 
   removeCourse(course_id){
-    this.afdb.object("userProfile/" + this.uid + "courses/" + course_id).remove();
+    console.log("removing course...");
+    this.afdb.object('userProfile/' + this.uid + '/courses/' + course_id).remove();
   }
 }
