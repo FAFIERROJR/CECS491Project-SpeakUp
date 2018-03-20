@@ -1,11 +1,15 @@
 import { Component } from '@angular/core';
-import { NavController } from 'ionic-angular';
+import { NavController, IonicPage, NavParams } from 'ionic-angular';
 import { AngularFireDatabase } from 'angularfire2/database';
 import { AngularFireAuth } from 'angularfire2/auth';
 import { AlertController } from 'ionic-angular';
 import { LandingPage } from '../landing/landing';
 import { Chatroom } from '../../app/models/chatroom';
 
+import { ChatroomcardsComponent } from '../../components/chatroomcards/chatroomcards';
+import { Observable } from '@firebase/util';
+import { ChatroomslistPage } from '../chatroomslist/chatroomslist';
+@IonicPage()
 @Component({
     selector: 'page-home',
     templateUrl: 'home.html'
@@ -17,6 +21,10 @@ export class HomePage
     lastAccessCode_ref: any;
     chatroom_accessCode_ref: any;
     accessCode: any;
+    //courses: Observable<{}[]>;
+    courses: any;
+    uid: string;
+    chatroomlist: any
     
     constructor(public navCtrl: NavController, public afdb: AngularFireDatabase,
         public afAuth: AngularFireAuth, public alertCtrl: AlertController)
@@ -28,6 +36,10 @@ export class HomePage
         // this.createChatroom();
         
         // this.accessChatroom();
+
+        this.uid = this.afAuth.auth.currentUser.uid;
+        //this.courses = this.afdb.list('userProfile/' + this.uid + '/courses').valueChanges();
+        this.chatroomlist = ChatroomslistPage
     }
 
     generateAccessCode()

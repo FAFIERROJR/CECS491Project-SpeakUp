@@ -29,6 +29,13 @@ export class LandingPage {
     constructor(public navCtrl: NavController, public navParams: NavParams, public afAuth: AngularFireAuth,
         public afdb: AngularFireDatabase, public alertCtrl: AlertController)
     {
+        this.afAuth.auth.onAuthStateChanged(user =>{
+            if(user){
+                console.log(user);
+                this.navCtrl.setRoot(HomePage);
+            }
+        });
+        
         this.user = new User;
         this.password = "";
         this.password2 = "";
@@ -69,6 +76,8 @@ export class LandingPage {
             }).then((success) =>
             {
                 //do something
+            }).catch(err => {
+                console.log(err);
             });
 
             this.navCtrl.setRoot(HomePage);

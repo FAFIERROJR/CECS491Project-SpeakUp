@@ -13,16 +13,17 @@
   </ion-header>
   
   <ion-content padding>
-    <div id="mainContent"></div>
+    <div id="mainBackground"></div>
+    <div id="mainBackgroundTint"></div>
     <!-- Splash Image on the right -->
     <!-- <img id="splashImage" src="assets/imgs/bluebackground.jpg"> -->
-      <ion-split-pane>
+      <div>
         <ion-grid main id="signUpGrid" col-md-4>
           <ion-row id="signUpRow">
             <!-- Signup form on the left -->
             <ion-col align-self-stretch id="inputPane">
               <div id="appLogo">
-                <div id="logo"><img src="assets/imgs/speakup-hand-logo.svg"></div>
+                <div id="logo"><img src="assets/imgs/speakup-hand-logo-white.svg"></div>
                 <h2 class="brand-name">SPEAK UP</h2>
               </div>
 
@@ -97,5 +98,5 @@
             </ion-col>
           </ion-row>
         </ion-grid>
-      </ion-split-pane>
+      </div>
   </ion-content>

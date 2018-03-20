@@ -12,11 +12,25 @@
     </ion-buttons>
 
   </ion-navbar>
+
 </ion-header>
 
 <ion-content padding>
-
-  <ion-row>
+    <ion-tabs >
+        <ion-tab [root]="chatroomlist" tabTitle="Chatrooms" tabIcon="apps"></ion-tab>
+        <ion-tab [root]="chatroomlist" tabTitle="Messages" tabIcon="mail"></ion-tab>
+        <ion-tab [root]="chatroomlist" tabTitle="Notifications" tabIcon="notifications"></ion-tab>
+        <ion-tab [root]="chatroomlist" tabTitle="Profile" tabIcon="person"></ion-tab>
+    </ion-tabs>
+  
+  <!-- <ion-list inset float-left>
+    <button ion-item>Chatrooms</button>
+    <button ion-item>Classes</button>
+    <button ion-item>Notifications</button>
+    <button ion-item>Settings</button>
+  </ion-list> -->
+  <!-- <ion-row> -->
+    <!--
     <ion-col col-lg-3 col-md-4 col-12>
       <ion-card>
         <img src="https://source.unsplash.com/user/eyyisac/likes/200x200" />
@@ -99,8 +113,15 @@
           </p>
         </ion-card-content>
       </ion-card>
-
     </ion-col>
+          -->
+    <!-- <ion-col col-lg-3 col-md-4 col-12 *ngFor="let course of courses | async" >
+      <chatroomcards [course_id]="course.course_id"></chatroomcards>
+    </ion-col>
+    
   </ion-row>
 
+  <ion-fab right bottom>
+    <button ion-fab color="danger"><ion-icon name="add"></ion-icon></button>
+  </ion-fab> -->
 </ion-content>
