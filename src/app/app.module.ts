@@ -17,6 +17,7 @@ import { AngularFireModule } from 'angularfire2';
 import { AngularFireDatabaseModule, AngularFireDatabase } from 'angularfire2/database';
 import { AngularFireAuthModule } from 'angularfire2/auth';
 import { ChatroomcardsComponent } from '../components/chatroomcards/chatroomcards';
+import { ChatroomPage } from '../pages/chatroom/chatroom';
 export const firebase_config = {
   apiKey: "AIzaSyBRZwZxFw-mfeIkrFz3R985np6jYMV8z_M",
   authDomain: "speakup-2afce.firebaseapp.com",
@@ -32,7 +33,8 @@ export const firebase_config = {
     HomePage,
     LandingPage,
     ChatroomcardsComponent,
-    ChatroomslistPage
+    ChatroomslistPage,
+    ChatroomPage
   ],
   imports: [
     BrowserModule,
@@ -48,7 +50,8 @@ export const firebase_config = {
     HomePage,
     LandingPage,
     ChatroomcardsComponent,
-    ChatroomslistPage
+    ChatroomslistPage,
+    ChatroomPage
   ],
   providers: [
     StatusBar,
