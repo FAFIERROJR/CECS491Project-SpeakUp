@@ -13,6 +13,7 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
   selector: 'page-chatroom',
   templateUrl: 'chatroom.html',
 })
+
 export class ChatroomPage {
 
   constructor(public navCtrl: NavController, public navParams: NavParams) {

@@ -1,4 +1,5 @@
-export class Course{
+export class Course
+{
     course_id: string
     name: string
     section: number
