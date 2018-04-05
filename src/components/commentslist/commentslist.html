@@ -1,0 +1,12 @@
+<!-- Generated template for the CommentslistComponent component -->
+<div>
+  <ion-list *NgFor="let comment in comments | async">
+    <ion-item>
+      <comment [comment_id]="comment.comment_id"></comment>
+    </ion-item>
+  </ion-list>
+
+  <ion-infinite-scroll>
+    <ion-infinit-scroll-content></ion-infinit-scroll-content>
+  </ion-infinite-scroll>
+</div>

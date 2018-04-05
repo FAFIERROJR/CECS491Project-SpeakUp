@@ -4,12 +4,13 @@ import { AngularFireAuth } from 'angularfire2/auth';
 import { LandingPage } from '../landing/landing';
 
 import { ChatroomcardsComponent } from '../../components/chatroomcards/chatroomcards';
-import { Observable } from '@firebase/util';
+import { Observable } from 'rxjs/Observable';
 import { AngularFireDatabase } from 'angularfire2/database';
 
 import {User}  from '../../app/models/user'
 import { Placeholder } from '@angular/compiler/src/i18n/i18n_ast';
 import { Course } from '../../app/models/course';
+import { Chatroom } from '../../app/models/chatroom';
 
 
 /**
@@ -32,6 +33,13 @@ export class ChatroomslistPage {
   uid: string;
   user: any;
   is_instructor: boolean = false;
+  chatroom: Chatroom;
+  lastAccessCode_ref: any;
+  chatroom_accessCode_ref: any;
+  accessCode: any;
+  access_code_obj: any;
+  //courses: Observable<{}[]>;
+  chatroomlist: Observable<any[]>;
 
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public afAuth: AngularFireAuth,
@@ -40,6 +48,11 @@ export class ChatroomslistPage {
     this.courses = this.afdb.list('userProfile/' + this.uid + '/courses').valueChanges();
     this.userProfile = this.afdb.object('userProfile/' + this.uid).valueChanges().subscribe(user =>
     this.user = user);
+    this.chatroom = new Chatroom;
+    this.afdb.object('lastAccessCode').valueChanges().subscribe(data => {
+      this.access_code_obj = data;
+      console.log("acces code obj:", this.access_code_obj);
+    });
   }
 
   addCourseDialog(){
@@ -106,16 +119,22 @@ export class ChatroomslistPage {
       let key = "" + data.course_name + data.section + data.term + data.year;
       let new_course = new Course;
       new_course.course_id = key;
+      new_course.course_id.trim();
       new_course.name = data.course_name;
-      new_course.instructor = data.instructor_name;
+      new_course.instructor_name = data.instructor_name;
+      new_course.instructor_id = this.uid;
       new_course.section = data.section;
       new_course.term = data.term;
       new_course.year = data.year;
       this.afdb.object('course').update({
         [key] : new_course
       });
+      new_course.chatroom_id = this.createChatroom();
 
       this.addCourseToUser(key, new_course);
+      this.afdb.object('course/').update({
+        [key]: new_course
+      })
       return true;
     }else {
       console.log("returning false");
@@ -131,6 +150,35 @@ export class ChatroomslistPage {
       return false;
     }
   }
+
+  createChatroom(){
+    this.generateAccessCode();
+    this.chatroom.accessCode = this.accessCode;
+    let chatroom_id = this.afdb.database.ref('chatroom').push(this.chatroom).key
+    this.afdb.object('chatroom/' + chatroom_id).update({
+      'chatroom_id': chatroom_id
+    });
+    return chatroom_id;
+  }
+
+  generateAccessCode()
+  {
+      this.lastAccessCode_ref = this.afdb.database.ref('lastAccessCode/value');
+      this.accessCode = this.access_code_obj.value;
+
+      this.lastAccessCode_ref.transaction(function (value)
+      {
+          console.log("Value: ", value)
+          this.accessCode = value
+          return value = (value + 1) %1000000
+
+      });
+
+      while(this.accessCode == null){
+        console.log("accessCode: ", this.accessCode);
+      }
+  }
+
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad ChatroomslistPage');
