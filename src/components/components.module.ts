@@ -1,8 +1,11 @@
 import { NgModule } from '@angular/core';
 import { ChatroomcardsComponent } from './chatroomcards/chatroomcards';
+import { CommentslistComponent } from './commentslist/commentslist';
 @NgModule({
-	declarations: [ChatroomcardsComponent],
+	declarations: [ChatroomcardsComponent,
+    CommentslistComponent],
 	imports: [],
-	exports: [ChatroomcardsComponent]
+	exports: [ChatroomcardsComponent,
+    CommentslistComponent]
 })
 export class ComponentsModule {}
