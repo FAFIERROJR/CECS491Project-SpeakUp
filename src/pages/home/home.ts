@@ -5,10 +5,10 @@ import { AngularFireAuth } from 'angularfire2/auth';
 import { AlertController } from 'ionic-angular';
 import { LandingPage } from '../landing/landing';
 import { Chatroom } from '../../app/models/chatroom';
-
 import { ChatroomcardsComponent } from '../../components/chatroomcards/chatroomcards';
 import { Observable } from '@firebase/util';
 import { ChatroomslistPage } from '../chatroomslist/chatroomslist';
+
 @IonicPage()
 @Component({
     selector: 'page-home',
