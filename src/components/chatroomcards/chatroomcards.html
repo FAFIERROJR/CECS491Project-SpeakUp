@@ -3,7 +3,7 @@
   <img src="https://source.unsplash.com/user/eyyisac/likes/200x200?sig={{course_id}}" />
   <ion-card-content>
     <ion-card-title>
-      {{(course | async)?.name}} Section {{(course | async)?.section}}
+      {{(course | async)?.name}}
     </ion-card-title>
     <p>
       Announcements will go here
@@ -14,13 +14,13 @@
 
   <ion-row no-padding>
     <ion-col>
-      <button ion-button clear small color="primary" icon-start>
+      <button ion-button clear small color="primary" (click)="enterChatroomDialog(course.chatroom_id)" icon-start>
         <ion-icon name='chatboxes'></ion-icon>
         Enter
       </button>
     </ion-col>
     <ion-col text-center>
-      <button ion-button clear small color="primary" (click)="deleteOrRemove()" icon-start>
+      <button ion-button clear small color="primary" (click)="deleteOrRemove(course.chatroom_id)" icon-start>
         <ion-icon name='close'></ion-icon>
         Delete
       </button>

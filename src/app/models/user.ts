@@ -9,6 +9,6 @@ export class User
     uni_email:  string
     username: string
     xp: number = 0
-    courses:    Course[]
+    courses:    string[]
     is_instructor: boolean = false;
 }
