@@ -70,7 +70,7 @@ export class ChatroomcardsComponent {
 
   deleteCourse(course_id){
     console.log("deleting course...");
-    this.afdb.object('course/' + this.course_raw.department + '/' + this.course_raw.course_number + '/' + this.course_raw.section + '/' +  course_id).remove();
+    this.afdb.object('course/' + this.course_raw.department + '/' +  this.course_raw.course_number + '/' + this.course_raw.section + '/' +  course_id).remove();
   }
 
   removeCourse(course_id){
