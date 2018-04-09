@@ -12,6 +12,7 @@ import { Placeholder } from '@angular/compiler/src/i18n/i18n_ast';
 import { Course } from '../../app/models/course';
 import { Chatroom } from '../../app/models/chatroom';
 import { CoursepickerComponent } from '../../components/coursepicker/coursepicker';
+import { UserProvider } from '../../providers/userprovider/userprovider';
 
 
 /**
@@ -44,10 +45,10 @@ export class ChatroomslistPage {
 
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public afAuth: AngularFireAuth,
-    public afdb: AngularFireDatabase, public alertCtrl: AlertController, public modalCtrl: ModalController) {
+    public afdb: AngularFireDatabase, public alertCtrl: AlertController, public modalCtrl: ModalController, public userProvider: UserProvider) {
     this.uid = this.afAuth.auth.currentUser.uid;
-    this.courses = this.afdb.list('userProfile/' + this.uid + '/courses').valueChanges();
-    this.userProfile = this.afdb.object('userProfile/' + this.uid).valueChanges().subscribe(user =>
+    this.courses = this.userProvider.getUserCourses(this.uid);
+    this.userProfile = this.userProvider.getUser(this.uid).subscribe(user =>
     this.user = user);
     this.chatroom = new Chatroom;
     this.afdb.object('lastAccessCode').valueChanges().subscribe(data => {

@@ -13,6 +13,7 @@ import { AngularFireDatabase } from 'angularfire2/database';
 import { HomePage } from '../home/home';
 import { User } from '../../app/models/user';
 import { AlertController } from 'ionic-angular';
+import { UserProvider } from '../../providers/userprovider/userprovider';
 
 @IonicPage()
 @Component({
@@ -27,7 +28,7 @@ export class LandingPage {
     showSignUp: boolean;
 
     constructor(public navCtrl: NavController, public navParams: NavParams, public afAuth: AngularFireAuth,
-        public afdb: AngularFireDatabase, public alertCtrl: AlertController)
+         public alertCtrl: AlertController, public userService: UserserviceProvider)
     {
         this.afAuth.auth.onAuthStateChanged(user =>{
             if(user){
@@ -124,12 +125,7 @@ export class LandingPage {
 
     createProfile()
     {
-        let userProfileDB_Ref = this.afdb.object('userProfile');
-
-        userProfileDB_Ref.update
-        ({
-                [this.user.uid]: this.user
-        })
+        this.userService.addUser(this.user.uid, this.user);
     }
 
     verifyPassword()

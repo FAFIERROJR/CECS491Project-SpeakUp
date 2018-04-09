@@ -5,6 +5,7 @@ import { Observable } from 'rxjs/Observable';
 import { AlertController, NavController, NavParams } from 'ionic-angular';
 import { Chatroom } from '../../app/models/chatroom';
 import { ChatroomPage } from '../../pages/chatroom/chatroom';
+import { UserProvider } from '../../providers/userprovider/userprovider';
 
 /**
  * Generated class for the ChatroomcardsComponent component.
@@ -35,17 +36,17 @@ export class ChatroomcardsComponent {
   chatroomlist: Observable<any[]>;
 
   constructor(public afAuth: AngularFireAuth, public afdb: AngularFireDatabase, public alertCtrl: AlertController,
-    public navCtrl: NavController, public navParams: NavParams) {
+    public navCtrl: NavController, public navParams: NavParams, public userProvider: UserProvider) {
   }
 
 
   ngOnInit(){
     this.uid = this.afAuth.auth.currentUser.uid;
-    this.course = this.afdb.object("userProfile/" + this.uid + "/courses/" + this.course_id).valueChanges()
+    this.course = this.userProvider.getUserCourse(this.uid, this.course_id);
     this.course.subscribe(course => {
       this.course_raw = course;
     });
-    this.userProfile = this.afdb.object('userProfile/' + this.uid).valueChanges().subscribe(user =>
+    this.userProfile = this.userProvider.getUser(this.uid).subscribe(user =>
       this.user = user);
   }
 
@@ -75,7 +76,7 @@ export class ChatroomcardsComponent {
 
   removeCourse(course_id){
     console.log("removing course...");
-    this.afdb.object('userProfile/' + this.uid + '/courses/' + course_id).remove();
+    this.userProvider.deleteUserCourse(this.uid, course_id);
   }
 
   enterChatroomDialog(chatroom_id){
