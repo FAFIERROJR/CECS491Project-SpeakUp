@@ -125,9 +125,7 @@ export class ChatroomcardsComponent {
            return value;
             
       }).then(success => {
-        console.log(typeof(room))
         room = String(room)
-        console.log(typeof(access_code))
         if (access_code === room)
         {            
           console.log("Success")
