@@ -35,6 +35,7 @@ export class ChatroomcardsComponent {
   //courses: Observable<{}[]>;
   chatroomlist: Observable<any[]>;
   chatroom_id: string
+  course_ref: any
 
   constructor(public afAuth: AngularFireAuth, public afdb: AngularFireDatabase, public alertCtrl: AlertController,
     public navCtrl: NavController, public navParams: NavParams, public userProvider: UserProvider) {
@@ -111,29 +112,29 @@ export class ChatroomcardsComponent {
 
   accessChatroom(access_code)
   {   
-      // this.chatroom_accessCode_ref = this.afdb.database.ref('chatroom/' + chatroom_id)
-      // this.chatroom_accessCode_ref.object().map( chatroom => this.chatroom = chatroom);
+      this.chatroom_accessCode_ref = this.afdb.database.ref('chatroom/' + this.chatroom_id+'/accessCode')
+      console.log('chatroom/' + this.chatroom_id+'/accessCode')
 
       let num: any
-      // this.chatroom_accessCode_ref.transaction(function (value)
-      // { 
-      //     console.log(value)
-      //     num = value
-      //     return value 
-      // });
-      this.afdb.object('chatroom/' + this.chatroom_id).valueChanges().subscribe(chatroom => {
-        this.chatroom_obj = chatroom;
-      })
+      let room : any
 
-      num = this.chatroom_obj.accessCode;
-
-      if (access_code === num)
-      {            
+      this.chatroom_accessCode_ref.transaction(value =>
+      { 
+           console.log(value)
+           room = value
+           return value;
+            
+      }).then(success => {
+        console.log(typeof(room))
+        room = String(room)
+        console.log(typeof(access_code))
+        if (access_code === room)
+        {            
           console.log("Success")
           this.navCtrl.push(ChatroomPage, {chatroom_id: this.chatroom_id} );
-      }
-      else
-      {
+        }
+        else
+        {
           let alert = this.alertCtrl.create
           (({
               title: 'Access Code Invalid',
@@ -142,6 +143,17 @@ export class ChatroomcardsComponent {
           }));
           alert.present();
           this.accessCode = '';
-      }
+        }
+        
+
+      });
+      
+      //this.afdb.object('chatroom/' + this.chatroom_id).valueChanges().subscribe(chatroom => {
+      //  num = this.chatroom.accessCode;
+      //})
+
+      // num = room.accessCode;
+      
+      
   }
 }
