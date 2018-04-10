@@ -34,6 +34,7 @@ export class ChatroomcardsComponent {
   course_raw: any;
   //courses: Observable<{}[]>;
   chatroomlist: Observable<any[]>;
+  chatroom_id: string
 
   constructor(public afAuth: AngularFireAuth, public afdb: AngularFireDatabase, public alertCtrl: AlertController,
     public navCtrl: NavController, public navParams: NavParams, public userProvider: UserProvider) {
@@ -43,43 +44,47 @@ export class ChatroomcardsComponent {
   ngOnInit(){
     this.uid = this.afAuth.auth.currentUser.uid;
     this.course = this.userProvider.getUserCourse(this.uid, this.course_id);
+    console.log("course obs", this.course);
     this.course.subscribe(course => {
+      console.log("course_id", this.course_id)
+      console.log("course raw", course);
       this.course_raw = course;
+      this.chatroom_id = this.course_raw.chatroom_id;
     });
     this.userProfile = this.userProvider.getUser(this.uid).subscribe(user =>
       this.user = user);
   }
 
-  deleteOrRemove(chatroom_id){
+  deleteOrRemove(){
     console.log(this.course_id);
     if(this.user.is_instructor != null){
       console.log("is instructor not null");
       this.is_instructor = this.user.is_instructor;
       console.log(this.is_instructor)
       if(this.is_instructor === true){
-        this.deleteChatroom(chatroom_id);
-        this.deleteCourse(this.course_id);
+        this.deleteChatroom();
+        this.deleteCourse();
       }
-      this.removeCourse(this.course_id);
+      this.removeCourse();
     }
   }
 
-  deleteChatroom(chatroom_id){
+  deleteChatroom(){
     console.log("deleting chatroom...");
-    this.afdb.object('chatroom/' + chatroom_id).remove();
+    this.afdb.object('chatroom/' + this.chatroom_id).remove();
   }
 
-  deleteCourse(course_id){
+  deleteCourse(){
     console.log("deleting course...");
-    this.afdb.object('course/' + this.course_raw.department + '/' +  this.course_raw.course_number + '/' + this.course_raw.section + '/' +  course_id).remove();
+    this.afdb.object('course/' + this.course_raw.department + '/' +  this.course_raw.course_number + '/' + this.course_raw.section + '/' +  this.course_id).remove();
   }
 
-  removeCourse(course_id){
+  removeCourse(){
     console.log("removing course...");
-    this.userProvider.deleteUserCourse(this.uid, course_id);
+    this.userProvider.deleteUserCourse(this.uid, this.course_id);
   }
 
-  enterChatroomDialog(chatroom_id){
+  enterChatroomDialog(){
     this.is_instructor = this.user.is_instructor;
     if(this.is_instructor === false){
       console.log('is_instructor: ', this.is_instructor);
@@ -93,17 +98,18 @@ export class ChatroomcardsComponent {
         {
           text: 'Enter',
           handler: data => {
-            return this.accessChatroom(chatroom_id, data.access_code)
+            return this.accessChatroom(data.access_code)
           }
         }]
       }).present();
     }else{
-      this.navCtrl.push(ChatroomPage, {chatroom_id});
+      console.log('chatroom id', this.chatroom_id);
+      this.navCtrl.push(ChatroomPage, {chatroom_id: this.chatroom_id});
     }
 
   }
 
-  accessChatroom(chatroom_id, access_code)
+  accessChatroom(access_code)
   {   
       // this.chatroom_accessCode_ref = this.afdb.database.ref('chatroom/' + chatroom_id)
       // this.chatroom_accessCode_ref.object().map( chatroom => this.chatroom = chatroom);
@@ -115,7 +121,7 @@ export class ChatroomcardsComponent {
       //     num = value
       //     return value 
       // });
-      this.afdb.object('chatroom/' + chatroom_id).valueChanges().subscribe(chatroom => {
+      this.afdb.object('chatroom/' + this.chatroom_id).valueChanges().subscribe(chatroom => {
         this.chatroom_obj = chatroom;
       })
 
@@ -124,7 +130,7 @@ export class ChatroomcardsComponent {
       if (access_code === num)
       {            
           console.log("Success")
-          this.navCtrl.push(ChatroomPage, {chatroom_id} );
+          this.navCtrl.push(ChatroomPage, {chatroom_id: this.chatroom_id} );
       }
       else
       {

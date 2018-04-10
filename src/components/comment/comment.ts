@@ -1,20 +1,13 @@
 import { Component } from '@angular/core';
-<<<<<<< HEAD
- 
-import { NavController, IonicPage, NavParams } from 'ionic-angular';
-import { AngularFireDatabase } from 'angularfire2/database';
-import { AngularFireAuth } from 'angularfire2/auth';
-import { AlertController } from 'ionic-angular';
-import { Input } from '@angular/core';
-=======
 import { AngularFireDatabase } from 'angularfire2/database';
 import { Comment } from '../../app/models/comment';
 import { Input } from '@angular/core';
 import { Chatroom } from '../../app/models/chatroom';
+import { CommentProvider } from '../../providers/commentprovider/commentprovider';
+import { Observable } from 'rxjs/Observable';
 
 
 
->>>>>>> bd44e0ed2606a8efe6c148e262043fb4e87fe7ac
 
 /**
  * Generated class for the CommentComponent component.
@@ -26,89 +19,52 @@ import { Chatroom } from '../../app/models/chatroom';
   selector: 'comment',
   templateUrl: 'comment.html'
 })
-<<<<<<< HEAD
-
 export class CommentComponent {
-
-  text: string;
-  commentDBRef: any;
-  comment: any;
-
-  @Input() comment_id: any;
-  @Input() chatroom_id: any;
-
-  constructor(public navCtrl: NavController, public afdb: AngularFireDatabase,
-    public afAuth: AngularFireAuth, public alertCtrl: AlertController) {
-    this.commentDBRef = this.afdb.object('chatroom/' + this.chatroom_id + 'comment/' + this.comment_id)
-
-    console.log('Hello CommentComponent Component');
-    this.text = 'Hello World';
-  }
-
-  createReply(){
-
-
-  }
-
-  deleteComment(){
-    this.commentDBRef.remove()
-=======
-export class CommentComponent {
-  @Input() roomPath: string;
-  @Input() commentID: any;
+  @Input('chatroom_id') chatroom_id: string;
+  @Input('comment_id') comment_id: string;
   text: string;
   commentRef: any;
-  comment: Comment;
+  comment: Observable<any>;
   room: Chatroom;
 
-  constructor(public afdb: AngularFireDatabase) {
-    this.commentRef = this.afdb.object('chatroom'+ this.roomPath + '/comments')
+  constructor(public commentProvider: CommentProvider) {
+    //this.commentRef = this.afdb.object('chatroom'+ this.roomPath + '/comments')
+    this.comment = commentProvider.getComment(this.chatroom_id, this.comment_id);
+    console.log("comment obvs", this.comment);
   }
 
-  createComment(){
+  ngOnInit(){
+    //this.commentRef = this.afdb.object('chatroom'+ this.roomPath + '/comments')
+    this.comment = this.commentProvider.getComment(this.chatroom_id, this.comment_id);
+    console.log("comment obvs, comment_id, chatroom_id", this.comment, this.comment_id, this.chatroom_id);
+  }
 
-    this.commentRef.push({
-      [this.comment.comment_id] : this.comment
-
+  // createComment(){
+  //   this.commentRef.push({
+  //     [this.comment.comment_id] : this.comment
     
-    });
-  }
-
-  readComment(){
-    this.commentRef = this.afdb.database.ref('chatroom'+ this.roomPath + '/comments'+this.commentID)
-
-    this.commentRef.transaction( value => 
-      {
-
-      this.comment.content = value;
-      return value;
-
+  //   });
+  // }
+  //readComment(){
+    // this.commentRef = this.afdb.database.ref('chatroom'+ this.roomPath + '/comments'+this.commentID)
+    // this.commentRef.transaction( value => 
+    //   {
+    //   this.comment.content = value;
+    //   return value;
     
-      }
-  );
->>>>>>> bd44e0ed2606a8efe6c148e262043fb4e87fe7ac
+    //   }
+  //);
 
-
-  }
-
+  //}
   updateComment(){
 
-
   }
 
-<<<<<<< HEAD
-  readComment(){
-    this.comment = this.commentDBRef.valueChanges()
-
-
-  }
-
-=======
   deleteComment(){
-    this.commentRef = this.afdb.database.ref('chatroom'+ this.roomPath + '/comments'+this.commentID)
-    this.commentRef.remove(this.commentID);
+    // this.commentRef = this.afdb.database.ref('chatroom'+ this.roomPath + '/comments'+this.commentID)
+    // this.commentRef.remove(this.commentID);
+    this.commentProvider.deleteComment(this.chatroom_id, this.comment_id);
 
 
   }
->>>>>>> bd44e0ed2606a8efe6c148e262043fb4e87fe7ac
 }
