@@ -11,8 +11,8 @@ import { ChatroomPage } from '../pages/chatroom/chatroom';
   templateUrl: 'app.html'
 })
 export class MyApp {
-  //rootPage:any = LandingPage;
-  rootPage:any = ChatroomPage;
+  rootPage:any = LandingPage;
+  //rootPage:any = ChatroomPage;
   constructor(platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen, db: AngularFireDatabase) {
     platform.ready().then(() => {
       // Okay, so the platform is ready and our plugins are available.

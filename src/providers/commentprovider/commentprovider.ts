@@ -36,7 +36,7 @@ export class CommentProvider {
     let promise = new Promise((resolve, reject) => setTimeout(() => {
       if(this.validate_key(chatroom_id)){
         let comment_id = this.afdb.database.ref('chatroom/' + chatroom_id + '/comments').push(comment).key;
-        this.afdb.object('chatroom/' + chatroom_id + '/comments' + comment_id).update({comment_id: comment_id});
+        this.afdb.object('chatroom/' + chatroom_id + '/comments/' + comment_id).update({comment_id: comment_id});
         resolve();
       }else{
         reject();
