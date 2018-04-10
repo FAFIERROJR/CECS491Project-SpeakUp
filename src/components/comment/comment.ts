@@ -1,10 +1,20 @@
 import { Component } from '@angular/core';
+<<<<<<< HEAD
  
 import { NavController, IonicPage, NavParams } from 'ionic-angular';
 import { AngularFireDatabase } from 'angularfire2/database';
 import { AngularFireAuth } from 'angularfire2/auth';
 import { AlertController } from 'ionic-angular';
 import { Input } from '@angular/core';
+=======
+import { AngularFireDatabase } from 'angularfire2/database';
+import { Comment } from '../../app/models/comment';
+import { Input } from '@angular/core';
+import { Chatroom } from '../../app/models/chatroom';
+
+
+
+>>>>>>> bd44e0ed2606a8efe6c148e262043fb4e87fe7ac
 
 /**
  * Generated class for the CommentComponent component.
@@ -16,6 +26,7 @@ import { Input } from '@angular/core';
   selector: 'comment',
   templateUrl: 'comment.html'
 })
+<<<<<<< HEAD
 
 export class CommentComponent {
 
@@ -41,6 +52,41 @@ export class CommentComponent {
 
   deleteComment(){
     this.commentDBRef.remove()
+=======
+export class CommentComponent {
+  @Input() roomPath: string;
+  @Input() commentID: any;
+  text: string;
+  commentRef: any;
+  comment: Comment;
+  room: Chatroom;
+
+  constructor(public afdb: AngularFireDatabase) {
+    this.commentRef = this.afdb.object('chatroom'+ this.roomPath + '/comments')
+  }
+
+  createComment(){
+
+    this.commentRef.push({
+      [this.comment.comment_id] : this.comment
+
+    
+    });
+  }
+
+  readComment(){
+    this.commentRef = this.afdb.database.ref('chatroom'+ this.roomPath + '/comments'+this.commentID)
+
+    this.commentRef.transaction( value => 
+      {
+
+      this.comment.content = value;
+      return value;
+
+    
+      }
+  );
+>>>>>>> bd44e0ed2606a8efe6c148e262043fb4e87fe7ac
 
 
   }
@@ -50,10 +96,19 @@ export class CommentComponent {
 
   }
 
+<<<<<<< HEAD
   readComment(){
     this.comment = this.commentDBRef.valueChanges()
 
 
   }
 
+=======
+  deleteComment(){
+    this.commentRef = this.afdb.database.ref('chatroom'+ this.roomPath + '/comments'+this.commentID)
+    this.commentRef.remove(this.commentID);
+
+
+  }
+>>>>>>> bd44e0ed2606a8efe6c148e262043fb4e87fe7ac
 }

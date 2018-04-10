@@ -6,6 +6,7 @@ import { Course } from '../../app/models/course';
 import { NavController, AlertController } from 'ionic-angular';
 import { Placeholder } from '@angular/compiler/src/i18n/i18n_ast';
 import { Chatroom } from '../../app/models/chatroom';
+import { UserProvider } from '../../providers/userprovider/userprovider';
 
 /**
  * Generated class for the CoursepickerComponent component.
@@ -33,12 +34,12 @@ export class CoursepickerComponent {
   accessCode: any;
 
   constructor(public afdb: AngularFireDatabase, public afAuth: AngularFireAuth, public navCtrl: NavController,
-      public alertCtrl: AlertController) {
+      public alertCtrl: AlertController, public userProvider: UserProvider) {
     console.log('Course Picker Constructor');
     this.options = this.afdb.list(this.path).valueChanges();
     this.uid = this.afAuth.auth.currentUser.uid;
     console.log('uid: ', this.uid);
-    this.afdb.object('userProfile/' + this.uid).valueChanges().subscribe(user =>{
+    this.userProvider.getUser(this.uid).subscribe(user =>{
       this.user_obj= user;
       console.log('user_obj', this.user_obj);
       if(this.user_obj != null){
@@ -164,9 +165,9 @@ export class CoursepickerComponent {
     this.afdb.object(this.path +'/' + this.course_id ).update({
       chatroom_id: chatroom_id
     });
-    this.afdb.object('userProfile/' + this.uid + '/courses/' + this.course_id).update({
+    this.userProvider.updateUserCourse(this.uid, this.course_id, {
       chatroom_id : chatroom_id
-    })
+    });
   }
 
   generateAccessCode()
