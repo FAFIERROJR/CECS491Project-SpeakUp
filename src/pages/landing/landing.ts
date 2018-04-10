@@ -28,7 +28,7 @@ export class LandingPage {
     showSignUp: boolean;
 
     constructor(public navCtrl: NavController, public navParams: NavParams, public afAuth: AngularFireAuth,
-         public alertCtrl: AlertController, public userService: UserserviceProvider)
+         public alertCtrl: AlertController, public userProvider: UserProvider)
     {
         this.afAuth.auth.onAuthStateChanged(user =>{
             if(user){
@@ -125,7 +125,7 @@ export class LandingPage {
 
     createProfile()
     {
-        this.userService.addUser(this.user.uid, this.user);
+        this.userProvider.addUser(this.user.uid, this.user);
     }
 
     verifyPassword()
