@@ -78,15 +78,15 @@ export class UserProvider {
 
   getUserCourse(user_id: string, course_id: string): Observable<any> {
     if(this.validate_key(user_id) && this.validate_key(course_id)){
-      return this.afdb.object(this.users_path + '/' + user_id + '/courses' + course_id).valueChanges();
+      return this.afdb.object(this.users_path + '/' + user_id + '/courses/' + course_id).valueChanges();
     }
   }
 
   updateUserCourse(user_id: string, course_id: string, properties : {}) {
-    this.afdb.object(this.users_path + '/' + user_id + '/courses' + course_id).update(properties);
+    this.afdb.object(this.users_path + '/' + user_id + '/courses/' + course_id).update(properties);
   }
 
   deleteUserCourse(user_id: string, course_id: string): void {
-    this.afdb.object(this.users_path + '/' + user_id + '/courses' + course_id).remove();
+    this.afdb.object(this.users_path + '/' + user_id + '/courses/' + course_id).remove();
   }
 }

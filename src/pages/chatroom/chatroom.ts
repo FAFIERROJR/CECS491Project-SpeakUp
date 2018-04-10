@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { Comment } from '../../app/models/comment';
 import { AlertController } from 'ionic-angular';
+import {CommentslistComponent } from '../../components/commentslist/commentslist'
 
 @IonicPage()
 @Component({
@@ -15,6 +16,7 @@ export class ChatroomPage
     currentComment: Comment
     userInput: any
     no_profanity: boolean;
+    chatroom_id: string;
 
     constructor(public navCtrl: NavController, public navParams: NavParams, public alertCtrl: AlertController)
     {
@@ -23,6 +25,10 @@ export class ChatroomPage
 
         this.currentComment = new Comment
         this.currentComment.content = "fuck you"
+
+        this.chatroom_id = this.navParams.get('chatroom_id');
+        console.log("chatroom_id", this.chatroom_id);
+
     }
 
     checkProfanity()

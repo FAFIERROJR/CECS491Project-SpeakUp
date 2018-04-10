@@ -20,6 +20,9 @@ import { ChatroomcardsComponent } from '../components/chatroomcards/chatroomcard
 import { ChatroomPage } from '../pages/chatroom/chatroom';
 import { CoursepickerComponent } from '../components/coursepicker/coursepicker';
 import { UserProvider } from '../providers/userprovider/userprovider';
+import { CommentProvider } from '../providers/commentprovider/commentprovider';
+import { CommentslistComponent } from '../components/commentslist/commentslist';
+import { CommentComponent } from '../components/comment/comment';
 export const firebase_config = {
   apiKey: "AIzaSyBRZwZxFw-mfeIkrFz3R985np6jYMV8z_M",
   authDomain: "speakup-2afce.firebaseapp.com",
@@ -37,7 +40,9 @@ export const firebase_config = {
     ChatroomcardsComponent,
     ChatroomslistPage,
     ChatroomPage,
-    CoursepickerComponent
+    CoursepickerComponent,
+    CommentslistComponent,
+    CommentComponent
   ],
   imports: [
     BrowserModule,
@@ -55,14 +60,17 @@ export const firebase_config = {
     ChatroomcardsComponent,
     ChatroomslistPage,
     ChatroomPage,
-    CoursepickerComponent
+    CoursepickerComponent,
+    CommentslistComponent,
+    CommentComponent
   ],
   providers: [
     StatusBar,
     SplashScreen,
     AngularFireDatabase,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
-    UserProvider
+    UserProvider,
+    CommentProvider
   ]
 })
 export class AppModule {}
