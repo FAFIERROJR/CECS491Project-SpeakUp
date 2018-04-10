@@ -99,6 +99,6 @@ export class HomePage
     signOut(): void
     {
        this.afAuth.auth.signOut();
-       this.navCtrl.push(LandingPage);
+       this.navCtrl.setRoot(LandingPage);
     }
 }

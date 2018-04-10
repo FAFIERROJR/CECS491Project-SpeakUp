@@ -1,3 +1,40 @@
+$accent-color: #8ECB06;
+$base-color: #71afd0;
+
 page-chatroom {
+    
+    .toolbar-background {
+      background-color: $accent-color;
+    }
+
+    .toolbar-title {
+        color: white;
+        text-align: center;
+    }
+
+    ion-input#CommentInput{
+        border: solid 1px #dbdada;
+        position: absolute;
+        bottom: 0px;
+    }
+
+    #CommentList{
+        width: 100%;
+        height: 80vh;
+        background-color: rgb(255, 255, 255);
+    }
+
+    ion-col#ClassListPane{
+        width: 100%;
+        height: 90vh;
+        background-color: $base-color;
+    }
+
+    ion-col#ChatPane{
+        width: 100%;
+        height: 90vh;
+        position: relative;
+    }
+
 
 }
