@@ -18,6 +18,8 @@ import { AngularFireDatabaseModule, AngularFireDatabase } from 'angularfire2/dat
 import { AngularFireAuthModule } from 'angularfire2/auth';
 import { ChatroomcardsComponent } from '../components/chatroomcards/chatroomcards';
 import { ChatroomPage } from '../pages/chatroom/chatroom';
+import { CoursepickerComponent } from '../components/coursepicker/coursepicker';
+import { UserProvider } from '../providers/userprovider/userprovider';
 export const firebase_config = {
   apiKey: "AIzaSyBRZwZxFw-mfeIkrFz3R985np6jYMV8z_M",
   authDomain: "speakup-2afce.firebaseapp.com",
@@ -34,7 +36,8 @@ export const firebase_config = {
     LandingPage,
     ChatroomcardsComponent,
     ChatroomslistPage,
-    ChatroomPage
+    ChatroomPage,
+    CoursepickerComponent
   ],
   imports: [
     BrowserModule,
@@ -51,13 +54,15 @@ export const firebase_config = {
     LandingPage,
     ChatroomcardsComponent,
     ChatroomslistPage,
-    ChatroomPage
+    ChatroomPage,
+    CoursepickerComponent
   ],
   providers: [
     StatusBar,
     SplashScreen,
     AngularFireDatabase,
-    {provide: ErrorHandler, useClass: IonicErrorHandler}
+    {provide: ErrorHandler, useClass: IonicErrorHandler},
+    UserProvider
   ]
 })
 export class AppModule {}
