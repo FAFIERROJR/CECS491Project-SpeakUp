@@ -1,4 +1,9 @@
 <!-- Generated template for the CommentComponent component -->
-<div>
-  {{(comment| async)?.content}}
+<div  (click)="toggleTimestamp()">
+  <div class="ownComments">
+    {{(comment| async)?.content}}
+  </div>
+  <br>
+  <!-- placeholder timestamp -->
+  <span *ngIf="timestampDisplay" class="timestamp">Sent Tuesday, 3:00pm</span>
 </div>

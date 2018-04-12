@@ -26,6 +26,7 @@ export class CommentComponent {
   commentRef: any;
   comment: Observable<any>;
   room: Chatroom;
+  timestampDisplay: boolean = false;
 
   constructor(public commentProvider: CommentProvider) {
     //this.commentRef = this.afdb.object('chatroom'+ this.roomPath + '/comments')
@@ -66,5 +67,14 @@ export class CommentComponent {
     this.commentProvider.deleteComment(this.chatroom_id, this.comment_id);
 
 
+  }
+
+  toggleTimestamp(){
+    if(this.timestampDisplay == false){
+      this.timestampDisplay = true;
+    }
+    else {
+      this.timestampDisplay = false;
+    }
   }
 }
