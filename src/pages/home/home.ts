@@ -23,7 +23,7 @@ export class HomePage
     // accessCode: any;
     // //courses: Observable<{}[]>;
     // courses: any;
-     uid: string;
+    uid: string;
     chatroomlist: any
     
     constructor(public navCtrl: NavController, public afdb: AngularFireDatabase,
