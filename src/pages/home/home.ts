@@ -40,6 +40,7 @@ export class HomePage
         this.uid = this.afAuth.auth.currentUser.uid;
         //this.courses = this.afdb.list('userProfile/' + this.uid + '/courses').valueChanges();
         this.chatroomlist = ChatroomslistPage
+
     }
 
     // generateAccessCode()

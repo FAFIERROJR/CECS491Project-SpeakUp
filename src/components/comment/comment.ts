@@ -40,30 +40,22 @@ export class CommentComponent {
   }
 
   // createComment(){
-
   //   this.commentRef.push({
   //     [this.comment.comment_id] : this.comment
-
     
   //   });
   // }
-
   //readComment(){
     // this.commentRef = this.afdb.database.ref('chatroom'+ this.roomPath + '/comments'+this.commentID)
-
     // this.commentRef.transaction( value => 
     //   {
-
     //   this.comment.content = value;
     //   return value;
-
     
     //   }
   //);
 
-
   //}
-
   updateComment(){
 
   }

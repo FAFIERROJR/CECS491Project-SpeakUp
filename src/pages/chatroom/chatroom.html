@@ -29,11 +29,11 @@
           <ion-row>
             <ion-col col-lg-11>
                 <ion-item>
-                    <ion-input id="CommentInput" type="text" placeholder="Type comments here..."></ion-input>
+                    <ion-input id="CommentInput" type="text" placeholder="Type comments here..." name="comment_input" [(ngModel)]="comment_input"></ion-input>
                   </ion-item>
             </ion-col>
             <ion-col col-lg-1>
-              <button ion-button>SEND</button>
+              <button ion-button (click)="addComment()">SEND</button>
             </ion-col>
           </ion-row>
         </form>

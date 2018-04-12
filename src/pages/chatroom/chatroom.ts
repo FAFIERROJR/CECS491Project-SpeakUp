@@ -3,6 +3,7 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { Comment } from '../../app/models/comment';
 import { AlertController } from 'ionic-angular';
 import {CommentslistComponent } from '../../components/commentslist/commentslist'
+import { CommentProvider } from '../../providers/commentprovider/commentprovider';
 
 @IonicPage()
 @Component({
@@ -17,8 +18,10 @@ export class ChatroomPage
     userInput: any
     no_profanity: boolean;
     chatroom_id: string;
+    comment_input: string;
 
-    constructor(public navCtrl: NavController, public navParams: NavParams, public alertCtrl: AlertController)
+    constructor(public navCtrl: NavController, public navParams: NavParams, public alertCtrl: AlertController,
+        public commentProvider: CommentProvider)
     {
         this.profanity = ["fuck", "shit", "damn", "bitch"]
         this.no_profanity = true;
@@ -61,5 +64,11 @@ export class ChatroomPage
         {
             // this.send();
         }
+    }
+
+    addComment(){
+        let comment = new Comment;
+        comment.content = this.comment_input;
+        this.commentProvider.addComment(this.chatroom_id, comment);
     }
 }
