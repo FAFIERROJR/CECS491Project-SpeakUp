@@ -65,7 +65,6 @@ export class CoursepickerComponent {
       this.afdb.object('userProfile/' + this.uid + '/courses/').update({
         [this.course.course_id]: this.courses_raw[this.course.course_id]
       });
-      this.generateAccessCode();
       this.navCtrl.pop();
       return;
     }
@@ -143,6 +142,7 @@ export class CoursepickerComponent {
     this.afdb.object(this.path).update({
       [this.course.course_id]: this.course
     });
+    this.generateAccessCode();
     return true;
   }
 
