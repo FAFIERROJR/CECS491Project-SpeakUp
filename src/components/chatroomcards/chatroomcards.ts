@@ -6,6 +6,9 @@ import { AlertController, NavController, NavParams } from 'ionic-angular';
 import { Chatroom } from '../../app/models/chatroom';
 import { ChatroomPage } from '../../pages/chatroom/chatroom';
 import { UserProvider } from '../../providers/userprovider/userprovider';
+import { CourseProvider } from '../../providers/courseprovider/courseprovider';
+import { Course } from '../../app/models/course';
+import { Subscription } from 'rxjs/Subscription';
 
 /**
  * Generated class for the ChatroomcardsComponent component.
@@ -22,7 +25,6 @@ export class ChatroomcardsComponent {
   uid: string;
   course: Observable<any>;
   @Input() course_id: string;
-  userProfile: any;
   user: any;
   is_instructor: boolean = false;
   courses: any;
@@ -31,14 +33,15 @@ export class ChatroomcardsComponent {
   chatroom_accessCode_ref: any;
   accessCode: any;
   chatroom_obj: any;
-  course_raw: any;
+  course_raw: Course;
   //courses: Observable<{}[]>;
   chatroomlist: Observable<any[]>;
   chatroom_id: string
   course_ref: any
+  course_subscription: Subscription;
 
   constructor(public afAuth: AngularFireAuth, public afdb: AngularFireDatabase, public alertCtrl: AlertController,
-    public navCtrl: NavController, public navParams: NavParams, public userProvider: UserProvider) {
+    public navCtrl: NavController, public navParams: NavParams, public userProvider: UserProvider, public courseProvider: CourseProvider) {
   }
 
 
@@ -46,43 +49,53 @@ export class ChatroomcardsComponent {
     this.uid = this.afAuth.auth.currentUser.uid;
     this.course = this.userProvider.getUserCourse(this.uid, this.course_id);
     console.log("course obs", this.course);
-    this.course.subscribe(course => {
+    this.course_subscription = this.course.subscribe(course => {
       console.log("course_id", this.course_id)
       console.log("course raw", course);
       this.course_raw = course;
       this.chatroom_id = this.course_raw.chatroom_id;
+      if(this.courseProvider.getCourse(this.course_raw.department, this.course_raw.course_number, this.course_raw.section.toString(),
+          this.course_raw.course_id) == null){
+            this.deleteCourse(this.course_raw.course_id);
+          }
     });
-    this.userProfile = this.userProvider.getUser(this.uid).subscribe(user =>
+    this.userProvider.getUser(this.uid).subscribe(user =>
       this.user = user);
   }
 
   deleteOrRemove(){
+    let chatroom_id = this.chatroom_id;
+    let course_id = this.course_id;
     console.log(this.course_id);
     if(this.user.is_instructor != null){
       console.log("is instructor not null");
       this.is_instructor = this.user.is_instructor;
       console.log(this.is_instructor)
       if(this.is_instructor === true){
-        this.deleteChatroom();
-        this.deleteCourse();
+        this.deleteChatroom(chatroom_id);
+        this.deleteCourse(course_id);
       }
-      this.removeCourse();
+      this.removeCourse(course_id);
     }
   }
 
-  deleteChatroom(){
+  deleteChatroom(chatroom_id){
     console.log("deleting chatroom...");
-    this.afdb.object('chatroom/' + this.chatroom_id).remove();
+    this.afdb.object('chatroom/' + chatroom_id).remove();
   }
 
-  deleteCourse(){
+  deleteCourse(course_id){
     console.log("deleting course...");
-    this.afdb.object('course/' + this.course_raw.department + '/' +  this.course_raw.course_number + '/' + this.course_raw.section + '/' +  this.course_id).remove();
+    let department = this.course_raw.department;
+    let course_number = this.course_raw.course_number;
+    let section = this.course_raw.section;
+    this.course_subscription.unsubscribe();
+    this.afdb.object('course/' + department + '/' +  course_number + '/' + section + '/' +  course_id).remove();
   }
 
-  removeCourse(){
+  removeCourse(course_id){
     console.log("removing course...");
-    this.userProvider.deleteUserCourse(this.uid, this.course_id);
+    this.userProvider.deleteUserCourse(this.uid, course_id);
   }
 
   enterChatroomDialog(){
@@ -112,8 +125,9 @@ export class ChatroomcardsComponent {
 
   accessChatroom(access_code)
   {   
-      this.chatroom_accessCode_ref = this.afdb.database.ref('chatroom/' + this.chatroom_id+'/accessCode')
-      console.log('chatroom/' + this.chatroom_id+'/accessCode')
+      let chatroom_id = this.chatroom_id
+      this.chatroom_accessCode_ref = this.afdb.database.ref('chatroom/' + chatroom_id+'/accessCode')
+      console.log('chatroom/' + chatroom_id+'/accessCode')
 
       let num: any
       let room : any
@@ -129,7 +143,7 @@ export class ChatroomcardsComponent {
         if (access_code === room)
         {            
           console.log("Success")
-          this.navCtrl.push(ChatroomPage, {chatroom_id: this.chatroom_id} );
+          this.navCtrl.push(ChatroomPage, {chatroom_id: chatroom_id} );
         }
         else
         {

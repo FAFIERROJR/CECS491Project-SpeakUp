@@ -7,6 +7,7 @@ import { NavController, AlertController } from 'ionic-angular';
 import { Placeholder } from '@angular/compiler/src/i18n/i18n_ast';
 import { Chatroom } from '../../app/models/chatroom';
 import { UserProvider } from '../../providers/userprovider/userprovider';
+import { CourseProvider } from '../../providers/courseprovider/courseprovider';
 
 /**
  * Generated class for the CoursepickerComponent component.
@@ -29,14 +30,17 @@ export class CoursepickerComponent {
   is_instructor: boolean = false;
   course: Course;
   level: string = 'Department';
-  courses_raw: any;
+  level_num : number = 1;
+  course_raw: any;
   chatroom: Chatroom;
   accessCode: any;
+  selection_made: Boolean = false;
+  continue_color: string = 'grey';
 
   constructor(public afdb: AngularFireDatabase, public afAuth: AngularFireAuth, public navCtrl: NavController,
-      public alertCtrl: AlertController, public userProvider: UserProvider) {
+      public alertCtrl: AlertController, public userProvider: UserProvider, public courseProvider: CourseProvider) {
     console.log('Course Picker Constructor');
-    this.options = this.afdb.list(this.path).valueChanges();
+    this.options = this.courseProvider.getDepartments();
     this.uid = this.afAuth.auth.currentUser.uid;
     console.log('uid: ', this.uid);
     this.userProvider.getUser(this.uid).subscribe(user =>{
@@ -51,54 +55,54 @@ export class CoursepickerComponent {
     this.course = new Course;
   }
 
-  select(){
+  getBackColor(){
+    if(this.level_num == 1){
+      return 'grey';
+    }
+    return '#488aff';
+  }
+
+  continue(){
+    if(!this.selection_made){
+      return;
+    }
+    this.selection_made = false;
+    this.continue_color = 'grey';
     console.log('choice: ', this.choice);
     let path_array = this.path.split('/');
-    if(path_array.length == 4){
+    if(this.level_num == 4){
       this.course.course_id = this.choice;
       this.course_id = this.course.course_id;
-      console.log('path : ', this.path + '/' +  this.course.course_id)
-  
-      
-      console.log("made it this far", this.courses_raw);
-      
-      this.afdb.object('userProfile/' + this.uid + '/courses/').update({
-        [this.course.course_id]: this.courses_raw[this.course.course_id]
-      });
-      this.generateAccessCode();
+      let new_course: Course = this.course_raw;
+      console.log(new_course);
+      this.userProvider.addUserCourse(this.uid, new_course);
       this.navCtrl.pop();
       return;
     }
-    this.path = this.path + '/' +  this.choice;
-    this.options = this.afdb.list(this.path).valueChanges();
-    path_array = this.path.split('/');
-    switch(path_array.length){
+    // this.path = this.path + '/' +  this.choice;
+    // this.options = this.afdb.list(this.path).valueChanges();
+    // path_array = this.path.split('/');
+    this.level_num++;
+    console.log('this.level_num', this.level_num);
+    switch(this.level_num){
       case 1:
-        this.level = 'Department';
+        this.options = this.courseProvider.getDepartments();
         break;
       case 2:
-        this.level = 'Course Number';
         this.course.department = this.choice;
         break;
       case 3:
-        this.level = 'Course Section';
         this.course.course_number = this.choice;
         break;
       case 4:
-        this.level = 'Course';
         this.course.section = this.choice;
-        this.afdb.object(this.path).valueChanges().subscribe(courses =>{
-          this.courses_raw = courses;
-          console.log('course', courses);
-          console.log('raw', this.courses_raw)
-        });
         break;
     }
+    this.updateLevel();
   }
 
   addDialog(){
-    let path_array = this.path.split('/');
-    if(path_array.length < 4){
+    if(this.level_num < 4){
       this.alertCtrl.create({
         title: 'Enter new ' + this.level,
         inputs: [{
@@ -113,7 +117,7 @@ export class CoursepickerComponent {
         }]
       }).present();
     }
-    if(path_array.length == 4){
+    if(this.level_num == 4){
       this.alertCtrl.create({
         title: 'Enter new ' + this.level,
         inputs: [{
@@ -138,21 +142,29 @@ export class CoursepickerComponent {
     this.course.instructor_id = this.uid;
     this.course.year = data.year;
     this.course.term = data.term;
-    this.course.course_id = this.course.department + this.course.course_number + this.course.section + this.course.instructor_name + this.course.term + this.course.year;
     this.course.name = this.course.department + ' ' + this.course.course_number + ' ' + this.course.section + ' ' + this.course.term + ' ' + this.course.year;
-    this.afdb.object(this.path).update({
-      [this.course.course_id]: this.course
-    });
+    this.courseProvider.addCourse(this.course.department, this.course.course_number, this.course.section.toString(),
+        this.course).then(course_id => {
+          console.log('promise course id: ', course_id);
+          this.course.course_id = course_id;
+          this.generateAccessCode();
+        })
     return true;
   }
 
   addSection(data){
-    this.afdb.object(this.path).update({
-      [data.new_option]: {
-        key: data.new_option
-      }
-    });
-    return true;
+    switch(this.level_num){
+      case 1:
+        this.courseProvider.addDepartment(data.new_option);
+        break;
+      case 2:
+        this.courseProvider.addCourseNumber(this.course.department, data.new_option);
+        break;
+      case 3:
+        this.courseProvider.addSection(this.course.department, this.course.course_number, data.new_option);
+        break;
+
+    }
   }
 
   createChatroom(){
@@ -162,12 +174,8 @@ export class CoursepickerComponent {
     this.afdb.object('chatroom/' + chatroom_id).update({
       'chatroom_id': chatroom_id
     });
-    this.afdb.object(this.path +'/' + this.course_id ).update({
-      chatroom_id: chatroom_id
-    });
-    this.userProvider.updateUserCourse(this.uid, this.course_id, {
-      chatroom_id : chatroom_id
-    });
+    this.courseProvider.updateCourse(this.course.department, this.course.course_number, this.course.section.toString(),
+        this.course.course_id, {chatroom_id: chatroom_id});
   }
 
   generateAccessCode()
@@ -184,6 +192,43 @@ export class CoursepickerComponent {
           console.log('accessCode: ', this.accessCode)
           this.createChatroom();
       })
+  }
+
+  setCourse(course_raw){
+    this.course_raw = course_raw;
+  }
+
+  setSelection(){
+    this.selection_made = true;
+    this.continue_color = '#488aff';
+    console.log("selection made: ", this.selection_made)
+  }
+
+  goBack(){
+    this.level_num--;
+    this.updateLevel();
+    this.continue_color = 'grey';
+  }
+
+  updateLevel(){
+    switch(this.level_num){
+      case 1:
+        this.level = 'Department';
+        this.options = this.courseProvider.getDepartments();
+        break;
+      case 2:
+        this.level = 'Course Number';
+        this.options = this.courseProvider.getCourseNumbers(this.course.department);
+        break;
+      case 3:
+        this.level = 'Course Section';
+        this.options = this.courseProvider.getSections(this.course.department, this.course.course_number);
+        break;
+      case 4:
+        this.level = 'Course';
+        this.options = this.courseProvider.getCourses(this.course.department, this.course.course_number, this.course.section.toString())
+        break;
+    }
   }
 
 }
