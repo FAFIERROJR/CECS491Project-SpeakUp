@@ -11,7 +11,7 @@
       </ng-container>
     </ion-list>
     <button ion-button type="button" *ngIf="is_instructor" (click)="addDialog()">Add</button>
-    <button ion-button (click)="goBack()">Back</button>
+    <button ion-button (click)="goBack()" [style.backgroundColor]= "getBackColor()">Back</button>
     <button ion-button (click)="continue()" [style.backgroundColor]="continue_color">Continue</button>
   </form>
 </div>

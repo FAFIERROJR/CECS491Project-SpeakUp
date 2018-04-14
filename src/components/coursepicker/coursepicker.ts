@@ -55,6 +55,13 @@ export class CoursepickerComponent {
     this.course = new Course;
   }
 
+  getBackColor(){
+    if(this.level_num == 1){
+      return 'grey';
+    }
+    return '#488aff';
+  }
+
   continue(){
     if(!this.selection_made){
       return;
