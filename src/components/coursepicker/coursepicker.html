@@ -1,16 +1,17 @@
 <!-- Generated template for the CoursepickerComponent component -->
 <div>
   <span>Choose {{level}}</span>
-  <form>
+  <form ngSubmit="continue()">
     <ion-list radio-group [(ngModel)]="choice" name="coursePicker">
       <ng-container *ngFor="let option of options | async" >
       <ion-item *ngIf="option.key || option.name">
-        <ion-radio value="{{option.key? option.key : option.course_id}}"></ion-radio>
+        <ion-radio value="{{option.key? option.key : option.course_id}}" (click)="setSelection(); option.course_id? setCourse(option) : null"></ion-radio>
         <ion-label>{{option.key? option.key : option.name}}</ion-label>
       </ion-item>
       </ng-container>
     </ion-list>
     <button ion-button type="button" *ngIf="is_instructor" (click)="addDialog()">Add</button>
-    <button ion-button (click)="select()">Continue</button>
+    <button ion-button (click)="goBack()">Back</button>
+    <button ion-button (click)="continue()" [style.backgroundColor]="continue_color">Continue</button>
   </form>
 </div>
