@@ -86,7 +86,7 @@ export class LandingPage {
             }),
             'uni_id': new FormControl(this.user.uni_id, [
                 Validators.required,
-                Validators.maxLength(7),
+                Validators.maxLength(9),
                 Validators.minLength(7),
                 Validators.pattern('^[0-9]{9}$')
             ]),
