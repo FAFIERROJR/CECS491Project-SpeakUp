@@ -7,7 +7,7 @@
 <ion-header>
 
   <ion-navbar >
-    <ion-title>CECS429 Section 05</ion-title>
+    <ion-title>{{(course_obvs | async)?.name}} <span *ngIf="is_instructor"> {{(chatroom | async)?.access_code}}</span></ion-title>
   </ion-navbar>
 
 </ion-header>
@@ -25,7 +25,7 @@
           <commentslist [chatroom_id]="chatroom_id"></commentslist>
         </section>
 
-        <form>
+        <form (ngSubmit)="addComment()">
           <ion-row>
             <ion-col col-lg-11>
                 <ion-item>
@@ -33,7 +33,7 @@
                   </ion-item>
             </ion-col>
             <ion-col col-lg-1>
-              <button ion-button (click)="addComment()">SEND</button>
+              <button ion-button type="submit">SEND</button>
             </ion-col>
           </ion-row>
         </form>
