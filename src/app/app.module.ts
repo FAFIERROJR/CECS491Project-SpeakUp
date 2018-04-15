@@ -10,6 +10,7 @@ import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
 import { LandingPage } from '../pages/landing/landing';
 import { ChatroomslistPage } from '../pages/chatroomslist/chatroomslist'
+import { MessagesPage } from '../pages/messages/messages'
 
 
 //firebase and angular fire imports
@@ -43,7 +44,8 @@ export const firebase_config = {
     ChatroomPage,
     CoursepickerComponent,
     CommentslistComponent,
-    CommentComponent
+    CommentComponent,
+    MessagesPage
   ],
   imports: [
     BrowserModule,
@@ -60,6 +62,7 @@ export const firebase_config = {
     LandingPage,
     ChatroomcardsComponent,
     ChatroomslistPage,
+    MessagesPage,
     ChatroomPage,
     CoursepickerComponent,
     CommentslistComponent,

@@ -8,6 +8,7 @@ import { Chatroom } from '../../app/models/chatroom';
 import { ChatroomcardsComponent } from '../../components/chatroomcards/chatroomcards';
 import { Observable } from '@firebase/util';
 import { ChatroomslistPage } from '../chatroomslist/chatroomslist';
+import { MessagesPage } from '../messages/messages';
 
 @IonicPage()
 @Component({
@@ -25,6 +26,7 @@ export class HomePage
     // courses: any;
     uid: string;
     chatroomlist: any
+    messages: any
     
     constructor(public navCtrl: NavController, public afdb: AngularFireDatabase,
         public afAuth: AngularFireAuth, public alertCtrl: AlertController)
@@ -40,6 +42,7 @@ export class HomePage
         this.uid = this.afAuth.auth.currentUser.uid;
         //this.courses = this.afdb.list('userProfile/' + this.uid + '/courses').valueChanges();
         this.chatroomlist = ChatroomslistPage
+        this.messages = MessagesPage;
 
     }
 
