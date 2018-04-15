@@ -4,39 +4,40 @@
   See http://ionicframework.com/docs/components/#navigation for more info on
   Ionic pages and navigation.
 -->
-<ion-header>
-
-  <ion-navbar >
-    <ion-title>{{(course_obvs | async)?.name}} <span *ngIf="is_instructor"> {{(chatroom | async)?.access_code}}</span></ion-title>
+<ion-header >
+  <ion-navbar id="InstructorHeader" *ngIf="is_instructor">
+    <ion-title>{{(course_obvs | async)?.name}} <span class="float-right"> Access Code: {{(chatroom | async)?.access_code}}</span></ion-title>  
   </ion-navbar>
-
+  <ion-navbar *ngIf="!is_instructor">
+    <ion-title>{{(course_obvs | async)?.name}}</ion-title>  
+  </ion-navbar>
 </ion-header>
-
 
 <ion-content padding>
   <ion-grid>
     <ion-row>
-      <ion-col id="ClassListPane" col-lg-3>
-
+      <ion-col *ngIf="is_instructor" id="ClassListPane" col-lg-3>
+          <div id="StudentListTitle">Student List</div>
       </ion-col>
 
       <ion-col id="ChatPane" col-lg-9>
         <section id="CommentList">
           <commentslist [chatroom_id]="chatroom_id"></commentslist>
         </section>
-
         <form (ngSubmit)="addComment()">
-          <ion-row>
-            <ion-col col-lg-11>
-                <ion-item>
-                    <ion-input id="CommentInput" type="text" placeholder="Type comments here..." name="comment_input" [(ngModel)]="comment_input"></ion-input>
-                  </ion-item>
-            </ion-col>
-            <ion-col col-lg-1>
-              <button ion-button type="submit">SEND</button>
-            </ion-col>
-          </ion-row>
-        </form>
+            <ion-row>
+              <ion-col col-lg-11>
+                  <ion-item>
+                      <ion-input id="CommentInput" type="text" placeholder="Type comments here..." name="comment_input" [(ngModel)]="comment_input"></ion-input>
+                    </ion-item>
+              </ion-col>
+              <ion-col col-lg-1>
+                <button ion-button type="submit">
+                  <ion-icon ios="ios-send" md="md-send"></ion-icon>
+                </button>
+              </ion-col>
+            </ion-row>
+          </form>
       </ion-col>
     </ion-row>
   </ion-grid>

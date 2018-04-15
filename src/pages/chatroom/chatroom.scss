@@ -2,14 +2,34 @@ $accent-color: #8ECB06;
 $base-color: #71afd0;
 
 page-chatroom {
+    .grid {
+        height: 100%;
+    }
+    .row{
+        height: 100%;
+    }
     
-    .toolbar-background {
+    .float-right{
+        right: 0;
+        position: absolute;
+        padding-right: 10px;
+    }
+    ion-navbar#InstructorHeader div.toolbar-background {
       background-color: $accent-color;
     }
 
-    .toolbar-title {
+    ion-navbar#InstructorHeader div.toolbar-title {
         color: white;
+    }
+    
+    .toolbar-title {
         text-align: center;
+    }
+
+    #StudentListTitle{
+        padding: 5px;
+        font-size: 2.0rem;
+        color: white;
     }
 
     ion-input#CommentInput{
@@ -20,20 +40,23 @@ page-chatroom {
 
     #CommentList{
         width: 100%;
-        height: 80vh;
+        height: 72vh;
         background-color: rgb(255, 255, 255);
+        overflow: auto;
     }
 
     ion-col#ClassListPane{
         width: 100%;
-        height: 90vh;
         background-color: $base-color;
     }
 
     ion-col#ChatPane{
         width: 100%;
-        height: 90vh;
+        height: 100%;
         position: relative;
+        left: 0;
+        right: 0;
+        margin: auto;
     }
 
 
