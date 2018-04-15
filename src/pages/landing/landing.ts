@@ -87,7 +87,8 @@ export class LandingPage {
             'uni_id': new FormControl(this.user.uni_id, [
                 Validators.required,
                 Validators.maxLength(9),
-                Validators.minLength(9)
+                Validators.minLength(9),
+                Validators.pattern('^[0-9]{9}$')
             ]),
             'uni_email': new FormControl(this.user.uni_email, [
                 Validators.required,
@@ -144,6 +145,7 @@ export class LandingPage {
             alert.present();
             this.user.uni_email = '';
             this.password = '';
+            this.password2 = '';
         });
     }
 
