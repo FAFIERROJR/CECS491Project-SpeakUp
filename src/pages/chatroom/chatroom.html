@@ -6,7 +6,7 @@
 -->
 <ion-header >
   <ion-navbar id="InstructorHeader" *ngIf="is_instructor">
-    <ion-title>{{(course_obvs | async)?.name}} <span class="float-right"> Access Code: {{(chatroom_obvs | async)?.accessCode}}</span></ion-title>  
+    <ion-title>{{(course_obvs | async)?.name}} <span hideWhen="android, ios" class="float-right"> Access Code: {{(chatroom_obvs | async)?.accessCode}}</span></ion-title>  
   </ion-navbar>
   <ion-navbar *ngIf="!is_instructor">
     <ion-title>{{(course_obvs | async)?.name}}</ion-title>  
@@ -16,9 +16,9 @@
 <ion-content padding>
   <ion-grid>
     <ion-row>
-      <ion-col *ngIf="is_instructor" id="ClassListPane" col-lg-3>
-          <div id="StudentListTitle">Student List</div>
-      </ion-col>
+        <ion-col hideWhen="android, ios" *ngIf="is_instructor" id="ClassListPane" col-lg-3 >
+          <div  id="StudentListTitle">Student List</div>
+        </ion-col>
 
       <ion-col id="ChatPane" col-lg-9>
         <section id="CommentList">
@@ -26,17 +26,17 @@
         </section>
         <form (ngSubmit)="addComment()">
             <ion-row>
-              <ion-col col-lg-11>
-                  <ion-item>
-                      <ion-input id="CommentInput" type="text" placeholder="Type comments here..." name="comment_input" [(ngModel)]="comment_input"></ion-input>
-                    </ion-item>
-              </ion-col>
-              <ion-col col-lg-1>
-                <button ion-button type="submit">
-                  <ion-icon ios="ios-send" md="md-send"></ion-icon>
-                </button>
-              </ion-col>
-            </ion-row>
+                <ion-col col-md-11 col-lg-11>
+                    <ion-item>
+                        <ion-input id="CommentInput" type="text" placeholder="Type comments here..." name="comment_input" [(ngModel)]="comment_input"></ion-input>
+                      </ion-item>
+                </ion-col>
+                <ion-col col-md-1 col-lg-1>
+                  <button ion-button type="submit">
+                    <ion-icon ios="ios-send" md="md-send"></ion-icon>
+                  </button>
+                </ion-col>
+              </ion-row>
           </form>
       </ion-col>
     </ion-row>
