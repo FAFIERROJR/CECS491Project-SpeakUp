@@ -29,18 +29,18 @@
 
   <!-- Login  -->
             <section>
-              <form *ngIf="showLogin" id="loginForm" (ngSubmit)="login()">
+              <form *ngIf="showLogin" id="loginForm" (ngSubmit)="login()" [formGroup]="login_form_control">
                 <ion-item style="border-top-left-radius: 10px;border-top-right-radius: 10px;">
                   <ion-label >Email</ion-label>
-                  <ion-input type="text" name="login_uni_email" [(ngModel)]="user.uni_email"></ion-input>
+                  <ion-input type="text" name="login_uni_email" formControlName="uni_email" [(ngModel)]="this.user.uni_email" ></ion-input>
                 </ion-item>
                 
                 <ion-item style="border-bottom-left-radius: 10px;border-bottom-right-radius: 10px;">
                   <ion-label>Password</ion-label>
-                  <ion-input type="password" name="login_password" [(ngModel)]="password"></ion-input>
+                  <ion-input type="password" name="login_password" formControlName="password" [(ngModel)]="this.password" ></ion-input>
                 </ion-item>
                 
-                <button ion-button block round class="green-button" type="submit">Login</button>
+                <button ion-button block round class="green-button" type="submit" [disabled]="login_form_control.invalid">Login</button>
               </form>
               <div text-center *ngIf="showLogin">
                 <div>
@@ -55,38 +55,40 @@
             </section>
   <!-- Sign Up -->
             <section>
-              <form id="signUpForm" *ngIf="showSignUp" (ngSubmit)="verifyPassword()">
+              <form id="signUpForm" *ngIf="showSignUp" (ngSubmit)="verifyPassword()" [formGroup]="signup_form_control">
                 <ion-item style="border-top-left-radius: 10px;border-top-right-radius: 10px;">
                   <ion-label >First Name</ion-label>
-                  <ion-input type="text" name="first_name" [(ngModel)]="user.first_name"></ion-input>
+                  <ion-input type="text" name="first_name" formControlName="first_name" [(ngModel)]="this.user.first_name" ></ion-input>
                 </ion-item>
     
                 <ion-item>
                   <ion-label>Last Name</ion-label>
-                  <ion-input type="text" name="last_name" [(ngModel)]="user.last_name"></ion-input>
+                  <ion-input type="text" name="last_name" formControlName="last_name" [(ngModel)]="this.user.last_name" ></ion-input>
                 </ion-item>
     
                 <ion-item>
                   <ion-label>Campus ID</ion-label>
-                  <ion-input type="text" name="uni_ID" [(ngModel)]="user.uni_id"></ion-input>
+                  <ion-input type="text" name="uni_ID" formControlName="uni_id" [(ngModel)]="this.user.uni_id" ></ion-input>
                 </ion-item>
     
                 <ion-item>
                   <ion-label>Campus Email</ion-label>
-                  <ion-input type="text" name="uni_email" [(ngModel)]="user.uni_email"></ion-input>
+                  <ion-input type="text" name="uni_email" formControlName="uni_email" [(ngModel)]="this.user.uni_email" ></ion-input>
                 </ion-item>
     
+                <div formGroupName="passwords">
                 <ion-item>
                   <ion-label>Password</ion-label>
-                  <ion-input type="password" name="password" [(ngModel)]="password"></ion-input>
+                  <ion-input type="password" name="password" formControlName="password" [(ngModel)]="this.password" ></ion-input>
                 </ion-item>
     
                 <ion-item style="border-bottom-left-radius: 10px;border-bottom-right-radius: 10px;">
                   <ion-label>Confirm Password</ion-label>
-                  <ion-input type="password" name="password2" [(ngModel)]="password2"></ion-input>
+                  <ion-input type="password" name="password2" formControlName="password2" [(ngModel)]="this.password2"  ></ion-input>
                 </ion-item>
+                </div>
 
-                <button ion-button round block class="green-button" type="submit">Create Account</button>
+                <button ion-button round block class="green-button" type="submit" [disabled]="signup_form_control.invalid">Create Account</button>
               </form>
 
               <!-- might need to place extra ng-if in this div as well to hide this along with the signUpForm -->

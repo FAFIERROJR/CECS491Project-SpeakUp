@@ -6,7 +6,7 @@
  */
 
 import { Component } from '@angular/core';
-import {FormsModule} from '@angular/forms';
+import {FormsModule, FormControl, FormGroup, Validators, ValidatorFn, AbstractControl} from '@angular/forms';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { AngularFireAuth } from 'angularfire2/auth';
 import { AngularFireDatabase } from 'angularfire2/database';
@@ -26,6 +26,8 @@ export class LandingPage {
     password2: string;
     showLogin: boolean;
     showSignUp: boolean;
+    signup_form_control: FormGroup;
+    login_form_control: FormGroup;
 
     constructor(public navCtrl: NavController, public navParams: NavParams, public afAuth: AngularFireAuth,
          public alertCtrl: AlertController, public userProvider: UserProvider)
@@ -56,6 +58,56 @@ export class LandingPage {
         // this.verifyPassword()
 
         // this.login();
+    }
+
+    ngOnInit(){
+        this.signup_form_control = new FormGroup({
+            'first_name': new FormControl(this.user.first_name, [
+                Validators.required,
+                Validators.minLength(2)
+            ]),
+
+            'last_name': new FormControl(this.user.last_name, [
+                Validators.required,
+                Validators.minLength(2)
+            ]),
+            'passwords': new FormGroup({
+                'password': new FormControl(this.password, [
+                    Validators.required,
+                    Validators.minLength(6)
+                ]),
+                'password2': new FormControl(this.password2, [
+                    Validators.required,
+                    Validators.minLength(6)
+                ]),
+                'passwords_match_validator': new FormControl([
+                    this.passwords_match_validator()
+                ])
+            }),
+            'uni_id': new FormControl(this.user.uni_id, [
+                Validators.required,
+                Validators.maxLength(9),
+                Validators.minLength(9),
+                Validators.pattern('^[0-9]{9}$')
+            ]),
+            'uni_email': new FormControl(this.user.uni_email, [
+                Validators.required,
+                Validators.email
+            ])
+        });
+
+        this.login_form_control = new FormGroup({
+
+            'password': new FormControl(this.password, [
+                Validators.required,
+                Validators.minLength(6)
+
+            ]),
+            'uni_email': new FormControl(this.user.uni_email, [
+                Validators.required,
+                Validators.email
+            ])
+        });
     }
 
     signUp()
@@ -93,6 +145,7 @@ export class LandingPage {
             alert.present();
             this.user.uni_email = '';
             this.password = '';
+            this.password2 = '';
         });
     }
 
@@ -128,6 +181,15 @@ export class LandingPage {
         this.userProvider.addUser(this.user.uid, this.user);
     }
 
+    passwords_match_validator(): ValidatorFn
+    {
+       return (control: AbstractControl): {[key: string]: any} => {
+        const forbidden = (this.password == this.password2);
+        return forbidden? {'password_match': {value: control.value}} : null;
+      };
+    
+    }
+
     verifyPassword()
     {
         console.log("verifyPassword() called");
@@ -141,7 +203,7 @@ export class LandingPage {
         });
         alert.present();
         this.password = "";
-        this.password = "";
+        this.password2 = "";
       }
     }
 
