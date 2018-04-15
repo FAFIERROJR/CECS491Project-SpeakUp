@@ -1,7 +1,12 @@
 $accent-color: #8ECB06;
 $base-color: #71afd0;
-
+$instr-color: rgb(220, 220, 3);
 page-chatroom {
+    ion-header {
+        position: relative;
+        top: -5px;
+    }
+
     .grid {
         height: 100%;
     }
@@ -15,16 +20,20 @@ page-chatroom {
         padding-right: 10px;
     }
     ion-navbar#InstructorHeader div.toolbar-background {
-      background-color: $accent-color;
+      background-color: $instr-color;
     }
 
     ion-navbar#InstructorHeader div.toolbar-title {
         color: white;
     }
-    
-    .toolbar-title {
-        text-align: center;
+
+    .toolbar-background {
+        background-color: $accent-color;
     }
+    
+    // .toolbar-title {
+    //     text-align: center;
+    // }
 
     #StudentListTitle{
         padding: 5px;

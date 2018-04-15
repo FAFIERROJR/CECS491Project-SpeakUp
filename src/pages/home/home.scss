@@ -1,3 +1,21 @@
 page-home {
+    @import url('https://fonts.googleapis.com/css?family=Nunito:800');
+
+    img#LogoImg {
+        height: 25px;
+        width: 25px;
+        padding: 0;
+    }
+    
+    .toolbar-background {
+        background-color: rgb(0, 162, 255);
+    }
+    .toolbar-title {
+        color: white;
+    }
+    
+    #HomeNavbarTitle {
+        font-family: Nunito, Arial, San-Serif;
+    }
 
 }

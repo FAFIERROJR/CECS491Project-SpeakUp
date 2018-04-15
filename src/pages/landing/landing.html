@@ -58,33 +58,33 @@
               <form id="signUpForm" *ngIf="showSignUp" (ngSubmit)="verifyPassword()" [formGroup]="signup_form_control">
                 <ion-item style="border-top-left-radius: 10px;border-top-right-radius: 10px;">
                   <ion-label >First Name</ion-label>
-                  <ion-input type="text" name="first_name" formControlName="first_name" [(ngModel)]="this.user.first_name" ></ion-input>
+                  <ion-input type="text" name="first_name" formControlName="first_name" [(ngModel)]="this.user.first_name" placeholder="Minimum of 2 characters"></ion-input>
                 </ion-item>
     
                 <ion-item>
                   <ion-label>Last Name</ion-label>
-                  <ion-input type="text" name="last_name" formControlName="last_name" [(ngModel)]="this.user.last_name" ></ion-input>
+                  <ion-input type="text" name="last_name" formControlName="last_name" [(ngModel)]="this.user.last_name" placeholder="Minimum of 2 characters"></ion-input>
                 </ion-item>
     
                 <ion-item>
                   <ion-label>Campus ID</ion-label>
-                  <ion-input type="text" name="uni_ID" formControlName="uni_id" [(ngModel)]="this.user.uni_id" ></ion-input>
+                  <ion-input type="text" name="uni_ID" formControlName="uni_id" [(ngModel)]="this.user.uni_id" placeholder="Minimum of 7 characters"></ion-input>
                 </ion-item>
     
                 <ion-item>
                   <ion-label>Campus Email</ion-label>
-                  <ion-input type="text" name="uni_email" formControlName="uni_email" [(ngModel)]="this.user.uni_email" ></ion-input>
+                  <ion-input type="text" name="uni_email" formControlName="uni_email" [(ngModel)]="this.user.uni_email" placeholder="Enter a valid email"></ion-input>
                 </ion-item>
     
                 <div formGroupName="passwords">
                 <ion-item>
                   <ion-label>Password</ion-label>
-                  <ion-input type="password" name="password" formControlName="password" [(ngModel)]="this.password" ></ion-input>
+                  <ion-input type="password" name="password" formControlName="password" [(ngModel)]="this.password" placeholder="Minimum of 6 characters"></ion-input>
                 </ion-item>
     
                 <ion-item style="border-bottom-left-radius: 10px;border-bottom-right-radius: 10px;">
                   <ion-label>Confirm Password</ion-label>
-                  <ion-input type="password" name="password2" formControlName="password2" [(ngModel)]="this.password2"  ></ion-input>
+                  <ion-input type="password" name="password2" formControlName="password2" [(ngModel)]="this.password2" placeholder="Minimum of 6 characters"></ion-input>
                 </ion-item>
                 </div>
 
@@ -101,4 +101,5 @@
           </ion-row>
         </ion-grid>
       </div>
+      
   </ion-content>
