@@ -1,6 +1,8 @@
 <!-- Generated template for the CoursepickerComponent component -->
-<div>
-  <span>Choose {{level}}</span>
+  <div id="LevelTitle">Select {{level}}</div>
+  <button id="DismissBtn" clear ion-button (click)="dismiss()">
+    <ion-icon ios="ios-close-circle" md="md-close-circle"></ion-icon>
+  </button>
   <form ngSubmit="continue()">
     <ion-list radio-group [(ngModel)]="choice" name="coursePicker">
       <ng-container *ngFor="let option of options | async" >
@@ -10,8 +12,11 @@
       </ion-item>
       </ng-container>
     </ion-list>
-    <button ion-button type="button" *ngIf="is_instructor" (click)="addDialog()">Add</button>
-    <button ion-button (click)="goBack()" [style.backgroundColor]= "getBackColor()">Back</button>
-    <button ion-button (click)="continue()" [style.backgroundColor]="continue_color">Continue</button>
   </form>
-</div>
+  <div id="BtnGroup">
+    <button ion-button (click)="goBack()" [style.backgroundColor]= "getBackColor()">Back</button>      
+    <span float-right>
+        <button ion-button type="button" *ngIf="is_instructor" (click)="addDialog()">Add</button>
+        <button ion-button (click)="continue()" [style.backgroundColor]="continue_color">Continue</button>
+      </span>
+  </div>
