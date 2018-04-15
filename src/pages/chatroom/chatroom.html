@@ -6,7 +6,7 @@
 -->
 <ion-header >
   <ion-navbar id="InstructorHeader" *ngIf="is_instructor">
-    <ion-title>{{(course_obvs | async)?.name}} <span class="float-right"> Access Code: {{(chatroom | async)?.access_code}}</span></ion-title>  
+    <ion-title>{{(course_obvs | async)?.name}} <span class="float-right"> Access Code: {{(chatroom_obvs | async)?.accessCode}}</span></ion-title>  
   </ion-navbar>
   <ion-navbar *ngIf="!is_instructor">
     <ion-title>{{(course_obvs | async)?.name}}</ion-title>  

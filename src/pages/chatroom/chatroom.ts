@@ -50,6 +50,11 @@ export class ChatroomPage
         console.log("chatroom_id", this.chatroom_id);
 
         this.chatroom_obvs = this.afdb.object('chatroom/' + this.chatroom_id).valueChanges();
+        this.afdb.object('chatroom/' + this.chatroom_id).update({test: 'test'});
+        console.log('chatroom obvs', this.chatroom_obvs)
+        this.chatroom_obvs.subscribe(chatroom => {
+            console.log("access code", chatroom);
+        })
         this.course_obvs = this.userProvider.getUserCourse(this.uid, this.course_id);
 
 
