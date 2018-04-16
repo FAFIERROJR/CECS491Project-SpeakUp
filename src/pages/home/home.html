@@ -4,6 +4,7 @@
       <img id="LogoImg"src="assets/imgs/speakup-hand-logo-white.svg">
       Speak Up!
     </ion-title>
+    <span id="usernameDisplay">{{(user_obvs | async)?.username}}</span>
     <ion-buttons end>
       <button ion-button><ion-icon name="settings"></ion-icon></button>
       <button (click)="signOut()" ion-button><ion-icon name="log-out"></ion-icon></button>

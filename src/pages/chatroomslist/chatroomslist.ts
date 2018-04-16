@@ -30,7 +30,7 @@ import { UserProvider } from '../../providers/userprovider/userprovider';
 export class ChatroomslistPage {
     
   //courses: Observable<{}[]>;
-  courses: any;
+  courses: Observable<any>;
   userProfile: any;
   uid: string;
   user: any;
@@ -42,12 +42,27 @@ export class ChatroomslistPage {
   access_code_obj: any;
   //courses: Observable<{}[]>;
   chatroomlist: Observable<any[]>;
+  has_courses: boolean = false;
 
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public afAuth: AngularFireAuth,
     public afdb: AngularFireDatabase, public alertCtrl: AlertController, public modalCtrl: ModalController, public userProvider: UserProvider) {
     this.uid = this.afAuth.auth.currentUser.uid;
     this.courses = this.userProvider.getUserCourses(this.uid);
+    this.courses.subscribe(courses => {
+      let course_count = 0;
+      for(let course of courses){
+        course_count++
+        break;
+      }
+      if(course_count > 0){
+        this.has_courses = true;
+      }
+      else{
+        this.has_courses = false;
+      }
+      console.log("has courses: ", this.has_courses);
+    });
     this.userProfile = this.userProvider.getUser(this.uid).subscribe(user =>
     this.user = user);
     this.chatroom = new Chatroom;
