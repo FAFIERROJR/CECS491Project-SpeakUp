@@ -64,6 +64,7 @@ export class ChatroomcardsComponent {
   }
 
   deleteOrRemove(){
+    this.course_subscription.unsubscribe();
     let chatroom_id = this.chatroom_id;
     let course_id = this.course_id;
     console.log(this.course_id);
@@ -89,7 +90,6 @@ export class ChatroomcardsComponent {
     let department = this.course_raw.department;
     let course_number = this.course_raw.course_number;
     let section = this.course_raw.section;
-    this.course_subscription.unsubscribe();
     this.afdb.object('course/' + department + '/' +  course_number + '/' + section + '/' +  course_id).remove();
   }
 
