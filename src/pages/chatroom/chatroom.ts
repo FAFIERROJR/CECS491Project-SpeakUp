@@ -34,6 +34,7 @@ export class ChatroomPage
     access_code_raw: any;
     access_code_string: string;
     access_code_sub: Subscription;
+    username: string;
 
     constructor(public navCtrl: NavController, public navParams: NavParams, public alertCtrl: AlertController, public afAuth: AngularFireAuth,
         public commentProvider: CommentProvider, public userProvider: UserProvider, public afdb: AngularFireDatabase)
@@ -53,6 +54,7 @@ export class ChatroomPage
         this.afdb.object('chatroom/' + this.chatroom_id).update({test: 'test'});
         console.log('chatroom obvs', this.chatroom_obvs)
         this.chatroom_obvs.subscribe(chatroom => {
+            this.access_code_string = chatroom.accessCode;
             console.log("access code", chatroom);
         })
         this.course_obvs = this.userProvider.getUserCourse(this.uid, this.course_id);
@@ -60,6 +62,7 @@ export class ChatroomPage
 
         this.user_sub = this.userProvider.getUser(this.uid).subscribe(user => {
             this.is_instructor = user.is_instructor;
+            this.username = user.username;
             console.log("is_instructor", this.is_instructor);
         })
 
@@ -104,6 +107,8 @@ export class ChatroomPage
     addComment(){
         let comment = new Comment;
         comment.content = this.comment_input;
+        comment.username = this.username;
+        comment.uid = this.uid;
         this.commentProvider.addComment(this.chatroom_id, comment);
         this.comment_input="";
     }

@@ -1,6 +1,7 @@
 <!-- Generated template for the CommentComponent component -->
 <div  (click)="toggleTimestamp()">
   <div class="ownComments">
+    <span>{{(comment | async)?.username}}</span>
     {{(comment| async)?.content}}
   </div>
   <br>
