@@ -88,7 +88,7 @@ export class LandingPage {
                 Validators.required,
                 Validators.maxLength(9),
                 Validators.minLength(7),
-                Validators.pattern('^[0-9]{9}$')
+                Validators.pattern('^[0-9]{7,9}$')
             ]),
             'uni_email': new FormControl(this.user.uni_email, [
                 Validators.required,

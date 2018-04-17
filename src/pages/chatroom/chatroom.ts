@@ -11,6 +11,8 @@ import { AngularFireDatabase } from 'angularfire2/database';
 import { Chatroom } from '../../app/models/chatroom';
 import { Observable } from 'rxjs/Observable';
 import { StudentlistComponent } from '../../components/studentlist/studentlist';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { validateArgCount } from '@firebase/util';
 @IonicPage()
 @Component({
   selector: 'page-chatroom',
@@ -36,6 +38,7 @@ export class ChatroomPage
     access_code_sub: Subscription;
     username: string;
     studentListDisplay: boolean = false;
+    comment_control: FormGroup
 
     constructor(public navCtrl: NavController, public navParams: NavParams, public alertCtrl: AlertController, public afAuth: AngularFireAuth,
         public commentProvider: CommentProvider, public userProvider: UserProvider, public afdb: AngularFireDatabase, public modalCtrl: ModalController)
@@ -70,6 +73,13 @@ export class ChatroomPage
         this.access_code_sub = this.afdb.object('lastAccessCode').valueChanges().subscribe(access_code => {
             this.access_code_raw = access_code;
             this.access_code_string = this.access_code_raw.value;
+        })
+
+        this.comment_control = new FormGroup({
+            'comment_input': new FormControl(this.comment_input, [
+                Validators.minLength(1),
+                Validators.required
+            ])
         })
     }
 

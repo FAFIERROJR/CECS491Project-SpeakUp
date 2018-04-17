@@ -46,15 +46,15 @@
         <section id="CommentList">
           <commentslist [chatroom_id]="chatroom_id"></commentslist>
         </section>
-        <form (ngSubmit)="addComment()">
+        <form (ngSubmit)="addComment()" [formGroup]="comment_control">
           <ion-row>
             <ion-col col-md-11 col-lg-11>
               <ion-item>
-                <ion-input id="CommentInput" type="text" placeholder="Type comments here..." name="comment_input" [(ngModel)]="comment_input"></ion-input>
+                <ion-input id="CommentInput" type="text" placeholder="Type comments here..." name="comment_input" [(ngModel)]="comment_input" formControlName="comment_input"></ion-input>
               </ion-item>
             </ion-col>
             <ion-col col-md-1 col-lg-1>
-              <button ion-button type="submit">
+              <button ion-button type="submit" [disabled]="comment_control.invalid">
                 <ion-icon ios="ios-send" md="md-send"></ion-icon>
               </button>
             </ion-col>
