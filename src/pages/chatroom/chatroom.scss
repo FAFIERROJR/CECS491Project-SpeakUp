@@ -1,6 +1,6 @@
 $accent-color: #8ECB06;
-$base-color: #71afd0;
-$instr-color: rgb(220, 220, 3);
+$student-color: rgb(0,203,66);
+$instr-color: #21aaf4;
 page-chatroom {
     ion-header {
         position: relative;
@@ -23,10 +23,10 @@ page-chatroom {
     //   background-color: $instr-color;
     // }
 
-    ion-navbar#InstructorHeader button.toggleChatList {
+    //ion-navbar#InstructorHeader button.toggleChatList {
         // background-color: violet;
         // float: left;
-    }
+    //}
 
     span ion-icon {
         margin-right: 20px;
