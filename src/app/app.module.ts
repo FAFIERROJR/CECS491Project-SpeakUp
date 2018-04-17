@@ -25,6 +25,7 @@ import { CommentProvider } from '../providers/commentprovider/commentprovider';
 import { CommentslistComponent } from '../components/commentslist/commentslist';
 import { CommentComponent } from '../components/comment/comment';
 import { CourseProvider } from '../providers/courseprovider/courseprovider';
+import { StudentlistComponent } from '../components/studentlist/studentlist';
 export const firebase_config = {
   apiKey: "AIzaSyBRZwZxFw-mfeIkrFz3R985np6jYMV8z_M",
   authDomain: "speakup-2afce.firebaseapp.com",
@@ -45,6 +46,7 @@ export const firebase_config = {
     CoursepickerComponent,
     CommentslistComponent,
     CommentComponent,
+    StudentlistComponent,
     MessagesPage
   ],
   imports: [
@@ -66,6 +68,7 @@ export const firebase_config = {
     ChatroomPage,
     CoursepickerComponent,
     CommentslistComponent,
+    StudentlistComponent,
     CommentComponent
   ],
   providers: [
