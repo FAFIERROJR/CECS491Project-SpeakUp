@@ -1,7 +1,8 @@
 <!-- Generated template for the CommentComponent component -->
 <div  (click)="toggleTimestamp()">
+  <span *ngIf="is_instructor" class="commenter">{{(comment | async)?.username}} </span>
+  <span *ngIf="!is_instructor" class="commenter">JD</span>
   <div class="ownComments">
-    <span>{{(comment | async)?.username}}</span>
     {{(comment| async)?.content}}
   </div>
   <br>
