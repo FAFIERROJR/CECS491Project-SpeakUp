@@ -1,10 +1,13 @@
 <!-- Generated template for the CommentComponent component -->
 <div  (click)="toggleTimestamp()">
-  <span *ngIf="is_instructor" class="commenter">{{(comment | async)?.username}} </span>
-  <span *ngIf="!is_instructor" class="commenter">JD</span>
-  <span class="ownComments">
-    {{(comment| async)?.content}}
-  </span>
+  <ion-row>
+      <div col-md-1 *ngIf="is_instructor" class="commenter">{{(comment | async)?.username}} </div>
+      <div col-md-1 *ngIf="!is_instructor" class="commenter">JD</div>
+      <div col-md-11 class="ownComments">
+        {{(comment| async)?.content}}
+      </div>
+  </ion-row>
+
   <br>
   <!-- placeholder timestamp -->
   <span *ngIf="timestampDisplay" class="timestamp">Sent Tuesday, 3:00pm</span>

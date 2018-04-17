@@ -1,11 +1,11 @@
 $instr-color: #21aaf4;
 comment {
     ion-label {
-        white-space: unset !important;
+        white-space: normal !important;
     }
     .ownComments {
         background-color: $instr-color;
-        display: inline-block;
+        //display: inline-block;
         color: white;
         padding: 15px;
         margin: 0px;
@@ -14,7 +14,7 @@ comment {
         
     }
 
-    span.commenter {
+    .commenter {
         background-color: #DCDC03;
         color: white;
         padding: 15px;
