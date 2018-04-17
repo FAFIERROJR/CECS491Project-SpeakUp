@@ -35,6 +35,7 @@ export class ChatroomPage
     access_code_string: string;
     access_code_sub: Subscription;
     username: string;
+    studentListDisplay: boolean = false;
 
     constructor(public navCtrl: NavController, public navParams: NavParams, public alertCtrl: AlertController, public afAuth: AngularFireAuth,
         public commentProvider: CommentProvider, public userProvider: UserProvider, public afdb: AngularFireDatabase, public modalCtrl: ModalController)
@@ -114,6 +115,13 @@ export class ChatroomPage
     }
 
     showStudentList(){
-        this.modalCtrl.create(StudentlistComponent).present();
+        if(this.studentListDisplay == false){
+            this.studentListDisplay = true;
+        }
+        else {
+            this.studentListDisplay = false;
+        }
     }
+
+
 }
