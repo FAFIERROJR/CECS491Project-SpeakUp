@@ -7,6 +7,14 @@ page-home {
         padding: 0;
         position: absolute;
     }
+
+    img.logo-img-mobile{
+        height: 25px;
+        width: auto;
+        padding-right: 8px;
+        top: 8px;
+    }
+
     ion-navbar#InstructorNavBar div.toolbar-background {
         background-color: $instr-color;
       }
@@ -20,7 +28,7 @@ page-home {
     }
 
     .toolbar-background{
-        background-color: $base-color;
+        background-color: $student-color;
     }
 
     .username-display{
