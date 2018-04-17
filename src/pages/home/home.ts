@@ -31,6 +31,7 @@ export class HomePage
     messages: any
     user_obvs: Observable<any>;
     is_instructor: boolean = false;
+    username: string
     user_sub: Subscription;
     
     constructor(public navCtrl: NavController, public afdb: AngularFireDatabase,
@@ -52,6 +53,7 @@ export class HomePage
         this.user_obvs = this.userProvider.getUser(this.uid);
         this.user_sub = this.user_obvs.subscribe(user => {
             this.is_instructor = user.is_instructor;
+            this.username = user.username;
             console.log(this.is_instructor);
         });
 

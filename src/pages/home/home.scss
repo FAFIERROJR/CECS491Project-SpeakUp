@@ -1,21 +1,33 @@
 page-home {
     @import url('https://fonts.googleapis.com/css?family=Nunito:800');
 
-    img#LogoImg {
+    img.logo-img {
         height: 25px;
-        width: 25px;
+        width: auto;
         padding: 0;
+        position: absolute;
     }
-    
-    .toolbar-background {
-        background-color: rgb(0, 162, 255);
-    }
+    ion-navbar#InstructorNavBar div.toolbar-background {
+        background-color: $instr-color;
+      }
+
     .toolbar-title {
         color: white;
     }
     
-    #HomeNavbarTitle {
+    .home-navbar-title{
         font-family: Nunito, Arial, San-Serif;
     }
 
+    .toolbar-background{
+        background-color: $base-color;
+    }
+
+    .username-display{
+        text-align: right;
+    }
+
+    .TitleDisplay{
+        padding: 0 0 0 35px;
+    }
 }
