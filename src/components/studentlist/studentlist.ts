@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { ViewController } from 'ionic-angular';
 
 /**
  * Generated class for the StudentlistComponent component.
@@ -14,9 +15,13 @@ export class StudentlistComponent {
 
   text: string;
 
-  constructor() {
+  constructor(public viewCtrl: ViewController) {
     console.log('Hello StudentlistComponent Component');
     this.text = 'Hello World';
+  }
+
+  dismiss() {
+    this.viewCtrl.dismiss();
   }
 
 }

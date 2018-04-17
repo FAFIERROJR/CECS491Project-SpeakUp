@@ -233,5 +233,5 @@ export class CoursepickerComponent {
 
   dismiss() {
     this.viewCtrl.dismiss();
-}
+  }
 }

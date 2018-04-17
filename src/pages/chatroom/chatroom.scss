@@ -7,6 +7,11 @@ page-chatroom {
         top: -5px;
     }
 
+    .scroll-content {
+        padding-left: 0 !important;
+        padding-right: 0 !important;
+    }
+
     .grid {
         height: 100%;
     }
@@ -63,7 +68,7 @@ page-chatroom {
         width: 100%;
         height: 60vh;
         background-color: rgb(255, 255, 255);
-        overflow: auto;
+        overflow-y: auto;
     }
 
     ion-col#ClassListPane{
