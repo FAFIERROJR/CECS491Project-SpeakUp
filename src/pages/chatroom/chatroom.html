@@ -26,7 +26,7 @@
               <ion-title>
                   <!-- <ion-buttons start> -->
                     <span>
-                        <button color="light" ion-button clear hideWhen="android, ios" ion-start class="toggleChatList"><ion-icon name="people"></ion-icon></button>
+                        <button (click)="showStudentList()" color="light" ion-button clear hideWhen="android, ios" ion-start class="toggleChatList"><ion-icon name="people"></ion-icon></button>
                         <span class="center">
                           {{(course_obvs | async)?.name}}
                           <span hideWhen="android, ios" class="float-right"> Access Code: {{access_code_string}}</span>
