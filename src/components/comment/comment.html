@@ -2,9 +2,9 @@
 <div  (click)="toggleTimestamp()">
   <span *ngIf="is_instructor" class="commenter">{{(comment | async)?.username}} </span>
   <span *ngIf="!is_instructor" class="commenter">JD</span>
-  <div class="ownComments">
+  <span class="ownComments">
     {{(comment| async)?.content}}
-  </div>
+  </span>
   <br>
   <!-- placeholder timestamp -->
   <span *ngIf="timestampDisplay" class="timestamp">Sent Tuesday, 3:00pm</span>
