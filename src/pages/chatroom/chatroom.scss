@@ -19,8 +19,22 @@ page-chatroom {
         position: absolute;
         padding-right: 10px;
     }
-    ion-navbar#InstructorHeader div.toolbar-background {
-      background-color: $instr-color;
+    // ion-navbar#InstructorHeader div.toolbar-background {
+    //   background-color: $instr-color;
+    // }
+
+    ion-navbar#InstructorHeader button.toggleChatList {
+        // background-color: violet;
+        // float: left;
+    }
+
+    span ion-icon {
+        margin-right: 20px;
+        padding: none;
+    }
+
+    .inline-block {
+        display: inline;
     }
 
     ion-navbar#InstructorHeader div.toolbar-title {
