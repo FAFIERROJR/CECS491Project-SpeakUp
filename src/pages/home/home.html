@@ -1,19 +1,34 @@
 <ion-header>
-  <ion-navbar text-center >
-    <ion-title id="HomeNavbarTitle">
-      <img id="LogoImg"src="assets/imgs/speakup-hand-logo-white.svg">
-      Speak Up!
-    </ion-title>
-    <span id="usernameDisplay">{{username}}</span>
+  <!-- INSTRUCTOR NAV BAR -->
+  <ion-navbar id="InstructorNavBar" *ngIf="is_instructor">
+      <ion-title  class="home-navbar-title">
+          <ion-row>
+             <span col-md-6 ><img class="logo-img"src="assets/imgs/speakup-hand-logo-white-navicon.svg">
+               <span class="TitleDisplay"> Speak Up! </span>
+             </span>
+             <span col-md-6 class="username-display">Instructor: username</span>
+          </ion-row> 
+         </ion-title>
     <ion-buttons end>
       <button ion-button><ion-icon name="settings"></ion-icon></button>
       <button (click)="signOut()" ion-button><ion-icon name="log-out"></ion-icon></button>
-
-      <!-- <button ion-button icon-end color="primary" solid>Sign Out</button> -->
     </ion-buttons>
-
   </ion-navbar>
-
+<!-- STUDENT NAV BAR -->
+  <ion-navbar *ngIf="!is_instructor" id="StudentNavBar">
+      <ion-title class="home-navbar-title">
+          <ion-row>
+             <span col-md-6 ><img class="logo-img"src="assets/imgs/speakup-hand-logo-white-navicon.svg">
+               <span class="TitleDisplay"> Speak Up! </span>
+             </span>
+             <span col-md-6 class="username-display">{{(user_obvs | async)?.username}}</span>
+          </ion-row> 
+         </ion-title>
+    <ion-buttons end>
+      <button ion-button><ion-icon name="settings"></ion-icon></button>
+      <button (click)="signOut()" ion-button><ion-icon name="log-out"></ion-icon></button>
+    </ion-buttons>
+  </ion-navbar>
 </ion-header>
 
 <ion-content padding>
