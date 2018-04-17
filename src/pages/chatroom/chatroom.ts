@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, ModalController } from 'ionic-angular';
 import { Comment } from '../../app/models/comment';
 import { AlertController } from 'ionic-angular';
 import {CommentslistComponent } from '../../components/commentslist/commentslist'
@@ -10,7 +10,7 @@ import { Subscription } from 'rxjs/Subscription';
 import { AngularFireDatabase } from 'angularfire2/database';
 import { Chatroom } from '../../app/models/chatroom';
 import { Observable } from 'rxjs/Observable';
-
+import { StudentlistComponent } from '../../components/studentlist/studentlist';
 @IonicPage()
 @Component({
   selector: 'page-chatroom',
@@ -37,7 +37,7 @@ export class ChatroomPage
     username: string;
 
     constructor(public navCtrl: NavController, public navParams: NavParams, public alertCtrl: AlertController, public afAuth: AngularFireAuth,
-        public commentProvider: CommentProvider, public userProvider: UserProvider, public afdb: AngularFireDatabase)
+        public commentProvider: CommentProvider, public userProvider: UserProvider, public afdb: AngularFireDatabase, public modalCtrl: ModalController)
     {
         this.uid = this.afAuth.auth.currentUser.uid;
         this.profanity = ["fuck", "shit", "damn", "bitch"]
@@ -111,5 +111,9 @@ export class ChatroomPage
         comment.uid = this.uid;
         this.commentProvider.addComment(this.chatroom_id, comment);
         this.comment_input="";
+    }
+
+    showStudentList(){
+        this.modalCtrl.create(StudentlistComponent).present();
     }
 }
