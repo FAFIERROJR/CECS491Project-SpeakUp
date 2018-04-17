@@ -14,8 +14,6 @@ import { CommentProvider } from '../../providers/commentprovider/commentprovider
 export class ChatroomPage
 {
     profanity: Array<any>
-    currentComment: Comment
-    userInput: any
     no_profanity: boolean;
     chatroom_id: string;
     comment_input: string;
@@ -23,11 +21,8 @@ export class ChatroomPage
     constructor(public navCtrl: NavController, public navParams: NavParams, public alertCtrl: AlertController,
         public commentProvider: CommentProvider)
     {
-        this.profanity = ["fuck", "shit", "damn", "bitch"]
+        this.profanity = ['fuck', 'shit', 'damn', 'bitch']
         this.no_profanity = true;
-
-        this.currentComment = new Comment
-        this.currentComment.content = "fuck you"
 
         this.chatroom_id = this.navParams.get('chatroom_id');
         console.log("chatroom_id", this.chatroom_id);
@@ -36,39 +31,37 @@ export class ChatroomPage
 
     checkProfanity()
     {
-        this.userInput = this.currentComment.content
-
         for (var i = 0; i < this.profanity.length; i++)
         {
-            if (this.userInput.indexOf(this.profanity[i]) != -1)
+            if (this.comment_input.indexOf(this.profanity[i]) != -1)
             {
-                let alert = this.alertCtrl.create
+                console.log(this.comment_input.indexOf(this.profanity[i]))
+                return false;
+            }
+        }
+
+        return true
+    }
+
+    addComment()
+    {
+        let comment = new Comment;
+        comment.content = this.comment_input;
+
+        if (this.checkProfanity())
+        {
+            this.commentProvider.addComment(this.chatroom_id, comment);
+            this.comment_input = '';
+        }
+        else
+        {
+            let alert = this.alertCtrl.create
                 (({
-                    title: 'Profanity Alert',
+                    title: 'Woah...',
                     subTitle: "Your comment contains profanity. Please remove it.",
                     buttons: ['Dismiss']
                 }));
-                alert.present()
-
-                this.no_profanity = false;
-                console.log(this.userInput.indexOf(this.profanity[i]))
-            }
-            else
-            {
-                this.no_profanity = true;
-                console.log(this.userInput.indexOf(this.profanity[i]));
-            }
+            alert.present()
         }
-
-        if (this.no_profanity)
-        {
-            // this.send();
-        }
-    }
-
-    addComment(){
-        let comment = new Comment;
-        comment.content = this.comment_input;
-        this.commentProvider.addComment(this.chatroom_id, comment);
     }
 }
