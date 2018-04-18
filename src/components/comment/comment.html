@@ -1,14 +1,32 @@
-<!-- Generated template for the CommentComponent component -->
-<div  (click)="toggleTimestamp()">
-  <ion-row>
-      <div col-md-1 *ngIf="is_instructor" class="commenter">{{(comment | async)?.username}} </div>
-      <div col-md-1 *ngIf="!is_instructor" class="commenter">JD</div>
-      <div col-md-11 class="ownComments">
-        {{(comment| async)?.content}}
-      </div>
-  </ion-row>
+<ion-item *ngIf="is_instructor" (click)="toggleTimestamp()">
+  <ion-avatar item-start>
+    <img src="assets/imgs/logo.png">
+  </ion-avatar>
+  <h2>{{(comment | async)?.username}}</h2>
+  <p>{{(comment| async)?.content}}</p>
+  <ion-note item-end *ngIf="timestampDisplay" class="timestamp">Sent Tuesday, 3:00pm</ion-note>
+</ion-item>
 
-  <br>
+<ion-item *ngIf="!is_instructor" (click)="toggleTimestamp()">
+  <ion-avatar item-start>
+    <img src="assets/imgs/speakup-hand-logo.svg">
+  </ion-avatar>
+  <h2>Animal Name</h2>
+  <p>{{(comment| async)?.content}}</p>
+  <ion-note item-end *ngIf="timestampDisplay" class="timestamp">Sent Tuesday, 3:00pm</ion-note>
+</ion-item>
+
+<!-- Generated template for the CommentComponent component -->
+<!-- <div (click)="toggleTimestamp()">
+  <ion-row>
+    <div style="display: inline;" col-md-1 *ngIf="is_instructor" class="commenter">{{(comment | async)?.username}} </div>
+    <div col-md-1 *ngIf="!is_instructor" class="commenter">JD</div>
+    <div col-md-11 class="ownComments">
+      {{(comment| async)?.content}}
+    </div>
+  </ion-row> -->
+
+<!-- <br>
   <!-- placeholder timestamp -->
-  <span *ngIf="timestampDisplay" class="timestamp">Sent Tuesday, 3:00pm</span>
-</div>
+<!-- <span *ngIf="timestampDisplay" class="timestamp">Sent Tuesday, 3:00pm</span> -->
+<!-- </div> -->

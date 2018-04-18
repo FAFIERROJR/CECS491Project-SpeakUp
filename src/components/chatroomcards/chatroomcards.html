@@ -18,9 +18,13 @@
         </button>
       </ion-col>
       <ion-col text-center>
-        <button ion-button clear small color="primary" (click)="deleteOrRemove()" icon-start>
+        <button *ngIf="is_instructor" ion-button clear small color="primary" (click)="deleteOrRemove()" icon-start>
           <ion-icon name='close'></ion-icon>
           Delete
+        </button>
+        <button *ngIf="!is_instructor" ion-button clear small color="primary" (click)="deleteOrRemove()" icon-start>
+          <ion-icon name='close'></ion-icon>
+          Leave
         </button>
       </ion-col>
       <!-- <ion-col text-right>

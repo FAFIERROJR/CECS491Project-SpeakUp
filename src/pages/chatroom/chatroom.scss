@@ -2,9 +2,24 @@ $accent-color: #8ECB06;
 $student-color: rgb(0,203,66);
 $instr-color: #21aaf4;
 page-chatroom {
+
     ion-header {
         position: relative;
         top: -5px;
+    }
+
+    ion-title{
+        padding-left: 35px;
+    }
+
+    .bar-button-solid{
+        background-color: $accent-color;
+    }
+
+    .ion-start {
+        position: absolute;
+        top: 10px;
+        left: 10px;
     }
 
     .scroll-content {
@@ -14,7 +29,9 @@ page-chatroom {
 
     .grid {
         height: 100%;
+        padding: 0;
     }
+
     .row{
         height: 100%;
     }
@@ -24,17 +41,9 @@ page-chatroom {
         position: absolute;
         padding-right: 10px;
     }
-    // ion-navbar#InstructorHeader div.toolbar-background {
-    //   background-color: $instr-color;
-    // }
-
-    //ion-navbar#InstructorHeader button.toggleChatList {
-        // background-color: violet;
-        // float: left;
-    //}
 
     span ion-icon {
-        margin-right: 20px;
+        //margin-right: 20px;
         padding: none;
     }
 
@@ -50,23 +59,28 @@ page-chatroom {
         background-color: $accent-color;
     }
     
-    // .toolbar-title {
-    //     text-align: center;
-    // }
-
-    // #StudentListTitle{
-
-    // }
+    .toolbar-title {
+        text-align: center;
+    }
+    ion-toolbar#CommentInputToolbar div.toolbar-background {
+        background-color: white;
+    }
 
     ion-input#CommentInput{
         border: solid 1px #dbdada;
         position: absolute;
         bottom: 0px;
+        padding-left: 50px;
+    }
+
+    #CommentInputToolbar ion-icon {
+        font-size: 1.8em;
     }
 
     #CommentList{
         width: 100%;
-        height: 60vh;
+        height: 70vh;
+        max-height: 85%;
         background-color: rgb(255, 255, 255);
         overflow-y: auto;
     }
@@ -88,18 +102,7 @@ page-chatroom {
     ion-col#ChatPane{
         width: 100%;
         height: 100%;
-        position: relative;
-        left: 0;
-        right: 0;
-        margin: auto;
+        padding: 0;
     }
-
-    button#SendBtn{
-        position: absolute;
-        bottom: 0;
-        right: 0;
-        margin: 0;
-    }
-
-
+     
 }

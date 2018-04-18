@@ -8,7 +8,7 @@ coursepicker {
 
     div#LevelTitle{
         font-size: 22px;
-        padding: 20px;
+        padding: 40px 20px 20px 15px;
     }
 
     div#BtnGroup {
@@ -19,7 +19,7 @@ coursepicker {
     }
 
     button#DismissBtn {
-        top:0;
+        top: 8px;
         position: absolute;
         right: 0;
         font-size: 2.4rem;
