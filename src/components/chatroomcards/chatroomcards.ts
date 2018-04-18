@@ -38,11 +38,7 @@ export class ChatroomcardsComponent {
   chatroomlist: Observable<any[]>;
   chatroom_id: string
   course_ref: any
-<<<<<<< HEAD
-  temp: any
-=======
   course_subscription: Subscription;
->>>>>>> 4be34878961c4dab520a09e26d14bcceaab6e5bd
 
   constructor(public afAuth: AngularFireAuth, public afdb: AngularFireDatabase, public alertCtrl: AlertController,
     public navCtrl: NavController, public navParams: NavParams, public userProvider: UserProvider, public courseProvider: CourseProvider) {
@@ -91,24 +87,15 @@ export class ChatroomcardsComponent {
 
   deleteCourse(course_id){
     console.log("deleting course...");
-<<<<<<< HEAD
-    this.temp = this.course_id
-    this.afdb.object('course/' + this.course_raw.department + '/' +  this.course_raw.course_number + '/' + this.course_raw.section + '/' +  this.course_id).remove();
-=======
     let department = this.course_raw.department;
     let course_number = this.course_raw.course_number;
     let section = this.course_raw.section;
     this.afdb.object('course/' + department + '/' +  course_number + '/' + section + '/' +  course_id).remove();
->>>>>>> 4be34878961c4dab520a09e26d14bcceaab6e5bd
   }
 
   removeCourse(course_id){
     console.log("removing course...");
-<<<<<<< HEAD
-    this.userProvider.deleteUserCourse(this.uid, this.temp)
-=======
     this.userProvider.deleteUserCourse(this.uid, course_id);
->>>>>>> 4be34878961c4dab520a09e26d14bcceaab6e5bd
   }
 
   enterChatroomDialog(){
