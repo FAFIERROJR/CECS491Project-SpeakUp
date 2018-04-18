@@ -4,15 +4,67 @@
   See http://ionicframework.com/docs/components/#navigation for more info on
   Ionic pages and navigation.
 -->
-<ion-header>
 
-  <ion-navbar>
-    <ion-title>chatroom</ion-title>
-  </ion-navbar>
+<ion-content>
+  <ion-grid>
+    <ion-row>
+      <!-- Button that shows up on iOS and android -->
+      <ion-col hideWhen="android, ios" *ngIf="is_instructor && studentListDisplay" id="ClassListPane" col-lg-3>
+        <div id="StudentListTitle">
+          <h2>Student List</h2>
+          <img src="assets/imgs/placeholder-list.png" />
+        </div>
+      </ion-col>
 
-</ion-header>
+      <ion-col id="ChatPane">
+        <ion-header>
+          <!-- instructor tool bar -->
+          <ion-toolbar id="InstructorHeader" *ngIf="is_instructor">
+            <ion-buttons class="ion-start">
+              <button ion-button icon-only solid (click)="showStudentList()" hideWhen="android, ios" class="toggleChatList">
+                <ion-icon name="people"></ion-icon>
+              </button>
+            </ion-buttons>
+            <ion-buttons class="ion-start">
+              <button ion-button icon-only solid (click)="showStudentListMobile()" showWhen="android, ios" class="toggleChatList">
+                <ion-icon name="people"></ion-icon>
+              </button>
+            </ion-buttons>
+            <ion-title>
+              <span class="center">{{(course_obvs | async)?.name}}</span>
+              <span hideWhen="android, ios" class="float-right"> Access Code: {{access_code_string}}</span>
+            </ion-title>
+          </ion-toolbar>
 
-
-<ion-content padding>
-
+          <!-- Student toolbar -->
+          <ion-toolbar *ngIf="!is_instructor" text-center hideBackButton>
+            <ion-title>{{(course_obvs | async)?.name}}</ion-title>
+          </ion-toolbar>
+        </ion-header>
+        <section id="CommentList">
+          <commentslist [chatroom_id]="chatroom_id"></commentslist>
+        </section>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
 </ion-content>
+
+<ion-footer>
+  <ion-toolbar id="CommentInputToolbar">
+    <ion-buttons class="ion-start">
+      <button ion-button>
+        <ion-icon name="happy"></ion-icon>
+      </button>
+    </ion-buttons>
+    <form (ngSubmit)="addComment()" [formGroup]="comment_control">
+      <ion-input id="CommentInput" type="text" placeholder="Type comments here..." name="comment_input" [(ngModel)]="comment_input"
+        formControlName="comment_input">
+      </ion-input>
+      <ion-buttons class="ion-end">
+        <button ion-button type="submit" [disabled]="comment_control.invalid">
+          <ion-icon ios="ios-send" md="md-send"></ion-icon>
+        </button>
+      </ion-buttons>
+    </form>
+  </ion-toolbar>
+</ion-footer>

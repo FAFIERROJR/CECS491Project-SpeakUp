@@ -1,0 +1,48 @@
+$instr-color: #21aaf4;
+comment {
+    ion-label {
+        white-space: normal !important;
+    }
+    .ownComments {
+        background-color: $instr-color;
+        // display: inline-block;
+        color: white;
+        padding: 15px;
+        margin: 0px;
+        border-radius: .5;
+        border-radius: 0px 30px 30px 30px;
+        
+    }
+
+    .commenter {
+        background-color: #DCDC03;
+        color: white;
+        padding: 15px;
+        margin: 0px;
+        border-radius: .5;
+        border-radius: 30px 30px 30px 30px;
+        display: inline-block;
+    }
+
+    .hiddenCommenter {
+        background-color: #DCDC03;
+        color: white;
+        padding: 15px;
+        margin-bottom: 0px;
+        border-radius: .5;
+        border-radius: 30px 30px 30px 30px;
+        display: inline-block;
+    }
+
+    .center {
+        display: inline-block;
+        margin-top: 10px;
+        margin-bottom: 10px;
+    }
+
+    span.timestamp{
+        color:gray;
+        display: inline;
+        font-size: .9em;
+    }
+}

@@ -11,17 +11,33 @@
   </ion-navbar> -->
 
 </ion-header>
-
-
 <ion-content padding>
-  <ion-row>
-  <ion-col col-lg-3 col-md-4 col-12 *ngFor="let course of courses | async" >
-    <chatroomcards [course_id]="course.course_id"></chatroomcards>
-  </ion-col>
-  
-</ion-row>
 
-<ion-fab right bottom>
-  <button ion-fab color="danger" (click)="addCourseDialog()"><ion-icon name="add"></ion-icon></button>
-</ion-fab>
+  <div id="EmptyCourse" *ngIf="!has_courses">
+    <div id="mainBackground"></div>
+    <div id="mainBackgroundTint"></div>
+    <div id="LogoImg">
+      <img src="assets/imgs/speakup-hand-logo-white.svg"> 
+      <div id="TextMessage">
+        There are currently no courses.
+      </div>
+      <div id="SubMessage">
+        Click the add button to start adding courses.
+      </div>
+    </div>
+
+  </div>
+  
+
+  <ion-row>
+    <ion-col col-lg-3 col-md-4 col-12 *ngFor="let course of courses | async">
+      <chatroomcards [course_id]="course.course_id"></chatroomcards>
+    </ion-col>
+  </ion-row>
+
+  <ion-fab right bottom>
+    <button ion-fab color="custom-green" (click)="addCourseDialog()">
+      <ion-icon name="add"></ion-icon>
+    </button>
+  </ion-fab>
 </ion-content>
