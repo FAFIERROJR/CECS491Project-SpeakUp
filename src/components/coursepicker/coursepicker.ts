@@ -3,7 +3,7 @@ import { Observable } from 'rxjs/Observable';
 import { AngularFireDatabase } from 'angularfire2/database';
 import { AngularFireAuth } from 'angularfire2/auth';
 import { Course } from '../../app/models/course';
-import { NavController, AlertController } from 'ionic-angular';
+import { NavController, AlertController, ViewController } from 'ionic-angular';
 import { Placeholder } from '@angular/compiler/src/i18n/i18n_ast';
 import { Chatroom } from '../../app/models/chatroom';
 import { UserProvider } from '../../providers/userprovider/userprovider';
@@ -38,7 +38,7 @@ export class CoursepickerComponent {
   continue_color: string = 'grey';
 
   constructor(public afdb: AngularFireDatabase, public afAuth: AngularFireAuth, public navCtrl: NavController,
-      public alertCtrl: AlertController, public userProvider: UserProvider, public courseProvider: CourseProvider) {
+      public alertCtrl: AlertController, public userProvider: UserProvider, public courseProvider: CourseProvider, public viewCtrl: ViewController) {
     console.log('Course Picker Constructor');
     this.options = this.courseProvider.getDepartments();
     this.uid = this.afAuth.auth.currentUser.uid;
@@ -231,4 +231,7 @@ export class CoursepickerComponent {
     }
   }
 
+  dismiss() {
+    this.viewCtrl.dismiss();
+  }
 }

@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, ModalController } from 'ionic-angular';
 import { Comment } from '../../app/models/comment';
 import { AlertController } from 'ionic-angular';
 import {CommentslistComponent } from '../../components/commentslist/commentslist'
@@ -10,7 +10,9 @@ import { Subscription } from 'rxjs/Subscription';
 import { AngularFireDatabase } from 'angularfire2/database';
 import { Chatroom } from '../../app/models/chatroom';
 import { Observable } from 'rxjs/Observable';
-
+import { StudentlistComponent } from '../../components/studentlist/studentlist';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { validateArgCount } from '@firebase/util';
 @IonicPage()
 @Component({
   selector: 'page-chatroom',
@@ -32,9 +34,12 @@ export class ChatroomPage
     access_code_raw: any;
     access_code_string: string;
     access_code_sub: Subscription;
+    username: string;
+    studentListDisplay: boolean = false;
+    comment_control: FormGroup
 
     constructor(public navCtrl: NavController, public navParams: NavParams, public alertCtrl: AlertController, public afAuth: AngularFireAuth,
-        public commentProvider: CommentProvider, public userProvider: UserProvider, public afdb: AngularFireDatabase)
+        public commentProvider: CommentProvider, public userProvider: UserProvider, public afdb: AngularFireDatabase, public modalCtrl: ModalController)
     {
         this.uid = this.afAuth.auth.currentUser.uid;
         this.profanity = ["fuck", "shit", "damn", "bitch"]
@@ -45,17 +50,31 @@ export class ChatroomPage
         console.log("chatroom_id", this.chatroom_id);
 
         this.chatroom_obvs = this.afdb.object('chatroom/' + this.chatroom_id).valueChanges();
+        this.afdb.object('chatroom/' + this.chatroom_id).update({test: 'test'});
+        console.log('chatroom obvs', this.chatroom_obvs)
+        this.chatroom_obvs.subscribe(chatroom => {
+            this.access_code_string = chatroom.accessCode;
+            console.log("access code", chatroom);
+        })
         this.course_obvs = this.userProvider.getUserCourse(this.uid, this.course_id);
 
 
         this.user_sub = this.userProvider.getUser(this.uid).subscribe(user => {
             this.is_instructor = user.is_instructor;
+            this.username = user.username;
             console.log("is_instructor", this.is_instructor);
         })
 
         this.access_code_sub = this.afdb.object('lastAccessCode').valueChanges().subscribe(access_code => {
             this.access_code_raw = access_code;
             this.access_code_string = this.access_code_raw.value;
+        })
+
+        this.comment_control = new FormGroup({
+            'comment_input': new FormControl(this.comment_input, [
+                Validators.minLength(1),
+                Validators.required
+            ])
         })
     }
 
@@ -80,6 +99,8 @@ export class ChatroomPage
 
         if (this.checkProfanity())
         {
+            comment.username = this.username;
+            comment.uid = this.uid;
             this.commentProvider.addComment(this.chatroom_id, comment);
             this.comment_input = '';
         }
@@ -94,4 +115,18 @@ export class ChatroomPage
             alert.present()
         }
     }
+
+    showStudentList(){
+        if(this.studentListDisplay == false){
+            this.studentListDisplay = true;
+        }
+        else {
+            this.studentListDisplay = false;
+        }
+    }
+
+    showStudentListMobile(){
+        this.modalCtrl.create(StudentlistComponent).present();
+    }
+
 }

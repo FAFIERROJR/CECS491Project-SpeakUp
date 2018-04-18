@@ -8,6 +8,7 @@ export class Comment
     user_date: string
     user_time: string
     username: string
+    uid: string
     xp: number = 0
     vote_history: Vote
     parent_comment: Comment

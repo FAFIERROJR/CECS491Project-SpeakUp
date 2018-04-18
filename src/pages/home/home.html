@@ -1,28 +1,72 @@
 <ion-header>
-  <ion-navbar>
-    <ion-title>
-      Welcome to Speak Up!
-
+  <!-- INSTRUCTOR NAV BAR -->
+  <ion-navbar id="InstructorNavBar" *ngIf="is_instructor">
+    <ion-title hideWhen="ios, android" class="home-navbar-title">
+      <ion-row>
+        <span col-md-6>
+          <img class="logo-img" src="assets/imgs/speakup-hand-logo-white-navicon.svg">
+          <span class="TitleDisplay"> Speak Up! </span>
+        </span>
+        <span col-md-6 class="username-display">{{username}}</span>
+      </ion-row>
     </ion-title>
+
+    <ion-title showWhen="ios, android" class="home-navbar-title">
+      
+      <img class="logo-img-mobile" src="assets/imgs/speakup-hand-logo-white-navicon.svg">
+      <span class="username-display">{{username}}</span>
+        
+      </ion-title>
+
     <ion-buttons end>
-      <button ion-button><ion-icon name="settings"></ion-icon></button>
-      <button (click)="signOut()" ion-button><ion-icon name="log-out"></ion-icon></button>
-
-      <!-- <button ion-button icon-end color="primary" solid>Sign Out</button> -->
+      <button ion-button>
+        <ion-icon name="settings"></ion-icon>
+      </button>
+      <button (click)="signOut()" ion-button>
+        <ion-icon name="log-out"></ion-icon>
+      </button>
     </ion-buttons>
-
   </ion-navbar>
 
+
+  <!-- STUDENT NAV BAR -->
+  <ion-navbar *ngIf="!is_instructor" id="StudentNavBar">
+    <ion-title hideWhen="ios, android" class="home-navbar-title">
+      <ion-row>
+        <span col-md-6>
+          <img class="logo-img" src="assets/imgs/speakup-hand-logo-white-navicon.svg">
+          <span class="TitleDisplay"> Speak Up! </span>
+        </span>
+        <span col-md-6 class="username-display">{{(user_obvs | async)?.username}}</span>
+      </ion-row>
+    </ion-title>
+
+    <ion-title showWhen="ios, android" class="home-navbar-title">
+        <ion-row>
+            <img class="logo-img-mobile" src="assets/imgs/speakup-hand-logo-white-navicon.svg">
+            <span class="username-display">{{(user_obvs | async)?.username}}</span>
+        </ion-row>
+      </ion-title>
+
+    <ion-buttons end>
+      <button ion-button>
+        <ion-icon name="settings"></ion-icon>
+      </button>
+      <button (click)="signOut()" ion-button>
+        <ion-icon name="log-out"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-navbar>
 </ion-header>
 
 <ion-content padding>
-    <ion-tabs >
-        <ion-tab [root]="chatroomlist" tabTitle="Chatrooms" tabIcon="apps"></ion-tab>
-        <ion-tab [root]="chatroomlist" tabTitle="Messages" tabIcon="mail"></ion-tab>
-        <ion-tab [root]="chatroomlist" tabTitle="Notifications" tabIcon="notifications"></ion-tab>
-        <ion-tab [root]="chatroomlist" tabTitle="Profile" tabIcon="person"></ion-tab>
-    </ion-tabs>
-  
+  <ion-tabs>
+    <ion-tab [root]="chatroomlist" tabTitle="Chatrooms" tabIcon="apps"></ion-tab>
+    <ion-tab [root]="messages" tabTitle="Messages" tabIcon="mail"></ion-tab>
+    <ion-tab [root]="messages" tabTitle="Notifications" tabIcon="notifications"></ion-tab>
+    <ion-tab [root]="messages" tabTitle="Profile" tabIcon="person"></ion-tab>
+  </ion-tabs>
+
   <!-- <ion-list inset float-left>
     <button ion-item>Chatrooms</button>
     <button ion-item>Classes</button>
@@ -30,7 +74,7 @@
     <button ion-item>Settings</button>
   </ion-list> -->
   <!-- <ion-row> -->
-    <!--
+  <!--
     <ion-col col-lg-3 col-md-4 col-12>
       <ion-card>
         <img src="https://source.unsplash.com/user/eyyisac/likes/200x200" />
@@ -115,7 +159,7 @@
       </ion-card>
     </ion-col>
           -->
-    <!-- <ion-col col-lg-3 col-md-4 col-12 *ngFor="let course of courses | async" >
+  <!-- <ion-col col-lg-3 col-md-4 col-12 *ngFor="let course of courses | async" >
       <chatroomcards [course_id]="course.course_id"></chatroomcards>
     </ion-col>
     

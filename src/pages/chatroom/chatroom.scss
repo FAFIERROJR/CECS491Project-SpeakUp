@@ -1,40 +1,108 @@
 $accent-color: #8ECB06;
-$base-color: #71afd0;
-
+$student-color: rgb(0,203,66);
+$instr-color: #21aaf4;
 page-chatroom {
-    
-    .toolbar-background {
-      background-color: $accent-color;
+
+    ion-header {
+        position: relative;
+        top: -5px;
     }
 
-    .toolbar-title {
+    ion-title{
+        padding-left: 35px;
+    }
+
+    .bar-button-solid{
+        background-color: $accent-color;
+    }
+
+    .ion-start {
+        position: absolute;
+        top: 10px;
+        left: 10px;
+    }
+
+    .scroll-content {
+        padding-left: 0 !important;
+        padding-right: 0 !important;
+    }
+
+    .grid {
+        height: 100%;
+        padding: 0;
+    }
+
+    .row{
+        height: 100%;
+    }
+    
+    .float-right{
+        right: 0;
+        position: absolute;
+        padding-right: 10px;
+    }
+
+    span ion-icon {
+        //margin-right: 20px;
+        padding: none;
+    }
+
+    .inline-block {
+        display: inline;
+    }
+
+    ion-navbar#InstructorHeader div.toolbar-title {
         color: white;
+    }
+
+    .toolbar-background {
+        background-color: $accent-color;
+    }
+    
+    .toolbar-title {
         text-align: center;
+    }
+    ion-toolbar#CommentInputToolbar div.toolbar-background {
+        background-color: white;
     }
 
     ion-input#CommentInput{
         border: solid 1px #dbdada;
         position: absolute;
         bottom: 0px;
+        padding-left: 50px;
+    }
+
+    #CommentInputToolbar ion-icon {
+        font-size: 1.8em;
     }
 
     #CommentList{
         width: 100%;
-        height: 80vh;
+        height: 70vh;
+        max-height: 85%;
         background-color: rgb(255, 255, 255);
+        overflow-y: auto;
     }
 
     ion-col#ClassListPane{
         width: 100%;
-        height: 90vh;
-        background-color: $base-color;
+        background-color: #F7F7F7;
+        padding: 5px;
+        font-size: 2.0rem;
+        color: black;
+    }
+
+    ion-col#ClassListPane h2 {
+        text-align: center;
+        padding-top: 10px;
+        font-size: 1em;
     }
 
     ion-col#ChatPane{
         width: 100%;
-        height: 90vh;
-        position: relative;
+        height: 100%;
+        padding: 0;
     }
-
-
+     
 }

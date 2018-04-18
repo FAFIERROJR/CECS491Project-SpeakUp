@@ -6,8 +6,11 @@ import { AlertController } from 'ionic-angular';
 import { LandingPage } from '../landing/landing';
 import { Chatroom } from '../../app/models/chatroom';
 import { ChatroomcardsComponent } from '../../components/chatroomcards/chatroomcards';
-import { Observable } from '@firebase/util';
+import { Observable } from 'rxjs/Observable';
 import { ChatroomslistPage } from '../chatroomslist/chatroomslist';
+import { MessagesPage } from '../messages/messages';
+import { UserProvider } from '../../providers/userprovider/userprovider';
+import { Subscription } from 'rxjs/Subscription';
 
 @IonicPage()
 @Component({
@@ -23,11 +26,16 @@ export class HomePage
     // accessCode: any;
     // //courses: Observable<{}[]>;
     // courses: any;
-     uid: string;
+    uid: string;
     chatroomlist: any
+    messages: any
+    user_obvs: Observable<any>;
+    is_instructor: boolean = false;
+    username: string
+    user_sub: Subscription;
     
     constructor(public navCtrl: NavController, public afdb: AngularFireDatabase,
-        public afAuth: AngularFireAuth, public alertCtrl: AlertController)
+        public afAuth: AngularFireAuth, public alertCtrl: AlertController, public userProvider: UserProvider)
     {
         // this.generateAccessCode();
 
@@ -40,6 +48,14 @@ export class HomePage
         this.uid = this.afAuth.auth.currentUser.uid;
         //this.courses = this.afdb.list('userProfile/' + this.uid + '/courses').valueChanges();
         this.chatroomlist = ChatroomslistPage
+        this.messages = MessagesPage;
+        console.log(this.uid);
+        this.user_obvs = this.userProvider.getUser(this.uid);
+        this.user_sub = this.user_obvs.subscribe(user => {
+            this.is_instructor = user.is_instructor;
+            this.username = user.username;
+            console.log(this.is_instructor);
+        });
 
     }
 

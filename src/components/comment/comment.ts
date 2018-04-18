@@ -5,9 +5,9 @@ import { Input } from '@angular/core';
 import { Chatroom } from '../../app/models/chatroom';
 import { CommentProvider } from '../../providers/commentprovider/commentprovider';
 import { Observable } from 'rxjs/Observable';
-
-
-
+import { UserProvider } from '../../providers/userprovider/userprovider';
+import { Subscription } from 'rxjs/Subscription';
+import { AngularFireAuth } from 'angularfire2/auth';
 
 /**
  * Generated class for the CommentComponent component.
@@ -26,10 +26,21 @@ export class CommentComponent {
   commentRef: any;
   comment: Observable<any>;
   room: Chatroom;
+  timestampDisplay: boolean = false;
+  uid: string;
 
-  constructor(public commentProvider: CommentProvider) {
+  is_instructor: Boolean =false;
+  user_sub: Subscription;
+  
+  constructor(public commentProvider: CommentProvider, public userProvider: UserProvider, public afAuth: AngularFireAuth) {
     //this.commentRef = this.afdb.object('chatroom'+ this.roomPath + '/comments')
     this.comment = commentProvider.getComment(this.chatroom_id, this.comment_id);
+    this.uid = this.afAuth.auth.currentUser.uid;
+    this.user_sub = this.userProvider.getUser(this.uid).subscribe(user => {
+      this.is_instructor = user.is_instructor;
+      console.log("is_instructor", this.is_instructor);
+  })
+    
     console.log("comment obvs", this.comment);
   }
 
@@ -66,5 +77,14 @@ export class CommentComponent {
     this.commentProvider.deleteComment(this.chatroom_id, this.comment_id);
 
 
+  }
+
+  toggleTimestamp(){
+    if(this.timestampDisplay == false){
+      this.timestampDisplay = true;
+    }
+    else {
+      this.timestampDisplay = false;
+    }
   }
 }
