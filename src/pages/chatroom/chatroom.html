@@ -5,7 +5,6 @@
   Ionic pages and navigation.
 -->
 
-
 <ion-content>
   <ion-grid>
     <ion-row>
@@ -45,24 +44,27 @@
         <section id="CommentList">
           <commentslist [chatroom_id]="chatroom_id"></commentslist>
         </section>
-
-        <ion-toolbar id="CommentInputToolbar">
-          <ion-buttons class="ion-start">
-            <button ion-button class="input-icon">
-                <ion-icon name="happy"></ion-icon>
-            </button>
-          </ion-buttons>
-          <form (ngSubmit)="addComment()" [formGroup]="comment_control">
-            <ion-input id="CommentInput" type="text" placeholder="Type comments here..." name="comment_input" [(ngModel)]="comment_input"
-              formControlName="comment_input"></ion-input>
-            <ion-buttons end>
-              <button ion-button type="submit" [disabled]="comment_control.invalid" class="input-icon">
-                <ion-icon ios="ios-send" md="md-send"></ion-icon>
-              </button>
-            </ion-buttons>
-          </form>
-        </ion-toolbar>
       </ion-col>
     </ion-row>
   </ion-grid>
 </ion-content>
+
+<ion-footer>
+  <ion-toolbar id="CommentInputToolbar">
+    <ion-buttons class="ion-start">
+      <button ion-button>
+        <ion-icon name="happy"></ion-icon>
+      </button>
+    </ion-buttons>
+    <form (ngSubmit)="addComment()" [formGroup]="comment_control">
+      <ion-input id="CommentInput" type="text" placeholder="Type comments here..." name="comment_input" [(ngModel)]="comment_input"
+        formControlName="comment_input">
+      </ion-input>
+      <ion-buttons class="ion-end">
+        <button ion-button type="submit" [disabled]="comment_control.invalid">
+          <ion-icon ios="ios-send" md="md-send"></ion-icon>
+        </button>
+      </ion-buttons>
+    </form>
+  </ion-toolbar>
+</ion-footer>
