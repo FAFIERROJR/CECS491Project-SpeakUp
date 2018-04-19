@@ -1,7 +1,7 @@
 <!-- Generated template for the CommentslistComponent component -->
 <div>
-  <ion-list no-lines *ngFor="let comment of comments | async">
-     <comment [comment_id]="comment.comment_id" [chatroom_id]="chatroom_id"></comment>
+  <ion-list no-lines>
+     <comment *ngFor="let comment of comments | async" [comment_id]="comment.comment_id" [chatroom_id]="chatroom_id"></comment>
   </ion-list>
 
   <!-- <ion-infinite-scroll>
