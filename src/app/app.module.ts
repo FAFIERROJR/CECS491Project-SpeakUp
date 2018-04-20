@@ -52,7 +52,7 @@ export const firebase_config = {
   imports: [
     BrowserModule,
     IonicModule.forRoot(MyApp , {
-      backButtonTex: ""
+      backButtonText: ""
     }),
     AngularFireModule.initializeApp(firebase_config),
     AngularFireDatabaseModule,
