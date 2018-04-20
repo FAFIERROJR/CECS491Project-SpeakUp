@@ -51,7 +51,9 @@ export const firebase_config = {
   ],
   imports: [
     BrowserModule,
-    IonicModule.forRoot(MyApp),
+    IonicModule.forRoot(MyApp , {
+      backButtonTex: ""
+    }),
     AngularFireModule.initializeApp(firebase_config),
     AngularFireDatabaseModule,
     AngularFireAuthModule

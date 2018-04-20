@@ -40,7 +40,7 @@ export class ChatroomPage
 
     constructor(public navCtrl: NavController, public navParams: NavParams, public alertCtrl: AlertController, public afAuth: AngularFireAuth,
         public commentProvider: CommentProvider, public userProvider: UserProvider, public afdb: AngularFireDatabase, public modalCtrl: ModalController)
-    {
+    {   
         this.uid = this.afAuth.auth.currentUser.uid;
         this.profanity = ["fuck", "shit", "damn", "bitch"]
         this.no_profanity = true;
