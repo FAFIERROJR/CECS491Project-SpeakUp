@@ -11,6 +11,10 @@ page-chatroom {
     ion-title{
         padding-left: 35px;
     }
+    
+    .back-button {
+        display: block;
+    }
 
     .bar-button-solid{
         background-color: $accent-color;

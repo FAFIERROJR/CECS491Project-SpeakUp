@@ -9,7 +9,6 @@ import { StatusBar } from '@ionic-native/status-bar';
 import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
 import { LandingPage } from '../pages/landing/landing';
-import { ChatroomslistPage } from '../pages/chatroomslist/chatroomslist'
 import { MessagesPage } from '../pages/messages/messages'
 
 
@@ -26,6 +25,7 @@ import { CommentslistComponent } from '../components/commentslist/commentslist';
 import { CommentComponent } from '../components/comment/comment';
 import { CourseProvider } from '../providers/courseprovider/courseprovider';
 import { StudentlistComponent } from '../components/studentlist/studentlist';
+import { ChatroomslistComponent } from '../components/chatroomslist/chatroomslist';
 export const firebase_config = {
   apiKey: "AIzaSyBRZwZxFw-mfeIkrFz3R985np6jYMV8z_M",
   authDomain: "speakup-2afce.firebaseapp.com",
@@ -41,7 +41,7 @@ export const firebase_config = {
     HomePage,
     LandingPage,
     ChatroomcardsComponent,
-    ChatroomslistPage,
+    ChatroomslistComponent,
     ChatroomPage,
     CoursepickerComponent,
     CommentslistComponent,
@@ -63,7 +63,7 @@ export const firebase_config = {
     HomePage,
     LandingPage,
     ChatroomcardsComponent,
-    ChatroomslistPage,
+    ChatroomslistComponent,
     MessagesPage,
     ChatroomPage,
     CoursepickerComponent,

@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 import {IonicPage, NavController, NavParams, AlertController, ModalController} from 'ionic-angular';
 import { AngularFireAuth } from 'angularfire2/auth';
-import { LandingPage } from '../landing/landing';
 
 import { ChatroomcardsComponent } from '../../components/chatroomcards/chatroomcards';
 import { Observable } from 'rxjs/Observable';
@@ -22,12 +21,11 @@ import { UserProvider } from '../../providers/userprovider/userprovider';
  * Ionic pages and navigation.
  */
 
-@IonicPage()
 @Component({
-  selector: 'page-chatroomslist',
+  selector: 'chatroomslist',
   templateUrl: 'chatroomslist.html',
 })
-export class ChatroomslistPage {
+export class ChatroomslistComponent{
     
   //courses: Observable<{}[]>;
   courses: Observable<any>;
