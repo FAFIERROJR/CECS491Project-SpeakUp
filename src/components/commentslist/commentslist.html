@@ -1,10 +1,9 @@
 <!-- Generated template for the CommentslistComponent component -->
-<div>
+<ion-content>
+    <ion-infinite-scroll (ionInfinite)="doInfinite($event)" position="top">
+        <ion-infinite-scroll-content></ion-infinite-scroll-content>
+      </ion-infinite-scroll>
   <ion-list no-lines>
-     <comment *ngFor="let comment of comments | async; trackBy: trackByFn" [comment_id]="comment.comment_id" [chatroom_id]="chatroom_id"></comment>
+     <comment *ngFor="let comment of comments_to_display; trackBy: trackByFn" [comment_id]="comment.comment_id" [chatroom_id]="chatroom_id"></comment>
   </ion-list>
-
-  <!-- <ion-infinite-scroll>
-    <ion-infinite-scroll-content></ion-infinite-scroll-content>
-  </ion-infinite-scroll> -->
-</div>
+</ion-content>
