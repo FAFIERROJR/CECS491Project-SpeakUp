@@ -60,9 +60,9 @@ export class CommentslistComponent {
       left_end = 0;
     }
     let new_comments = this.full_comments.slice(left_end, right_end);
-    for(let comment of new_comments){
+    for(let i = new_comments.length - 1; i >= 0; i--){
       let to_append = []
-      to_append.push(comment);
+      to_append.push(new_comments[i]);
 
       this.comments_to_display = to_append.concat(this.comments_to_display);
     }
