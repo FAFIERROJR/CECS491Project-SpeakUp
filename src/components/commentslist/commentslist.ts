@@ -35,4 +35,8 @@ export class CommentslistComponent {
     console.log("comments obvs", this.comments);
   }
 
+  trackByFn(index, comment){
+    return comment.comment_id;
+  }
+
 }
