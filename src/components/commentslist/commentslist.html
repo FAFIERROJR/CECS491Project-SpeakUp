@@ -9,11 +9,9 @@
 </ion-content> -->
 
 <ion-content>
-    <ion-list no-lines [virtualScroll]="comments_to_display" [approxItemHeight]="'20px'">
+    <ion-list no-lines [virtualScroll]="full_comments" [approxItemHeight]="'20px'">
         <ion-item *virtualItem="let item">
-            <div>
-                <comment [comment_id]="item.comment_id" [chatroom_id]="chatroom_id"></comment>
-            </div>
+            <comment [comment_id]="item.comment_id" [chatroom_id]="chatroom_id"></comment>
         </ion-item>
     </ion-list>
 </ion-content>

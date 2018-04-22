@@ -64,8 +64,6 @@ export class CommentslistComponent {
     this.comments_obvs = this.commentProvider.getComments(this.chatroom_id);
     this.comments_sub = this.comments_obvs.subscribe(comments => {
       this.full_comments = comments;
-      this.comments_to_display = comments;
-
     });
   }
 
