@@ -27,6 +27,7 @@ import { CommentComponent } from '../components/comment/comment';
 import { CourseProvider } from '../providers/courseprovider/courseprovider';
 import { StudentlistComponent } from '../components/studentlist/studentlist';
 import { ClasslistproviderProvider } from '../providers/classlistprovider/classlistprovider';
+import { ClasslistProvider } from '../providers/classlist/classlist';
 export const firebase_config = {
   apiKey: "AIzaSyBRZwZxFw-mfeIkrFz3R985np6jYMV8z_M",
   authDomain: "speakup-2afce.firebaseapp.com",
@@ -80,7 +81,8 @@ export const firebase_config = {
     UserProvider,
     CommentProvider,
     CourseProvider,
-    ClasslistproviderProvider
+    ClasslistproviderProvider,
+    ClasslistProvider
   ]
 })
 export class AppModule {}
