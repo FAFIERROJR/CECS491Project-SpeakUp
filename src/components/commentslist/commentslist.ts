@@ -19,6 +19,7 @@ import { UserProvider } from '../../providers/userprovider/userprovider';
   templateUrl: 'commentslist.html'
 })
 export class CommentslistComponent {
+  visible: Array<boolean> = [];
   comments: Observable<any[]>;
   right_end: number;
   left_end: number;
@@ -66,9 +67,8 @@ export class CommentslistComponent {
     return item.comment_id;
   }
 
-  toggleTimestamp(event:any){
-    console.log(event.target);
-   
+  toggleTimestamp(i){
+    this.visible[i] = !this.visible[i];
   }
 
 }
