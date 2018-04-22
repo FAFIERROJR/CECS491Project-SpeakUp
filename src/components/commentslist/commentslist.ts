@@ -6,6 +6,8 @@ import { CommentComponent } from '../comment/comment'
 import { CommentProvider } from '../../providers/commentprovider/commentprovider';
 import { Subscription } from 'rxjs/Subscription';
 import { NO_COMPLETE_CHILD_SOURCE } from '@firebase/database/dist/esm/src/core/view/CompleteChildSource';
+import { AngularFireAuth } from 'angularfire2/auth';
+import { UserProvider } from '../../providers/userprovider/userprovider';
 /**
  * Generated class for the CommentslistComponent component.
  *
@@ -32,31 +34,21 @@ export class CommentslistComponent {
   @Input('chatroom_id')
   chatroom_id: string;
   timestampDisplay = false;
+  uid: string;
+  is_instructor: Boolean =false;
+  user_sub: Subscription;
 
-  items: any;
 
 
-  constructor(public commentProvider: CommentProvider, public alertCtrl: AlertController) {
+  constructor(public commentProvider: CommentProvider, public alertCtrl: AlertController, public userProvider: UserProvider, public afAuth: AngularFireAuth) {
     console.log('Hello CommentslistComponent Component');
     this.comments_obvs  = new Observable<any[]>();
-    // this.comments_obvs = this.commentProvider.getComments(this.chatroom_id);
-    // console.log("chatroom_id", this.chatroom_id);
-    // console.log("comments obvs", this.comments_obvs);
-
-
-    // this.items = [];
-
-    // for (let i = 0; i < 2000; i++) {
-    //   let item = {
-    //     title: 'Title',
-    //     body: 'body',
-    //     number: i,
-    //     avatarUrl: 'https://avatars.io/facebook/random' + i
-    //   };
-
-    //   this.items.push(item);
-    // }
-
+    this.uid = this.afAuth.auth.currentUser.uid;
+    this.user_sub = this.userProvider.getUser(this.uid).subscribe(user => {
+      this.is_instructor = user.is_instructor;
+      console.log("is_instructor", this.is_instructor);
+  })
+  
   }
 
   ngOnInit() {
@@ -74,13 +66,9 @@ export class CommentslistComponent {
     return item.comment_id;
   }
 
-  toggleTimestamp(){
-    if(this.timestampDisplay == false){
-      this.timestampDisplay = true;
-    }
-    else {
-      this.timestampDisplay = false;
-    }
+  toggleTimestamp(event:any){
+    console.log(event.target);
+   
   }
 
 }
