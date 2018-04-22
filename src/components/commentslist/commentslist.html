@@ -9,9 +9,25 @@
 </ion-content> -->
 
 <ion-content>
-    <ion-list no-lines [virtualScroll]="full_comments" [approxItemHeight]="'20px'">
-        <ion-item *virtualItem="let item">
-            <comment [comment_id]="item.comment_id" [chatroom_id]="chatroom_id"></comment>
+    <ion-list no-lines [virtualScroll]="comments_obvs | async" [approxItemHeight]="'20px'" [virtualTrackBy]="trackByFn">
+        <ion-item *virtualItem="let comment">
+          <ion-item *ngIf="is_instructor" (click)="toggleTimestamp()">
+            <ion-avatar item-start>
+              <img src="assets/imgs/logo.png">
+            </ion-avatar>
+            <h2>{{comment.username}}</h2>
+            <p>{{comment.content}}</p>
+            <ion-note item-end *ngIf="timestampDisplay" class="timestamp">Sent Tuesday, 3:00pm</ion-note>
+          </ion-item>
+          
+          <ion-item *ngIf="!is_instructor" (click)="toggleTimestamp()">
+            <ion-avatar item-start>
+              <img src="assets/imgs/speakup-hand-logo.svg">
+            </ion-avatar>
+            <h2>Animal Name</h2>
+            <p>{{comment.content}}</p>
+            <ion-note item-end *ngIf="timestampDisplay" class="timestamp">Sent Tuesday, 3:00pm</ion-note>
+          </ion-item>
         </ion-item>
     </ion-list>
 </ion-content>

@@ -31,15 +31,17 @@ export class CommentslistComponent {
   startUp = true;
   @Input('chatroom_id')
   chatroom_id: string;
+  timestampDisplay = false;
 
   items: any;
 
 
   constructor(public commentProvider: CommentProvider, public alertCtrl: AlertController) {
     console.log('Hello CommentslistComponent Component');
-    this.comments_obvs = this.commentProvider.getComments(this.chatroom_id);
-    console.log("chatroom_id", this.chatroom_id);
-    console.log("comments obvs", this.comments_obvs);
+    this.comments_obvs  = new Observable<any[]>();
+    // this.comments_obvs = this.commentProvider.getComments(this.chatroom_id);
+    // console.log("chatroom_id", this.chatroom_id);
+    // console.log("comments obvs", this.comments_obvs);
 
 
     // this.items = [];
@@ -64,11 +66,21 @@ export class CommentslistComponent {
     this.comments_obvs = this.commentProvider.getComments(this.chatroom_id);
     this.comments_sub = this.comments_obvs.subscribe(comments => {
       this.full_comments = comments;
+      console.log(this.full_comments);
     });
   }
 
   trackByFn(index, item) {
     return item.comment_id;
+  }
+
+  toggleTimestamp(){
+    if(this.timestampDisplay == false){
+      this.timestampDisplay = true;
+    }
+    else {
+      this.timestampDisplay = false;
+    }
   }
 
 }
