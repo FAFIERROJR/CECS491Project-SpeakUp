@@ -131,7 +131,7 @@ export class ChatroomPage
 
     eventHandler(keyCode){
         if(keyCode === 13){
-            this.commentProvider.enterKeyPressed = true;
+            
         }
     }
 }

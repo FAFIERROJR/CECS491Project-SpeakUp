@@ -12,8 +12,7 @@ import { Comment } from '../../app/models/comment'
 */
 @Injectable()
 export class CommentProvider {
-  enterKeyPressed: boolean = false;
-  
+ 
   constructor(public afdb: AngularFireDatabase) {
     console.log('Hello CommentProvider Provider');
 
