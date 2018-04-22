@@ -2,9 +2,10 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, ModalController } from 'ionic-angular';
 import { Comment } from '../../app/models/comment';
 import { AlertController } from 'ionic-angular';
-import {CommentslistComponent } from '../../components/commentslist/commentslist'
+import { CommentslistComponent } from '../../components/commentslist/commentslist'
 import { CommentProvider } from '../../providers/commentprovider/commentprovider';
 import { UserProvider } from '../../providers/userprovider/userprovider';
+import { ClasslistProvider } from '../../providers/classlistprovider/classlistprovider';
 import { AngularFireAuth } from 'angularfire2/auth';
 import { Subscription } from 'rxjs/Subscription';
 import { AngularFireDatabase } from 'angularfire2/database';
@@ -13,6 +14,7 @@ import { Observable } from 'rxjs/Observable';
 import { StudentlistComponent } from '../../components/studentlist/studentlist';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { validateArgCount } from '@firebase/util';
+
 @IonicPage()
 @Component({
   selector: 'page-chatroom',
@@ -39,15 +41,18 @@ export class ChatroomPage
     comment_control: FormGroup
 
     constructor(public navCtrl: NavController, public navParams: NavParams, public alertCtrl: AlertController, public afAuth: AngularFireAuth,
-        public commentProvider: CommentProvider, public userProvider: UserProvider, public afdb: AngularFireDatabase, public modalCtrl: ModalController)
+        public commentProvider: CommentProvider, public userProvider: UserProvider, public classlistProvider: ClasslistProvider, public afdb: AngularFireDatabase, public modalCtrl: ModalController)
     {
-        this.uid = this.afAuth.auth.currentUser.uid;
-        this.profanity = ["fuck", "shit", "damn", "bitch"]
+        this.profanity = ["fuck", "shit", "damn", "bitch"];
         this.no_profanity = true;
 
+        //this.uid = this.afAuth.auth.currentUser.uid;
+        this.uid = this.navParams.get('uid');
         this.chatroom_id = this.navParams.get('chatroom_id');
         this.course_id = this.navParams.get('course_id');
         console.log("chatroom_id", this.chatroom_id);
+
+        this.classlistProvider.push(this.chatroom_id, this.uid);
 
         this.chatroom_obvs = this.afdb.object('chatroom/' + this.chatroom_id).valueChanges();
         this.afdb.object('chatroom/' + this.chatroom_id).update({test: 'test'});
@@ -57,7 +62,6 @@ export class ChatroomPage
             console.log("access code", chatroom);
         })
         this.course_obvs = this.userProvider.getUserCourse(this.uid, this.course_id);
-
 
         this.user_sub = this.userProvider.getUser(this.uid).subscribe(user => {
             this.is_instructor = user.is_instructor;
@@ -128,5 +132,4 @@ export class ChatroomPage
     showStudentListMobile(){
         this.modalCtrl.create(StudentlistComponent).present();
     }
-
 }
