@@ -129,4 +129,9 @@ export class ChatroomPage
         this.modalCtrl.create(StudentlistComponent).present();
     }
 
+    eventHandler(keyCode){
+        if(keyCode === 13){
+            this.commentProvider.enterKeyPressed = true;
+        }
+    }
 }

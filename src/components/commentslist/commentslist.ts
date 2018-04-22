@@ -1,7 +1,7 @@
 import { Component, Injectable, Input } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import { AngularFireDatabase } from 'angularfire2/database';
-import { AlertController } from 'ionic-angular';
+import { AlertController, InfiniteScroll } from 'ionic-angular';
 import {CommentComponent} from '../comment/comment'
 import { CommentProvider } from '../../providers/commentprovider/commentprovider';
 import { Subscription } from 'rxjs/Subscription';
@@ -17,6 +17,8 @@ import { NO_COMPLETE_CHILD_SOURCE } from '@firebase/database/dist/esm/src/core/v
   templateUrl: 'commentslist.html'
 })
 export class CommentslistComponent {
+  right_end: number;
+  left_end: number;
   //repushing
 
   comments_to_display = []
@@ -25,6 +27,7 @@ export class CommentslistComponent {
   comments_sub: Subscription;
   page = 0;
   page_size = 20;
+  startUp = true;
   @Input('chatroom_id')
     chatroom_id: string;
 
@@ -43,7 +46,17 @@ export class CommentslistComponent {
     this.comments_obvs = this.commentProvider.getComments(this.chatroom_id);
     this.comments_sub = this.comments_obvs.subscribe(comments => {
       this.full_comments = comments;
-      this.comments_to_display = this.full_comments.slice(this.full_comments.length -20 + 1, this.full_comments.length);
+
+      if(this.startUp){
+        this.comments_to_display = this.full_comments.slice(this.full_comments.length -20 + 1, this.full_comments.length);
+        this.startUp = false;
+      }
+
+      if(this.commentProvider.enterKeyPressed){
+        console.log("Enter KEY PRESSED")
+        this.comments_to_display = this.full_comments.slice(this.full_comments.length -20 + 1, this.full_comments.length);
+        this.page = 0;
+      }
     });
   }
 
@@ -54,12 +67,12 @@ export class CommentslistComponent {
   doInfinite(infiniteScroll){
     console.log("scrolling");
     this.page++;
-    let left_end = this.full_comments.length - this.page_size * (this.page + 1) + 1;
-    let right_end = this.full_comments.length - this.page_size * this.page;
-    if(left_end < 0){
-      left_end = 0;
+    this.left_end = this.full_comments.length - this.page_size * (this.page + 1) + 1;
+    this.right_end = this.full_comments.length - this.page_size * this.page;
+    if(this.left_end < 0){
+      this.left_end = 0;
     }
-    let new_comments = this.full_comments.slice(left_end, right_end);
+    let new_comments = this.full_comments.slice(this.left_end, this.right_end);
     for(let i = new_comments.length - 1; i >= 0; i--){
       let to_append = []
       to_append.push(new_comments[i]);
@@ -69,8 +82,11 @@ export class CommentslistComponent {
     console.log("comments displayed", this.comments_to_display)
     infiniteScroll.complete();
 
-    if(left_end == 0){
+    if(this.left_end === 0){
       infiniteScroll.enable(false);
+    }
+    if(this.page === 0) {
+      infiniteScroll.enable(true);
     }
   }
 
