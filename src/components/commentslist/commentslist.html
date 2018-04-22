@@ -11,7 +11,7 @@
 <ion-content>
     <ion-list no-lines [virtualScroll]="comments_obvs | async" [approxItemHeight]="'20px'" [virtualTrackBy]="trackByFn">
         <ion-item *virtualItem="let comment; let i=index">
-          <ion-item *ngIf="is_instructor" (click)="toggleTimestamp(i)">
+          <ion-item *ngIf="is_instructor" (mouseenter)="toggleTimestamp(i)" (mouseleave)="toggleTimestamp(i); visible[i]=false">
             <ion-avatar item-start>
               <img src="assets/imgs/logo.png">
             </ion-avatar>
@@ -20,7 +20,7 @@
             <ion-note item-end *ngIf="visible[i]">Sent Tuesday, 3:00pm</ion-note>
           </ion-item>
           
-          <ion-item *ngIf="!is_instructor" (click)="toggleTimestamp(i)">
+          <ion-item *ngIf="!is_instructor" (mouseenter)="toggleTimestamp(i)" (mouseleave)="toggleTimestamp(i); visible[i]=false">
             <ion-avatar item-start>
               <img src="assets/imgs/speakup-hand-logo.svg">
             </ion-avatar>
