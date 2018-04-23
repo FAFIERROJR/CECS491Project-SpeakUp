@@ -23,6 +23,8 @@ import { Subscription } from 'rxjs/Subscription';
 export class ChatroomcardsComponent {
 
   uid: string;
+  uni_id: Observable<any>;
+  username: string;
   course: Observable<any>;
   @Input() course_id: string;
   user: any;
@@ -48,6 +50,7 @@ export class ChatroomcardsComponent {
   ngOnInit(){
     this.uid = this.afAuth.auth.currentUser.uid;
     this.course = this.userProvider.getUserCourse(this.uid, this.course_id);
+    this.username = this.afAuth.auth.currentUser.displayName;
     console.log("course obs", this.course);
     this.course_subscription = this.course.subscribe(course => {
       console.log("course_id", this.course_id)
@@ -117,8 +120,8 @@ export class ChatroomcardsComponent {
         }]
       }).present();
     }else{
-      console.log('chatroom id', this.chatroom_id);
-      this.navCtrl.push(ChatroomPage, {chatroom_id: this.chatroom_id, course_id: this.course_id, uid: this.uid});
+        console.log('chatroom id', this.chatroom_id);
+        this.navCtrl.push(ChatroomPage, { chatroom_id: this.chatroom_id, course_id: this.course_id, uid: this.uid, username: this.username });
     }
 
   }

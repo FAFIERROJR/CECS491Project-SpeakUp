@@ -1,5 +1,6 @@
-﻿export class Student
+export class Student
 {
-    student_id: string
+    student_id: string // firebase id
+    uid: string
     username: string
 }

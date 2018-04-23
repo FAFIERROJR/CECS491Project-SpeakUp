@@ -32,13 +32,22 @@ export class ChatroomPage
     course_obvs: Observable<any>;
     is_instructor: Boolean =false;
     uid: string;
+    username: string;
     user_sub: Subscription
     access_code_raw: any;
     access_code_string: string;
     access_code_sub: Subscription;
-    username: string;
     studentListDisplay: boolean = false;
     comment_control: FormGroup
+
+    // Classlist Declarations
+    classlist_obsv: Observable<any>
+    classlist_sub: Subscription
+    classlist_raw: any
+    student_obsv: Observable<any>
+    student_sub: Subscription
+    student_raw: any
+    student_id: any
 
     constructor(public navCtrl: NavController, public navParams: NavParams, public alertCtrl: AlertController, public afAuth: AngularFireAuth,
         public commentProvider: CommentProvider, public userProvider: UserProvider, public classlistProvider: ClasslistProvider, public afdb: AngularFireDatabase, public modalCtrl: ModalController)
@@ -46,27 +55,47 @@ export class ChatroomPage
         this.profanity = ["fuck", "shit", "damn", "bitch"];
         this.no_profanity = true;
 
-        //this.uid = this.afAuth.auth.currentUser.uid;
         this.uid = this.navParams.get('uid');
-        this.chatroom_id = this.navParams.get('chatroom_id');
+        this.username = this.navParams.get('username');
         this.course_id = this.navParams.get('course_id');
-        console.log("chatroom_id", this.chatroom_id);
+        this.chatroom_id = this.navParams.get('chatroom_id');
+        console.log('uid: ', this.uid);
+        console.log('username: ', this.username);
+        console.log('course_id: ', this.course_id);
+        console.log('chatroom_id: ', this.chatroom_id);
 
-        this.classlistProvider.push(this.chatroom_id, this.uid);
+        // Classlist Subscriptions
+        this.classlistProvider.push(this.chatroom_id, this.uid, this.username);
+        this.classlist_obsv = this.classlistProvider.getClasslist(this.chatroom_id);
+        this.classlist_sub = this.classlist_obsv.subscribe(classlist => {
+            this.classlist_raw = classlist
+            console.log('classlist: ', classlist)
+        })
+        /*
+        this.itemRef = db.object('item');
+        this.itemRef.snapshotChanges().subscribe(action => {
+            console.log(action.type);
+            console.log(action.key)
+            console.log(action.payload.val())
+        });
+        */
+        this.student_obsv = this.classlistProvider.getStudent(this.chatroom_id, this.uid);
+        this.student_sub = this.student_obsv.subscribe(student => {
+            this.student_raw = student
+            console.log('student: ', student)
+        })
 
         this.chatroom_obvs = this.afdb.object('chatroom/' + this.chatroom_id).valueChanges();
-        this.afdb.object('chatroom/' + this.chatroom_id).update({test: 'test'});
-        console.log('chatroom obvs', this.chatroom_obvs)
         this.chatroom_obvs.subscribe(chatroom => {
             this.access_code_string = chatroom.accessCode;
-            console.log("access code", chatroom);
+            console.log("access code: ", chatroom);
         })
         this.course_obvs = this.userProvider.getUserCourse(this.uid, this.course_id);
 
         this.user_sub = this.userProvider.getUser(this.uid).subscribe(user => {
             this.is_instructor = user.is_instructor;
             this.username = user.username;
-            console.log("is_instructor", this.is_instructor);
+            console.log("is_instructor: ", this.is_instructor);
         })
 
         this.access_code_sub = this.afdb.object('lastAccessCode').valueChanges().subscribe(access_code => {
@@ -120,7 +149,8 @@ export class ChatroomPage
         }
     }
 
-    showStudentList(){
+    showStudentList()
+    {
         if(this.studentListDisplay == false){
             this.studentListDisplay = true;
         }
@@ -129,7 +159,13 @@ export class ChatroomPage
         }
     }
 
-    showStudentListMobile(){
+    showStudentListMobile()
+    {
         this.modalCtrl.create(StudentlistComponent).present();
+    }
+
+    ionViewDidLeave()
+    {
+        this.classlistProvider.pop(this.chatroom_id, this.uid);
     }
 }

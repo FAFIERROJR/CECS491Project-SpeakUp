@@ -45,19 +45,6 @@ export class LandingPage {
         this.user.uni_email= "";
         this.showLogin = true;
         this.showSignUp = false;
-
-        //test code
-        // this.user = new User();
-        // this.user.first_name = "Kyle";
-        // this.user.last_name = "Pamintuan";
-        // this.user.uni_email = "kp@gmail.com";
-        // this.user.uni_id = "008830924";
-        // this.password = "CECS491B";
-        // this.password2 = "cecs4444";
-
-        // this.verifyPassword()
-
-        // this.login();
     }
 
     ngOnInit(){
