@@ -14,12 +14,15 @@ import { Observable } from 'rxjs/Observable';
 import { StudentlistComponent } from '../../components/studentlist/studentlist';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { validateArgCount } from '@firebase/util';
+import { OnDestroy, HostListener } from '@angular/core';
 
 @IonicPage()
 @Component({
   selector: 'page-chatroom',
   templateUrl: 'chatroom.html',
+  host: {'window:beforeunload':'classlistPop'}
 })
+
 
 export class ChatroomPage
 {
@@ -41,13 +44,9 @@ export class ChatroomPage
     comment_control: FormGroup
 
     // Classlist Declarations
-    classlist_obsv: Observable<any>
-    classlist_sub: Subscription
-    classlist_raw: any
-    student_obsv: Observable<any>
-    student_sub: Subscription
-    student_raw: any
-    student_id: any
+    //classlist_obsv: Observable<any>
+    //classlist_sub: Subscription
+    //classlist_raw: any
 
     constructor(public navCtrl: NavController, public navParams: NavParams, public alertCtrl: AlertController, public afAuth: AngularFireAuth,
         public commentProvider: CommentProvider, public userProvider: UserProvider, public classlistProvider: ClasslistProvider, public afdb: AngularFireDatabase, public modalCtrl: ModalController)
@@ -64,13 +63,17 @@ export class ChatroomPage
         console.log('course_id: ', this.course_id);
         console.log('chatroom_id: ', this.chatroom_id);
 
-        // Classlist Subscriptions
+        // Classlist Push
         this.classlistProvider.push(this.chatroom_id, this.uid, this.username);
+
+        /*
+        // Classlist Subscriptions
         this.classlist_obsv = this.classlistProvider.getClasslist(this.chatroom_id);
         this.classlist_sub = this.classlist_obsv.subscribe(classlist => {
             this.classlist_raw = classlist
             console.log('classlist: ', classlist)
         })
+        */
 
         this.chatroom_obvs = this.afdb.object('chatroom/' + this.chatroom_id).valueChanges();
         this.chatroom_obvs.subscribe(chatroom => {
@@ -151,7 +154,21 @@ export class ChatroomPage
         this.modalCtrl.create(StudentlistComponent).present();
     }
 
+    // Classlist Pop
     ionViewDidLeave()
+    {
+        this.classlistProvider.pop(this.chatroom_id, this.uid);
+    }
+
+    // Classlist Pop
+    ngOnDestroy()
+    {
+        this.classlistProvider.pop(this.chatroom_id, this.uid);
+    }
+
+    // Classlist Pop
+    @HostListener('window:beforeunload')
+    classlistPop()
     {
         this.classlistProvider.pop(this.chatroom_id, this.uid);
     }
