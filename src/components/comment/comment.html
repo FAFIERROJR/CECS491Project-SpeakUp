@@ -16,6 +16,11 @@
   <ion-note item-end *ngIf="timestampDisplay" class="timestamp">Sent Tuesday, 3:00pm</ion-note>
 </ion-item>
 
+<ion-item *ngIf="is_instructor" (click) ="deleteComment()">
+  <ion-icon name = "close" >
+  </ion-icon>
+</ion-item>
+
 <!-- Generated template for the CommentComponent component -->
 <!-- <div (click)="toggleTimestamp()">
   <ion-row>
