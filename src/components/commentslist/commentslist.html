@@ -8,7 +8,7 @@
   </ion-list>
 </ion-content> -->
 
-<ion-content>
+<ion-content #scrollMe>
     <ion-list no-lines [virtualScroll]="comments_obvs | async" [approxItemHeight]="'30px'" [virtualTrackBy]="trackByFn">
         <ion-item *virtualItem="let comment; let i=index">
           <ion-item *ngIf="is_instructor" (mouseenter)="toggleTimestamp(i)" (mouseleave)="toggleTimestamp(i); visible[i]=false">

@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild, ElementRef } from '@angular/core';
 import { IonicPage, NavController, NavParams, ModalController } from 'ionic-angular';
 import { Comment } from '../../app/models/comment';
 import { AlertController } from 'ionic-angular';
@@ -13,6 +13,7 @@ import { Observable } from 'rxjs/Observable';
 import { StudentlistComponent } from '../../components/studentlist/studentlist';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { validateArgCount } from '@firebase/util';
+
 @IonicPage()
 @Component({
   selector: 'page-chatroom',
@@ -21,6 +22,7 @@ import { validateArgCount } from '@firebase/util';
 
 export class ChatroomPage
 {
+    @ViewChild('scrollMe') private commentsGrid: ElementRef;
     profanity: Array<any>
     no_profanity: boolean;
     chatroom_id: string;
@@ -76,6 +78,24 @@ export class ChatroomPage
                 Validators.required
             ])
         })
+    }
+
+    /**
+     * Checks your view and executes
+     */
+    ngAfterViewChecked(){
+        this.scrollToBottom();
+    }
+
+    /**
+     * Scrolls the chat down to make the latest comments visible
+     */
+    scrollToBottom(): void{
+        try{
+            this.commentsGrid.nativeElement.scrollTop = this.commentsGrid.nativeElement.scrollHeight;
+        } catch(err) {
+            // Do nothing
+        }
     }
 
     checkProfanity()
