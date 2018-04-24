@@ -43,11 +43,6 @@ export class ChatroomPage
     studentListDisplay: boolean = false;
     comment_control: FormGroup
 
-    // Classlist Declarations
-    //classlist_obsv: Observable<any>
-    //classlist_sub: Subscription
-    //classlist_raw: any
-
     constructor(public navCtrl: NavController, public navParams: NavParams, public alertCtrl: AlertController, public afAuth: AngularFireAuth,
         public commentProvider: CommentProvider, public userProvider: UserProvider, public classlistProvider: ClasslistProvider, public afdb: AngularFireDatabase, public modalCtrl: ModalController)
     {
@@ -65,15 +60,6 @@ export class ChatroomPage
 
         // Classlist Push
         this.classlistProvider.push(this.chatroom_id, this.uid, this.username);
-
-        /*
-        // Classlist Subscriptions
-        this.classlist_obsv = this.classlistProvider.getClasslist(this.chatroom_id);
-        this.classlist_sub = this.classlist_obsv.subscribe(classlist => {
-            this.classlist_raw = classlist
-            console.log('classlist: ', classlist)
-        })
-        */
 
         this.chatroom_obvs = this.afdb.object('chatroom/' + this.chatroom_id).valueChanges();
         this.chatroom_obvs.subscribe(chatroom => {
