@@ -71,19 +71,6 @@ export class ChatroomPage
             this.classlist_raw = classlist
             console.log('classlist: ', classlist)
         })
-        /*
-        this.itemRef = db.object('item');
-        this.itemRef.snapshotChanges().subscribe(action => {
-            console.log(action.type);
-            console.log(action.key)
-            console.log(action.payload.val())
-        });
-        */
-        this.student_obsv = this.classlistProvider.getStudent(this.chatroom_id, this.uid);
-        this.student_sub = this.student_obsv.subscribe(student => {
-            this.student_raw = student
-            console.log('student: ', student)
-        })
 
         this.chatroom_obvs = this.afdb.object('chatroom/' + this.chatroom_id).valueChanges();
         this.chatroom_obvs.subscribe(chatroom => {
