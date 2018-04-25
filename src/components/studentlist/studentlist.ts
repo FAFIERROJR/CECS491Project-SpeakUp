@@ -15,6 +15,8 @@ import { ClasslistProvider } from '../../providers/classlistprovider/classlistpr
 })
 export class StudentlistComponent {
 
+  items: any[];
+  classlist_sub: any;
   text: string;
   classlist_obvs: Observable<any[]>;
   @Input() chatroom_id: string;
@@ -22,13 +24,27 @@ export class StudentlistComponent {
 
   constructor(public viewCtrl: ViewController, public classlistProvider: ClasslistProvider) {
     console.log('Hello StudentlistComponent Component');
-    this.text = 'Hello World';
+    this.classlist_obvs = new Observable<any[]>();
+    this.text = 'Hello World';  
+
+    this.items = [];
+    for(let i = 0; i < 100; i++){
+   
+      let item = {
+        title: 'Title',
+        body: 'body',
+        number: i,
+        avatarUrl: 'https://avatars.io/facebook/random'+i
+      };
+      this.items.push(item);
+    }
+
   }
 
   ngOnInit(){
     console.log("chatroom_id", this.chatroom_id);
     this.classlist_obvs = this.classlistProvider.getClasslist(this.chatroom_id)
-    this.classlist_obvs.subscribe(studentlist =>{
+    this.classlist_sub = this.classlist_obvs.subscribe(studentlist =>{
       console.log("studentlist", studentlist);
     });
   }
@@ -37,7 +53,7 @@ export class StudentlistComponent {
     this.viewCtrl.dismiss();
   }
 
-  trackByFn(student){
+  trackByFn(index, student){
     return student.uid;
   }
 

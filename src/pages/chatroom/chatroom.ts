@@ -44,11 +44,16 @@ export class ChatroomPage
     access_code_sub: Subscription;
     studentListDisplay: boolean = false;
     comment_control: FormGroup
+    spamCount: any;
+    cd: any;
 
     constructor(public navCtrl: NavController, public navParams: NavParams, public alertCtrl: AlertController, public afAuth: AngularFireAuth,
         public commentProvider: CommentProvider, public userProvider: UserProvider, public classlistProvider: ClasslistProvider, public afdb: AngularFireDatabase, public modalCtrl: ModalController)
     {
-        this.profanity = ["fuck", "shit", "damn", "bitch"];
+        this.spamCount = 0;
+        this.cd = this.spamCooldown();
+        this.uid = this.afAuth.auth.currentUser.uid;
+        this.profanity = ["fuck", "shit", "damn", "bitch"]
         this.no_profanity = true;
 
         this.uid = this.navParams.get('uid');
@@ -135,16 +140,27 @@ export class ChatroomPage
         let comment = new Comment;
         comment.content = this.comment_input;
 
-        if (this.checkProfanity()) {
+        if (this.checkProfanity() && this.spamCount < 10 )
+        {
             comment.username = this.username;
             comment.uid = this.uid;
             this.commentProvider.addComment(this.chatroom_id, comment);
             this.comment_input = '';
-            this.disableScrollDown = false;
-            this.scrollToBottom();
-            
+            this.spamCount++;
+
         }
-        else {
+        else if (this.spamCount >= 10)
+        {
+            let alert = this.alertCtrl.create
+            (({
+                title: 'Slow down kiddo!',
+                subTitle: "Your spam is not welcome here.",
+                buttons: ['Dismiss']
+            }));
+        alert.present()
+        }
+        else 
+        {
             let alert = this.alertCtrl.create
                 (({
                     title: 'Woah...',
@@ -153,6 +169,9 @@ export class ChatroomPage
                 }));
             alert.present()
         }
+
+        this.disableScrollDown = false;
+        this.scrollToBottom();
     }
 
     showStudentList()
@@ -188,4 +207,15 @@ export class ChatroomPage
     {
         this.classlistProvider.pop(this.chatroom_id, this.uid);
     }
+    decSpam(){
+        if (this.spamCount > 0){
+            this.spamCount--;
+        }
+    }
+
+    spamCooldown(){
+        setInterval(() => this.decSpam() , 5000);
+
+    }
+
 }

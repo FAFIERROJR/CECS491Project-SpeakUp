@@ -1,16 +1,31 @@
-<!-- Generated template for the StudentlistComponent component -->
-<div>
+
   <div id="Title">Student List</div>
   <button showWhen="android,ios" id="DismissBtn" clear ion-button (click)="dismiss()">
     <ion-icon ios="ios-close-circle" md="md-close-circle"></ion-icon>
   </button>
-  <!-- <img src="assets/imgs/placeholder-list.png" /> -->
-  <ion-list [virtualScroll]="classlist_obvs | async" [virtualTrackBy]="trackByFn" [approxItemHeight]="20">
+  <!-- <ion-list no-lines [virtualScroll]="classlist_obvs | async" [approxItemHeight]="'30px'" [virtualTrackBy]="trackByFn">
     <ion-item *virtualItem="let student">
-      <span>{{student.username}} {{student.uid}} test</span>
+      <ion-item>{{student.username}}</ion-item>
+    </ion-item>
+  </ion-list> -->
+
+  <ion-list no-lines>
+    <ion-item>
+      test
+    </ion-item>
+    <ion-item>
+      test
     </ion-item>
   </ion-list>
-</div>
 
+  <ion-list [virtualScroll]="items" >
+    <ion-item *virtualItem="let item">
+      <ion-avatar item-left>
+        <ion-img [src]="item.avatarUrl"></ion-img>
+      </ion-avatar>
+       <h2>{{item.title}}</h2>
+      <p>{{item.body}}</p>
+      <p>{{item.number}}</p>
+    </ion-item>
+  </ion-list>
 
-<!-- {{text}} -->
