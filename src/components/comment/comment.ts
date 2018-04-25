@@ -41,13 +41,13 @@ export class CommentComponent {
       console.log("is_instructor", this.is_instructor);
   })
     
-    console.log("comment obvs", this.comment);
+    // console.log("comment obvs", this.comment);
   }
 
   ngOnInit(){
     //this.commentRef = this.afdb.object('chatroom'+ this.roomPath + '/comments')
     this.comment = this.commentProvider.getComment(this.chatroom_id, this.comment_id);
-    console.log("comment obvs, comment_id, chatroom_id", this.comment, this.comment_id, this.chatroom_id);
+    // console.log("comment obvs, comment_id, chatroom_id", this.comment, this.comment_id, this.chatroom_id);
   }
 
   // createComment(){

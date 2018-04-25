@@ -16,7 +16,7 @@ import { ClasslistProvider } from '../../providers/classlistprovider/classlistpr
 export class StudentlistComponent {
 
   text: string;
-  class_list_obvs: Observable<any[]>;
+  classlist_obvs: Observable<any[]>;
   @Input() chatroom_id: string;
   
 
@@ -26,11 +26,19 @@ export class StudentlistComponent {
   }
 
   ngOnInit(){
-    this.class_list_obvs = this.classlistProvider.getClasslist(this.chatroom_id);
+    console.log("chatroom_id", this.chatroom_id);
+    this.classlist_obvs = this.classlistProvider.getClasslist(this.chatroom_id)
+    this.classlist_obvs.subscribe(studentlist =>{
+      console.log("studentlist", studentlist);
+    });
   }
 
   dismiss() {
     this.viewCtrl.dismiss();
+  }
+
+  trackByFn(student){
+    return student.uid;
   }
 
 }

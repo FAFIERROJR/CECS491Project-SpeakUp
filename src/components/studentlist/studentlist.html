@@ -5,9 +5,9 @@
     <ion-icon ios="ios-close-circle" md="md-close-circle"></ion-icon>
   </button>
   <!-- <img src="assets/imgs/placeholder-list.png" /> -->
-  <ion-list [virtualScroll]="classlist">
+  <ion-list [virtualScroll]="classlist_obvs | async" [virtualTrackBy]="trackByFn" [approxItemHeight]="20">
     <ion-item *virtualItem="let student">
-      {{student.username}}
+      <span>{{student.username}} {{student.uid}} test</span>
     </ion-item>
   </ion-list>
 </div>
