@@ -38,12 +38,13 @@ export class ChatroomPage
     studentListDisplay: boolean = false;
     comment_control: FormGroup
     spamCount: any;
+    cd: any;
 
     constructor(public navCtrl: NavController, public navParams: NavParams, public alertCtrl: AlertController, public afAuth: AngularFireAuth,
         public commentProvider: CommentProvider, public userProvider: UserProvider, public afdb: AngularFireDatabase, public modalCtrl: ModalController)
     {
         this.spamCount = 0;
-        this.spamCooldown();
+        this.cd = this.spamCooldown();
         this.uid = this.afAuth.auth.currentUser.uid;
         this.profanity = ["fuck", "shit", "damn", "bitch"]
         this.no_profanity = true;
@@ -148,12 +149,10 @@ export class ChatroomPage
         if (this.spamCount > 0){
             this.spamCount--;
         }
-
-
     }
 
     spamCooldown(){
-        setInterval(function(){this.decSpam()} , 5000);
+        setInterval(() => this.decSpam() , 5000);
 
     }
 
