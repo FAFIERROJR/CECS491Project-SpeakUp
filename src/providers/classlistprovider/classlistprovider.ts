@@ -32,10 +32,8 @@ export class ClasslistProvider
 
         if (this.validate_key(chatroom_id) && this.validate_key(uid))
         {
-            //this.classlist_ref = this.afdb.object('chatroom/' + chatroom_id + '/classlist');
-            //this.classlist_ref.update(this.student);
-            this.classlist_ref = this.afdb.list('chatroom/' + chatroom_id + '/classlist');
-            this.student.student_id = this.classlist_ref.push(this.student).key;
+            this.classlist_ref = this.afdb.object('chatroom/' + chatroom_id + '/classlist');
+            this.classlist_ref.update({ [this.student.uid]: this.student });
         }
     }
 
@@ -43,10 +41,8 @@ export class ClasslistProvider
     {
         if (this.validate_key(chatroom_id) && this.validate_key(uid))
         {
-            //this.student_id = this.afdb.list('chatroom/' + chatroom_id + '/classlist');
-            //this.classlist_ref.remove(this.student_id);
-            //this.classlist_ref.remove(uid);
-            this.classlist_ref.remove(this.student.student_id);
+            let student_ref = this.afdb.object('chatroom/' + chatroom_id + '/classlist/' + uid);
+            student_ref.remove();
         }
     }
 

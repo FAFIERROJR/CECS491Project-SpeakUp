@@ -29,7 +29,7 @@ export class HomePage
     user_sub: Subscription;
     
     constructor(public navCtrl: NavController, public afdb: AngularFireDatabase,
-        public afAuth: AngularFireAuth, public alertCtrl: AlertController, public userProvider: UserProvider)
+        public afAuth: AngularFireAuth, public alertCtrl: AlertController, public userProvider: UserProvider, public navParams: NavParams)
     {
         this.uid = this.afAuth.auth.currentUser.uid;
         this.chatroomlist = ChatroomslistPage
