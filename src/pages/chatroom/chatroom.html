@@ -33,7 +33,7 @@
             <ion-title>{{(course_obvs | async)?.name}}</ion-title>
           </ion-navbar>
         </ion-header>
-        <section #scrollMe (scroll)="onScroll() "id="CommentList" style="overflow: scroll; height: 100%;" >
+        <section id="CommentList">
           <commentslist #comments [chatroom_id]="chatroom_id"></commentslist>
         </section>
       </ion-col>

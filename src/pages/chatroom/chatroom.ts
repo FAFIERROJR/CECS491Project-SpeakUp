@@ -18,16 +18,13 @@ import { OnDestroy, HostListener } from '@angular/core';
 
 @IonicPage()
 @Component({
-  selector: 'page-chatroom',
-  templateUrl: 'chatroom.html',
-  host: {'window:beforeunload':'classlistPop'}
+    selector: 'page-chatroom',
+    templateUrl: 'chatroom.html',
+    host: { 'window:beforeunload': 'classlistPop' }
 })
 
 
-export class ChatroomPage
-{
-    @ViewChild('scrollMe') private commentsGrid: ElementRef;
-    disableScrollDown = false;
+export class ChatroomPage {
     profanity: Array<any>
     no_profanity: boolean;
     chatroom_id: string;
@@ -49,8 +46,7 @@ export class ChatroomPage
     @ViewChild('comments') comments_list: CommentslistComponent;
 
     constructor(public navCtrl: NavController, public navParams: NavParams, public alertCtrl: AlertController, public afAuth: AngularFireAuth,
-        public commentProvider: CommentProvider, public userProvider: UserProvider, public classlistProvider: ClasslistProvider, public afdb: AngularFireDatabase, public modalCtrl: ModalController)
-    {
+        public commentProvider: CommentProvider, public userProvider: UserProvider, public classlistProvider: ClasslistProvider, public afdb: AngularFireDatabase, public modalCtrl: ModalController) {
         this.spamCount = 0;
         this.cd = this.spamCooldown();
         this.uid = this.afAuth.auth.currentUser.uid;
@@ -95,41 +91,6 @@ export class ChatroomPage
         })
     }
 
-    ngAfterViewChecked(){
-        this.scrollToBottom();
-    }
-
-    ngAfterViewInit(){
-        this.comments_list.scrollToBottom();
-    }
-
-    onScroll() {
-        let element = this.commentsGrid.nativeElement
-        let atBottom = element.scrollHeight - element.scrollTop === element.clientHeight
-        if (this.disableScrollDown && atBottom) {
-            this.disableScrollDown = false;
-        } else {
-            // console.log("scrolling")
-            this.disableScrollDown = true;
-        }
-    }
-
-    /**
-     * Scrolls the chat down to make the latest comments visible
-     */
-    scrollToBottom(): void {
-        if (this.disableScrollDown) {
-            return
-        }
-        else {
-            try {
-                this.commentsGrid.nativeElement.scrollTop = this.commentsGrid.nativeElement.scrollHeight;
-            } catch (err) {
-                // console.log(err);
-            }
-        }
-    }
-
     checkProfanity() {
         for (var i = 0; i < this.profanity.length; i++) {
             if (this.comment_input.indexOf(this.profanity[i]) != -1) {
@@ -145,8 +106,7 @@ export class ChatroomPage
         let comment = new Comment;
         comment.content = this.comment_input;
 
-        if (this.checkProfanity() && this.spamCount < 10 )
-        {
+        if (this.checkProfanity() && this.spamCount < 10) {
             comment.username = this.username;
             comment.uid = this.uid;
             this.commentProvider.addComment(this.chatroom_id, comment);
@@ -154,18 +114,16 @@ export class ChatroomPage
             this.spamCount++;
 
         }
-        else if (this.spamCount >= 10)
-        {
+        else if (this.spamCount >= 10) {
             let alert = this.alertCtrl.create
-            (({
-                title: 'Slow down kiddo!',
-                subTitle: "Your spam is not welcome here.",
-                buttons: ['Dismiss']
-            }));
-        alert.present()
+                (({
+                    title: 'Slow down kiddo!',
+                    subTitle: "Your spam is not welcome here.",
+                    buttons: ['Dismiss']
+                }));
+            alert.present()
         }
-        else 
-        {
+        else {
             let alert = this.alertCtrl.create
                 (({
                     title: 'Woah...',
@@ -175,14 +133,12 @@ export class ChatroomPage
             alert.present()
         }
 
-        this.disableScrollDown = false;
-        this.scrollToBottom();
         this.comments_list.scrollToBottom();
+
     }
 
-    showStudentList()
-    {
-        if(this.studentListDisplay == false){
+    showStudentList() {
+        if (this.studentListDisplay == false) {
             this.studentListDisplay = true;
         }
         else {
@@ -190,38 +146,40 @@ export class ChatroomPage
         }
     }
 
-    showStudentListMobile()
-    {
+    showStudentListMobile() {
         this.modalCtrl.create(StudentlistComponent).present();
     }
 
     // Classlist Pop
-    ionViewDidLeave()
-    {
+    ionViewDidLeave() {
         this.classlistProvider.pop(this.chatroom_id, this.uid);
     }
 
     // Classlist Pop
-    ngOnDestroy()
-    {
+    ngOnDestroy() {
         this.classlistProvider.pop(this.chatroom_id, this.uid);
     }
 
     // Classlist Pop
     @HostListener('window:beforeunload')
-    classlistPop()
-    {
+    classlistPop() {
         this.classlistProvider.pop(this.chatroom_id, this.uid);
     }
-    decSpam(){
-        if (this.spamCount > 0){
+    decSpam() {
+        if (this.spamCount > 0) {
             this.spamCount--;
         }
     }
 
-    spamCooldown(){
-        setInterval(() => this.decSpam() , 5000);
+    spamCooldown() {
+        setInterval(() => this.decSpam(), 5000);
 
+    }
+
+    ionViewDidLoad() {
+        setTimeout(() => {
+            this.comments_list.scrollToBottom();
+        }, 800);
     }
 
 }
