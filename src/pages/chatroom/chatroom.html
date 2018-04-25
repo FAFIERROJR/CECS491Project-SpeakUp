@@ -10,10 +10,11 @@
     <ion-row>
       <!-- Button that shows up on iOS and android -->
       <ion-col hideWhen="android, ios" *ngIf="is_instructor && studentListDisplay" id="ClassListPane" col-lg-3>
-        <div id="StudentListTitle">
+        <!-- <div id="StudentListTitle">
           <h2>Student List</h2>
           <img src="assets/imgs/placeholder-list.png" />
-        </div>
+        </div> -->
+        <studentlist [chatroom_id]="chatroom_id"></studentlist>>
       </ion-col>
 
       <ion-col id="ChatPane">
