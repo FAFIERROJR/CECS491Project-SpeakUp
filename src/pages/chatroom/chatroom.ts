@@ -156,5 +156,5 @@ export class ChatroomPage{
 
     showStudentListMobile() {
         this.modalCtrl.create(StudentlistComponent).present();
-    }nfg
+    }
 }
