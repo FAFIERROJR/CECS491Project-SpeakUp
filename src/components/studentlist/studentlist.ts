@@ -27,17 +27,17 @@ export class StudentlistComponent {
     this.classlist_obvs = new Observable<any[]>();
     this.text = 'Hello World';  
 
-    this.items = [];
-    for(let i = 0; i < 100; i++){
+    // this.items = [];
+    // for(let i = 0; i < 100; i++){
    
-      let item = {
-        title: 'Title',
-        body: 'body',
-        number: i,
-        avatarUrl: 'https://avatars.io/facebook/random'+i
-      };
-      this.items.push(item);
-    }
+    //   let item = {
+    //     title: 'Title',
+    //     body: 'body',
+    //     number: i,
+    //     avatarUrl: 'https://avatars.io/facebook/random'+i
+    //   };
+    //   this.items.push(item);
+    // }
 
   }
 
