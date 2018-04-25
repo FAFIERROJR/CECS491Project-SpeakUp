@@ -3,13 +3,13 @@
   <button showWhen="android,ios" id="DismissBtn" clear ion-button (click)="dismiss()">
     <ion-icon ios="ios-close-circle" md="md-close-circle"></ion-icon>
   </button>
-  <!-- <ion-list no-lines [virtualScroll]="classlist_obvs | async" [approxItemHeight]="'30px'" [virtualTrackBy]="trackByFn">
+  <ion-list no-lines [virtualScroll]="classlist_obvs | async" [approxItemHeight]="'30px'" [virtualTrackBy]="trackByFn">
     <ion-item *virtualItem="let student">
       <ion-item>{{student.username}}</ion-item>
     </ion-item>
-  </ion-list> -->
+  </ion-list>
 
-  <ion-list no-lines>
+  <!-- <ion-list no-lines>
     <ion-item>
       test
     </ion-item>
@@ -27,5 +27,5 @@
       <p>{{item.body}}</p>
       <p>{{item.number}}</p>
     </ion-item>
-  </ion-list>
+  </ion-list> -->
 
