@@ -1,9 +1,50 @@
-<!-- Generated template for the CommentslistComponent component -->
-<ion-content>
-    <ion-infinite-scroll (ionInfinite)="doInfinite($event)" position="top">
-        <ion-infinite-scroll-content></ion-infinite-scroll-content>
-      </ion-infinite-scroll>
-  <ion-list no-lines>
-     <comment *ngFor="let comment of comments_to_display; trackBy: trackByFn" [comment_id]="comment.comment_id" [chatroom_id]="chatroom_id"></comment>
-  </ion-list>
-</ion-content>
+<ion-list no-lines [virtualScroll]="comments_obvs | async" [approxItemHeight]="'30px'" [virtualTrackBy]="trackByFn">
+    <ion-item *virtualItem="let comment; let i=index">
+        <ion-item *ngIf="is_instructor" (mouseenter)="toggleTimestamp(i)" (mouseleave)="toggleTimestamp(i); visible[i]=false">
+            <ion-avatar item-start>
+                <img src="assets/imgs/logo.png">
+            </ion-avatar>
+            <h2>{{comment.username}} <span class="timestamp" *ngIf="visible[i]">Tuesday, 3:00pm</span></h2>
+            <p>{{comment.content}}</p>
+            <ion-note item-end *ngIf="visible[i]">
+                <p class="points">
+                    <span>100</span>
+                    <span>pts</span>
+                </p>
+                <ion-buttons>
+                    <button ion-button small clear class="vote-btns">
+                        <ion-icon ios="ios-thumbs-up" md="md-thumbs-up"></ion-icon>
+                    </button>
+                    <button ion-button small clear class="vote-btns">
+                        <ion-icon ios="ios-thumbs-down" md="md-thumbs-down"></ion-icon>
+                    </button>
+                    <button id="DeleteComment" ion-button small color="danger" class="vote-btns">
+                        <ion-icon ios="ios-trash" md="md-trash"></ion-icon>
+                    </button>
+                </ion-buttons>
+            </ion-note>
+        </ion-item>
+
+        <ion-item *ngIf="!is_instructor" (mouseenter)="toggleTimestamp(i)" (mouseleave)="toggleTimestamp(i); visible[i]=false">
+            <ion-avatar item-start>
+                <img src="assets/imgs/speakup-hand-logo.svg">
+            </ion-avatar>
+            <h2>Animal Name <span class="timestamp" *ngIf="visible[i]">Tuesday, 3:00pm</span></h2>
+            <p>{{comment.content}}</p>
+            <ion-note item-end *ngIf="visible[i]">
+                <p class="points">
+                    <span>100</span>
+                    <span>pts</span>
+                </p>
+                <ion-buttons>
+                    <button ion-button small clear class="vote-btns">
+                        <ion-icon ios="ios-thumbs-up" md="md-thumbs-up"></ion-icon>
+                    </button>
+                    <button ion-button small clear class="vote-btns">
+                        <ion-icon ios="ios-thumbs-down" md="md-thumbs-down"></ion-icon>
+                    </button>
+                </ion-buttons>
+            </ion-note>
+        </ion-item>
+    </ion-item>
+</ion-list>

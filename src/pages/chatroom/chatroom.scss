@@ -11,6 +11,10 @@ page-chatroom {
     ion-title{
         padding-left: 35px;
     }
+    
+    .back-button {
+        display: block;
+    }
 
     .bar-button-solid{
         background-color: $accent-color;
@@ -95,7 +99,7 @@ page-chatroom {
         width: 100%;
         height: 100%;
         background-color: rgb(255, 255, 255);
-        overflow-y: auto;
+        
     }
 
     ion-col#ClassListPane{
