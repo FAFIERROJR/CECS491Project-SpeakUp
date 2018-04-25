@@ -40,7 +40,7 @@
 
       <ion-col hideWhen="android, ios" *ngIf="is_instructor && studentListDisplay" id="ClassListPane" col-lg-3>
         <div id="StudentListTitle">
-          <studentlist></studentlist>
+          <studentlist [chatroom_id]="chatroom_id"></studentlist>>
         </div>
       </ion-col>
 

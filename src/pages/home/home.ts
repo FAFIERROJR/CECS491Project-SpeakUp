@@ -10,6 +10,7 @@ import { Observable } from 'rxjs/Observable';
 import { MessagesPage } from '../messages/messages';
 import { UserProvider } from '../../providers/userprovider/userprovider';
 import { Subscription } from 'rxjs/Subscription';
+import { ChatroomslistComponent } from '../../components/chatroomslist/chatroomslist';
 
 @IonicPage()
 @Component({
@@ -19,12 +20,6 @@ import { Subscription } from 'rxjs/Subscription';
 
 export class HomePage
 {
-    // chatroom: Chatroom;
-    // lastAccessCode_ref: any;
-    // chatroom_accessCode_ref: any;
-    // accessCode: any;
-    // //courses: Observable<{}[]>;
-    // courses: any;
     uid: string;
     chatroomlist: any
     messages: any
@@ -34,19 +29,10 @@ export class HomePage
     user_sub: Subscription;
     
     constructor(public navCtrl: NavController, public afdb: AngularFireDatabase,
-        public afAuth: AngularFireAuth, public alertCtrl: AlertController, public userProvider: UserProvider)
+        public afAuth: AngularFireAuth, public alertCtrl: AlertController, public userProvider: UserProvider, public navParams: NavParams)
     {
-        // this.generateAccessCode();
-
-        // this.chatroom = new Chatroom;
-        // this.chatroom.accessCode = "123456";
-        // this.createChatroom();
-        
-        // this.accessChatroom();
-
         this.uid = this.afAuth.auth.currentUser.uid;
-        //this.courses = this.afdb.list('userProfile/' + this.uid + '/courses').valueChanges();
-        //this.chatroomlist = ChatroomslistPage
+        this.chatroomlist = ChatroomslistComponent
         this.messages = MessagesPage;
         console.log(this.uid);
         this.user_obvs = this.userProvider.getUser(this.uid);
@@ -57,59 +43,6 @@ export class HomePage
         });
 
     }
-
-    // generateAccessCode()
-    // {
-    //     this.lastAccessCode_ref = this.afdb.database.ref('lastAccessCode/value');
-
-    //     this.lastAccessCode_ref.transaction(function (value)
-    //     {
-    //         console.log("Value: ", value)
-    //         this.accessCode = value
-    //         return value = value + 1
-
-    //     });
-    // }
-
-    // createChatroom()
-    // {
-    //     let chatroomDB_Ref = this.afdb.object('chatroom');
-
-    //     chatroomDB_Ref.update
-    //     ({
-    //         [this.chatroom.accessCode]: this.chatroom
-    //     })
-    // }
-
-    // accessChatroom()
-    // {   
-    //     this.chatroom_accessCode_ref = this.afdb.database.ref('chatroom/accessCode');
-
-    //     let num: any
-    //     this.chatroom_accessCode_ref.transaction(function (value)
-    //     { 
-    //         console.log(value)
-    //         num = value
-    //         return value 
-    //     });
-
-    //     if (this.accessCode === num)
-    //     {            
-    //         console.log("Success")
-    //         //this.navCtrl.setRoot(ChatroomPage);
-    //     }
-    //     else
-    //     {
-    //         let alert = this.alertCtrl.create
-    //         (({
-    //             title: 'Access Code Invalid',
-    //             subTitle: 'error',
-    //             buttons: ['Dismiss']
-    //         }));
-    //         alert.present();
-    //         this.accessCode = '';
-    //     }
-    // }
 
     signOut(): void
     {

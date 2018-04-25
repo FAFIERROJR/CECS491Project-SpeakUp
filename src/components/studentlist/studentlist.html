@@ -4,7 +4,12 @@
   <button showWhen="android,ios" id="DismissBtn" clear ion-button (click)="dismiss()">
     <ion-icon ios="ios-close-circle" md="md-close-circle"></ion-icon>
   </button>
-  <img src="assets/imgs/placeholder-list.png" />
+  <!-- <img src="assets/imgs/placeholder-list.png" /> -->
+  <ion-list [virtualScroll]="classlist">
+    <ion-item *virtualItem="let student">
+      {{student.username}}
+    </ion-item>
+  </ion-list>
 </div>
 
 
