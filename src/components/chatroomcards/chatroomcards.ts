@@ -146,7 +146,7 @@ export class ChatroomcardsComponent {
         if (access_code === room)
         {            
           console.log("Success")
-          this.navCtrl.push(ChatroomPage, {chatroom_id: this.chatroom_id, course_id: this.course_id} );
+          this.navCtrl.push(ChatroomPage, {chatroom_id: this.chatroom_id, course_id: this.course_id, uid: this.uid, username: this.username} );
         }
         else
         {

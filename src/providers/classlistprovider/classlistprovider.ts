@@ -52,12 +52,12 @@ export class ClasslistProvider
 
     getStudent(chatroom_id: string, uid: string)
     {
-        return this.afdb.list('chatroom/' + chatroom_id + '/classlist', ref => ref.orderByChild('uid').equalTo(uid)).valueChanges();
+        return this.afdb.object('chatroom/' + chatroom_id + '/classlist/' + uid).valueChanges();
     }
 
     getClasslist(chatroom_id: string)
     {
-        return this.afdb.list('chatroom/' + chatroom_id + '/classlist', ref => ref.orderByChild('uid')).valueChanges();
+        return this.afdb.list('chatroom/' + chatroom_id + '/classlist').valueChanges();
     }
 
     validate_key(key: string): boolean
