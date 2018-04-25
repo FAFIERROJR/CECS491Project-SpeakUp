@@ -1,5 +1,5 @@
-import { AfterViewChecked, Component, ViewChild, ElementRef, OnInit } from '@angular/core';
-import { IonicPage, NavController, NavParams, ModalController } from 'ionic-angular';
+import { AfterViewChecked, Component, ViewChild, ElementRef, OnInit, ContentChild } from '@angular/core';
+import { IonicPage, NavController, NavParams, ModalController, VirtualScroll } from 'ionic-angular';
 import { Comment } from '../../app/models/comment';
 import { AlertController } from 'ionic-angular';
 import { CommentslistComponent } from '../../components/commentslist/commentslist'
@@ -46,6 +46,7 @@ export class ChatroomPage
     comment_control: FormGroup
     spamCount: any;
     cd: any;
+    @ViewChild('comments') comments_list: CommentslistComponent;
 
     constructor(public navCtrl: NavController, public navParams: NavParams, public alertCtrl: AlertController, public afAuth: AngularFireAuth,
         public commentProvider: CommentProvider, public userProvider: UserProvider, public classlistProvider: ClasslistProvider, public afdb: AngularFireDatabase, public modalCtrl: ModalController)
@@ -96,6 +97,10 @@ export class ChatroomPage
 
     ngAfterViewChecked(){
         this.scrollToBottom();
+    }
+
+    ngAfterViewInit(){
+        this.comments_list.scrollToBottom();
     }
 
     onScroll() {
@@ -172,6 +177,7 @@ export class ChatroomPage
 
         this.disableScrollDown = false;
         this.scrollToBottom();
+        this.comments_list.scrollToBottom();
     }
 
     showStudentList()

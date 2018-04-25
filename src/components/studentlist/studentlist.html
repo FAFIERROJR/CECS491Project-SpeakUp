@@ -1,4 +1,5 @@
 
+<ion-content>
   <div id="Title">Student List</div>
   <button showWhen="android,ios" id="DismissBtn" clear ion-button (click)="dismiss()">
     <ion-icon ios="ios-close-circle" md="md-close-circle"></ion-icon>
@@ -9,14 +10,14 @@
     </ion-item>
   </ion-list> -->
 
-  <ion-list no-lines>
+  <!-- <ion-list no-lines>
     <ion-item>
       test
     </ion-item>
     <ion-item>
       test
     </ion-item>
-  </ion-list>
+  </ion-list> -->
 
   <ion-list [virtualScroll]="items" >
     <ion-item *virtualItem="let item">
@@ -28,4 +29,4 @@
       <p>{{item.number}}</p>
     </ion-item>
   </ion-list>
-
+</ion-content>

@@ -34,7 +34,7 @@
           </ion-navbar>
         </ion-header>
         <section #scrollMe (scroll)="onScroll() "id="CommentList" style="overflow: scroll; height: 100%;" >
-          <commentslist [chatroom_id]="chatroom_id"></commentslist>
+          <commentslist #comments [chatroom_id]="chatroom_id"></commentslist>
         </section>
       </ion-col>
 

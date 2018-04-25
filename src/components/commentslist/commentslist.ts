@@ -1,7 +1,7 @@
-import { Component, Injectable, Input } from '@angular/core';
+import { Component, Injectable, Input, ViewChild } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import { AngularFireDatabase } from 'angularfire2/database';
-import { AlertController, InfiniteScroll } from 'ionic-angular';
+import { AlertController, InfiniteScroll, Content } from 'ionic-angular';
 import { CommentComponent } from '../comment/comment'
 import { CommentProvider } from '../../providers/commentprovider/commentprovider';
 import { Subscription } from 'rxjs/Subscription';
@@ -23,6 +23,7 @@ export class CommentslistComponent {
   comments: Observable<any[]>;
   right_end: number;
   left_end: number;
+  @ViewChild(Content) content: Content;
   //repushing
 
   comments_to_display = []
@@ -61,6 +62,10 @@ export class CommentslistComponent {
       this.full_comments = comments;
       console.log(this.full_comments);
     });
+  }
+
+  scrollToBottom(){
+    this.content.scrollToBottom();
   }
 
   trackByFn(index, item) {
