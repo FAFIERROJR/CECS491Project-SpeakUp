@@ -43,6 +43,7 @@ export class ChatroomPage
         public commentProvider: CommentProvider, public userProvider: UserProvider, public afdb: AngularFireDatabase, public modalCtrl: ModalController)
     {
         this.spamCount = 0;
+        this.spamCooldown();
         this.uid = this.afAuth.auth.currentUser.uid;
         this.profanity = ["fuck", "shit", "damn", "bitch"]
         this.no_profanity = true;
@@ -152,7 +153,7 @@ export class ChatroomPage
     }
 
     spamCooldown(){
-        setInterval(this.decSpam() , 5000);
+        setInterval(function(){this.decSpam()} , 5000);
 
     }
 
