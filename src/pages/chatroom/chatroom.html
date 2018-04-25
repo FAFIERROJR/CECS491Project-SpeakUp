@@ -33,7 +33,7 @@
             <ion-title>{{(course_obvs | async)?.name}}</ion-title>
           </ion-navbar>
         </ion-header>
-        <section id="CommentList">
+        <section #scrollMe (scroll)="onScroll() "id="CommentList" style="overflow: scroll; height: 100%;" >
           <commentslist [chatroom_id]="chatroom_id"></commentslist>
         </section>
       </ion-col>
@@ -57,7 +57,7 @@
     </ion-buttons>
     <form (ngSubmit)="addComment()" [formGroup]="comment_control">
       <ion-input id="CommentInput" type="text" placeholder="Type comments here..." name="comment_input" [(ngModel)]="comment_input"
-        formControlName="comment_input" (keypress)="eventHandler($event.keyCode)">
+        formControlName="comment_input">
       </ion-input>
       <ion-buttons class="ion-end">
         <button ion-button type="submit" [disabled]="comment_control.invalid">

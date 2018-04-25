@@ -1,8 +1,8 @@
-import { Component, ViewChild, ElementRef } from '@angular/core';
+import { AfterViewChecked, Component, ViewChild, ElementRef, OnInit } from '@angular/core';
 import { IonicPage, NavController, NavParams, ModalController } from 'ionic-angular';
 import { Comment } from '../../app/models/comment';
 import { AlertController } from 'ionic-angular';
-import {CommentslistComponent } from '../../components/commentslist/commentslist'
+import { CommentslistComponent } from '../../components/commentslist/commentslist'
 import { CommentProvider } from '../../providers/commentprovider/commentprovider';
 import { UserProvider } from '../../providers/userprovider/userprovider';
 import { AngularFireAuth } from 'angularfire2/auth';
@@ -12,17 +12,17 @@ import { Chatroom } from '../../app/models/chatroom';
 import { Observable } from 'rxjs/Observable';
 import { StudentlistComponent } from '../../components/studentlist/studentlist';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
-import { validateArgCount } from '@firebase/util';
+import { validateArgCount, CONSTANTS } from '@firebase/util';
 
 @IonicPage()
 @Component({
-  selector: 'page-chatroom',
-  templateUrl: 'chatroom.html',
+    selector: 'page-chatroom',
+    templateUrl: 'chatroom.html',
 })
 
-export class ChatroomPage
-{
+export class ChatroomPage{
     @ViewChild('scrollMe') private commentsGrid: ElementRef;
+    disableScrollDown = false;
     profanity: Array<any>
     no_profanity: boolean;
     chatroom_id: string;
@@ -30,7 +30,7 @@ export class ChatroomPage
     comment_input: string;
     course_id: string;
     course_obvs: Observable<any>;
-    is_instructor: Boolean =false;
+    is_instructor: Boolean = false;
     uid: string;
     user_sub: Subscription
     access_code_raw: any;
@@ -41,22 +41,21 @@ export class ChatroomPage
     comment_control: FormGroup
 
     constructor(public navCtrl: NavController, public navParams: NavParams, public alertCtrl: AlertController, public afAuth: AngularFireAuth,
-        public commentProvider: CommentProvider, public userProvider: UserProvider, public afdb: AngularFireDatabase, public modalCtrl: ModalController)
-    {   
+        public commentProvider: CommentProvider, public userProvider: UserProvider, public afdb: AngularFireDatabase, public modalCtrl: ModalController) {
         this.uid = this.afAuth.auth.currentUser.uid;
         this.profanity = ["fuck", "shit", "damn", "bitch"]
         this.no_profanity = true;
 
         this.chatroom_id = this.navParams.get('chatroom_id');
         this.course_id = this.navParams.get('course_id');
-        console.log("chatroom_id", this.chatroom_id);
+        // console.log("chatroom_id", this.chatroom_id);
 
         this.chatroom_obvs = this.afdb.object('chatroom/' + this.chatroom_id).valueChanges();
-        this.afdb.object('chatroom/' + this.chatroom_id).update({test: 'test'});
-        console.log('chatroom obvs', this.chatroom_obvs)
+        this.afdb.object('chatroom/' + this.chatroom_id).update({ test: 'test' });
+        // console.log('chatroom obvs', this.chatroom_obvs)
         this.chatroom_obvs.subscribe(chatroom => {
             this.access_code_string = chatroom.accessCode;
-            console.log("access code", chatroom);
+            // console.log("access code", chatroom);
         })
         this.course_obvs = this.userProvider.getUserCourse(this.uid, this.course_id);
 
@@ -64,7 +63,7 @@ export class ChatroomPage
         this.user_sub = this.userProvider.getUser(this.uid).subscribe(user => {
             this.is_instructor = user.is_instructor;
             this.username = user.username;
-            console.log("is_instructor", this.is_instructor);
+            // console.log("is_instructor", this.is_instructor);
         })
 
         this.access_code_sub = this.afdb.object('lastAccessCode').valueChanges().subscribe(access_code => {
@@ -80,31 +79,41 @@ export class ChatroomPage
         })
     }
 
-    /**
-     * Checks your view and executes
-     */
     ngAfterViewChecked(){
         this.scrollToBottom();
+    }
+
+    onScroll() {
+        let element = this.commentsGrid.nativeElement
+        let atBottom = element.scrollHeight - element.scrollTop === element.clientHeight
+        if (this.disableScrollDown && atBottom) {
+            this.disableScrollDown = false;
+        } else {
+            // console.log("scrolling")
+            this.disableScrollDown = true;
+        }
     }
 
     /**
      * Scrolls the chat down to make the latest comments visible
      */
-    scrollToBottom(): void{
-        try{
-            this.commentsGrid.nativeElement.scrollTop = this.commentsGrid.nativeElement.scrollHeight;
-        } catch(err) {
-            // Do nothing
+    scrollToBottom(): void {
+        if (this.disableScrollDown) {
+            return
+        }
+        else {
+            try {
+                this.commentsGrid.nativeElement.scrollTop = this.commentsGrid.nativeElement.scrollHeight;
+            } catch (err) {
+                // console.log(err);
+            }
         }
     }
 
-    checkProfanity()
-    {
-        for (var i = 0; i < this.profanity.length; i++)
-        {
-            if (this.comment_input.indexOf(this.profanity[i]) != -1)
-            {
-                console.log(this.comment_input.indexOf(this.profanity[i]))
+    checkProfanity() {
+        for (var i = 0; i < this.profanity.length; i++) {
+            if (this.comment_input.indexOf(this.profanity[i]) != -1) {
+                // console.log(this.comment_input.indexOf(this.profanity[i]))
                 return false;
             }
         }
@@ -112,20 +121,20 @@ export class ChatroomPage
         return true
     }
 
-    addComment()
-    {
+    addComment() {
         let comment = new Comment;
         comment.content = this.comment_input;
 
-        if (this.checkProfanity())
-        {
+        if (this.checkProfanity()) {
             comment.username = this.username;
             comment.uid = this.uid;
             this.commentProvider.addComment(this.chatroom_id, comment);
             this.comment_input = '';
+            this.disableScrollDown = false;
+            this.scrollToBottom();
+            
         }
-        else
-        {
+        else {
             let alert = this.alertCtrl.create
                 (({
                     title: 'Woah...',
@@ -136,8 +145,8 @@ export class ChatroomPage
         }
     }
 
-    showStudentList(){
-        if(this.studentListDisplay == true){
+    showStudentList() {
+        if (this.studentListDisplay == true) {
             this.studentListDisplay = false;
         }
         else {
@@ -145,13 +154,7 @@ export class ChatroomPage
         }
     }
 
-    showStudentListMobile(){
+    showStudentListMobile() {
         this.modalCtrl.create(StudentlistComponent).present();
-    }
-
-    eventHandler(keyCode){
-        if(keyCode === 13){
-            
-        }
-    }
+    }nfg
 }
