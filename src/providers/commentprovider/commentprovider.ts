@@ -12,9 +12,10 @@ import { Comment } from '../../app/models/comment'
 */
 @Injectable()
 export class CommentProvider {
-
+ 
   constructor(public afdb: AngularFireDatabase) {
     console.log('Hello CommentProvider Provider');
+
   }
 
   getComments(chatroom_id: string): Observable<any[]> {
@@ -76,5 +77,4 @@ export class CommentProvider {
     }
     return false;
   }
-
 }

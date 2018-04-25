@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { AfterViewChecked, Component, ViewChild, ElementRef, OnInit } from '@angular/core';
 import { IonicPage, NavController, NavParams, ModalController } from 'ionic-angular';
 import { Comment } from '../../app/models/comment';
 import { AlertController } from 'ionic-angular';
@@ -26,6 +26,8 @@ import { OnDestroy, HostListener } from '@angular/core';
 
 export class ChatroomPage
 {
+    @ViewChild('scrollMe') private commentsGrid: ElementRef;
+    disableScrollDown = false;
     profanity: Array<any>
     no_profanity: boolean;
     chatroom_id: string;
@@ -33,7 +35,7 @@ export class ChatroomPage
     comment_input: string;
     course_id: string;
     course_obvs: Observable<any>;
-    is_instructor: Boolean =false;
+    is_instructor: Boolean = false;
     uid: string;
     username: string;
     user_sub: Subscription
@@ -87,13 +89,41 @@ export class ChatroomPage
         })
     }
 
-    checkProfanity()
-    {
-        for (var i = 0; i < this.profanity.length; i++)
-        {
-            if (this.comment_input.indexOf(this.profanity[i]) != -1)
-            {
-                console.log(this.comment_input.indexOf(this.profanity[i]))
+    ngAfterViewChecked(){
+        this.scrollToBottom();
+    }
+
+    onScroll() {
+        let element = this.commentsGrid.nativeElement
+        let atBottom = element.scrollHeight - element.scrollTop === element.clientHeight
+        if (this.disableScrollDown && atBottom) {
+            this.disableScrollDown = false;
+        } else {
+            // console.log("scrolling")
+            this.disableScrollDown = true;
+        }
+    }
+
+    /**
+     * Scrolls the chat down to make the latest comments visible
+     */
+    scrollToBottom(): void {
+        if (this.disableScrollDown) {
+            return
+        }
+        else {
+            try {
+                this.commentsGrid.nativeElement.scrollTop = this.commentsGrid.nativeElement.scrollHeight;
+            } catch (err) {
+                // console.log(err);
+            }
+        }
+    }
+
+    checkProfanity() {
+        for (var i = 0; i < this.profanity.length; i++) {
+            if (this.comment_input.indexOf(this.profanity[i]) != -1) {
+                // console.log(this.comment_input.indexOf(this.profanity[i]))
                 return false;
             }
         }
@@ -101,20 +131,20 @@ export class ChatroomPage
         return true
     }
 
-    addComment()
-    {
+    addComment() {
         let comment = new Comment;
         comment.content = this.comment_input;
 
-        if (this.checkProfanity())
-        {
+        if (this.checkProfanity()) {
             comment.username = this.username;
             comment.uid = this.uid;
             this.commentProvider.addComment(this.chatroom_id, comment);
             this.comment_input = '';
+            this.disableScrollDown = false;
+            this.scrollToBottom();
+            
         }
-        else
-        {
+        else {
             let alert = this.alertCtrl.create
                 (({
                     title: 'Woah...',

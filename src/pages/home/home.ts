@@ -7,10 +7,10 @@ import { LandingPage } from '../landing/landing';
 import { Chatroom } from '../../app/models/chatroom';
 import { ChatroomcardsComponent } from '../../components/chatroomcards/chatroomcards';
 import { Observable } from 'rxjs/Observable';
-import { ChatroomslistPage } from '../chatroomslist/chatroomslist';
 import { MessagesPage } from '../messages/messages';
 import { UserProvider } from '../../providers/userprovider/userprovider';
 import { Subscription } from 'rxjs/Subscription';
+import { ChatroomslistComponent } from '../../components/chatroomslist/chatroomslist';
 
 @IonicPage()
 @Component({
@@ -32,7 +32,7 @@ export class HomePage
         public afAuth: AngularFireAuth, public alertCtrl: AlertController, public userProvider: UserProvider, public navParams: NavParams)
     {
         this.uid = this.afAuth.auth.currentUser.uid;
-        this.chatroomlist = ChatroomslistPage
+        this.chatroomlist = ChatroomslistComponent
         this.messages = MessagesPage;
         console.log(this.uid);
         this.user_obvs = this.userProvider.getUser(this.uid);

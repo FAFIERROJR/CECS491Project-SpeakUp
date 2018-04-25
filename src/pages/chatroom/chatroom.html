@@ -8,44 +8,42 @@
 <ion-content>
   <ion-grid>
     <ion-row>
-      <!-- Button that shows up on iOS and android -->
-      <ion-col hideWhen="android, ios" *ngIf="is_instructor && studentListDisplay" id="ClassListPane" col-lg-3>
-        <!-- <div id="StudentListTitle">
-          <h2>Student List</h2>
-          <img src="assets/imgs/placeholder-list.png" />
-        </div> -->
-        <studentlist [chatroom_id]="chatroom_id"></studentlist>>
-      </ion-col>
-
       <ion-col id="ChatPane">
         <ion-header>
           <!-- instructor tool bar -->
-          <ion-toolbar id="InstructorHeader" *ngIf="is_instructor">
-            <ion-buttons class="ion-start">
+          <ion-navbar id="InstructorHeader" *ngIf="is_instructor" text-center>
+            <ion-buttons end>
               <button ion-button icon-only solid (click)="showStudentList()" hideWhen="android, ios" class="toggleChatList">
                 <ion-icon name="people"></ion-icon>
               </button>
             </ion-buttons>
-            <ion-buttons class="ion-start">
+            <ion-buttons end>
               <button ion-button icon-only solid (click)="showStudentListMobile()" showWhen="android, ios" class="toggleChatList">
                 <ion-icon name="people"></ion-icon>
               </button>
             </ion-buttons>
             <ion-title>
-              <span class="center">{{(course_obvs | async)?.name}}</span>
+              <span>{{(course_obvs | async)?.name}}</span>
               <span hideWhen="android, ios" class="float-right"> Access Code: {{access_code_string}}</span>
             </ion-title>
-          </ion-toolbar>
+          </ion-navbar>
 
-          <!-- Student toolbar -->
-          <ion-toolbar *ngIf="!is_instructor" text-center hideBackButton>
+          <!-- Student navbar -->
+          <ion-navbar *ngIf="!is_instructor" text-center>
             <ion-title>{{(course_obvs | async)?.name}}</ion-title>
-          </ion-toolbar>
+          </ion-navbar>
         </ion-header>
-        <section id="CommentList">
+        <section #scrollMe (scroll)="onScroll() "id="CommentList" style="overflow: scroll; height: 100%;" >
           <commentslist [chatroom_id]="chatroom_id"></commentslist>
         </section>
       </ion-col>
+
+      <ion-col hideWhen="android, ios" *ngIf="is_instructor && studentListDisplay" id="ClassListPane" col-lg-3>
+        <div id="StudentListTitle">
+          <studentlist [chatroom_id]="chatroom_id"></studentlist>>
+        </div>
+      </ion-col>
+
     </ion-row>
   </ion-grid>
 </ion-content>
