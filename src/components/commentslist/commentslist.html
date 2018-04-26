@@ -18,7 +18,7 @@
                     <button ion-button small clear class="vote-btns">
                         <ion-icon ios="ios-thumbs-down" md="md-thumbs-down"></ion-icon>
                     </button>
-                    <button id="DeleteComment" ion-button small color="danger" class="vote-btns">
+                    <button id="DeleteComment" ion-button small color="danger" class="vote-btns" (click)="deleteComment(comment.comment_id)">
                         <ion-icon ios="ios-trash" md="md-trash"></ion-icon>
                     </button>
                 </ion-buttons>

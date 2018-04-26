@@ -74,9 +74,10 @@ export class CommentComponent {
   deleteComment(){
     // this.commentRef = this.afdb.database.ref('chatroom'+ this.roomPath + '/comments'+this.commentID)
     // this.commentRef.remove(this.commentID);
-    this.commentProvider.deleteComment(this.chatroom_id, this.comment_id);
-
-
+    if (this.is_instructor){
+      this.commentProvider.deleteComment(this.chatroom_id, this.comment_id);
+      console.log("deleting comment...");
+    }
   }
 
   toggleTimestamp(){

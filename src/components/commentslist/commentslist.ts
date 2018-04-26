@@ -52,6 +52,15 @@ export class CommentslistComponent {
   
   }
 
+  deleteComment(comment_id){
+    // this.commentRef = this.afdb.database.ref('chatroom'+ this.roomPath + '/comments'+this.commentID)
+    // this.commentRef.remove(this.commentID);
+    if (this.is_instructor){
+      this.commentProvider.deleteComment(this.chatroom_id, comment_id);
+      console.log("deleting comment...");
+    }
+  }
+
   ngOnInit() {
     this.comments = this.commentProvider.getComments(this.chatroom_id);
     // console.log("chatroom_id", this.chatroom_id);
