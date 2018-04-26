@@ -1,11 +1,24 @@
-<!-- Generated template for the StudentlistComponent component -->
-<div>
+<ion-content>
   <div id="Title">Student List</div>
   <button showWhen="android,ios" id="DismissBtn" clear ion-button (click)="dismiss()">
     <ion-icon ios="ios-close-circle" md="md-close-circle"></ion-icon>
   </button>
-  <img src="assets/imgs/placeholder-list.png" />
-</div>
+  <ion-list no-lines>
+    <ion-item *ngFor="let student of classlist_obvs | async; trackBy: trackByFn">
+      <ion-avatar item-left>
+        <img src="assets/icon/Panda.png">
+      </ion-avatar>
+      <h2>{{student.username}}</h2>
+    </ion-item>
 
+  </ion-list>
 
-<!-- {{text}} -->
+  <!-- <ion-list no-lines>
+    <ion-item *ngFor="let item of items">
+      <ion-avatar item-left>
+      </ion-avatar>
+      <h2>{{item.title}}</h2>
+      <p>{{item.body}}</p>
+    </ion-item>
+  </ion-list> -->
+</ion-content>

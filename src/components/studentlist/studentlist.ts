@@ -1,5 +1,7 @@
-import { Component } from '@angular/core';
-import { ViewController } from 'ionic-angular';
+import { Component, Input } from '@angular/core';
+import { ViewController, NavParams } from 'ionic-angular';
+import { Observable } from 'rxjs/Observable';
+import { ClasslistProvider } from '../../providers/classlistprovider/classlistprovider';
 
 /**
  * Generated class for the StudentlistComponent component.
@@ -13,15 +15,50 @@ import { ViewController } from 'ionic-angular';
 })
 export class StudentlistComponent {
 
+  items: any[];
+  classlist_sub: any;
   text: string;
+  classlist_obvs: Observable<any[]>;
+  @Input() chatroom_id: string;
+  
 
-  constructor(public viewCtrl: ViewController) {
+  constructor(public viewCtrl: ViewController, public classlistProvider: ClasslistProvider, public navParams: NavParams) {
     console.log('Hello StudentlistComponent Component');
-    this.text = 'Hello World';
+    this.text = 'Hello World';  
+
+    let chatroom_id = this.navParams.get('chatroom_id');
+    if(chatroom_id != null || chatroom_id != ""){
+      this.chatroom_id = chatroom_id
+    }
+
+    this.items = [];
+    for(let i = 0; i < 100; i++){
+   
+      let item = {
+        title: 'Title',
+        body: 'body',
+        number: i,
+        avatarUrl: 'https://avatars.io/facebook/random'+i
+      };
+      this.items.push(item);
+    }
+
+  }
+
+  ngOnInit(){
+    console.log("chatroom_id", this.chatroom_id);
+    this.classlist_obvs = this.classlistProvider.getClasslist(this.chatroom_id)
+    this.classlist_sub = this.classlist_obvs.subscribe(studentlist =>{
+      console.log("studentlist", studentlist);
+    });
   }
 
   dismiss() {
     this.viewCtrl.dismiss();
+  }
+
+  trackByFn(student){
+    return student.uid;
   }
 
 }

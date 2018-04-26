@@ -1,8 +1,9 @@
+<ion-content>
 <ion-list no-lines [virtualScroll]="comments_obvs | async" [approxItemHeight]="'30px'" [virtualTrackBy]="trackByFn">
     <ion-item *virtualItem="let comment; let i=index">
         <ion-item *ngIf="is_instructor" (mouseenter)="toggleTimestamp(i)" (mouseleave)="toggleTimestamp(i); visible[i]=false">
             <ion-avatar item-start>
-                <img src="assets/imgs/logo.png">
+                <img src="assets/icon/Gopher.png">
             </ion-avatar>
             <h2>{{comment.username}} <span class="timestamp" *ngIf="visible[i]">Tuesday, 3:00pm</span></h2>
             <p>{{comment.content}}</p>
@@ -27,7 +28,7 @@
 
         <ion-item *ngIf="!is_instructor" (mouseenter)="toggleTimestamp(i)" (mouseleave)="toggleTimestamp(i); visible[i]=false">
             <ion-avatar item-start>
-                <img src="assets/imgs/speakup-hand-logo.svg">
+                <img src="assets/icon/Koala.png">
             </ion-avatar>
             <h2>Animal Name <span class="timestamp" *ngIf="visible[i]">Tuesday, 3:00pm</span></h2>
             <p>{{comment.content}}</p>
@@ -48,3 +49,4 @@
         </ion-item>
     </ion-item>
 </ion-list>
+</ion-content>

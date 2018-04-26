@@ -27,7 +27,7 @@ export class CommentProvider {
 
   getComment(chatroom_id: string, comment_id: string): Observable<any> {
     if(this.validate_key(chatroom_id) && this.validate_key(comment_id)){
-      console.log('chatroom_id, comment_id', chatroom_id, comment_id);
+      // console.log('chatroom_id, comment_id', chatroom_id, comment_id);
       let comment = this.afdb.object('chatroom/' + chatroom_id + '/comments/' + comment_id).valueChanges();
       return comment;
     }
@@ -72,7 +72,7 @@ export class CommentProvider {
 
   validate_key(key: string): boolean {
     if (key != null && key != ""){
-      console.log("key valid");
+      // console.log("key valid");
       return true;
     }
     return false;
