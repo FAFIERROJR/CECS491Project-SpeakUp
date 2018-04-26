@@ -1,5 +1,9 @@
 studentlist {
     background-color: white;
+    overflow: auto;
+    height: 100%;
+    width: 100%;
+    position: absolute;
 
     button#DismissBtn {
         top:10px;
@@ -10,7 +14,6 @@ studentlist {
     }
 
     div#Title{
-        margin-top: 20px;
         font-size: 22px;
         padding: 20px;
     }

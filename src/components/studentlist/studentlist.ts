@@ -26,17 +26,17 @@ export class StudentlistComponent {
     console.log('Hello StudentlistComponent Component');
     this.text = 'Hello World';  
 
-    // this.items = [];
-    // for(let i = 0; i < 100; i++){
+    this.items = [];
+    for(let i = 0; i < 100; i++){
    
-    //   let item = {
-    //     title: 'Title',
-    //     body: 'body',
-    //     number: i,
-    //     avatarUrl: 'https://avatars.io/facebook/random'+i
-    //   };
-    //   this.items.push(item);
-    // }
+      let item = {
+        title: 'Title',
+        body: 'body',
+        number: i,
+        avatarUrl: 'https://avatars.io/facebook/random'+i
+      };
+      this.items.push(item);
+    }
 
   }
 
@@ -52,7 +52,7 @@ export class StudentlistComponent {
     this.viewCtrl.dismiss();
   }
 
-  trackByFn(index, student){
+  trackByFn(student){
     return student.uid;
   }
 

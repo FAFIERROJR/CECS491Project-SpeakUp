@@ -44,7 +44,7 @@ page-chatroom {
     }
 
     .grid {
-        height: calc(100% - 56px);
+        height: 100%;
         padding: 0;
     }
 
@@ -105,7 +105,7 @@ page-chatroom {
     ion-col#ClassListPane{
         width: 100%;
         background-color: #F7F7F7;
-        padding: 5px;
+        padding: 0px 5px 5px 5px;
         font-size: 2.0rem;
         color: black;
     }
