@@ -147,7 +147,7 @@ export class ChatroomPage {
     }
 
     showStudentListMobile() {
-        this.modalCtrl.create(StudentlistComponent).present();
+        this.modalCtrl.create(StudentlistComponent, {chatroom_id: this.chatroom_id}).present();
     }
 
     // Classlist Pop

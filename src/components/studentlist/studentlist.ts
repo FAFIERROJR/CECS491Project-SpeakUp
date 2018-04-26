@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { ViewController } from 'ionic-angular';
+import { ViewController, NavParams } from 'ionic-angular';
 import { Observable } from 'rxjs/Observable';
 import { ClasslistProvider } from '../../providers/classlistprovider/classlistprovider';
 
@@ -22,9 +22,14 @@ export class StudentlistComponent {
   @Input() chatroom_id: string;
   
 
-  constructor(public viewCtrl: ViewController, public classlistProvider: ClasslistProvider) {
+  constructor(public viewCtrl: ViewController, public classlistProvider: ClasslistProvider, public navParams: NavParams) {
     console.log('Hello StudentlistComponent Component');
     this.text = 'Hello World';  
+
+    let chatroom_id = this.navParams.get('chatroom_id');
+    if(chatroom_id != null || chatroom_id != ""){
+      this.chatroom_id = chatroom_id
+    }
 
     this.items = [];
     for(let i = 0; i < 100; i++){
