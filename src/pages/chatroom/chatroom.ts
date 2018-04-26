@@ -73,6 +73,11 @@ export class ChatroomPage {
             this.classlistProvider.push(this.chatroom_id, this.uid, this.username);
         });
 
+        // Classlist Pop (Platform: Pause)
+        this.onPause_sub = this.platform.pause.subscribe(() => {
+            this.classlistProvider.pop(this.chatroom_id, this.uid);
+        })
+
         this.chatroom_obvs = this.afdb.object('chatroom/' + this.chatroom_id).valueChanges();
         this.chatroom_obvs.subscribe(chatroom => {
             this.access_code_string = chatroom.accessCode;
@@ -166,11 +171,6 @@ export class ChatroomPage {
     ionViewDidLeave() {
         this.classlistProvider.pop(this.chatroom_id, this.uid);
 
-        // Classlist Pop (Platform: Pause)
-        this.onPause_sub = this.platform.pause.subscribe(() => {
-            this.classlistProvider.pop(this.chatroom_id, this.uid);
-        })
-
         this.onResume_sub.unsubscribe();
         this.onPause_sub.unsubscribe();
     }
@@ -178,11 +178,6 @@ export class ChatroomPage {
     // Classlist Pop (ng: Destroy)
     ngOnDestroy() {
         this.classlistProvider.pop(this.chatroom_id, this.uid);
-
-        // Classlist Pop (Platform: Pause)
-        this.onPause_sub = this.platform.pause.subscribe(() => {
-            this.classlistProvider.pop(this.chatroom_id, this.uid);
-        })
 
         this.onResume_sub.unsubscribe();
         this.onPause_sub.unsubscribe();
@@ -192,11 +187,6 @@ export class ChatroomPage {
     @HostListener('window:beforeunload')
     classlistPop() {
         this.classlistProvider.pop(this.chatroom_id, this.uid);
-
-        // Classlist Pop (Platform: Pause)
-        this.onPause_sub = this.platform.pause.subscribe(() => {
-            this.classlistProvider.pop(this.chatroom_id, this.uid);
-        })
 
         this.onResume_sub.unsubscribe();
         this.onPause_sub.unsubscribe();
