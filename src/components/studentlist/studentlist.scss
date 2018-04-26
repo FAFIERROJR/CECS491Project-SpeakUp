@@ -6,16 +6,37 @@ studentlist {
     position: absolute;
 
     button#DismissBtn {
-        top:10px;
+        top:0;
         position: absolute;
         right: 0;
         font-size: 2.4rem;
-        padding: 5px;
+        padding: 10px;
+        z-index: 2;
     }
 
     div#Title{
         font-size: 22px;
         padding: 20px;
+        background-color: white;
+        position: fixed;
+        z-index: 1;
+    }
+
+    div.status{
+        width: 20px;
+        height: 20px;
+        border-radius: 100px;
+        background-color: rgb(0, 171, 0);
+    }
+
+    ion-list{
+        top:56px;
+        position: absolute;
+    }
+    
+    ion-avatar {
+        background-color: rgb(0, 92, 191);
+        border-radius: 5px;
     }
 
 }
