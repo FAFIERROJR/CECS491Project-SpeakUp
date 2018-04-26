@@ -24,7 +24,6 @@ export class StudentlistComponent {
 
   constructor(public viewCtrl: ViewController, public classlistProvider: ClasslistProvider) {
     console.log('Hello StudentlistComponent Component');
-    this.classlist_obvs = new Observable<any[]>();
     this.text = 'Hello World';  
 
     // this.items = [];

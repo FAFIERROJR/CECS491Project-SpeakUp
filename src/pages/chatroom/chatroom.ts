@@ -39,7 +39,7 @@ export class ChatroomPage {
     access_code_raw: any;
     access_code_string: string;
     access_code_sub: Subscription;
-    studentListDisplay: boolean = false;
+    studentListDisplay: boolean = true;
     comment_control: FormGroup
     spamCount: any;
     cd: any;
@@ -138,11 +138,11 @@ export class ChatroomPage {
     }
 
     showStudentList() {
-        if (this.studentListDisplay == false) {
-            this.studentListDisplay = true;
+        if (this.studentListDisplay == true) {
+            this.studentListDisplay = false;
         }
         else {
-            this.studentListDisplay = false;
+            this.studentListDisplay = true;
         }
     }
 
