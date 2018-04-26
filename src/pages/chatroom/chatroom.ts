@@ -101,7 +101,7 @@ export class ChatroomPage
         let comment = new Comment;
         comment.content = this.comment_input;
 
-        if (this.checkProfanity() && this.spamCount < 10 )
+        if (this.checkProfanity() && this.spamCount < 3 )
         {
             comment.username = this.username;
             comment.uid = this.uid;
@@ -110,7 +110,7 @@ export class ChatroomPage
             this.spamCount++;
 
         }
-        else if (this.spamCount >= 10)
+        else if (this.spamCount >= 3)
         {
             let alert = this.alertCtrl.create
             (({
