@@ -5,55 +5,52 @@
                 <ion-avatar item-start>
                     <img src="assets/icon/Gopher.png">
                 </ion-avatar>
-                <h2>{{comment.username}}
-                    <span class="timestamp" *ngIf="visible[i]">Tuesday, 3:00pm</span>
+                <h2>{{comment.username}}:
+                    <span class="timestamp" *ngIf="visible[i]">
+                        <span>Tuesday, 3:00pm</span>
+                        <span>
+                            <span>100</span>
+                            <span>pts</span>
+                        </span>
+                    </span>
                 </h2>
                 <p class="comment-content">{{comment.content}}</p>
-                <!-- <ion-note item-end *ngIf="visible[i]"> -->
             </ion-item>
-            <ion-item-options slide="right">
-                <p class="points">
-                    <span>100</span>
-                    <span>pts</span>
-                </p>
-                <ion-buttons>
-                    <button ion-button small clear class="vote-btns">
-                        <ion-icon ios="ios-thumbs-up" md="md-thumbs-up"></ion-icon>
-                    </button>
-                    <button ion-button small clear class="vote-btns">
-                        <ion-icon ios="ios-thumbs-down" md="md-thumbs-down"></ion-icon>
-                    </button>
-                    <button id="DeleteComment" ion-button small color="danger" class="vote-btns" (click)="deleteComment(comment.comment_id)">
-                        <ion-icon ios="ios-trash" md="md-trash"></ion-icon>
-                    </button>
-                </ion-buttons>
+            <ion-item-options side="left" *ngIf="is_instructor">
+                <button ion-button large clear>
+                    <ion-icon ios="ios-thumbs-up" md="md-thumbs-up"></ion-icon>
+                </button>
+                <button ion-button large clear>
+                    <ion-icon ios="ios-thumbs-down" md="md-thumbs-down"></ion-icon>
+                </button>
+                <button id="DeleteComment" ion-button large clear (click)="deleteComment(comment.comment_id)">
+                    <ion-icon ios="ios-trash" md="md-trash"></ion-icon>
+                </button>
             </ion-item-options>
-            <!-- </ion-note> -->
-
-
+            
             <ion-item *ngIf="!is_instructor" (mouseenter)="toggleTimestamp(i)" (mouseleave)="toggleTimestamp(i); visible[i]=false">
                 <ion-avatar item-start>
                     <img src="assets/icon/Koala.png">
                 </ion-avatar>
-                <h2>Animal Name
-                    <span class="timestamp" *ngIf="visible[i]">Tuesday, 3:00pm</span>
+                <h2>AnimalName:
+                    <span class="timestamp" *ngIf="visible[i]">
+                        <span>Tuesday, 3:00pm</span>
+                        <span>
+                            <span>100</span>
+                            <span>pts</span>
+                        </span>
+                    </span>
                 </h2>
                 <p class="comment-content">{{comment.content}}</p>
-                <ion-note item-end *ngIf="visible[i]">
-                    <p class="points">
-                        <span>100</span>
-                        <span>pts</span>
-                    </p>
-                    <ion-buttons>
-                        <button ion-button small clear class="vote-btns">
-                            <ion-icon ios="ios-thumbs-up" md="md-thumbs-up"></ion-icon>
-                        </button>
-                        <button ion-button small clear class="vote-btns">
-                            <ion-icon ios="ios-thumbs-down" md="md-thumbs-down"></ion-icon>
-                        </button>
-                    </ion-buttons>
-                </ion-note>
             </ion-item>
+            <ion-item-options side="left" *ngIf="!is_instructor">
+                <button ion-button large clear>
+                    <ion-icon ios="ios-thumbs-up" md="md-thumbs-up"></ion-icon>
+                </button>
+                <button ion-button large clear>
+                    <ion-icon ios="ios-thumbs-down" md="md-thumbs-down"></ion-icon>
+                </button>
+            </ion-item-options>
         </ion-item-sliding>
     </ion-list>
 </ion-content>
