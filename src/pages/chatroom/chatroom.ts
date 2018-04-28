@@ -1,7 +1,7 @@
 import { AfterViewChecked, Component, ViewChild, ElementRef, OnInit, ContentChild } from '@angular/core';
 import { IonicPage, NavController, NavParams, ModalController, VirtualScroll } from 'ionic-angular';
 import { Comment } from '../../app/models/comment';
-import { AlertController } from 'ionic-angular';
+import { AlertController, Platform } from 'ionic-angular';
 import { CommentslistComponent } from '../../components/commentslist/commentslist'
 import { CommentProvider } from '../../providers/commentprovider/commentprovider';
 import { UserProvider } from '../../providers/userprovider/userprovider';
@@ -44,9 +44,12 @@ export class ChatroomPage {
     spamCount: any;
     cd: any;
     @ViewChild('comments') comments_list: CommentslistComponent;
+    onPause_sub: Subscription;
+    onResume_sub: Subscription;
 
     constructor(public navCtrl: NavController, public navParams: NavParams, public alertCtrl: AlertController, public afAuth: AngularFireAuth,
-        public commentProvider: CommentProvider, public userProvider: UserProvider, public classlistProvider: ClasslistProvider, public afdb: AngularFireDatabase, public modalCtrl: ModalController) {
+        public commentProvider: CommentProvider, public userProvider: UserProvider, public classlistProvider: ClasslistProvider, public afdb: AngularFireDatabase,
+        public modalCtrl: ModalController, public platform: Platform) {
         this.spamCount = 0;
         this.cd = this.spamCooldown();
         this.uid = this.afAuth.auth.currentUser.uid;
@@ -64,6 +67,16 @@ export class ChatroomPage {
 
         // Classlist Push
         this.classlistProvider.push(this.chatroom_id, this.uid, this.username);
+
+        // Classlist Push (Platform: Resume)
+        this.onResume_sub = this.platform.resume.subscribe(() => {
+            this.classlistProvider.push(this.chatroom_id, this.uid, this.username);
+        });
+
+        // Classlist Pop (Platform: Pause)
+        this.onPause_sub = this.platform.pause.subscribe(() => {
+            this.classlistProvider.pop(this.chatroom_id, this.uid);
+        })
 
         this.chatroom_obvs = this.afdb.object('chatroom/' + this.chatroom_id).valueChanges();
         this.chatroom_obvs.subscribe(chatroom => {
@@ -154,21 +167,31 @@ export class ChatroomPage {
         this.modalCtrl.create(StudentlistComponent, {chatroom_id: this.chatroom_id}).present();
     }
 
-    // Classlist Pop
+    // Classlist Pop (ionView: Did Leave)
     ionViewDidLeave() {
         this.classlistProvider.pop(this.chatroom_id, this.uid);
+
+        this.onResume_sub.unsubscribe();
+        this.onPause_sub.unsubscribe();
     }
 
-    // Classlist Pop
+    // Classlist Pop (ng: Destroy)
     ngOnDestroy() {
         this.classlistProvider.pop(this.chatroom_id, this.uid);
+
+        this.onResume_sub.unsubscribe();
+        this.onPause_sub.unsubscribe();
     }
 
-    // Classlist Pop
+    // Classlist Pop (HostListener: Before Unload)
     @HostListener('window:beforeunload')
     classlistPop() {
         this.classlistProvider.pop(this.chatroom_id, this.uid);
+
+        this.onResume_sub.unsubscribe();
+        this.onPause_sub.unsubscribe();
     }
+
     decSpam() {
         if (this.spamCount > 0) {
             this.spamCount--;
