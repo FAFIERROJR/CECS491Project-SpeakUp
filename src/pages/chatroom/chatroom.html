@@ -5,29 +5,39 @@
   Ionic pages and navigation.
 -->
 <ion-header>
-    <!-- instructor tool bar -->
-    <ion-navbar id="InstructorHeader" *ngIf="is_instructor" text-center>
-      <ion-buttons end>
-        <button ion-button icon-only solid (click)="showStudentList()" hideWhen="android, ios" class="toggleChatList">
-          <ion-icon name="people"></ion-icon>
-        </button>
-      </ion-buttons>
-      <ion-buttons end>
-        <button ion-button icon-only solid (click)="showStudentListMobile()" showWhen="android, ios" class="toggleChatList">
-          <ion-icon name="people"></ion-icon>
-        </button>
-      </ion-buttons>
-      <ion-title>
-        <span>{{(course_obvs | async)?.name}}</span>
-        <span hideWhen="android, ios" class="float-right"> Access Code: {{access_code_string}}</span>
-      </ion-title>
-    </ion-navbar>
+  <!-- instructor tool bar -->
+  <ion-navbar id="InstructorHeader" *ngIf="is_instructor" text-center>
+    <ion-buttons end>
+      <button ion-button icon-only solid (click)="showStudentList()" hideWhen="android, ios" class="toggleChatList">
+        <ion-icon name="people"></ion-icon>
+      </button>
+    </ion-buttons>
+    <ion-buttons end>
+      <button ion-button icon-only solid (click)="showStudentListMobile()" showWhen="android, ios" class="toggleChatList">
+        <ion-icon name="people"></ion-icon>
+      </button>
+    </ion-buttons>
+    <ion-title>
+      <span hideWhen="ios,android">{{(course_obvs | async)?.name}}</span>
+      <span showWhen="ios,android" class="float-left">{{(course_obvs | async)?.name}}</span>
+      <span hideWhen="android, ios" class="float-right"> Access Code: {{access_code_string}}</span>
+    </ion-title>
+    <ion-buttons end>
+      <button ion-button showWhen="ios,android">
+        <ion-icon name="key"></ion-icon>
+      </button>
+      <button ion-button>
+        <ion-icon name="settings"></ion-icon>
+      </button>
 
-    <!-- Student navbar -->
-    <ion-navbar *ngIf="!is_instructor" text-center>
-      <ion-title>{{(course_obvs | async)?.name}}</ion-title>
-    </ion-navbar>
-  </ion-header>
+    </ion-buttons>
+  </ion-navbar>
+
+  <!-- Student navbar -->
+  <ion-navbar *ngIf="!is_instructor" text-center>
+    <ion-title>{{(course_obvs | async)?.name}}</ion-title>
+  </ion-navbar>
+</ion-header>
 
 <ion-content>
   <ion-grid>
@@ -40,7 +50,7 @@
       </ion-col>
 
       <ion-col hideWhen="android, ios" *ngIf="is_instructor && studentListDisplay" id="ClassListPane" col-lg-3>
-        <studentlist [chatroom_id]="chatroom_id" ></studentlist>
+        <studentlist [chatroom_id]="chatroom_id"></studentlist>
       </ion-col>
     </ion-row>
   </ion-grid>

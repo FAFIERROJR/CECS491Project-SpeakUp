@@ -38,6 +38,10 @@ page-chatroom {
         right: 10px;
     }
 
+    ion-header ion-icon {
+        color: white;
+    }
+
     .scroll-content {
         padding-left: 0 !important;
         padding-right: 0 !important;
@@ -56,6 +60,16 @@ page-chatroom {
         right: 0;
         position: absolute;
         padding-right: 10px;
+    }
+
+    .float-left{
+        left: 0;
+        top: 0;
+        bottom: 0;
+        margin: auto;
+        height: 20px;
+        position: absolute;
+        padding-left: 30px;
     }
 
     span ion-icon {
@@ -94,6 +108,8 @@ page-chatroom {
 
     #CommentInputToolbar ion-icon {
         font-size: 1.8em;
+        position: fixed;
+        bottom: 0;
     }
 
     #CommentList{

@@ -5,50 +5,52 @@
                 <ion-avatar item-start>
                     <img src="assets/icon/Gopher.png">
                 </ion-avatar>
-                <h2>{{comment.username}}:
-                    <span class="timestamp" *ngIf="visible[i]">
-                        <span>Tuesday, 3:00pm</span>
-                        <span>
+                <h2>{{comment.username}}
+                    <span class="subtextgroup" *ngIf="visible[i]">
+                        <span class="points-style">
                             <span>100</span>
                             <span>pts</span>
                         </span>
+                        <span class="swipe-text">Swipe right to vote</span>
+                        <span class="timestamp">Tuesday, 3:00pm</span>
                     </span>
                 </h2>
                 <p class="comment-content">{{comment.content}}</p>
             </ion-item>
-            <ion-item-options side="left" *ngIf="is_instructor">
-                <button ion-button large clear>
-                    <ion-icon ios="ios-thumbs-up" md="md-thumbs-up"></ion-icon>
-                </button>
-                <button ion-button large clear>
-                    <ion-icon ios="ios-thumbs-down" md="md-thumbs-down"></ion-icon>
-                </button>
+            <ion-item-options side="left">
                 <button id="DeleteComment" ion-button large clear (click)="deleteComment(comment.comment_id)">
                     <ion-icon ios="ios-trash" md="md-trash"></ion-icon>
+                </button>
+                <button ion-button large clear class="arrow-btn">
+                    <ion-icon ios="ios-arrow-up" md="md-arrow-up"></ion-icon>
+                </button>
+                <button ion-button large clear class="arrow-btn">
+                    <ion-icon ios="ios-arrow-down" md="md-arrow-down"></ion-icon>
                 </button>
             </ion-item-options>
 
             <ion-item *ngIf="!is_instructor" (mouseenter)="toggleTimestamp(i)" (mouseleave)="toggleTimestamp(i); visible[i]=false">
                 <ion-avatar item-start>
-                    <img src="assets/icon/Koala.png">
+                    <img src="assets/icon/Cheetah.png">
                 </ion-avatar>
-                <h2>AnimalName:
-                    <span class="timestamp" *ngIf="visible[i]">
-                        <span>Tuesday, 3:00pm</span>
-                        <span>
+                <h2>{{comment.username}}
+                    <span class="subtextgroup" *ngIf="visible[i]">
+                        <span class="points-style">
                             <span>100</span>
                             <span>pts</span>
                         </span>
+                        <span class="timestamp">Tuesday, 3:00pm</span>
+                        <span class="swipe-text">Swipe right to vote</span>
                     </span>
                 </h2>
                 <p class="comment-content">{{comment.content}}</p>
             </ion-item>
             <ion-item-options side="left" *ngIf="!is_instructor">
-                <button ion-button large clear>
-                    <ion-icon ios="ios-thumbs-up" md="md-thumbs-up"></ion-icon>
+                <button ion-button large clear class="arrow-btn">
+                    <ion-icon ios="ios-arrow-up" md="md-arrow-up"></ion-icon>
                 </button>
-                <button ion-button large clear>
-                    <ion-icon ios="ios-thumbs-down" md="md-thumbs-down"></ion-icon>
+                <button ion-button large clear class="arrow-btn">
+                    <ion-icon ios="ios-arrow-down" md="md-arrow-down"></ion-icon>
                 </button>
             </ion-item-options>
         </ion-item-sliding>
