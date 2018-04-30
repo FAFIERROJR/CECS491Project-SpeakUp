@@ -13,6 +13,13 @@ chatroomcards {
         height: $img-height;
     }
 
+    .instructor-more-option{
+        position: absolute;
+        top: 0;
+        right: 0;
+        color: white;
+    }
+
     .card-background-tint{
         opacity: 0.2;
         background-color: black;

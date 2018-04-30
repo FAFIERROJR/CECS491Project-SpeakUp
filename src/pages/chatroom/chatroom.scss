@@ -8,10 +8,6 @@ page-chatroom {
         top: -5px;
     }
 
-    ion-title{
-        padding-left: 35px;
-    }
-    
     .back-button {
         display: block;
     }
@@ -69,7 +65,6 @@ page-chatroom {
         margin: auto;
         height: 20px;
         position: absolute;
-        padding-left: 30px;
     }
 
     span ion-icon {
@@ -89,9 +84,10 @@ page-chatroom {
         background-color: $accent-color;
     }
     
-    .toolbar-title {
-        text-align: center;
-    }
+    // .toolbar-title {
+    //     text-align: center;
+    // }
+
     ion-toolbar#CommentInputToolbar div.toolbar-background {
         background-color: white;
     }

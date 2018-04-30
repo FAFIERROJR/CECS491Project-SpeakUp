@@ -17,7 +17,7 @@
                 </h2>
                 <p class="comment-content">{{comment.content}}</p>
             </ion-item>
-            <ion-item-options side="left">
+            <ion-item-options side="left" *ngIf="is_instructor">
                 <button id="DeleteComment" ion-button large clear (click)="deleteComment(comment.comment_id)">
                     <ion-icon ios="ios-trash" md="md-trash"></ion-icon>
                 </button>
@@ -33,7 +33,7 @@
                 <ion-avatar item-start>
                     <img src="assets/icon/Cheetah.png">
                 </ion-avatar>
-                <h2>{{comment.username}}
+                <h2>Anonymous Animal
                     <span class="subtextgroup" *ngIf="visible[i]">
                         <span class="points-style">
                             <span>100</span>
