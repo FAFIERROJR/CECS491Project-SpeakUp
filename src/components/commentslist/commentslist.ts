@@ -105,7 +105,7 @@ export class CommentslistComponent {
   }
 
   getName(uid){
-    console.log("comment.uid: ", uid)
+    // console.log("comment.uid: ", uid)
     if(this.users_arr != null && this.users_arr[uid] != null){
       if(this.users_arr[uid].is_instructor){
         return this.users_arr[uid].username;
