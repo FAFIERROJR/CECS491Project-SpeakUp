@@ -6,12 +6,13 @@ import { AngularFireDatabase } from 'angularfire2/database';
 import { HomePage } from '../pages/home/home';
 import { LandingPage } from '../pages/landing/landing';
 import { ChatroomPage } from '../pages/chatroom/chatroom';
+import { IndexLandingPage } from '../pages/index-landing/index-landing';
 
 @Component({
   templateUrl: 'app.html'
 })
 export class MyApp {
-  rootPage:any = LandingPage;
+  rootPage:any = IndexLandingPage;
   //rootPage:any = ChatroomPage;
   constructor(platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen, db: AngularFireDatabase) {
     platform.ready().then(() => {
