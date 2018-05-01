@@ -85,7 +85,7 @@ export class ChatroomPage {
             if(this.is_instructor){
                 this.anon_name = this.username;
             }else{
-                this.name_binding_obvs = this.anonNamesProvider.getNames(this.chatroom_id, this.uid);
+                this.name_binding_obvs = this.anonNamesProvider.getNames(this.chatroom_id, this.uid, this.is_instructor);
 
             }
            

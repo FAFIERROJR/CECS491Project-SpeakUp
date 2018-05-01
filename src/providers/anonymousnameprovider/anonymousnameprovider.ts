@@ -44,26 +44,28 @@ export class AnonymousNameProvider {
   //   return null;
   // }
 
-  getNames(chatroom_id, uid): Observable<any[]>{
+  getNames(chatroom_id, uid, is_instructor): Observable<any[]>{
     if(this.validate_keys([chatroom_id, uid])){
       let names_obvs = this.afdb.object('chatroom/' + chatroom_id + '/nameBindings').valueChanges();
-      let names_sub = names_obvs.subscribe(name_bindings => {
-        if(name_bindings == null || name_bindings[uid] == null){
-            this.setName(chatroom_id, uid);
-        }
-        names_sub.unsubscribe();
-      })
+      setTimeout(() => {
+        let names_sub = names_obvs.subscribe(name_bindings => {
+            if(!is_instructor && (name_bindings == null || name_bindings[uid] == null)){
+                this.setName(chatroom_id, uid);
+            }
+          names_sub.unsubscribe();
+      })}, 500);
       return this.afdb.list('chatroom/' + chatroom_id + '/nameBindings').valueChanges();
     }
   }
 
-  getNamesObj(chatroom_id, uid): Observable<any>{
+  getNamesObj(chatroom_id, uid, is_instructor): Observable<any>{
     if(this.validate_keys([chatroom_id, uid])){
       let names_obvs = this.afdb.object('chatroom/' + chatroom_id + '/nameBindings').valueChanges();
       let names_sub = names_obvs.subscribe(name_bindings => {
-        if(name_bindings == null || name_bindings[uid] == null){
+        if(!is_instructor && (name_bindings == null || name_bindings[uid] == null)){
             this.setName(chatroom_id, uid);
         }
+        console.log("stuck");
         names_sub.unsubscribe();
       })
       return this.afdb.object('chatroom/' + chatroom_id + '/nameBindings').valueChanges();
@@ -71,36 +73,31 @@ export class AnonymousNameProvider {
   }
 
   private setName(chatroom_id, uid){
-    let is_available: boolean = false;
-
-    while(!is_available){
-      let candidate_name_num = Math.floor(Math.random() * 70);
-      let candidate_obvs = this.afdb.object('chatroom/' + chatroom_id + '/takenNames/' + candidate_name_num).valueChanges();
-      let takenname_sub = candidate_obvs.subscribe(data =>{
-        if(data == null){
-          is_available = true;
-        }
-
-        if(is_available){
-          let name;
-          let name_sub = this.afdb.object('anonymousNames/' + candidate_name_num).valueChanges().subscribe(name_raw => {
-            name = name_raw;
-            this.afdb.object('chatroom/' + chatroom_id + '/takenNames/').update({
-              [candidate_name_num]: uid
-            });
-            this.afdb.object('chatroom/' + chatroom_id + '/nameBindings').update({
-              [uid] : {
-                name: name,
-                number: candidate_name_num
-              }
-            });
-            
-            takenname_sub.unsubscribe();
-            name_sub.unsubscribe();
+      let is_available: boolean = false;
+      let candidate_name_num = this.getNextNum(chatroom_id);
+      // let candidate_obvs = this.afdb.object('chatroom/' + chatroom_id + '/takenNames/' + candidate_name_num).valueChanges();
+      // let takenname_sub = candidate_obvs.subscribe(data =>{
+      //   if(data == null){
+      //     is_available = true;
+      //   }
+        let name;
+        let name_sub = this.afdb.object('anonymousNames/' + candidate_name_num).valueChanges().subscribe(name_raw => {
+          name = name_raw;
+          this.afdb.object('chatroom/' + chatroom_id + '/takenNames/').update({
+             [candidate_name_num]: uid
+           });
+           this.afdb.object('chatroom/' + chatroom_id + '/nameBindings').update({
+            [uid] : {
+              name: name,
+              number: candidate_name_num
+            }
           });
-        }
-      });
-    }
+          name_sub.unsubscribe();
+          // takenname_sub.unsubscribe();
+        });
+      
+      // });
+      candidate_name_num++;
   }
 
   // freeName(chatroom_id, uid){
@@ -130,6 +127,15 @@ export class AnonymousNameProvider {
         }
       }
       return true;
+    }
+
+    private getNextNum(chatroom_id){
+      let next_name_num = -1;
+      this.afdb.database.ref('chatroom/' + chatroom_id + '/last_name_num').transaction((next_num) =>{
+        next_name_num = next_num;
+        return next_num = next_num = next_num + 1;;
+      })
+      return next_name_num;
     }
   
 }

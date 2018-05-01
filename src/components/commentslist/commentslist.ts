@@ -43,7 +43,7 @@ export class CommentslistComponent {
   users_sub: Subscription
   users_arr = {}
   names_sub: Subscription;
-  name_bindings_obvs: Observable<any[]>
+  name_bindings_obvs: Observable<any>
   names_arr : {}
   users_obvs : Observable<any[]>
 
@@ -73,9 +73,15 @@ export class CommentslistComponent {
     this.uid = this.afAuth.auth.currentUser.uid;
 
     this.user_sub = this.userProvider.getUser(this.uid).subscribe(user => {
-    this.is_instructor = user.is_instructor;
-    console.log("is_instructor", this.is_instructor);
-})
+      this.is_instructor = user.is_instructor;
+      console.log("is_instructor", this.is_instructor);
+
+      this.name_bindings_obvs= this.anonNamesProvider.getNamesObj(this.chatroom_id, this.uid, this.is_instructor);
+      console.log("name_bindgs obvs", this.name_bindings_obvs);
+      this.names_sub = this.name_bindings_obvs.subscribe(names => {
+        this.names_arr = names;
+    })
+  })
     this.comments = this.commentProvider.getComments(this.chatroom_id);
     // console.log("chatroom_id", this.chatroom_id);
     // console.log("comments obvs", this.comments);
@@ -84,12 +90,7 @@ export class CommentslistComponent {
       this.full_comments = comments;
       console.log(this.full_comments);
     });
-
-    this.name_bindings_obvs= this.anonNamesProvider.getNamesObj(this.chatroom_id, this.uid);
-    console.log("name_bindgs obvs", this.name_bindings_obvs);
-    this.names_sub = this.name_bindings_obvs.subscribe(names => {
-      this.names_arr = names;
-    })
+    
   }
 
   scrollToBottom(){
@@ -107,11 +108,28 @@ export class CommentslistComponent {
   getName(uid){
     // console.log("comment.uid: ", uid)
     if(this.users_arr != null && this.users_arr[uid] != null){
-      if(this.users_arr[uid].is_instructor){
+      if(this.users_arr[uid].is_instructor || uid == this.uid){
         return this.users_arr[uid].username;
       }
     }
-    return this.names_arr[uid].name;
+    if(this.names_arr != null && this.names_arr[uid] != null){
+      return  'Anynomous ' + this.names_arr[uid].name;
+    }
+    return 'Liger'
+  }
+
+  getUrl(uid){
+    // console.log("comment.uid: ", uid)
+    // if(this.users_arr != null && this.users_arr[uid] != null){
+    //   if(this.users_arr[uid].is_instructor){
+    //     return 'Liger'
+    //   }
+    //   return 'Liger'
+    // }
+    if(this.names_arr != null && this.names_arr[uid] != null){
+      return this.names_arr[uid].name;
+    }
+    return 'Liger';
   }
 
 }
