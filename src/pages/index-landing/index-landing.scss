@@ -1,4 +1,8 @@
 page-index-landing {
+    div.scroll-content {
+        padding:0 !important;
+    }
+    
     @import url(font-awesome.min.css);
 
     /*
@@ -1606,9 +1610,9 @@ page-index-landing {
     
     /* Basic */
     
-        @-ms-viewport {
-            width: device-width;
-        }
+        // @-ms-viewport {
+        //     width: device-width;
+        // }
     
         body {
             -ms-overflow-style: scrollbar;
