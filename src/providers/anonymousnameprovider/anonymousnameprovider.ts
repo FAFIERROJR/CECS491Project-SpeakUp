@@ -53,7 +53,7 @@ export class AnonymousNameProvider {
                 this.setName(chatroom_id, uid);
             }
           names_sub.unsubscribe();
-      })}, 500);
+      })}, 1000);
       return this.afdb.list('chatroom/' + chatroom_id + '/nameBindings').valueChanges();
     }
   }
@@ -97,7 +97,7 @@ export class AnonymousNameProvider {
         });
       
       // });
-      candidate_name_num++;
+      //candidate_name_num++;
   }
 
   // freeName(chatroom_id, uid){
@@ -130,10 +130,10 @@ export class AnonymousNameProvider {
     }
 
     private getNextNum(chatroom_id){
-      let next_name_num = -1;
+      let next_name_num;
       this.afdb.database.ref('chatroom/' + chatroom_id + '/last_name_num').transaction((next_num) =>{
         next_name_num = next_num;
-        return next_num = next_num = next_num + 1;;
+        return next_num + 1;
       })
       return next_name_num;
     }
