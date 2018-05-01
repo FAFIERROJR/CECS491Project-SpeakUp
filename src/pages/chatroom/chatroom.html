@@ -33,9 +33,12 @@
   </ion-navbar>
 
   <!-- Student navbar -->
-  <ion-navbar *ngIf="!is_instructor" text-center>
+  <ion-navbar *ngIf="!is_instructor" text-center hideWhen="ios,android">
     <ion-title>{{(course_obvs | async)?.name}}</ion-title>
   </ion-navbar>
+  <ion-navbar *ngIf="!is_instructor" showWhen="ios,android">
+      <ion-title>{{(course_obvs | async)?.name}}</ion-title>
+    </ion-navbar>
 </ion-header>
 
 <ion-content>

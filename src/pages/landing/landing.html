@@ -36,13 +36,13 @@
 
               <button ion-button block round class="green-button" type="submit" [disabled]="login_form_control.invalid">Login</button>
             </form>
-            <div text-center *ngIf="showLogin">
+            <div class="subtitle-signup" text-center *ngIf="showLogin">
               <div>
                 <span class="like-label">Don't have an account?</span>
-                <button ion-button small clear (click)="setShowSignUp()">Sign Up.</button>
+                <button class="button-blue-text" ion-button medium clear (click)="setShowSignUp()">Sign Up.</button>
                 <span style="display: inline-block;">
                   <span class="like-label">Or</span>
-                  <button ion-button small clear>Forgotten Password?</button>
+                  <button class="button-blue-text" ion-button medium clear>Forgotten Password?</button>
                 </span>
               </div>
             </div>
@@ -86,9 +86,9 @@
             </form>
 
             <!-- might need to place extra ng-if in this div as well to hide this along with the signUpForm -->
-            <div text-center *ngIf="showSignUp">
+            <div class="subtitle-signup" text-center *ngIf="showSignUp">
               <span class="like-label">I have an account.</span>
-              <button ion-button small clear (click)="setShowLogin()">Sign In.</button>
+              <button class="button-blue-text" ion-button medium clear (click)="setShowLogin()">Sign In.</button>
             </div>
           </section>
         </ion-col>
