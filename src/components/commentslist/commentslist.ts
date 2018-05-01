@@ -113,7 +113,7 @@ export class CommentslistComponent {
       }
     }
     if(this.names_arr != null && this.names_arr[uid] != null){
-      return  'Anynomous ' + this.names_arr[uid].name;
+      return  'Anynomous ' + this.names_arr[uid].name + this.names_arr[uid].suffix;
     }
     return 'Liger'
   }

@@ -80,15 +80,26 @@ export class AnonymousNameProvider {
       //   if(data == null){
       //     is_available = true;
       //   }
-        let name;
-        let name_sub = this.afdb.object('anonymousNames/' + candidate_name_num).valueChanges().subscribe(name_raw => {
+      let name;
+      let animal;
+      let suff;
+
+      animal = candidate_name_num % 70;
+      suff = Math.floor(candidate_name_num / 70);
+
+
+
+        let name_sub = this.afdb.object('anonymousNames/' + animal).valueChanges().subscribe(name_raw => {
           name = name_raw;
-          this.afdb.object('chatroom/' + chatroom_id + '/takenNames/').update({
-             [candidate_name_num]: uid
-           });
+          //this.afdb.object('chatroom/' + chatroom_id + '/takenNames/').update({
+             //[candidate_name_num]: uid
+           //});
+
+
            this.afdb.object('chatroom/' + chatroom_id + '/nameBindings').update({
             [uid] : {
               name: name,
+              suffix: suff,
               number: candidate_name_num
             }
           });
