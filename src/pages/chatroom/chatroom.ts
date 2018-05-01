@@ -15,6 +15,7 @@ import { StudentlistComponent } from '../../components/studentlist/studentlist';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { validateArgCount } from '@firebase/util';
 import { OnDestroy, HostListener } from '@angular/core';
+import { AnonymousNameProvider } from '../../providers/anonymousnameprovider/anonymousnameprovider';
 
 @IonicPage()
 @Component({
@@ -44,9 +45,14 @@ export class ChatroomPage {
     spamCount: any;
     cd: any;
     @ViewChild('comments') comments_list: CommentslistComponent;
+    name_binding_obvs: Observable<any>
+    name_sub: Subscription
+    names_arr = []
+    anon_name
 
     constructor(public navCtrl: NavController, public navParams: NavParams, public alertCtrl: AlertController, public afAuth: AngularFireAuth,
-        public commentProvider: CommentProvider, public userProvider: UserProvider, public classlistProvider: ClasslistProvider, public afdb: AngularFireDatabase, public modalCtrl: ModalController) {
+        public commentProvider: CommentProvider, public userProvider: UserProvider, public classlistProvider: ClasslistProvider,
+        public afdb: AngularFireDatabase, public modalCtrl: ModalController, public anonNamesProvider: AnonymousNameProvider) {
         this.spamCount = 0;
         this.cd = this.spamCooldown();
         this.uid = this.afAuth.auth.currentUser.uid;
@@ -76,6 +82,13 @@ export class ChatroomPage {
             this.is_instructor = user.is_instructor;
             this.username = user.username;
             console.log("is_instructor: ", this.is_instructor);
+            if(this.is_instructor){
+                this.anon_name = this.username;
+            }else{
+                this.name_binding_obvs = this.anonNamesProvider.getNames(this.chatroom_id, this.uid);
+
+            }
+           
         })
 
         this.access_code_sub = this.afdb.object('lastAccessCode').valueChanges().subscribe(access_code => {
@@ -89,6 +102,8 @@ export class ChatroomPage {
                 Validators.required
             ])
         })
+
+        
     }
 
     checkProfanity() {
@@ -110,6 +125,7 @@ export class ChatroomPage {
         {
             comment.username = this.username;
             comment.uid = this.uid;
+            // comment.anon_name = this.anon_name;
             this.commentProvider.addComment(this.chatroom_id, comment);
             this.comment_input = '';
             // this.disableScrollDown = false;
@@ -166,7 +182,7 @@ export class ChatroomPage {
 
     // Classlist Pop
     @HostListener('window:beforeunload')
-    classlistPop() {
+    beforeUnload() {
         this.classlistProvider.pop(this.chatroom_id, this.uid);
     }
     decSpam() {
@@ -185,5 +201,6 @@ export class ChatroomPage {
             this.comments_list.scrollToBottom();
         }, 800);
     }
+
 
 }
