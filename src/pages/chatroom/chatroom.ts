@@ -26,6 +26,8 @@ import { AnonymousNameProvider } from '../../providers/anonymousnameprovider/ano
 
 
 export class ChatroomPage {
+    spamCap: number
+    spamInterval: number
     profanity: Array<any>
     no_profanity: boolean;
     chatroom_id: string;
@@ -54,6 +56,8 @@ export class ChatroomPage {
         public commentProvider: CommentProvider, public userProvider: UserProvider, public classlistProvider: ClasslistProvider,
         public afdb: AngularFireDatabase, public modalCtrl: ModalController, public anonNamesProvider: AnonymousNameProvider) {
         this.spamCount = 0;
+        this.spamCap = 5;
+        this.spamInterval = 10000;
         this.cd = this.spamCooldown();
         this.uid = this.afAuth.auth.currentUser.uid;
         this.profanity = ["fuck", "shit", "damn", "bitch"]
@@ -121,7 +125,7 @@ export class ChatroomPage {
         let comment = new Comment;
         comment.content = this.comment_input;
 
-        if (this.checkProfanity() && this.spamCount < 3 )
+        if (this.checkProfanity() && this.spamCount < this.spamCap )
         {
             comment.username = this.username;
             comment.uid = this.uid;
@@ -133,7 +137,7 @@ export class ChatroomPage {
             this.spamCount++;
 
         }
-        else if (this.spamCount >= 3)
+        else if (this.spamCount >= this.spamCount)
         {
             let alert = this.alertCtrl.create
                 (({
@@ -192,7 +196,7 @@ export class ChatroomPage {
     }
 
     spamCooldown() {
-        setInterval(() => this.decSpam(), 5000);
+        setInterval(() => this.decSpam(), this.spamInterval);
 
     }
 
