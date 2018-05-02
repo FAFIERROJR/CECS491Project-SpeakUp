@@ -30,6 +30,7 @@ import { ClasslistProvider } from '../providers/classlistprovider/classlistprovi
 import { IndexLandingPage } from '../pages/index-landing/index-landing';
 import { ChatroomsettingsComponent } from '../components/chatroomsettings/chatroomsettings';
 import { ChatroompopoverPage } from '../pages/chatroompopover/chatroompopover';
+import { AnonymousNameProvider } from '../providers/anonymousnameprovider/anonymousnameprovider';
 export const firebase_config = {
   apiKey: "AIzaSyBRZwZxFw-mfeIkrFz3R985np6jYMV8z_M",
   authDomain: "speakup-2afce.firebaseapp.com",
@@ -91,7 +92,8 @@ export const firebase_config = {
     UserProvider,
     CommentProvider,
     CourseProvider,
-    ClasslistProvider
+    ClasslistProvider,
+    AnonymousNameProvider
   ]
 })
 export class AppModule {}

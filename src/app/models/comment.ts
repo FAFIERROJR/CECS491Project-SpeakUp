@@ -2,6 +2,7 @@ import { Vote } from "./vote";
 
 export class Comment 
 {
+    // anon_name: string
     comment_id: string
     content: string
     server_time: number

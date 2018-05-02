@@ -7,4 +7,5 @@ export class Chatroom
     classlist: string[]
     accessCode: string
     comments: Comment[]
+    next_name_num: number = 0
 }

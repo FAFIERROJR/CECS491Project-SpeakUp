@@ -30,6 +30,9 @@ export class UserProvider {
     return this.users;
   }
 
+  getUsersObj(): Observable<any> {
+    return this.afdb.object(this.users_path).valueChanges();
+  }
 
   getUser(user_id: string): Observable<User> {
     if(this.validate_key(user_id)){
