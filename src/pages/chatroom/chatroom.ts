@@ -15,6 +15,7 @@ import { StudentlistComponent } from '../../components/studentlist/studentlist';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { validateArgCount } from '@firebase/util';
 import { OnDestroy, HostListener } from '@angular/core';
+import { AnonymousNameProvider } from '../../providers/anonymousnameprovider/anonymousnameprovider';
 
 @IonicPage()
 @Component({
@@ -25,6 +26,8 @@ import { OnDestroy, HostListener } from '@angular/core';
 
 
 export class ChatroomPage {
+    spamCap: number
+    spamInterval: number
     profanity: Array<any>
     no_profanity: boolean;
     chatroom_id: string;
@@ -46,11 +49,17 @@ export class ChatroomPage {
     @ViewChild('comments') comments_list: CommentslistComponent;
     onPause_sub: Subscription;
     onResume_sub: Subscription;
+    name_binding_obvs: Observable<any>
+    name_sub: Subscription
+    names_arr = []
+    anon_name
 
     constructor(public navCtrl: NavController, public navParams: NavParams, public alertCtrl: AlertController, public afAuth: AngularFireAuth,
-        public commentProvider: CommentProvider, public userProvider: UserProvider, public classlistProvider: ClasslistProvider, public afdb: AngularFireDatabase,
-        public modalCtrl: ModalController, public platform: Platform) {
+        public commentProvider: CommentProvider, public userProvider: UserProvider, public classlistProvider: ClasslistProvider,
+        public afdb: AngularFireDatabase, public modalCtrl: ModalController, public anonNamesProvider: AnonymousNameProvider, public platform: Platform) {
         this.spamCount = 0;
+        this.spamCap = 5;
+        this.spamInterval = 10000;
         this.cd = this.spamCooldown();
         this.uid = this.afAuth.auth.currentUser.uid;
         this.profanity = ["fuck", "shit", "damn", "bitch"]
@@ -89,6 +98,13 @@ export class ChatroomPage {
             this.is_instructor = user.is_instructor;
             this.username = user.username;
             console.log("is_instructor: ", this.is_instructor);
+            if(this.is_instructor){
+                this.anon_name = this.username;
+            }else{
+                this.name_binding_obvs = this.anonNamesProvider.getNames(this.chatroom_id, this.uid, this.is_instructor);
+
+            }
+           
         })
 
         this.access_code_sub = this.afdb.object('lastAccessCode').valueChanges().subscribe(access_code => {
@@ -102,6 +118,8 @@ export class ChatroomPage {
                 Validators.required
             ])
         })
+
+        
     }
 
     checkProfanity() {
@@ -119,10 +137,11 @@ export class ChatroomPage {
         let comment = new Comment;
         comment.content = this.comment_input;
 
-        if (this.checkProfanity() && this.spamCount < 3 )
+        if (this.checkProfanity() && this.spamCount < this.spamCap )
         {
             comment.username = this.username;
             comment.uid = this.uid;
+            // comment.anon_name = this.anon_name;
             this.commentProvider.addComment(this.chatroom_id, comment);
             this.comment_input = '';
             // this.disableScrollDown = false;
@@ -130,7 +149,7 @@ export class ChatroomPage {
             this.spamCount++;
 
         }
-        else if (this.spamCount >= 3)
+        else if (this.spamCount >= this.spamCount)
         {
             let alert = this.alertCtrl.create
                 (({
@@ -185,7 +204,7 @@ export class ChatroomPage {
 
     // Classlist Pop (HostListener: Before Unload)
     @HostListener('window:beforeunload')
-    classlistPop() {
+    beforeUnload() {
         this.classlistProvider.pop(this.chatroom_id, this.uid);
 
         this.onResume_sub.unsubscribe();
@@ -199,7 +218,7 @@ export class ChatroomPage {
     }
 
     spamCooldown() {
-        setInterval(() => this.decSpam(), 5000);
+        setInterval(() => this.decSpam(), this.spamInterval);
 
     }
 
@@ -208,5 +227,6 @@ export class ChatroomPage {
             this.comments_list.scrollToBottom();
         }, 800);
     }
+
 
 }
