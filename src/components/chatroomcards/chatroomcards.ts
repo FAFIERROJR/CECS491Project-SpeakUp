@@ -2,13 +2,14 @@ import { Component, Input } from '@angular/core';
 import { AngularFireAuth } from 'angularfire2/auth'
 import { AngularFireDatabase } from 'angularfire2/database';
 import { Observable } from 'rxjs/Observable';
-import { AlertController, NavController, NavParams, ActionSheetController, Platform } from 'ionic-angular';
+import { AlertController, NavController, NavParams, ActionSheetController, Platform, PopoverController } from 'ionic-angular';
 import { Chatroom } from '../../app/models/chatroom';
 import { ChatroomPage } from '../../pages/chatroom/chatroom';
 import { UserProvider } from '../../providers/userprovider/userprovider';
 import { CourseProvider } from '../../providers/courseprovider/courseprovider';
 import { Course } from '../../app/models/course';
 import { Subscription } from 'rxjs/Subscription';
+import { ChatroompopoverPage } from '../../pages/chatroompopover/chatroompopover';
 
 /**
  * Generated class for the ChatroomcardsComponent component.
@@ -43,7 +44,7 @@ export class ChatroomcardsComponent {
   course_subscription: Subscription;
 
   constructor(public afAuth: AngularFireAuth, public afdb: AngularFireDatabase, public alertCtrl: AlertController,
-    public navCtrl: NavController, public navParams: NavParams, public userProvider: UserProvider, public courseProvider: CourseProvider, public actionSheetCtrl: ActionSheetController, public platform: Platform) {
+    public navCtrl: NavController, public navParams: NavParams, public userProvider: UserProvider, public courseProvider: CourseProvider, public popoverCtrl: PopoverController) {
   }
 
 
@@ -170,43 +171,11 @@ export class ChatroomcardsComponent {
 
   }
 
-
-  presentActionSheet(string) {
-    let actionSheet = this.actionSheetCtrl.create({
-      title: 'Chatroom Options',
-      buttons: [
-        {
-          text: 'View Access Code ',
-          icon: !this.platform.is('ios') ? 'key' : null,
-          handler: () => {
-            console.log('Annoucements clicked');
-          }
-        },
-        {
-          text: 'Manage Annoucements',
-          icon: !this.platform.is('ios') ? 'alert' : null,
-          handler: () => {
-            console.log('Archive clicked');
-          }
-        },
-        {
-          text: 'Manage Chatroom Settings',
-          icon: !this.platform.is('ios') ? 'settings' : null,
-          handler: () => {
-            console.log('Archive clicked');
-          }
-        },
-        {
-          text: 'Cancel',
-          role: 'cancel',
-          handler: () => {
-            console.log('Cancel clicked');
-          }
-        }
-      ]
+  presentPopover(myEvent) {
+    let popover = this.popoverCtrl.create(ChatroompopoverPage);
+    popover.present({
+      ev: myEvent
     });
- 
-    actionSheet.present();
   }
  
 }

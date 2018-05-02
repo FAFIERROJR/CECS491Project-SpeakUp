@@ -1,0 +1,18 @@
+<ion-list>
+  <button ion-item (click)="close()">
+    <ion-icon ios="ios-key" md="md-key"></ion-icon>
+    <span>View Access Code</span>
+  </button>
+  <button ion-item (click)="close()">
+    <ion-icon ios="ios-alert" md="md-alert"></ion-icon>
+    <span>Manage Annoucements</span>
+  </button>
+  <button ion-item (click)="close(); chatroomSettings()">
+    <ion-icon ios="ios-settings" md="md-settings"></ion-icon>
+    <span>Manage Chatroom Settings</span>
+  </button>
+  <button ion-item (click)="close()">
+      <ion-icon ios="ios-podium" md="md-podium"></ion-icon>
+      <span>View Chatroom Analytics </span>
+    </button>
+</ion-list>

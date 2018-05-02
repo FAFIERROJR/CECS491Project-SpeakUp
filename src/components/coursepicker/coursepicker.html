@@ -1,22 +1,36 @@
 <!-- Generated template for the CoursepickerComponent component -->
-  <div id="LevelTitle">Select {{level}}</div>
+<ion-header>
+
+  <ion-navbar>
+    <ion-buttons start>
+      <button ion-button id="DismissBtn" (click)="dismiss()">
+        <ion-icon ios="ios-close-circle" md="md-close-circle"></ion-icon>
+      </button>
+    </ion-buttons>
+    <ion-title>Select {{level}}</ion-title>
+  </ion-navbar>
+
+</ion-header>
+<ion-content padding>
+  <!-- <div id="LevelTitle">Select {{level}}</div>
   <button id="DismissBtn" clear ion-button (click)="dismiss()">
     <ion-icon ios="ios-close-circle" md="md-close-circle"></ion-icon>
-  </button>
+  </button> -->
   <form ngSubmit="continue()">
     <ion-list radio-group [(ngModel)]="choice" name="coursePicker">
-      <ng-container *ngFor="let option of options | async" >
-      <ion-item *ngIf="option.key || option.name">
-        <ion-radio value="{{option.key? option.key : option.course_id}}" (click)="setSelection(); option.course_id? setCourse(option) : null"></ion-radio>
-        <ion-label>{{option.key? option.key : option.name}}</ion-label>
-      </ion-item>
+      <ng-container *ngFor="let option of options | async">
+        <ion-item *ngIf="option.key || option.name">
+          <ion-radio value="{{option.key? option.key : option.course_id}}" (click)="setSelection(); option.course_id? setCourse(option) : null"></ion-radio>
+          <ion-label>{{option.key? option.key : option.name}}</ion-label>
+        </ion-item>
       </ng-container>
     </ion-list>
   </form>
   <div id="BtnGroup">
-    <button ion-button (click)="goBack()" [style.backgroundColor]= "getBackColor()">Back</button>      
+    <button ion-button (click)="goBack()" [style.backgroundColor]="getBackColor()">Back</button>
     <span float-right>
-        <button ion-button type="button" *ngIf="is_instructor" (click)="addDialog()">Add</button>
-        <button ion-button (click)="continue()" [style.backgroundColor]="continue_color">Continue</button>
-      </span>
+      <button ion-button type="button" *ngIf="is_instructor" (click)="addDialog()">Add</button>
+      <button ion-button (click)="continue()" [style.backgroundColor]="continue_color">Continue</button>
+    </span>
   </div>
+</ion-content>

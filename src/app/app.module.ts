@@ -28,6 +28,8 @@ import { StudentlistComponent } from '../components/studentlist/studentlist';
 import { ChatroomslistComponent } from '../components/chatroomslist/chatroomslist';
 import { ClasslistProvider } from '../providers/classlistprovider/classlistprovider';
 import { IndexLandingPage } from '../pages/index-landing/index-landing';
+import { ChatroomsettingsComponent } from '../components/chatroomsettings/chatroomsettings';
+import { ChatroompopoverPage } from '../pages/chatroompopover/chatroompopover';
 export const firebase_config = {
   apiKey: "AIzaSyBRZwZxFw-mfeIkrFz3R985np6jYMV8z_M",
   authDomain: "speakup-2afce.firebaseapp.com",
@@ -50,7 +52,9 @@ export const firebase_config = {
     CommentComponent,
     StudentlistComponent,
     MessagesPage,
-    IndexLandingPage
+    IndexLandingPage,
+    ChatroomsettingsComponent,
+    ChatroompopoverPage
   ],
   imports: [
     BrowserModule,
@@ -75,7 +79,9 @@ export const firebase_config = {
     CommentslistComponent,
     StudentlistComponent,
     CommentComponent,
-    IndexLandingPage
+    IndexLandingPage,
+    ChatroomsettingsComponent,
+    ChatroompopoverPage
   ],
   providers: [
     StatusBar,
