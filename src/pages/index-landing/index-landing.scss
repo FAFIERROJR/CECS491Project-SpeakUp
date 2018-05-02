@@ -1665,10 +1665,14 @@ page-index-landing {
 
 	body, input, select, textarea {
 		color: rgba(255, 255, 255, 0.55);
-		font-family: Nunito, Arial, San-Serif;
+		font-family: Arial, San-Serif;
 		font-size: 16.5pt;
 		font-weight: normal;
 		line-height: 1.75;
+	}
+
+	h1, h2, h3, h4, h5, h6 {
+		font-family: Nunito, Arial, San-Serif;
 	}
 
 		@media screen and (max-width: 1680px) {
