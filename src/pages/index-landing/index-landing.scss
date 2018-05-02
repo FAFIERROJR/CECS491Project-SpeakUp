@@ -1,5 +1,6 @@
 page-index-landing {
 	@import url('https://fonts.googleapis.com/css?family=Nunito:800');
+	@import url(font-awesome.min.css);
 
     .welcome-background {
 		position: absolute;
@@ -1665,16 +1666,20 @@ page-index-landing {
 
 	body, input, select, textarea {
 		color: rgba(255, 255, 255, 0.55);
-		font-family: Nunito, Arial, San-Serif;
+		font-family: Arial, San-Serif;
 		font-size: 16.5pt;
 		font-weight: normal;
 		line-height: 1.75;
 	}
 
+	h1, h2, h3, h4, h5, h6 {
+		font-family: Nunito, Arial, San-Serif;
+	}
+
 		@media screen and (max-width: 1680px) {
 
 			body, input, select, textarea {
-				font-size: 13pt;
+				font-size: 15pt;
 			}
 
 		}
@@ -1682,7 +1687,7 @@ page-index-landing {
 		@media screen and (max-width: 1280px) {
 
 			body, input, select, textarea {
-				font-size: 12pt;
+				font-size: 14pt;
 			}
 
 		}
@@ -1690,7 +1695,7 @@ page-index-landing {
 		@media screen and (max-width: 360px) {
 
 			body, input, select, textarea {
-				font-size: 11pt;
+				font-size: 13pt;
 			}
 
 		}
@@ -3037,7 +3042,7 @@ page-index-landing {
 		-webkit-flex-direction: row;
 		-ms-flex-direction: row;
 		flex-direction: row;
-		min-height: 22.5em;
+		min-height: 100vh;
 	}
 
 		body.is-ie .spotlights > section {
