@@ -47,7 +47,7 @@ export class ChatroomcardsComponent {
   }
 
 
-  ngOnInit(){
+  ngOnInit() {
     this.uid = this.afAuth.auth.currentUser.uid;
     this.course = this.userProvider.getUserCourse(this.uid, this.course_id);
     this.username = this.afAuth.auth.currentUser.displayName;
@@ -57,25 +57,27 @@ export class ChatroomcardsComponent {
       console.log("course raw", course);
       this.course_raw = course;
       this.chatroom_id = this.course_raw.chatroom_id;
-      if(this.courseProvider.getCourse(this.course_raw.department, this.course_raw.course_number, this.course_raw.section.toString(),
-          this.course_raw.course_id) == null){
-            this.deleteCourse(this.course_raw.course_id);
-          }
+      if (this.courseProvider.getCourse(this.course_raw.department, this.course_raw.course_number, this.course_raw.section.toString(),
+        this.course_raw.course_id) == null) {
+        this.deleteCourse(this.course_raw.course_id);
+      }
     });
-    this.userProvider.getUser(this.uid).subscribe(user =>
-      this.user = user);
+    this.userProvider.getUser(this.uid).subscribe(user => {
+      this.is_instructor = user.is_instructor;
+      this.user = user;
+    });
   }
 
-  deleteOrRemove(){
+  deleteOrRemove() {
     this.course_subscription.unsubscribe();
     let chatroom_id = this.chatroom_id;
     let course_id = this.course_id;
     console.log(this.course_id);
-    if(this.user.is_instructor != null){
+    if (this.user.is_instructor != null) {
       console.log("is instructor not null");
       this.is_instructor = this.user.is_instructor;
       console.log(this.is_instructor)
-      if(this.is_instructor === true){
+      if (this.is_instructor === true) {
         this.deleteChatroom(chatroom_id);
         this.deleteCourse(course_id);
       }
@@ -83,27 +85,27 @@ export class ChatroomcardsComponent {
     }
   }
 
-  deleteChatroom(chatroom_id){
+  deleteChatroom(chatroom_id) {
     console.log("deleting chatroom...");
     this.afdb.object('chatroom/' + chatroom_id).remove();
   }
 
-  deleteCourse(course_id){
+  deleteCourse(course_id) {
     console.log("deleting course...");
     let department = this.course_raw.department;
     let course_number = this.course_raw.course_number;
     let section = this.course_raw.section;
-    this.afdb.object('course/' + department + '/' +  course_number + '/' + section + '/' +  course_id).remove();
+    this.afdb.object('course/' + department + '/' + course_number + '/' + section + '/' + course_id).remove();
   }
 
-  removeCourse(course_id){
+  removeCourse(course_id) {
     console.log("removing course...");
     this.userProvider.deleteUserCourse(this.uid, course_id);
   }
 
-  enterChatroomDialog(){
+  enterChatroomDialog() {
     this.is_instructor = this.user.is_instructor;
-    if(this.is_instructor === false){
+    if (this.is_instructor === false) {
       console.log('is_instructor: ', this.is_instructor);
       this.alertCtrl.create({
         title: 'Enter access code',
@@ -112,63 +114,59 @@ export class ChatroomcardsComponent {
           placeholder: "Access Code"
         }],
         buttons: ['Cancel',
-        {
-          text: 'Enter',
-          handler: data => {
-            return this.accessChatroom(data.access_code)
-          }
-        }]
+          {
+            text: 'Enter',
+            handler: data => {
+              return this.accessChatroom(data.access_code)
+            }
+          }]
       }).present();
-    }else{
-        console.log('chatroom id', this.chatroom_id);
-        this.navCtrl.push(ChatroomPage, { chatroom_id: this.chatroom_id, course_id: this.course_id, uid: this.uid, username: this.username });
+    } else {
+      console.log('chatroom id', this.chatroom_id);
+      this.navCtrl.push(ChatroomPage, { chatroom_id: this.chatroom_id, course_id: this.course_id, uid: this.uid, username: this.username });
     }
 
   }
 
-  accessChatroom(access_code)
-  {   
-      let chatroom_id = this.chatroom_id
-      this.chatroom_accessCode_ref = this.afdb.database.ref('chatroom/' + chatroom_id+'/accessCode')
-      console.log('chatroom/' + chatroom_id+'/accessCode')
+  accessChatroom(access_code) {
+    let chatroom_id = this.chatroom_id
+    this.chatroom_accessCode_ref = this.afdb.database.ref('chatroom/' + chatroom_id + '/accessCode')
+    console.log('chatroom/' + chatroom_id + '/accessCode')
 
-      let num: any
-      let room : any
+    let num: any
+    let room: any
 
-      this.chatroom_accessCode_ref.transaction(value =>
-      { 
-           console.log(value)
-           room = value
-           return value;
-            
-      }).then(success => {
-        room = String(room)
-        if (access_code === room)
-        {            
-          console.log("Success")
-          this.navCtrl.push(ChatroomPage, {chatroom_id: this.chatroom_id, course_id: this.course_id, uid: this.uid, username: this.username} );
-        }
-        else
-        {
-          let alert = this.alertCtrl.create
+    this.chatroom_accessCode_ref.transaction(value => {
+      console.log(value)
+      room = value
+      return value;
+
+    }).then(success => {
+      room = String(room)
+      if (access_code === room) {
+        console.log("Success")
+        this.navCtrl.push(ChatroomPage, { chatroom_id: this.chatroom_id, course_id: this.course_id, uid: this.uid, username: this.username });
+      }
+      else {
+        let alert = this.alertCtrl.create
           (({
-              title: 'Access Code Invalid',
-              subTitle: 'error',
-              buttons: ['Dismiss']
+            title: 'Access Code Invalid',
+            subTitle: 'Make sure the access code is valid and correct.',
+            buttons: ['Dismiss']
           }));
-          alert.present();
-          this.accessCode = '';
-        }
-        
+        alert.present();
+        this.accessCode = '';
+      }
 
-      });
-      
-      //this.afdb.object('chatroom/' + this.chatroom_id).valueChanges().subscribe(chatroom => {
-      //  num = this.chatroom.accessCode;
-      //})
 
-      // num = room.accessCode;
-      
-      
+    });
+
+    //this.afdb.object('chatroom/' + this.chatroom_id).valueChanges().subscribe(chatroom => {
+    //  num = this.chatroom.accessCode;
+    //})
+
+    // num = room.accessCode;
+
+
   }
 }

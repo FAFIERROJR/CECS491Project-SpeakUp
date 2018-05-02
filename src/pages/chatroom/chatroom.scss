@@ -8,10 +8,6 @@ page-chatroom {
         top: -5px;
     }
 
-    ion-title{
-        padding-left: 35px;
-    }
-    
     .back-button {
         display: block;
     }
@@ -38,6 +34,10 @@ page-chatroom {
         right: 10px;
     }
 
+    ion-header ion-icon {
+        color: white;
+    }
+
     .scroll-content {
         padding-left: 0 !important;
         padding-right: 0 !important;
@@ -58,6 +58,15 @@ page-chatroom {
         padding-right: 10px;
     }
 
+    .float-left{
+        left: 0;
+        top: 0;
+        bottom: 0;
+        margin: auto;
+        height: 20px;
+        position: absolute;
+    }
+
     span ion-icon {
         //margin-right: 20px;
         padding: none;
@@ -75,9 +84,10 @@ page-chatroom {
         background-color: $accent-color;
     }
     
-    .toolbar-title {
-        text-align: center;
-    }
+    // .toolbar-title {
+    //     text-align: center;
+    // }
+
     ion-toolbar#CommentInputToolbar div.toolbar-background {
         background-color: white;
     }
@@ -88,18 +98,21 @@ page-chatroom {
         border-left: 0;
         position: absolute;
         padding-left: 50px;
+        padding-right: 40px;
         top: 0;
     }
 
     #CommentInputToolbar ion-icon {
         font-size: 1.8em;
+        position: fixed;
+        bottom: 0;
     }
 
     #CommentList{
         width: 100%;
         height: 100%;
         background-color: rgb(255, 255, 255);
-        
+        overflow-x: scroll;
     }
 
     ion-col#ClassListPane{

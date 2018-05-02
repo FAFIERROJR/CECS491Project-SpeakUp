@@ -7,7 +7,7 @@ commentslist {
         position: absolute;
         top: 0;
     }
-    .timestamp{
+    .subtextgroup{
         font-size: 1.1rem;
         color: rgb(101, 98, 98);
     }
@@ -16,9 +16,47 @@ commentslist {
         text-align: center;
         font-weight: bold;
     }
+    .comment-content {
+        white-space: normal;
+    }
 
+    #DeleteComment{
+        color:red;
+    }
+
+    .points-style{
+        padding-left: 10px;
+        padding-right: 10px;
+        font-size: 1.3rem;
+        font-weight: bold;
+    }
+
+    .swipe-text{
+        padding-left: 10px;
+        padding-right: 10px;
+        font-style: italic;
+    }
+
+    .timestamp{
+        padding-left: 10px;
+        padding-right: 10px;
+    }
+
+    // .arrow-up-btn{
+    //     position: absolute;
+    //     height: 30px !important;
+    //     top:0;
+    // }
+
+    // .arrow-down-btn{
+    //     position: absolute;
+    //     height: 30px !important;
+    //     bottom: 0;
+    // }
+    
     ion-avatar {
         background-color: rgb(69, 198, 237);
         border-radius: 100px;
     }
+    
 }

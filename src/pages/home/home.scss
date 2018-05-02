@@ -38,4 +38,22 @@ page-home {
     .TitleDisplay{
         padding: 0 0 0 35px;
     }
+
+    ion-icon {
+        color: white;
+    }
+    ion-content.content-ios .scroll-content{
+        padding: 0px !important;
+    }
+
+   ion-content.content-md .scroll-content{
+        padding: 0px !important;
+    }
+
+    @media only screen and (min-width: 768px) {
+        ion-content.content-md .scroll-content{
+            padding: 16px !important;
+        }
+    }
+
 }
