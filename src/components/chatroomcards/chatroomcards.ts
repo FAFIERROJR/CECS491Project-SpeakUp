@@ -2,7 +2,7 @@ import { Component, Input } from '@angular/core';
 import { AngularFireAuth } from 'angularfire2/auth'
 import { AngularFireDatabase } from 'angularfire2/database';
 import { Observable } from 'rxjs/Observable';
-import { AlertController, NavController, NavParams } from 'ionic-angular';
+import { AlertController, NavController, NavParams, ActionSheetController, Platform } from 'ionic-angular';
 import { Chatroom } from '../../app/models/chatroom';
 import { ChatroomPage } from '../../pages/chatroom/chatroom';
 import { UserProvider } from '../../providers/userprovider/userprovider';
@@ -43,7 +43,7 @@ export class ChatroomcardsComponent {
   course_subscription: Subscription;
 
   constructor(public afAuth: AngularFireAuth, public afdb: AngularFireDatabase, public alertCtrl: AlertController,
-    public navCtrl: NavController, public navParams: NavParams, public userProvider: UserProvider, public courseProvider: CourseProvider) {
+    public navCtrl: NavController, public navParams: NavParams, public userProvider: UserProvider, public courseProvider: CourseProvider, public actionSheetCtrl: ActionSheetController, public platform: Platform) {
   }
 
 
@@ -169,4 +169,44 @@ export class ChatroomcardsComponent {
 
 
   }
+
+
+  presentActionSheet(string) {
+    let actionSheet = this.actionSheetCtrl.create({
+      title: 'Chatroom Options',
+      buttons: [
+        {
+          text: 'View Access Code ',
+          icon: !this.platform.is('ios') ? 'key' : null,
+          handler: () => {
+            console.log('Annoucements clicked');
+          }
+        },
+        {
+          text: 'Manage Annoucements',
+          icon: !this.platform.is('ios') ? 'alert' : null,
+          handler: () => {
+            console.log('Archive clicked');
+          }
+        },
+        {
+          text: 'Manage Chatroom Settings',
+          icon: !this.platform.is('ios') ? 'settings' : null,
+          handler: () => {
+            console.log('Archive clicked');
+          }
+        },
+        {
+          text: 'Cancel',
+          role: 'cancel',
+          handler: () => {
+            console.log('Cancel clicked');
+          }
+        }
+      ]
+    });
+ 
+    actionSheet.present();
+  }
+ 
 }
