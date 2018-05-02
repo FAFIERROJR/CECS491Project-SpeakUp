@@ -22,4 +22,7 @@ export class IndexLandingPage {
     console.log('ionViewDidLoad IndexLandingPage');
   }
 
+  scroll(el) {
+    el.scrollIntoView({ behavior: "smooth" });
+  }
 }
