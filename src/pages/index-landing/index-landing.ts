@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { LandingPage } from '../landing/landing';
 
 /**
  * Generated class for the IndexLandingPage page.
@@ -24,5 +25,13 @@ export class IndexLandingPage {
 
   scroll(el) {
     el.scrollIntoView({ behavior: "smooth" });
+  }
+
+  goToLogIn(){
+    this.navCtrl.setRoot(LandingPage);
+  }
+
+  goToSignUp(){
+    this.navCtrl.setRoot(LandingPage);
   }
 }

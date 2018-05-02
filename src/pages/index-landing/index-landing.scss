@@ -1,7 +1,29 @@
 page-index-landing {
+	@import url('https://fonts.googleapis.com/css?family=Nunito:800');
 
-    
-    @import url(font-awesome.min.css);
+    .welcome-background {
+		position: absolute;
+		height: 100%;
+		width: 100%;
+		opacity: 0.2 ;
+	}
+	.welcome-background img{
+		width: 100%;
+	}
+
+    .welcome-logo {
+		position: absolute;
+		right: 0;
+		height: 100%;
+		width: 100%;
+		opacity: 0.3;
+	}
+
+	.button-size {
+		width: 200px;
+	}
+
+
 
 /*
 	Hyperspace by HTML5 UP
@@ -1643,7 +1665,7 @@ page-index-landing {
 
 	body, input, select, textarea {
 		color: rgba(255, 255, 255, 0.55);
-		font-family: Arial, Helvetica, sans-serif;
+		font-family: Nunito, Arial, San-Serif;
 		font-size: 16.5pt;
 		font-weight: normal;
 		line-height: 1.75;
