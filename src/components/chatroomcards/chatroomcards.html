@@ -1,8 +1,12 @@
 <!-- Generated template for the ChatroomcardsComponent component -->
 <ion-card-content class="card-background-page">
   <ion-card>
-    <img src="https://source.unsplash.com/user/eyyisac/likes/200x200?sig={{course_id}}" />
+    <!-- <img src="https://source.unsplash.com/user/eyyisac/likes/200x200?sig={{course_id}}" /> -->
+    <img src="https://source.unsplash.com/collection/2058539/1000x800?sig={{course_id}}"/>
     <div class="card-background-tint"></div>
+    <button class="instructor-more-option" *ngIf="is_instructor" medium ion-button clear>
+      <ion-icon ios="ios-more" md="md-more"></ion-icon>
+    </button>
     <ion-card-title>{{(course | async)?.name}}</ion-card-title>
     <div class="card-subtitle">
       Announcements will go here
@@ -13,17 +17,14 @@
     <ion-row no-padding>
       <ion-col>
         <button ion-button clear small color="primary" (click)="enterChatroomDialog()" icon-start>
-          <ion-icon name='chatboxes'></ion-icon>
           Enter
         </button>
       </ion-col>
       <ion-col text-center>
         <button *ngIf="is_instructor" ion-button clear small color="primary" (click)="deleteOrRemove()" icon-start>
-          <ion-icon name='close'></ion-icon>
           Delete
         </button>
         <button *ngIf="!is_instructor" ion-button clear small color="primary" (click)="deleteOrRemove()" icon-start>
-          <ion-icon name='close'></ion-icon>
           Leave
         </button>
       </ion-col>

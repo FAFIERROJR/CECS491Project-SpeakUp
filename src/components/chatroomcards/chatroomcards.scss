@@ -8,12 +8,20 @@ chatroomcards {
     ion-card-title{
         font-size: 2.0rem !important;
     }
+
     img{
         height: $img-height;
     }
 
+    .instructor-more-option{
+        position: absolute;
+        top: 0;
+        right: 0;
+        color: white;
+    }
+
     .card-background-tint{
-        opacity: 0.2;
+        opacity: 0.4;
         background-color: black;
         background-position: center;
         background-size: cover;

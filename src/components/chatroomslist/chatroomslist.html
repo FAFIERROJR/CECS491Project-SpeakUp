@@ -23,7 +23,7 @@
     
   
     <ion-row>
-      <ion-col col-lg-3 col-md-4 col-12 *ngFor="let course of courses | async">
+      <ion-col col-lg-3 col-12 *ngFor="let course of courses | async">
         <chatroomcards [course_id]="course.course_id"></chatroomcards>
       </ion-col>
     </ion-row>
