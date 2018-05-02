@@ -5,19 +5,22 @@ import { CoursepickerComponent } from './coursepicker/coursepicker';
 import { CommentComponent } from './comment/comment';
 import { StudentlistComponent } from './studentlist/studentlist';
 import { ChatroomslistComponent } from './chatroomslist/chatroomslist';
+import { ChatroomsettingsComponent } from './chatroomsettings/chatroomsettings';
 @NgModule({
 	declarations: [ChatroomcardsComponent,
     CommentslistComponent,
     CoursepickerComponent,
     CommentComponent,
     StudentlistComponent,
-    ChatroomslistComponent],
+    ChatroomslistComponent,
+    ChatroomsettingsComponent],
 	imports: [],
 	exports: [ChatroomcardsComponent,
     CommentslistComponent,
     CoursepickerComponent,
     CommentComponent,
     StudentlistComponent,
-    ChatroomslistComponent]
+    ChatroomslistComponent,
+    ChatroomsettingsComponent]
 })
 export class ComponentsModule {}

@@ -27,6 +27,9 @@ import { CourseProvider } from '../providers/courseprovider/courseprovider';
 import { StudentlistComponent } from '../components/studentlist/studentlist';
 import { ChatroomslistComponent } from '../components/chatroomslist/chatroomslist';
 import { ClasslistProvider } from '../providers/classlistprovider/classlistprovider';
+import { IndexLandingPage } from '../pages/index-landing/index-landing';
+import { ChatroomsettingsComponent } from '../components/chatroomsettings/chatroomsettings';
+import { ChatroompopoverPage } from '../pages/chatroompopover/chatroompopover';
 import { AnonymousNameProvider } from '../providers/anonymousnameprovider/anonymousnameprovider';
 export const firebase_config = {
   apiKey: "AIzaSyBRZwZxFw-mfeIkrFz3R985np6jYMV8z_M",
@@ -49,7 +52,10 @@ export const firebase_config = {
     CommentslistComponent,
     CommentComponent,
     StudentlistComponent,
-    MessagesPage
+    MessagesPage,
+    IndexLandingPage,
+    ChatroomsettingsComponent,
+    ChatroompopoverPage
   ],
   imports: [
     BrowserModule,
@@ -73,7 +79,10 @@ export const firebase_config = {
     CoursepickerComponent,
     CommentslistComponent,
     StudentlistComponent,
-    CommentComponent
+    CommentComponent,
+    IndexLandingPage,
+    ChatroomsettingsComponent,
+    ChatroompopoverPage
   ],
   providers: [
     StatusBar,

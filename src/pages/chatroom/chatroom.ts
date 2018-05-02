@@ -15,6 +15,7 @@ import { StudentlistComponent } from '../../components/studentlist/studentlist';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { validateArgCount } from '@firebase/util';
 import { OnDestroy, HostListener } from '@angular/core';
+import { ChatroomsettingsComponent } from '../../components/chatroomsettings/chatroomsettings';
 import { AnonymousNameProvider } from '../../providers/anonymousnameprovider/anonymousnameprovider';
 
 @IonicPage()
@@ -228,5 +229,17 @@ export class ChatroomPage {
         }, 800);
     }
 
+    chatroomSettings(){
+        this.modalCtrl.create(ChatroomsettingsComponent).present();
+    }
 
+    showAccessCode() {
+        let alert = this.alertCtrl.create({
+          title: 'Access Code',
+          subTitle: this.access_code_string,
+          buttons: ['Dismiss']
+        });
+        alert.present();
+      }
+    
 }

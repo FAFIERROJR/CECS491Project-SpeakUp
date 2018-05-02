@@ -1,0 +1,238 @@
+<!--
+	Hyperspace by HTML5 UP
+	html5up.net | @ajlkn
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+
+<body style="overflow: auto;">
+	<!-- Sidebar -->
+	<section id="sidebar">
+		<div class="inner">
+			<nav>
+				<ul>
+					<li>
+						<a href="#" [ngClass]="{'active': introBtn}" clear (click)="scroll(intro); introBtn=true; oneBtn=false; twoBtn=false; threeBtn=false;">Welcome</a>
+					</li>
+					<li>
+						<a href="#" [ngClass]="{'active': oneBtn}" clear (click)="scroll(one); introBtn=false; oneBtn=true; twoBtn=false; threeBtn=false;">Why Speak Up?</a>
+					</li>
+					<li>
+						<a href="#" [ngClass]="{'active': twoBtn}" clear (click)="scroll(two); introBtn=false; oneBtn=false; twoBtn=true; threeBtn=false;">what we do?</a>
+					</li>
+					<li>
+						<a href="#" [ngClass]="{'active': threeBtn}" clear (click)="scroll(three); introBtn=false; oneBtn=false; twoBtn=false; threeBtn=true;">Instructor?</a>
+					</li>
+				</ul>
+			</nav>
+		</div>
+	</section>
+
+	<!-- Wrapper -->
+	<div id="wrapper">
+
+		<!-- Intro -->
+		<section #intro class="wrapper style1 fullscreen fade-up">
+			<!-- <div class="welcome-background">
+				<img src="assets/imgs/scott-webb-379433-unsplash.jpg" />
+			</div> -->
+			<div class="welcome-logo">
+				<img src="https://source.unsplash.com/zFSo6bnZJTw/1400x1400" />
+			</div>
+			<div class="inner">
+				<h1>Speak Up</h1>
+				<p>A cross-platform chat application for asking questions without lifting a hand.</p>
+				<ion-row>
+					<ion-buttons end>
+						<button ion-button clear (click)="scroll(one)">Why?</button>
+					</ion-buttons>
+					<ion-buttons start>
+						<button ion-button small (click)="goToLogIn()">Log In</button>
+						<button ion-button small (click)="goToSignUp()">Sign Up</button>
+					</ion-buttons>
+				</ion-row>
+			</div>
+		</section>
+
+		<!-- One -->
+		<section #one class="wrapper style1 spotlights">
+			<section>
+				<div class="image">
+					<!-- <img src="assets/imgs/pic01.jpg" alt="" data-position="center center" /> -->
+				</div>
+				<div class="content">
+					<div class="inner">
+						<h2>Discussion promotes discovery and retention</h2>
+						<p>Want your students to have better retention and improved test performance? Start a conversation with them. Discussions give students opportuinities to discover.
+						</p>
+						<ul class="actions">
+							<li>
+								<a href="#" (click)="scroll(spotlight2);" class="button">Why?</a>
+
+							</li>
+						</ul>
+					</div>
+				</div>
+			</section>
+			<section #spotlight2>
+				<a href="#" class="image">
+					<img src="images/pic02.jpg" alt="" data-position="top center" />
+				</a>
+				<div class="content">
+					<div class="inner">
+						<h2>Extroverts dominate class disscussion</h2>
+						<p>It is well known that some students will be more outspoken than others but educators have a duty to both the shy and the bold. We want to help you draw out the best in students of all personality types, not just one!
+						</p>
+						<ul class="actions">
+							<li>
+								<a href="#" (click)="scroll(spotlight3);" class="button">Why?</a>
+							</li>
+						</ul>
+					</div>
+				</div>
+			</section>
+			<section #spotlight3>
+				<a href="#" class="image">
+					<img src="images/pic03.jpg" alt="" data-position="25% 25%" />
+				</a>
+				<div class="content">
+					<div class="inner">
+						<h2>We should spark enduring conversations</h2>
+						<p>We want students to grow intellectually by engaging with their acadmics even outside the classroom bounds
+						</p>
+						<ul class="actions">
+							<li>
+								<a href="#" (click)="scroll(two);" class="button">How?</a>
+							</li>
+						</ul>
+					</div>
+				</div>
+			</section>
+		</section>
+
+		<!-- Two -->
+		<section #two class="wrapper style3 fade-up">
+			<div class="inner">
+				<h2>What we do</h2>
+				<p>We are creating learning spaces where any student can feel free to participate. speakup empowers teachers to use dialog in the classroom.</p>
+				<div class="features">
+					<section>
+						<span class="icon major fa-lock"></span>
+						<h3>Instant Feedback</h3>
+						<p>speakup allows teachers to lead their class in discussion and get instant feedback from students</p>
+					</section>
+					<section>
+						<span class="icon major fa-lock"></span>
+						<h3>Anonymity</h3>
+						<p>Identity of students are kept hidden from other students to encourage everyone to participate</p>
+					</section>
+					<section>
+						<span class="icon major fa-cog"></span>
+						<h3>Instructor Moderated</h3>
+						<p>We keep teachers in control of their discussion boards allowing them to monitor participation and stop disruptions</p>
+					</section>
+					<section>
+						<span class="icon major fa-desktop"></span>
+						<h3>Child Safe</h3>
+						<p>A basic profanity filter keeps conversations civil and dissuades innapropriate behavior such as bullying</p>
+					</section>
+					<section>
+						<span class="icon major fa-chain"></span>
+						<h3>Anti Spam</h3>
+						<p>Keep discussion boards from becoming a fire-hydrant with anti spam filtering</p>
+					</section>
+					<section>
+						<span class="icon major fa-diamond"></span>
+						<h3>Cross Platform</h3>
+						<p>Cut costs by allowing students to use the hardware they already own, access speakup from Android, iOS or any modern web browser</p>
+					</section>
+				</div>
+				<ul class="actions">
+					<li>
+						<button ion-button small (click)="goToLogIn()">Demo</button>
+					</li>
+				</ul>
+			</div>
+		</section>
+
+		<!-- Three -->
+		<section #three class="wrapper style1 fade-up">
+			<div class="inner">
+				<h2>Are you an instructor?</h2>
+				<p>Like to sign up as instructor and have abosolute power over your own chatrooms? Just fill out the information needed
+					and we'll start the verification process and set you up with your own banned hammer for your chatrooms.
+				</p>
+				<div class="split style1">
+					<section>
+						<form method="post" action="#">
+							<div class="field half first">
+								<label for="name">First Name</label>
+								<input type="text" name="name" id="name" />
+							</div>
+							<div class="field half">
+								<label for="email">Last Name</label>
+								<input type="text" name="name" id="email" />
+							</div>
+							<div class="field half first">
+								<label for="email">Email</label>
+								<input type="text" name="email" id="name" />
+							</div>
+							<div class="field half">
+								<label for="email">Phone number</label>
+								<input type="text" name="name" id="name" placeholder="1-###-###-####" />
+							</div>
+							<div class="field half first">
+								<label for="email">Campus</label>
+								<input type="text" name="name" id="name" />
+							</div>
+							<div class="field half">
+									<label for="email">Campus phone number</label>
+									<input type="text" name="name" id="name" placeholder="1-###-###-####" />
+								</div>
+							<div class="field">
+								<label for="message">Message</label>
+								<textarea name="message" id="message" rows="5" placeholder=""></textarea>
+							</div>
+							<ul class="actions">
+								<li>
+									<a href="" class="button submit">Send Message</a>
+								</li>
+							</ul>
+						</form>
+					</section>
+					<section>
+						<ul class="contact">
+							<li>
+								<h3>Address</h3>
+								<span>12345 Everywhere and Nowhere
+									<br /> Flatearth, NO 98765-4321
+									<br /> USA
+								</span>
+							</li>
+							<li>
+								<h3>Email</h3>
+								<a href="#">rasingmyhand@speakup.tld</a>
+							</li>
+							<li>
+								<h3>Phone</h3>
+								<span>(123) 555-5555</span>
+							</li>
+						</ul>
+					</section>
+				</div>
+			</div>
+		</section>
+
+	</div>
+
+	<!-- Footer -->
+	<footer id="footer" class="wrapper style1-alt">
+		<div class="inner">
+			<ul class="menu">
+				<li>&copy; Untitled. All rights reserved.</li>
+				<li>Design:
+					<a href="http://html5up.net">HTML5 UP</a>
+				</li>
+			</ul>
+		</div>
+	</footer>
+</body>

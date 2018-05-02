@@ -20,6 +20,7 @@ import { AnonymousNameProvider } from '../../providers/anonymousnameprovider/ano
   templateUrl: 'commentslist.html'
 })
 export class CommentslistComponent {
+  disableScrollDown: boolean;
   visible: Array<boolean> = [];
   comments: Observable<any[]>;
   right_end: number;
@@ -38,27 +39,27 @@ export class CommentslistComponent {
   chatroom_id: string;
   timestampDisplay = false;
   uid: string;
-  is_instructor: Boolean =false;
+  is_instructor: Boolean = false;
   user_sub: Subscription;
   users_sub: Subscription
   users_arr = {}
   names_sub: Subscription;
   name_bindings_obvs: Observable<any>
-  names_arr : {}
-  users_obvs : Observable<any[]>
+  names_arr: {}
+  users_obvs: Observable<any[]>
 
 
   constructor(public commentProvider: CommentProvider, public alertCtrl: AlertController, public userProvider: UserProvider,
-     public afAuth: AngularFireAuth, public anonNamesProvider: AnonymousNameProvider) {
+    public afAuth: AngularFireAuth, public anonNamesProvider: AnonymousNameProvider) {
     console.log('Hello CommentslistComponent Component');
-    this.comments_obvs  = new Observable<any[]>();
-    
+    this.comments_obvs = new Observable<any[]>();
+
   }
 
-  deleteComment(comment_id){
+  deleteComment(comment_id) {
     // this.commentRef = this.afdb.database.ref('chatroom'+ this.roomPath + '/comments'+this.commentID)
     // this.commentRef.remove(this.commentID);
-    if (this.is_instructor){
+    if (this.is_instructor) {
       this.commentProvider.deleteComment(this.chatroom_id, comment_id);
       console.log("deleting comment...");
     }
@@ -66,7 +67,7 @@ export class CommentslistComponent {
 
   ngOnInit() {
     this.users_obvs = this.userProvider.getUsersObj();
-    this.users_sub = this.users_obvs.subscribe(users =>{
+    this.users_sub = this.users_obvs.subscribe(users => {
       this.users_arr = users
       console.log("users", this.users_arr);
     })
@@ -76,12 +77,12 @@ export class CommentslistComponent {
       this.is_instructor = user.is_instructor;
       console.log("is_instructor", this.is_instructor);
 
-      this.name_bindings_obvs= this.anonNamesProvider.getNamesObj(this.chatroom_id, this.uid, this.is_instructor);
+      this.name_bindings_obvs = this.anonNamesProvider.getNamesObj(this.chatroom_id, this.uid, this.is_instructor);
       console.log("name_bindgs obvs", this.name_bindings_obvs);
       this.names_sub = this.name_bindings_obvs.subscribe(names => {
         this.names_arr = names;
+      })
     })
-  })
     this.comments = this.commentProvider.getComments(this.chatroom_id);
     // console.log("chatroom_id", this.chatroom_id);
     // console.log("comments obvs", this.comments);
@@ -90,35 +91,48 @@ export class CommentslistComponent {
       this.full_comments = comments;
       console.log(this.full_comments);
     });
-    
+
+  }
+  onScroll() {
+    let atBottom = this.content.scrollHeight - this.content.scrollTop === this.content.contentHeight
+    if (this.disableScrollDown && atBottom) {
+      this.disableScrollDown = false;
+    } else {
+      this.disableScrollDown = true;
+    }
   }
 
-  scrollToBottom(){
-    this.content.scrollToBottom();
+  scrollToBottom() {
+    if (this.disableScrollDown) {
+      return
+    }
+    else {
+      this.content.scrollToBottom();
+    }
   }
 
   trackByFn(index, item) {
     return item.comment_id;
   }
 
-  toggleTimestamp(i){
+  toggleTimestamp(i) {
     this.visible[i] = !this.visible[i];
   }
 
-  getName(uid){
+  getName(uid) {
     // console.log("comment.uid: ", uid)
-    if(this.users_arr != null && this.users_arr[uid] != null){
-      if(this.users_arr[uid].is_instructor || uid == this.uid){
+    if (this.users_arr != null && this.users_arr[uid] != null) {
+      if (this.users_arr[uid].is_instructor || uid == this.uid) {
         return this.users_arr[uid].username;
       }
     }
-    if(this.names_arr != null && this.names_arr[uid] != null){
-      return  'Anynomous ' + this.names_arr[uid].name + this.names_arr[uid].suffix;
+    if (this.names_arr != null && this.names_arr[uid] != null) {
+      return 'Anynomous ' + this.names_arr[uid].name + this.names_arr[uid].suffix;
     }
     return 'Anynomous Liger'
   }
 
-  getUrl(uid){
+  getUrl(uid) {
     // console.log("comment.uid: ", uid)
     // if(this.users_arr != null && this.users_arr[uid] != null){
     //   if(this.users_arr[uid].is_instructor){
@@ -126,7 +140,7 @@ export class CommentslistComponent {
     //   }
     //   return 'Liger'
     // }
-    if(this.names_arr != null && this.names_arr[uid] != null){
+    if (this.names_arr != null && this.names_arr[uid] != null) {
       return this.names_arr[uid].name;
     }
     return 'Liger';
