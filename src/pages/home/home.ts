@@ -11,6 +11,7 @@ import { MessagesPage } from '../messages/messages';
 import { UserProvider } from '../../providers/userprovider/userprovider';
 import { Subscription } from 'rxjs/Subscription';
 import { ChatroomslistComponent } from '../../components/chatroomslist/chatroomslist';
+import { IndexLandingPage } from '../index-landing/index-landing';
 
 @IonicPage()
 @Component({
@@ -48,5 +49,13 @@ export class HomePage
     {
        this.afAuth.auth.signOut();
        this.navCtrl.setRoot(LandingPage);
+    }
+
+    goToMessagePage(){
+        this.navCtrl.push(MessagesPage);
+    }
+
+    goToIndex(){
+        this.navCtrl.push(IndexLandingPage);
     }
 }
