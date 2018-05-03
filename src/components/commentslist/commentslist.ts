@@ -146,4 +146,15 @@ export class CommentslistComponent {
     return 'Liger';
   }
 
+  getTimestamp(UTC_time){
+    if(UTC_time != null){
+      // let offset = new Date().getTimezoneOffset();
+      // let offset_factor = 60000;
+      let timestamp = new Date(UTC_time);
+
+      return timestamp.toLocaleString('en-US');
+    }
+    return 'Sent at Unknown Time'
+  }
+
 }
