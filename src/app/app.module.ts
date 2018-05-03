@@ -31,6 +31,7 @@ import { IndexLandingPage } from '../pages/index-landing/index-landing';
 import { ChatroomsettingsComponent } from '../components/chatroomsettings/chatroomsettings';
 import { ChatroompopoverPage } from '../pages/chatroompopover/chatroompopover';
 import { AnonymousNameProvider } from '../providers/anonymousnameprovider/anonymousnameprovider';
+import { StudentlistpopoverPage } from '../pages/studentlistpopover/studentlistpopover';
 export const firebase_config = {
   apiKey: "AIzaSyBRZwZxFw-mfeIkrFz3R985np6jYMV8z_M",
   authDomain: "speakup-2afce.firebaseapp.com",
@@ -55,7 +56,8 @@ export const firebase_config = {
     MessagesPage,
     IndexLandingPage,
     ChatroomsettingsComponent,
-    ChatroompopoverPage
+    ChatroompopoverPage,
+    StudentlistpopoverPage
   ],
   imports: [
     BrowserModule,
@@ -82,7 +84,8 @@ export const firebase_config = {
     CommentComponent,
     IndexLandingPage,
     ChatroomsettingsComponent,
-    ChatroompopoverPage
+    ChatroompopoverPage,
+    StudentlistpopoverPage
   ],
   providers: [
     StatusBar,
