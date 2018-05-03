@@ -61,8 +61,8 @@ export class ChatroomPage {
         public afdb: AngularFireDatabase, public modalCtrl: ModalController, public anonNamesProvider: AnonymousNameProvider, 
         public platform: Platform, public toastCtrl: ToastController) {
         this.spamCount = 0;
-        this.spamCap = 1000;
-        this.spamInterval = 10000;
+        this.spamCap = 3;
+        this.spamInterval = 5000;
         this.cd = this.spamCooldown();
         this.uid = this.afAuth.auth.currentUser.uid;
         this.profanity = ["fuck", "shit", "damn", "bitch"]
@@ -153,7 +153,7 @@ export class ChatroomPage {
             this.spamCount++;
 
         }
-        else if (this.spamCount >= this.spamCount)
+        else if (this.spamCount >= this.spamCap)
         {
             let toast = this.toastCtrl.create
                 (({
