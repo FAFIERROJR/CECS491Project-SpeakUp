@@ -17,6 +17,7 @@ import { validateArgCount } from '@firebase/util';
 import { OnDestroy, HostListener } from '@angular/core';
 import { ChatroomsettingsComponent } from '../../components/chatroomsettings/chatroomsettings';
 import { AnonymousNameProvider } from '../../providers/anonymousnameprovider/anonymousnameprovider';
+import {database} from 'firebase';
 
 @IonicPage()
 @Component({
@@ -142,6 +143,7 @@ export class ChatroomPage {
         {
             comment.username = this.username;
             comment.uid = this.uid;
+            comment.server_time = database.ServerValue.TIMESTAMP;
             // comment.anon_name = this.anon_name;
             this.commentProvider.addComment(this.chatroom_id, comment);
             this.comment_input = '';
