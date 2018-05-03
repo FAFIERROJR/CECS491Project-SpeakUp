@@ -39,7 +39,9 @@
       <ion-row>
         <span col-md-6>
           <img class="logo-img" src="assets/imgs/speakup-hand-logo-white-navicon.svg">
-          <span class="TitleDisplay"> Speak Up! </span>
+          <span class="TitleDisplay">
+            <button class="title-btn" ion-button clear (click)="goToIndex()">Speak Up!</button>
+          </span>
         </span>
         <span col-md-6 class="username-display">
           <button class="title-btn" ion-button clear (click)="goToMessagePage()">{{(user_obvs | async)?.username}}</button>
