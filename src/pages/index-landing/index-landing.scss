@@ -2,17 +2,7 @@ page-index-landing {
 	@import url('https://fonts.googleapis.com/css?family=Nunito:800');
 	@import url(font-awesome.min.css);
 
-    .welcome-background {
-		position: absolute;
-		height: 100%;
-		width: 100%;
-		opacity: 0.2 ;
-	}
-	.welcome-background img{
-		width: 100%;
-	}
-
-    .welcome-logo {
+    .bg-image {
 		position: absolute;
 		right: 0;
 		height: 100%;
@@ -20,11 +10,15 @@ page-index-landing {
 		opacity: 0.3;
 	}
 
+	.bg-image img {
+		height: 100vh;
+		width: 100vw;
+		object-fit: cover;
+	}
+
 	.button-size {
 		width: 200px;
 	}
-
-
 
 /*
 	Hyperspace by HTML5 UP
