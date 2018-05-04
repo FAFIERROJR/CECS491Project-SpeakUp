@@ -99,6 +99,14 @@ export class CommentslistComponent {
         this.scrollToBottom()
       }
     });
+    this.content.ionScrollEnd.subscribe(() => {
+      if(this.isElementInViewPort(this.bottom_div, window.innerHeight)){
+        this.disableScrollDown = false;
+      }
+      else{
+        this.disableScrollDown = true;
+      }
+    })
 
 
 
