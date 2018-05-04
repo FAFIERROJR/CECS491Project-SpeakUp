@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, ModalController } from 'ionic-angular';
 import { LandingPage } from '../landing/landing';
+import { IndexlandingpagemodalComponent } from '../../components/indexlandingpagemodal/indexlandingpagemodal';
 
 /**
  * Generated class for the IndexLandingPage page.
@@ -16,7 +17,10 @@ import { LandingPage } from '../landing/landing';
 })
 export class IndexLandingPage {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  description: any;
+  image: any;
+
+  constructor(public navCtrl: NavController, public navParams: NavParams, public modalCtrl: ModalController) {
   }
 
   ionViewDidLoad() {
@@ -27,11 +31,45 @@ export class IndexLandingPage {
     el.scrollIntoView({ behavior: "smooth" });
   }
 
-  goToLogIn(){
+  goToLogIn() {
     this.navCtrl.setRoot(LandingPage);
   }
 
-  goToSignUp(){
+  goToSignUp() {
     this.navCtrl.setRoot(LandingPage);
+  }
+
+  openModal(param) {
+    switch (param) {
+      case 'InstantFeedback':
+        this.image = 'https://i.imgur.com/D8yW8lN.mp4';
+        this.description = "Instant feedback description";
+        break;
+      case 'Anonymity':
+        this.image = 'image Anonymity';
+        this.description = "Instant feedback description";
+        break;
+      case 'InstructorModerated':
+        this.image = 'image InstructorModerated';
+        this.description = "Instant feedback description";
+        break;
+      case 'ChildSafe':
+        this.image = 'image ChildSafe';
+        this.description = "Instant feedback description";
+        break;
+      case 'AntiSpam':
+        this.image = 'image AntiSpam';
+        this.description = "Instant feedback description";
+        break;
+      case 'CrossPlatform':
+        this.image = 'image CrossPlatform';
+        this.description = "Instant feedback description";
+        break;
+    }
+
+    this.modalCtrl.create(IndexlandingpagemodalComponent, {
+      image: this.image,
+      description: this.description
+    }).present()
   }
 }

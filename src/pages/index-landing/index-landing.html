@@ -63,7 +63,8 @@
 				<div class="content">
 					<div class="inner">
 						<h2>Discussion promotes discovery and retention</h2>
-						<p>Want your students to have better retention and improved test performance? Start a conversation with them. Discussions give students opportuinities to discover.
+						<p>Want your students to have better retention and improved test performance? Start a conversation with them. Discussions
+							give students opportuinities to discover.
 						</p>
 						<ul class="actions">
 							<li>
@@ -83,7 +84,8 @@
 				<div class="content">
 					<div class="inner">
 						<h2>Extroverts dominate class disscussion</h2>
-						<p>It is well known that some students will be more outspoken than others but educators have a duty to both the shy and the bold. We want to help you draw out the best in students of all personality types, not just one!
+						<p>It is well known that some students will be more outspoken than others but educators have a duty to both the shy and
+							the bold. We want to help you draw out the best in students of all personality types, not just one!
 						</p>
 						<ul class="actions">
 							<li>
@@ -116,37 +118,39 @@
 		<section style="background-color: #456199" #two class="wrapper style3 fade-up">
 			<div class="inner">
 				<h2>What we do</h2>
-				<p>We are creating learning spaces where any student can feel free to participate. speakup empowers teachers to use dialog in the classroom.</p>
+				<p>We are creating learning spaces where any student can feel free to participate. speakup empowers teachers to use dialog
+					in the classroom.</p>
 				<div class="features">
 					<section>
-						<span class="icon major fa-lock"></span>
+						<button class="icon major fa-lock" (click)="openModal('InstantFeedback')"></button>
 						<h3>Instant Feedback</h3>
 						<p>speakup allows teachers to lead their class in discussion and get instant feedback from students</p>
 					</section>
 					<section>
-						<span class="icon major fa-lock"></span>
+						<button class="icon major fa-lock" (click)="openModal('Anonymity')"></button>
 						<h3>Anonymity</h3>
 						<p>Identity of students are kept hidden from other students to encourage everyone to participate</p>
 					</section>
 					<section>
-						<span class="icon major fa-cog"></span>
+						<button class="icon major fa-cog" (click)="openModal('InstructorModerated')"></button>
 						<h3>Instructor Moderated</h3>
 						<p>We keep teachers in control of their discussion boards allowing them to monitor participation and stop disruptions</p>
 					</section>
 					<section>
-						<span class="icon major fa-desktop"></span>
+						<button class="icon major fa-desktop" (click)="openModal('ChildSafe')"></button>
 						<h3>Child Safe</h3>
 						<p>A basic profanity filter keeps conversations civil and dissuades innapropriate behavior such as bullying</p>
 					</section>
 					<section>
-						<span class="icon major fa-chain"></span>
+						<button class="icon major fa-chain" (click)="openModal('AntiSpam')"></button>
 						<h3>Anti Spam</h3>
 						<p>Keep discussion boards from becoming a fire-hydrant with anti spam filtering</p>
 					</section>
 					<section>
-						<span class="icon major fa-diamond"></span>
+						<button class="icon major fa-diamond" (click)="openModal('CrossPlatform')"></button>
 						<h3>Cross Platform</h3>
-						<p>Cut costs by allowing students to use the hardware they already own, access speakup from Android, iOS or any modern web browser</p>
+						<p>Cut costs by allowing students to use the hardware they already own, access speakup from Android, iOS or any modern
+							web browser</p>
 					</section>
 				</div>
 				<ul class="actions">
@@ -188,9 +192,9 @@
 								<input type="text" name="name" id="name" />
 							</div>
 							<div class="field half">
-									<label for="email">Campus phone number</label>
-									<input type="text" name="name" id="name" placeholder="1-###-###-####" />
-								</div>
+								<label for="email">Campus phone number</label>
+								<input type="text" name="name" id="name" placeholder="1-###-###-####" />
+							</div>
 							<div class="field">
 								<label for="message">Message</label>
 								<textarea name="message" id="message" rows="5" placeholder=""></textarea>
