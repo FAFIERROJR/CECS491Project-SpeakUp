@@ -11,6 +11,8 @@ export class Comment
     username: string
     uid: string
     xp: number = 0
-    vote_history: Vote
+    vote_history: {
+        [vote_id : string] : Vote
+    }
     parent_comment: Comment
 }
