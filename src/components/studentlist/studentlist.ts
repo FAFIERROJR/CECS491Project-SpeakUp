@@ -1,11 +1,12 @@
 import { Component, Input } from '@angular/core';
-import { ViewController, NavParams } from 'ionic-angular';
+import { ViewController, NavParams, PopoverController } from 'ionic-angular';
 import { Observable } from 'rxjs/Observable';
 import { ClasslistProvider } from '../../providers/classlistprovider/classlistprovider';
 import { AngularFireAuth } from 'angularfire2/auth';
 import { AnonymousNameProvider } from '../../providers/anonymousnameprovider/anonymousnameprovider';
 import { UserProvider } from '../../providers/userprovider/userprovider';
 import { Subscription } from 'rxjs/Subscription';
+import { StudentlistpopoverPage } from '../../pages/studentlistpopover/studentlistpopover';
 
 /**
  * Generated class for the StudentlistComponent component.
@@ -35,7 +36,8 @@ export class StudentlistComponent {
   users_obvs : Observable<any[]>
 
   constructor(public viewCtrl: ViewController, public classlistProvider: ClasslistProvider, public navParams: NavParams,
-  public afAuth : AngularFireAuth, public anonNamesProvider: AnonymousNameProvider, public userProvider: UserProvider) {
+  public afAuth : AngularFireAuth, public anonNamesProvider: AnonymousNameProvider, public userProvider: UserProvider,
+  public popoverCtrl: PopoverController) {
     console.log('Hello StudentlistComponent Component');
     this.text = 'Hello World';  
 
@@ -98,5 +100,11 @@ export class StudentlistComponent {
     return 'Liger';
   }
   
+  presentPopover(myEvent) {
+    let popover = this.popoverCtrl.create(StudentlistpopoverPage);
+    popover.present({
+      ev: myEvent
+    });
+  }
 
 }
