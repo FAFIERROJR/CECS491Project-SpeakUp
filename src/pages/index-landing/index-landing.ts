@@ -55,7 +55,7 @@ export class IndexLandingPage {
       case 'InstructorModerated':
         this.image = 'assets/imgs/InstructorMenus.png';
         this.video = '';
-        this.description = "Instant feedback description";
+        this.description = "Instructor's Menus";
         break;
       case 'ChildSafe':
         this.image = 'assets/imgs/ProfanityToast.png';
@@ -68,9 +68,9 @@ export class IndexLandingPage {
         this.description = "Anti-Spam";
         break;
       case 'CrossPlatform':
-        this.image = 'image CrossPlatform';
+        this.image = 'assets/imgs/CrossPlatform.jpg';
         this.video = '';
-        this.description = "Instant feedback description";
+        this.description = "Speak Up works on all major platforms";
         break;
     }
 

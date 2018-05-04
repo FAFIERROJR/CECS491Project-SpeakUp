@@ -2,26 +2,24 @@ indexlandingpagemodal {
     @import url('https://fonts.googleapis.com/css?family=Nunito:800');
     font-family: Nunito, Arial, San-Serif;
     
+    .content {
+        height: 100%;
+        width: 100%;
+    }
     .description {
-        position: absolute;
         padding: 16px;
         font-size: 1.4em;
     }
 
     .container {
         position: absolute;
-        height: 100%;
         width: 100%;
     }
 
     video {
-        position: absolute;
     }
 
     img {
-        position: absolute;
-        margin: auto;
-        top: 0;
-        bottom: 0;
+        
     }
 }   
