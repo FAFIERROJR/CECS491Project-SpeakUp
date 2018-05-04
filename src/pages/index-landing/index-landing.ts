@@ -19,6 +19,7 @@ export class IndexLandingPage {
 
   description: any;
   image: any;
+  video: any;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public modalCtrl: ModalController) {
   }
@@ -42,32 +43,39 @@ export class IndexLandingPage {
   openModal(param) {
     switch (param) {
       case 'InstantFeedback':
-        this.image = 'https://i.imgur.com/D8yW8lN.mp4';
-        this.description = "Instant feedback description";
+        this.image ='';
+        this.video = 'assets/videos/InstantFeedback.mov';
+        this.description = "Instant feedback. ";
         break;
       case 'Anonymity':
-        this.image = 'image Anonymity';
-        this.description = "Instant feedback description";
+        this.image = '';
+        this.video = 'assets/videos/Anonymity.mov';
+        this.description = "Anonymity";
         break;
       case 'InstructorModerated':
-        this.image = 'image InstructorModerated';
+        this.image = 'assets/imgs/InstructorMenus.png';
+        this.video = '';
         this.description = "Instant feedback description";
         break;
       case 'ChildSafe':
-        this.image = 'image ChildSafe';
-        this.description = "Instant feedback description";
+        this.image = 'assets/imgs/ProfanityToast.png';
+        this.video = '';
+        this.description = "Profanity Check";
         break;
       case 'AntiSpam':
-        this.image = 'image AntiSpam';
-        this.description = "Instant feedback description";
+        this.image = '';
+        this.video = 'assets/videos/AntiSpam.mov';
+        this.description = "Anti-Spam";
         break;
       case 'CrossPlatform':
         this.image = 'image CrossPlatform';
+        this.video = '';
         this.description = "Instant feedback description";
         break;
     }
 
     this.modalCtrl.create(IndexlandingpagemodalComponent, {
+      video: this.video,
       image: this.image,
       description: this.description
     }).present()

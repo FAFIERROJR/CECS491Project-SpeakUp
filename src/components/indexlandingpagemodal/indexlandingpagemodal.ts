@@ -16,10 +16,10 @@ export class IndexlandingpagemodalComponent {
   text: string;
   description: any;
   image: any;
+  video: any;
 
   constructor(public navParams: NavParams) {
-    console.log('Hello IndexlandingpagemodalComponent Component');
-    this.text = 'Hello World';
+    this.video = navParams.get('video');
     this.description = navParams.get('description');
     this.image = navParams.get('image');
   }

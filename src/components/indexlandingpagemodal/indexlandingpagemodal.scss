@@ -1,11 +1,14 @@
 indexlandingpagemodal {
+    @import url('https://fonts.googleapis.com/css?family=Nunito:800');
+    font-family: Nunito, Arial, San-Serif;
     
     .description {
         position: absolute;
+        padding: 16px;
         font-size: 1.4em;
     }
 
-    .video-container {
+    .container {
         position: absolute;
         height: 100%;
         width: 100%;
@@ -13,5 +16,12 @@ indexlandingpagemodal {
 
     video {
         position: absolute;
+    }
+
+    img {
+        position: absolute;
+        margin: auto;
+        top: 0;
+        bottom: 0;
     }
 }   
