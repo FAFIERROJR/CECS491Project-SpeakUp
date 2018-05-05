@@ -65,7 +65,7 @@ export class ChatroomPage {
         this.spamInterval = 5000;
         this.cd = this.spamCooldown();
         this.uid = this.afAuth.auth.currentUser.uid;
-        this.profanity = ["fuck", "shit", "damn", "bitch"]
+        this.profanity = ["fuck", "shit", "damn", "bitch", "asshole", "ass", "bullshit", "dick", "pussy", "faggot", "cunt", "nigga", "nigger", "beaner", "fucker", "motherfucker", "fuckin", "fucking", "gay", "penis", "sex", "slut", "boob", "boobs", "tit", "tits", "titties", "suck", "vagina", "sexy", "rape", "piss", "masturbate", "jack off", "jizz", "blowjob", "handjob", "dick", "cock", "clit", "clitoris", "whore", "butt", "butthole", "anal", "booty", "www.", ".com"]
         this.no_profanity = true;
 
         this.uid = this.navParams.get('uid');
@@ -125,9 +125,14 @@ export class ChatroomPage {
         
     }
 
-    checkProfanity() {
-        for (var i = 0; i < this.profanity.length; i++) {
-            if (this.comment_input.indexOf(this.profanity[i]) != -1) {
+    checkProfanity()
+    {
+        for (var i = 0; i < this.profanity.length; i++)
+        {
+            let comment_lowercase = this.comment_input.toLowerCase();
+
+            if (comment_lowercase.indexOf(this.profanity[i]) != -1)
+            {
                 // console.log(this.comment_input.indexOf(this.profanity[i]))
                 return false;
             }
