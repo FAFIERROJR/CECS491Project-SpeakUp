@@ -33,6 +33,7 @@ import { ChatroompopoverPage } from '../pages/chatroompopover/chatroompopover';
 import { AnonymousNameProvider } from '../providers/anonymousnameprovider/anonymousnameprovider';
 import { StudentlistpopoverPage } from '../pages/studentlistpopover/studentlistpopover';
 import { IndexlandingpagemodalComponent } from '../components/indexlandingpagemodal/indexlandingpagemodal';
+import { VoteProvider } from '../providers/voteprovider/voteprovider';
 export const firebase_config = {
   apiKey: "AIzaSyBRZwZxFw-mfeIkrFz3R985np6jYMV8z_M",
   authDomain: "speakup-2afce.firebaseapp.com",
@@ -99,7 +100,8 @@ export const firebase_config = {
     CommentProvider,
     CourseProvider,
     ClasslistProvider,
-    AnonymousNameProvider
+    AnonymousNameProvider,
+    VoteProvider
   ]
 })
 export class AppModule {}

@@ -9,6 +9,8 @@ import { NO_COMPLETE_CHILD_SOURCE } from '@firebase/database/dist/esm/src/core/v
 import { AngularFireAuth } from 'angularfire2/auth';
 import { UserProvider } from '../../providers/userprovider/userprovider';
 import { AnonymousNameProvider } from '../../providers/anonymousnameprovider/anonymousnameprovider';
+import { VoteProvider } from '../../providers/voteprovider/voteprovider';
+import { Vote } from '../../app/models/vote';
 /**
  * Generated class for the CommentslistComponent component.
  *
@@ -50,11 +52,13 @@ export class CommentslistComponent {
   names_arr: {}
   users_obvs: Observable<any[]>
   can_add_scroll = true
+  vote_history: any
+  vote_sub: Subscription
 
 
 
   constructor(public commentProvider: CommentProvider, public alertCtrl: AlertController, public userProvider: UserProvider,
-    public afAuth: AngularFireAuth, public anonNamesProvider: AnonymousNameProvider) {
+    public afAuth: AngularFireAuth, public anonNamesProvider: AnonymousNameProvider, public voteProvider: VoteProvider) {
     // this.bottom_div = document.getElementById('bottom');
     console.log('Hello CommentslistComponent Component');
     this.comments_obvs = new Observable<any[]>();
@@ -107,8 +111,6 @@ export class CommentslistComponent {
         this.disableScrollDown = true;
       }
     })
-
-
 
   }
   onScroll() {
@@ -213,5 +215,12 @@ export class CommentslistComponent {
     return false
   }
   
+  vote(comment_id: string, value: number){
+    console.log("voting...")
+    let vote = new Vote;
+    vote.uid = this.uid;
+    vote.value = value;
+    this.voteProvider.addVote(this.chatroom_id, comment_id, vote)
+  }
 
 }

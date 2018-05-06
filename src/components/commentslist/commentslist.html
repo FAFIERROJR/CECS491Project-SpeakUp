@@ -8,7 +8,7 @@
                 <h2>{{comment.username}}
                     <span class="subtextgroup" *ngIf="visible[i]">
                         <span class="points-style">
-                            <span>100</span>
+                            <span>{{comment.xp}}</span>
                             <span>pts</span>
                         </span>
                         <span class="timestamp">{{getTimestamp(comment.server_time)}}</span>
@@ -21,11 +21,11 @@
                 <button id="DeleteComment" ion-button large clear (click)="deleteComment(comment.comment_id)">
                     <ion-icon ios="ios-trash" md="md-trash"></ion-icon>
                 </button>
-                <button ion-button large clear class="arrow-btn">
-                    <ion-icon ios="ios-arrow-up" md="md-arrow-up"></ion-icon>
+                <button ion-button large clear class="arrow-btn" (click)="vote(comment.comment_id, 1)">
+                    <ion-icon ios="ios-arrow-up" md="md-arrow-up"  [ngClass]="{'upvoted': (comment.vote_history? comment.vote_history[uid]?.value == 1: false)}"></ion-icon>
                 </button>
-                <button ion-button large clear class="arrow-btn">
-                    <ion-icon ios="ios-arrow-down" md="md-arrow-down"></ion-icon>
+                <button ion-button large clear class="arrow-btn" (click)="vote(comment.comment_id, -1)">
+                    <ion-icon ios="ios-arrow-down" md="md-arrow-down" [ngClass]="{'downvoted': (comment.vote_history? comment.vote_history[uid]?.value == -1: false)}"></ion-icon>
                 </button>
             </ion-item-options>
 
@@ -36,7 +36,7 @@
                 <h2>{{getName(comment.uid)}}
                     <span class="subtextgroup" *ngIf="visible[i]">
                         <span class="points-style">
-                            <span>100</span>
+                            <span>{{comment.xp}}</span>
                             <span>pts</span>
                         </span>
                         <span class="timestamp">{{getTimestamp(comment.server_time)}}</span>
@@ -46,11 +46,11 @@
                 <p class="comment-content">{{comment.content}}</p>
             </ion-item>
             <ion-item-options side="left" *ngIf="!is_instructor">
-                <button ion-button large clear class="arrow-btn">
+                <button ion-button large clear class="arrow-btn" (click)="vote(comment.comment_id, 1)">
                     <ion-icon ios="ios-arrow-up" md="md-arrow-up"></ion-icon>
                 </button>
-                <button ion-button large clear class="arrow-btn">
-                    <ion-icon ios="ios-arrow-down" md="md-arrow-down"></ion-icon>
+                <button ion-button large clear class="arrow-btn" (click)="vote(comment.comment_id, -1)" [ngClass]="{'upvoted': (comment.vote_history? comment.vote_history[uid]?.value == 1: false)}">
+                    <ion-icon ios="ios-arrow-down" md="md-arrow-down" [ngClass]="{'downvoted': comment.vote_history? comment.vote_history[uid]?.value == -1: false}"></ion-icon>
                 </button>
             </ion-item-options>
         </ion-item-sliding>

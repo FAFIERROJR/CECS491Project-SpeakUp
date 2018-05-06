@@ -1,6 +1,5 @@
 export class Vote
 {
-    vote_id: string
     uid: string
-    value: number
+    value: number = 0;
 }
