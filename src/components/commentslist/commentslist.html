@@ -22,10 +22,10 @@
                     <ion-icon ios="ios-trash" md="md-trash"></ion-icon>
                 </button>
                 <button ion-button large clear class="arrow-btn" (click)="vote(comment.comment_id, 1)">
-                    <ion-icon ios="ios-arrow-up" md="md-arrow-up"></ion-icon>
+                    <ion-icon ios="ios-arrow-up" md="md-arrow-up"  [ngClass]="{'upvoted': (comment.vote_history? comment.vote_history[uid]?.value == 1: false)}"></ion-icon>
                 </button>
                 <button ion-button large clear class="arrow-btn" (click)="vote(comment.comment_id, -1)">
-                    <ion-icon ios="ios-arrow-down" md="md-arrow-down"></ion-icon>
+                    <ion-icon ios="ios-arrow-down" md="md-arrow-down" [ngClass]="{'downvoted': (comment.vote_history? comment.vote_history[uid]?.value == -1: false)}"></ion-icon>
                 </button>
             </ion-item-options>
 
@@ -49,8 +49,8 @@
                 <button ion-button large clear class="arrow-btn" (click)="vote(comment.comment_id, 1)">
                     <ion-icon ios="ios-arrow-up" md="md-arrow-up"></ion-icon>
                 </button>
-                <button ion-button large clear class="arrow-btn" (click)="vote(comment.comment_id, -1)">
-                    <ion-icon ios="ios-arrow-down" md="md-arrow-down"></ion-icon>
+                <button ion-button large clear class="arrow-btn" (click)="vote(comment.comment_id, -1)" [ngClass]="{'upvoted': (comment.vote_history? comment.vote_history[uid]?.value == 1: false)}">
+                    <ion-icon ios="ios-arrow-down" md="md-arrow-down" [ngClass]="{'downvoted': comment.vote_history? comment.vote_history[uid]?.value == -1: false}"></ion-icon>
                 </button>
             </ion-item-options>
         </ion-item-sliding>
