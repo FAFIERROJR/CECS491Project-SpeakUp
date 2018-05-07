@@ -55,17 +55,20 @@ export class ChatroomPage {
     name_sub: Subscription
     names_arr = []
     anon_name
+    comment_max_length
 
     constructor(public navCtrl: NavController, public navParams: NavParams, public alertCtrl: AlertController, public afAuth: AngularFireAuth,
         public commentProvider: CommentProvider, public userProvider: UserProvider, public classlistProvider: ClasslistProvider,
         public afdb: AngularFireDatabase, public modalCtrl: ModalController, public anonNamesProvider: AnonymousNameProvider, 
         public platform: Platform, public toastCtrl: ToastController) {
+        this.comment_max_length = 1000;
+        this.comment_input = "";
         this.spamCount = 0;
         this.spamCap = 3;
         this.spamInterval = 5000;
         this.cd = this.spamCooldown();
         this.uid = this.afAuth.auth.currentUser.uid;
-        this.profanity = ["fuck", "shit", "damn", "bitch", "asshole", "ass", "bullshit", "dick", "pussy", "faggot", "cunt", "nigga", "nigger", "beaner", "fucker", "motherfucker", "fuckin", "fucking", "gay", "penis", "sex", "slut", "boob", "boobs", "tit", "tits", "titties", "suck", "vagina", "sexy", "rape", "piss", "masturbate", "jack off", "jizz", "blowjob", "handjob", "dick", "cock", "clit", "clitoris", "whore", "butt", "butthole", "anal", "booty", "www.", ".com", "fcuk", "lmao", "stfu", "gtfo", "stupid", "dumb", "retard", "retarded", "shut up"]
+        this.profanity = ["fuck", "shit", "damn", "bitch", "asshole", "bullshit", "dick", "pussy", "faggot", "cunt", "nigga", "nigger", "beaner", "fucker", "motherfucker", "fuckin", "fucking", "gay", "penis", "sex", "slut", "boob", "boobs", "tit", "tits", "titties", "suck", "vagina", "sexy", "rape", "piss", "masturbate", "jack off", "jizz", "blowjob", "handjob", "dick", "cock", "clit", "clitoris", "whore", "butt", "butthole", "anal", "booty", "www.", ".com", "fcuk", "lmao", "stfu", "gtfo", "stupid", "dumb", "retard", "retarded", "shut up"]
         this.no_profanity = true;
 
         this.uid = this.navParams.get('uid');
@@ -118,6 +121,7 @@ export class ChatroomPage {
         this.comment_control = new FormGroup({
             'comment_input': new FormControl(this.comment_input, [
                 Validators.minLength(1),
+                Validators.maxLength(this.comment_max_length),
                 Validators.required
             ])
         })
