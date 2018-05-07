@@ -2,6 +2,26 @@ page-index-landing {
 	@import url('https://fonts.googleapis.com/css?family=Nunito:800');
 	@import url(font-awesome.min.css);
 
+	.avatar {
+		height: 200px;
+		width: 200px;
+		border-radius: 100px;
+	}
+	.avatar-info {
+		text-align: center;
+		padding: 2.0em !important;
+		
+	}
+
+	.avatar-info p{
+		margin: 0 !important;
+	}
+
+	.tech-icon{
+		width: auto;
+		height: 4em;
+	}
+
     .bg-image {
 		position: absolute;
 		right: 0;
@@ -3942,8 +3962,5 @@ page-index-landing {
 
 		}
 
-	.tech-icon{
-		width: auto;
-		height: 3em;
-	}
+	
 }
