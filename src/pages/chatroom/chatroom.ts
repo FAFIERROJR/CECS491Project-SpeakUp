@@ -113,10 +113,10 @@ export class ChatroomPage {
            
         })
 
-        this.access_code_sub = this.afdb.object('lastAccessCode').valueChanges().subscribe(access_code => {
-            this.access_code_raw = access_code;
-            this.access_code_string = this.access_code_raw.value;
-        })
+        // this.access_code_sub = this.afdb.object('lastAccessCode').valueChanges().subscribe(access_code => {
+        //     this.access_code_raw = access_code;
+        //     this.access_code_string = this.access_code_raw.value;
+        // })
 
         this.comment_control = new FormGroup({
             'comment_input': new FormControl(this.comment_input, [
