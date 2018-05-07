@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, ModalController, ToastController } from 'ionic-angular';
 import { LandingPage } from '../landing/landing';
+import { IndexlandingpagemodalComponent } from '../../components/indexlandingpagemodal/indexlandingpagemodal';
 
 /**
  * Generated class for the IndexLandingPage page.
@@ -16,7 +17,12 @@ import { LandingPage } from '../landing/landing';
 })
 export class IndexLandingPage {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  description: any;
+  image: any;
+  video: any;
+
+  constructor(public navCtrl: NavController, public navParams: NavParams, public modalCtrl: ModalController,
+      public toastCtrl: ToastController) {
   }
 
   ionViewDidLoad() {
@@ -27,11 +33,61 @@ export class IndexLandingPage {
     el.scrollIntoView({ behavior: "smooth" });
   }
 
-  goToLogIn(){
+  goToLogIn() {
     this.navCtrl.setRoot(LandingPage);
   }
 
-  goToSignUp(){
+  goToSignUp() {
     this.navCtrl.setRoot(LandingPage);
+  }
+
+  openModal(param) {
+    switch (param) {
+      case 'InstantFeedback':
+        this.image ='';
+        this.video = 'assets/videos/InstantFeedback.mov';
+        this.description = "Instant feedback. ";
+        break;
+      case 'Anonymity':
+        this.image = '';
+        this.video = 'assets/videos/Anonymity.mov';
+        this.description = "Anonymity";
+        break;
+      case 'InstructorModerated':
+        this.image = 'assets/imgs/InstructorMenus.png';
+        this.video = '';
+        this.description = "Instructor's Menus";
+        break;
+      case 'ChildSafe':
+        this.image = 'assets/imgs/ProfanityToast.png';
+        this.video = '';
+        this.description = "Profanity Check";
+        break;
+      case 'AntiSpam':
+        this.image = '';
+        this.video = 'assets/videos/AntiSpam.mov';
+        this.description = "Anti-Spam";
+        break;
+      case 'CrossPlatform':
+        this.image = 'assets/imgs/CrossPlatform.jpg';
+        this.video = '';
+        this.description = "Speak Up works on all major platforms";
+        break;
+    }
+
+    this.modalCtrl.create(IndexlandingpagemodalComponent, {
+      video: this.video,
+      image: this.image,
+      description: this.description
+    }).present()
+  }
+
+  comingSoon(){
+    let toast = this.toastCtrl.create({
+      message: 'Coming Soon!',
+      duration: 2000,
+      position: 'bottom'
+    })
+    toast.present();
   }
 }

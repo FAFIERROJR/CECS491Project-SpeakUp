@@ -11,16 +11,19 @@
 			<nav>
 				<ul>
 					<li>
-						<a href="#" [ngClass]="{'active': introBtn}" clear (click)="scroll(intro); introBtn=true; oneBtn=false; twoBtn=false; threeBtn=false;">Welcome</a>
+						<a href="#" [ngClass]="{'active': introBtn}" clear (click)="scroll(intro); introBtn=true; oneBtn=false; twoBtn=false; threeBtn=false; aboutusBtn=false;">Welcome</a>
 					</li>
 					<li>
-						<a href="#" [ngClass]="{'active': oneBtn}" clear (click)="scroll(one); introBtn=false; oneBtn=true; twoBtn=false; threeBtn=false;">Why Speak Up?</a>
+						<a href="#" [ngClass]="{'active': oneBtn}" clear (click)="scroll(one); introBtn=false; oneBtn=true; twoBtn=false; threeBtn=false; aboutusBtn=false;">Why Speak Up?</a>
 					</li>
 					<li>
-						<a href="#" [ngClass]="{'active': twoBtn}" clear (click)="scroll(two); introBtn=false; oneBtn=false; twoBtn=true; threeBtn=false;">what we do?</a>
+						<a href="#" [ngClass]="{'active': twoBtn}" clear (click)="scroll(two); introBtn=false; oneBtn=false; twoBtn=true; threeBtn=false; aboutusBtn=false;">what we do?</a>
 					</li>
 					<li>
-						<a href="#" [ngClass]="{'active': threeBtn}" clear (click)="scroll(three); introBtn=false; oneBtn=false; twoBtn=false; threeBtn=true;">Instructor?</a>
+						<a href="#" [ngClass]="{'active': aboutusBtn}" clear (click)="scroll(aboutus); introBtn=false; oneBtn=false; twoBtn=false; aboutusBtn=true; threeBtn=false;">About us</a>
+					</li>
+					<li>
+						<a href="#" [ngClass]="{'active': threeBtn}" clear (click)="scroll(three); introBtn=false; oneBtn=false; twoBtn=false; threeBtn=true; aboutusBtn=false;">Instructor?</a>
 					</li>
 				</ul>
 			</nav>
@@ -32,12 +35,11 @@
 
 		<!-- Intro -->
 		<section #intro class="wrapper style1 fullscreen fade-up">
-			<!-- <div class="welcome-background">
-				<img src="assets/imgs/scott-webb-379433-unsplash.jpg" />
-			</div> -->
-			<div class="welcome-logo">
-				<img src="https://source.unsplash.com/zFSo6bnZJTw/1400x1400" />
+
+			<div class="bg-image">
+				<img src="https://source.unsplash.com/zFSo6bnZJTw" alt="" data-position="center center" />
 			</div>
+
 			<div class="inner">
 				<h1>Speak Up</h1>
 				<p>A cross-platform chat application for asking questions without lifting a hand.</p>
@@ -55,14 +57,17 @@
 
 		<!-- One -->
 		<section #one class="wrapper style1 spotlights">
-			<section>
-				<div class="image">
-					<!-- <img src="assets/imgs/pic01.jpg" alt="" data-position="center center" /> -->
+			<section style="background-color: #456199;" #spotlight1>
+
+				<div class="bg-image">
+					<img src="https://source.unsplash.com/7kFhELbLh08" alt="" data-position="center center" />
 				</div>
+
 				<div class="content">
 					<div class="inner">
 						<h2>Discussion promotes discovery and retention</h2>
-						<p>Want your students to have better retention and improved test performance? Start a conversation with them. Discussions give students opportuinities to discover.
+						<p>Want your students to have better retention and improved test performance? Start a conversation with them. Discussions
+							give students opportuinities to discover.
 						</p>
 						<ul class="actions">
 							<li>
@@ -73,14 +78,17 @@
 					</div>
 				</div>
 			</section>
-			<section #spotlight2>
-				<a href="#" class="image">
-					<img src="images/pic02.jpg" alt="" data-position="top center" />
-				</a>
+			<section style="background-color: #6BB39B;" #spotlight2>
+
+				<div class="bg-image">
+					<img src="https://source.unsplash.com/5QgIuuBxKwM" alt="" data-position="top center" />
+				</div>
+
 				<div class="content">
 					<div class="inner">
 						<h2>Extroverts dominate class disscussion</h2>
-						<p>It is well known that some students will be more outspoken than others but educators have a duty to both the shy and the bold. We want to help you draw out the best in students of all personality types, not just one!
+						<p>It is well known that some students will be more outspoken than others but educators have a duty to both the shy and
+							the bold. We want to help you draw out the best in students of all personality types, not just one!
 						</p>
 						<ul class="actions">
 							<li>
@@ -90,10 +98,10 @@
 					</div>
 				</div>
 			</section>
-			<section #spotlight3>
-				<a href="#" class="image">
-					<img src="images/pic03.jpg" alt="" data-position="25% 25%" />
-				</a>
+			<section style="background-color: #ACCC99;" #spotlight3>
+				<div class="bg-image">
+					<img src="https://source.unsplash.com/jNTuKJsw63k" alt="" data-position="25% 25%" />
+				</div>
 				<div class="content">
 					<div class="inner">
 						<h2>We should spark enduring conversations</h2>
@@ -110,56 +118,117 @@
 		</section>
 
 		<!-- Two -->
-		<section #two class="wrapper style3 fade-up">
+		<section style="background-color: #456199" #two class="wrapper style3 fade-up">
 			<div class="inner">
 				<h2>What we do</h2>
-				<p>We are creating learning spaces where any student can feel free to participate. speakup empowers teachers to use dialog in the classroom.</p>
+				<p>We are creating learning spaces where any student can feel free to participate. speakup empowers teachers to use dialog
+					in the classroom.</p>
 				<div class="features">
 					<section>
-						<span class="icon major fa-lock"></span>
+						<button class="icon major fa-lock" (click)="openModal('InstantFeedback')"></button>
 						<h3>Instant Feedback</h3>
 						<p>speakup allows teachers to lead their class in discussion and get instant feedback from students</p>
 					</section>
 					<section>
-						<span class="icon major fa-lock"></span>
+						<button class="icon major fa-lock" (click)="openModal('Anonymity')"></button>
 						<h3>Anonymity</h3>
 						<p>Identity of students are kept hidden from other students to encourage everyone to participate</p>
 					</section>
 					<section>
-						<span class="icon major fa-cog"></span>
+						<button class="icon major fa-cog" (click)="openModal('InstructorModerated')"></button>
 						<h3>Instructor Moderated</h3>
 						<p>We keep teachers in control of their discussion boards allowing them to monitor participation and stop disruptions</p>
 					</section>
 					<section>
-						<span class="icon major fa-desktop"></span>
+						<button class="icon major fa-desktop" (click)="openModal('ChildSafe')"></button>
 						<h3>Child Safe</h3>
 						<p>A basic profanity filter keeps conversations civil and dissuades innapropriate behavior such as bullying</p>
 					</section>
 					<section>
-						<span class="icon major fa-chain"></span>
+						<button class="icon major fa-chain" (click)="openModal('AntiSpam')"></button>
 						<h3>Anti Spam</h3>
 						<p>Keep discussion boards from becoming a fire-hydrant with anti spam filtering</p>
 					</section>
 					<section>
-						<span class="icon major fa-diamond"></span>
+						<button class="icon major fa-diamond" (click)="openModal('CrossPlatform')"></button>
 						<h3>Cross Platform</h3>
-						<p>Cut costs by allowing students to use the hardware they already own, access speakup from Android, iOS or any modern web browser</p>
+						<p>Cut costs by allowing students to use the hardware they already own, access speakup from Android, iOS or any modern
+							web browser</p>
 					</section>
 				</div>
 				<ul class="actions">
 					<li>
 						<button ion-button small (click)="goToLogIn()">Demo</button>
 					</li>
+					<li>
+						<a><img class="tech-icon" src="../../assets/icon/google-play-badge.png"/></a>
+					</li>
+					<li>
+						<a><img class="app-store-badge" src="../../assets/icon/Download_on_the_App_Store_Badge_US-UK_RGB_blk_092917.svg" (click)="comingSoon()"/></a>
+					</li>
 				</ul>
 			</div>
 		</section>
 
+		<!-- About Us -->
+		<section style="background-color: #027172" #aboutus class="wrapper style3 fade-up">
+			<div class="inner">
+				<h2>About Us</h2>
+				<p>Locked In Development</p>
+				<div class="features">
+					<section class="avatar-info">
+						<h3>Site Powered By</h3>
+						<p>
+							<a href="https://ionicframework.com" target="_blank">
+								<img class="tech-icon" src="../../assets/icon/ionic-logo-portrait.png" />
+							</a>
+							<a href="https://angular.io" target="_blank">
+								<img class="tech-icon" src="../../assets/icon/angular.png" />
+							</a>
+							<a href="https://firebase.com" target="_blank">
+								<img class="tech-icon" src="../../assets/icon/Firebase.png" />
+							</a>
+							<a href="https://cordova.apache.org" target="_blank">
+								<img class="tech-icon" src="../../assets/icon/cordova_512.png" />
+							</a>
+						</p>
+					</section>
+					<section class="avatar-info">
+						<img class="avatar" src="assets/imgs/matt.png">
+						<h3>Matthew Le</h3>
+						<p>UX Designer
+							<br />Cross-Platform Designer</p>
+					</section>
+					<section class="avatar-info">
+						<img class="avatar" src="assets/imgs/matt.png">
+						<h3>Isaac Chavez</h3>
+						<p>UX Designer
+							<br />Graphic Designer</p>
+					</section>
+					<section class="avatar-info">
+						<img class="avatar" src="assets/imgs/kyle.png">
+						<h3>Kyle Pamintuan</h3>
+						<p>Developer</p>
+					</section>
+					<section class="avatar-info">
+						<img class="avatar" src="assets/imgs/daniel.png">
+						<h3>Daniel Martinez</h3>
+						<p>Developer</p>
+					</section>
+					<section class="avatar-info">
+						<img class="avatar" src="assets/imgs/frank.png">
+						<h3>Francisco Fierro</h3>
+						<p>Developer</p>
+					</section>
+				</div>
+			</div>
+		</section>
 		<!-- Three -->
 		<section #three class="wrapper style1 fade-up">
 			<div class="inner">
 				<h2>Are you an instructor?</h2>
-				<p>Like to sign up as instructor and have abosolute power over your own chatrooms? Just fill out the information needed
-					and we'll start the verification process and set you up with your own banned hammer for your chatrooms.
+				<p>Like to sign up as instructor and have absolute power over your own chatrooms? Just fill out the information needed and
+					we'll start the verification process and set you up with your own banned hammer for your chatrooms.
 				</p>
 				<div class="split style1">
 					<section>
@@ -185,9 +254,9 @@
 								<input type="text" name="name" id="name" />
 							</div>
 							<div class="field half">
-									<label for="email">Campus phone number</label>
-									<input type="text" name="name" id="name" placeholder="1-###-###-####" />
-								</div>
+								<label for="email">Campus phone number</label>
+								<input type="text" name="name" id="name" placeholder="1-###-###-####" />
+							</div>
 							<div class="field">
 								<label for="message">Message</label>
 								<textarea name="message" id="message" rows="5" placeholder=""></textarea>

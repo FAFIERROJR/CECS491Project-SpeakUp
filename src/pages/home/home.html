@@ -5,16 +5,22 @@
       <ion-row>
         <span col-md-6>
           <img class="logo-img" src="assets/imgs/speakup-hand-logo-white-navicon.svg">
-          <span class="TitleDisplay"> Speak Up! </span>
+          <span class="TitleDisplay">
+            <button class="title-btn" ion-button clear (click)="goToIndex()">Speak Up</button>
+          </span>
         </span>
-        <span col-md-6 class="username-display">{{username}}</span>
+        <span col-md-6 class="username-display">
+          <button class="title-btn" ion-button clear (click)="goToMessagePage()">{{username}}</button>
+        </span>
       </ion-row>
     </ion-title>
 
     <ion-title showWhen="ios, android" class="home-navbar-title">
       <img class="logo-img-mobile" src="assets/imgs/speakup-hand-logo-white-navicon.svg">
-      <span class="username-display">{{username}}</span>
-      </ion-title>
+      <span col-md-6 class="username-display-mobile">
+        <button class="title-btn" ion-button clear (click)="goToMessagePage()">{{username}}</button>
+      </span>
+    </ion-title>
 
     <ion-buttons end>
       <button ion-button>
@@ -33,18 +39,24 @@
       <ion-row>
         <span col-md-6>
           <img class="logo-img" src="assets/imgs/speakup-hand-logo-white-navicon.svg">
-          <span class="TitleDisplay"> Speak Up! </span>
+          <span class="TitleDisplay">
+            <button class="title-btn" ion-button clear (click)="goToIndex()">Speak Up</button>
+          </span>
         </span>
-        <span col-md-6 class="username-display">{{(user_obvs | async)?.username}}</span>
+        <span col-md-6 class="username-display">
+          <button class="title-btn" ion-button clear (click)="goToMessagePage()">{{(user_obvs | async)?.username}}</button>
+        </span>
       </ion-row>
     </ion-title>
 
     <ion-title showWhen="ios, android" class="home-navbar-title">
-        <ion-row>
-            <img class="logo-img-mobile" src="assets/imgs/speakup-hand-logo-white-navicon.svg">
-            <span class="username-display">{{(user_obvs | async)?.username}}</span>
-        </ion-row>
-      </ion-title>
+      <ion-row>
+        <img class="logo-img-mobile" src="assets/imgs/speakup-hand-logo-white-navicon.svg">
+        <span class="username-display-mobile">
+          <button class="title-btn" ion-button clear (click)="goToMessagePage()">{{(user_obvs | async)?.username}}</button>
+        </span>
+      </ion-row>
+    </ion-title>
 
     <ion-buttons end>
       <button ion-button>

@@ -6,6 +6,7 @@ import { CommentComponent } from './comment/comment';
 import { StudentlistComponent } from './studentlist/studentlist';
 import { ChatroomslistComponent } from './chatroomslist/chatroomslist';
 import { ChatroomsettingsComponent } from './chatroomsettings/chatroomsettings';
+import { IndexlandingpagemodalComponent } from './indexlandingpagemodal/indexlandingpagemodal';
 @NgModule({
 	declarations: [ChatroomcardsComponent,
     CommentslistComponent,
@@ -13,7 +14,8 @@ import { ChatroomsettingsComponent } from './chatroomsettings/chatroomsettings';
     CommentComponent,
     StudentlistComponent,
     ChatroomslistComponent,
-    ChatroomsettingsComponent],
+    ChatroomsettingsComponent,
+    IndexlandingpagemodalComponent],
 	imports: [],
 	exports: [ChatroomcardsComponent,
     CommentslistComponent,
@@ -21,6 +23,7 @@ import { ChatroomsettingsComponent } from './chatroomsettings/chatroomsettings';
     CommentComponent,
     StudentlistComponent,
     ChatroomslistComponent,
-    ChatroomsettingsComponent]
+    ChatroomsettingsComponent,
+    IndexlandingpagemodalComponent]
 })
 export class ComponentsModule {}

@@ -1,5 +1,5 @@
 import { AfterViewChecked, Component, ViewChild, ElementRef, OnInit, ContentChild } from '@angular/core';
-import { IonicPage, NavController, NavParams, ModalController, VirtualScroll } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, ModalController, VirtualScroll, ToastController } from 'ionic-angular';
 import { Comment } from '../../app/models/comment';
 import { AlertController, Platform } from 'ionic-angular';
 import { CommentslistComponent } from '../../components/commentslist/commentslist'
@@ -58,13 +58,14 @@ export class ChatroomPage {
 
     constructor(public navCtrl: NavController, public navParams: NavParams, public alertCtrl: AlertController, public afAuth: AngularFireAuth,
         public commentProvider: CommentProvider, public userProvider: UserProvider, public classlistProvider: ClasslistProvider,
-        public afdb: AngularFireDatabase, public modalCtrl: ModalController, public anonNamesProvider: AnonymousNameProvider, public platform: Platform) {
+        public afdb: AngularFireDatabase, public modalCtrl: ModalController, public anonNamesProvider: AnonymousNameProvider, 
+        public platform: Platform, public toastCtrl: ToastController) {
         this.spamCount = 0;
-        this.spamCap = 5;
-        this.spamInterval = 10000;
+        this.spamCap = 3;
+        this.spamInterval = 5000;
         this.cd = this.spamCooldown();
         this.uid = this.afAuth.auth.currentUser.uid;
-        this.profanity = ["fuck", "shit", "damn", "bitch"]
+        this.profanity = ["fuck", "shit", "damn", "bitch", "asshole", "ass", "bullshit", "dick", "pussy", "faggot", "cunt", "nigga", "nigger", "beaner", "fucker", "motherfucker", "fuckin", "fucking", "gay", "penis", "sex", "slut", "boob", "boobs", "tit", "tits", "titties", "suck", "vagina", "sexy", "rape", "piss", "masturbate", "jack off", "jizz", "blowjob", "handjob", "dick", "cock", "clit", "clitoris", "whore", "butt", "butthole", "anal", "booty", "www.", ".com", "fcuk", "lmao", "stfu", "gtfo", "stupid", "dumb", "retard", "retarded", "shut up"]
         this.no_profanity = true;
 
         this.uid = this.navParams.get('uid');
@@ -124,9 +125,14 @@ export class ChatroomPage {
         
     }
 
-    checkProfanity() {
-        for (var i = 0; i < this.profanity.length; i++) {
-            if (this.comment_input.indexOf(this.profanity[i]) != -1) {
+    checkProfanity()
+    {
+        for (var i = 0; i < this.profanity.length; i++)
+        {
+            let comment_lowercase = this.comment_input.toLowerCase();
+
+            if (comment_lowercase.indexOf(this.profanity[i]) != -1)
+            {
                 // console.log(this.comment_input.indexOf(this.profanity[i]))
                 return false;
             }
@@ -152,28 +158,27 @@ export class ChatroomPage {
             this.spamCount++;
 
         }
-        else if (this.spamCount >= this.spamCount)
+        else if (this.spamCount >= this.spamCap)
         {
-            let alert = this.alertCtrl.create
+            let toast = this.toastCtrl.create
                 (({
-                    title: 'Slow down kiddo!',
-                    subTitle: "Your spam is not welcome here.",
-                    buttons: ['Dismiss']
+                    message: "Slow down kiddo! Your spam is not welcome here.",
+                    duration: 3000,
+                    position: 'bottom'
                 }));
-            alert.present()
+            toast.present()
         }
         else {
-            let alert = this.alertCtrl.create
+            let toast = this.toastCtrl.create
                 (({
-                    title: 'Woah...',
-                    subTitle: "Your comment contains profanity. Please remove it.",
-                    buttons: ['Dismiss']
+                    message: "Woah.. Your comment contains profanity. Please remove it.",
+                    duration: 3000,
+                    position: 'bottom'
                 }));
-            alert.present()
+            toast.present()
         }
-
+        
         this.comments_list.scrollToBottom();
-
     }
 
     showStudentList() {

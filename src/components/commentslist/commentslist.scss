@@ -1,4 +1,5 @@
 commentslist {
+
     button.vote-btns{
         margin-top: 0;
     }
@@ -40,6 +41,14 @@ commentslist {
     .timestamp{
         padding-left: 10px;
         padding-right: 10px;
+    }
+
+    .downvoted{
+        color: purple;
+    }
+    
+    .upvoted{
+        color: orange;
     }
 
     // .arrow-up-btn{

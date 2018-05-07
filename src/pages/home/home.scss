@@ -1,7 +1,13 @@
 page-home {
     @import url('https://fonts.googleapis.com/css?family=Nunito:800');
 
+    .title-btn {
+        color:white;
+        font-size: 1.8rem;
+    }
+
     img.logo-img {
+        top:13px;
         height: 25px;
         width: auto;
         padding: 0;
@@ -12,7 +18,10 @@ page-home {
         height: 25px;
         width: auto;
         padding-right: 8px;
-        top: 8px;
+        top: 5px;
+        position: absolute;
+        left:10px;
+        
     }
 
     ion-navbar#InstructorNavBar div.toolbar-background {
@@ -31,8 +40,12 @@ page-home {
         background-color: $student-color;
     }
 
+    .username-display-mobile{
+        margin-left: 15px;
+    }
+
     .username-display{
-        text-align: right;
+       text-align: right;
     }
 
     .TitleDisplay{
