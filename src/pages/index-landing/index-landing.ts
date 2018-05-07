@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, ModalController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, ModalController, ToastController } from 'ionic-angular';
 import { LandingPage } from '../landing/landing';
 import { IndexlandingpagemodalComponent } from '../../components/indexlandingpagemodal/indexlandingpagemodal';
 
@@ -21,7 +21,8 @@ export class IndexLandingPage {
   image: any;
   video: any;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public modalCtrl: ModalController) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, public modalCtrl: ModalController,
+      public toastCtrl: ToastController) {
   }
 
   ionViewDidLoad() {
@@ -79,5 +80,14 @@ export class IndexLandingPage {
       image: this.image,
       description: this.description
     }).present()
+  }
+
+  comingSoon(){
+    let toast = this.toastCtrl.create({
+      message: 'Coming Soon!',
+      duration: 2000,
+      position: 'bottom'
+    })
+    toast.present();
   }
 }
