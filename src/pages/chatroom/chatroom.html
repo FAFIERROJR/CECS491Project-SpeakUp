@@ -69,8 +69,9 @@
       <ion-input id="CommentInput" type="text" placeholder="Type comments here..." name="comment_input" [(ngModel)]="comment_input"
         formControlName="comment_input">
       </ion-input>
-      <ion-label stacked>{{comment_input.length}}/{{comment_max_length}}</ion-label>
+      
       <ion-buttons id="SendButton" class="ion-end">
+          <span>{{comment_input.length}}/{{comment_max_length}}</span>
         <button ion-button type="submit" [disabled]="comment_control.invalid">
           <ion-icon ios="ios-send" md="md-send"></ion-icon>
         </button>
