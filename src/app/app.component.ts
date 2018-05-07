@@ -12,7 +12,7 @@ import { IndexLandingPage } from '../pages/index-landing/index-landing';
   templateUrl: 'app.html'
 })
 export class MyApp {
-  rootPage:any = LandingPage; //comment when building android or ios
+  rootPage:any = IndexLandingPage; //uncomment when building web
   //rootPage:any = LandingPage; //uncomment when building android or ios
   constructor(platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen, db: AngularFireDatabase) {
     platform.ready().then(() => {
