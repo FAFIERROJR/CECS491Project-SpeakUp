@@ -65,7 +65,7 @@ export class ChatroomPage {
         this.spamInterval = 5000;
         this.cd = this.spamCooldown();
         this.uid = this.afAuth.auth.currentUser.uid;
-        this.profanity = ["fuck", "shit", "damn", "bitch", "asshole", "ass", "bullshit", "dick", "pussy", "faggot", "cunt", "nigga", "nigger", "beaner", "fucker", "motherfucker", "fuckin", "fucking", "gay", "penis", "sex", "slut", "boob", "boobs", "tit", "tits", "titties", "suck", "vagina", "sexy", "rape", "piss", "masturbate", "jack off", "jizz", "blowjob", "handjob", "dick", "cock", "clit", "clitoris", "whore", "butt", "butthole", "anal", "booty", "www.", ".com"]
+        this.profanity = ["fuck", "shit", "damn", "bitch", "asshole", "ass", "bullshit", "dick", "pussy", "faggot", "cunt", "nigga", "nigger", "beaner", "fucker", "motherfucker", "fuckin", "fucking", "gay", "penis", "sex", "slut", "boob", "boobs", "tit", "tits", "titties", "suck", "vagina", "sexy", "rape", "piss", "masturbate", "jack off", "jizz", "blowjob", "handjob", "dick", "cock", "clit", "clitoris", "whore", "butt", "butthole", "anal", "booty", "www.", ".com", "fcuk", "lmao", "stfu", "gtfo", "stupid", "dumb", "retard", "retarded", "shut up"]
         this.no_profanity = true;
 
         this.uid = this.navParams.get('uid');
