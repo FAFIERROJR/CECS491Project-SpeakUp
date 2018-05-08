@@ -175,7 +175,12 @@ export class CommentslistComponent {
       }
     }
     if (this.names_arr != null && this.names_arr[uid] != null) {
-      return 'Anynomous ' + this.names_arr[uid].name + this.names_arr[uid].suffix;
+      if(this.names_arr[uid].suffix > 0){
+        return 'Anynomous ' + this.names_arr[uid].name + this.names_arr[uid].suffix;
+      }
+      else{
+        return 'Anynomous ' + this.names_arr[uid].name;
+      }
     }
     return 'Anynomous Liger'
   }
