@@ -7,7 +7,12 @@ page-chatroom {
         position: relative;
         top: -5px;
     }
-
+    .limit-counter{
+        position: absolute;
+        top: 13px;
+        color: rgb(182, 182, 182);
+        font-size: 1.2rem;
+    }
     .back-button {
         display: block;
     }

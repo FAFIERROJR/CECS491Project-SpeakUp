@@ -19,12 +19,13 @@
 					<li>
 						<a href="#" [ngClass]="{'active': twoBtn}" clear (click)="scroll(two); introBtn=false; oneBtn=false; twoBtn=true; threeBtn=false; aboutusBtn=false;">what we do?</a>
 					</li>
+					<!-- <li>
+						<a href="#" [ngClass]="{'active': threeBtn}" clear (click)="scroll(three); introBtn=false; oneBtn=false; twoBtn=false; threeBtn=true; aboutusBtn=false;">Instructor?</a>
+					</li> -->
 					<li>
 						<a href="#" [ngClass]="{'active': aboutusBtn}" clear (click)="scroll(aboutus); introBtn=false; oneBtn=false; twoBtn=false; aboutusBtn=true; threeBtn=false;">About us</a>
 					</li>
-					<li>
-						<a href="#" [ngClass]="{'active': threeBtn}" clear (click)="scroll(three); introBtn=false; oneBtn=false; twoBtn=false; threeBtn=true; aboutusBtn=false;">Instructor?</a>
-					</li>
+
 				</ul>
 			</nav>
 		</div>
@@ -161,68 +162,21 @@
 						<button ion-button small (click)="goToLogIn()">Demo</button>
 					</li>
 					<li>
-						<a style="outline: none;"><img class="tech-icon" src="../../assets/icon/google-play-badge.png"/></a>
+						<a style="outline: none;">
+							<img class="tech-icon" src="../../assets/icon/google-play-badge.png" />
+						</a>
 					</li>
 					<li>
-						<a><img class="app-store-badge" src="../../assets/icon/Download_on_the_App_Store_Badge_US-UK_RGB_blk_092917.svg" (click)="comingSoon()"/></a>
+						<a>
+							<img class="app-store-badge" src="../../assets/icon/Download_on_the_App_Store_Badge_US-UK_RGB_blk_092917.svg" (click)="comingSoon()"
+							/>
+						</a>
 					</li>
 				</ul>
 			</div>
 		</section>
-
-		<!-- About Us -->
-		<section style="background-color: #027172" #aboutus class="wrapper style3 fade-up">
-			<div class="inner">
-				<h2>About Us</h2>
-				<p>Locked In Development</p>
-				<div class="features">
-					<section class="avatar-info">
-						<h3>Site Powered By</h3>
-						<p>
-							<a href="https://ionicframework.com" target="_blank">
-								<img class="tech-icon" src="../../assets/icon/ionic-logo-portrait.png" />
-							</a>
-							<a href="https://angular.io" target="_blank">
-								<img class="tech-icon" src="../../assets/icon/angular.png" />
-							</a>
-							<a href="https://firebase.com" target="_blank">
-								<img class="tech-icon" src="../../assets/icon/Firebase.png" />
-							</a>
-							<a href="https://cordova.apache.org" target="_blank">
-								<img class="tech-icon" src="../../assets/icon/cordova_512.png" />
-							</a>
-						</p>
-					</section>
-					<section class="avatar-info">
-						<img class="avatar" src="assets/imgs/matt.png">
-						<h3>Matthew Le</h3>
-						<p>Front End Developer</p>
-					</section>
-					<section class="avatar-info">
-						<img class="avatar" src="assets/imgs/isaac.png">
-						<h3>Isaac Chavez</h3>
-						<p>Front End Developer</p>
-					</section>
-					<section class="avatar-info">
-						<img class="avatar" src="assets/imgs/kyle.png">
-						<h3>Kyle Pamintuan</h3>
-						<p>Web Developer</p>
-					</section>
-					<section class="avatar-info">
-						<img class="avatar" src="assets/imgs/daniel.png">
-						<h3>Daniel Martinez</h3>
-						<p>Web Developer</p>
-					</section>
-					<section class="avatar-info">
-						<img class="avatar" src="assets/imgs/frank.png">
-						<h3>Francisco Fierro</h3>
-						<p>Web Developer</p>
-					</section>
-				</div>
-			</div>
-		</section>
 		<!-- Three -->
-		<section #three class="wrapper style1 fade-up">
+		<!-- <section #three class="wrapper style1 fade-up">
 			<div class="inner">
 				<h2>Are you an instructor?</h2>
 				<p>Like to sign up as instructor and have absolute power over your own chatrooms? Just fill out the information needed and
@@ -287,7 +241,59 @@
 					</section>
 				</div>
 			</div>
+		</section> -->
+		<!-- About Us -->
+		<section style="background-color: #027172" #aboutus class="wrapper style3 fade-up">
+			<div class="inner">
+				<h2>About Us</h2>
+				<p>Locked In Development</p>
+				<div class="features">
+					<section class="avatar-info">
+						<h3>Site Powered By</h3>
+						<p>
+							<a href="https://ionicframework.com" target="_blank">
+								<img class="tech-icon" src="../../assets/icon/ionic-logo-portrait.png" />
+							</a>
+							<a href="https://angular.io" target="_blank">
+								<img class="tech-icon" src="../../assets/icon/angular.png" />
+							</a>
+							<a href="https://firebase.com" target="_blank">
+								<img class="tech-icon" src="../../assets/icon/Firebase.png" />
+							</a>
+							<a href="https://cordova.apache.org" target="_blank">
+								<img class="tech-icon" src="../../assets/icon/cordova_512.png" />
+							</a>
+						</p>
+					</section>
+					<section class="avatar-info">
+						<img class="avatar" src="assets/imgs/matt.png">
+						<h3>Matthew Le</h3>
+						<p>Front End Developer</p>
+					</section>
+					<section class="avatar-info">
+						<img class="avatar" src="assets/imgs/isaac.png">
+						<h3>Isaac Chavez</h3>
+						<p>Front End Developer</p>
+					</section>
+					<section class="avatar-info">
+						<img class="avatar" src="assets/imgs/kyle.png">
+						<h3>Kyle Pamintuan</h3>
+						<p>Web Developer</p>
+					</section>
+					<section class="avatar-info">
+						<img class="avatar" src="assets/imgs/daniel.png">
+						<h3>Daniel Martinez</h3>
+						<p>Web Developer</p>
+					</section>
+					<section class="avatar-info">
+						<img class="avatar" src="assets/imgs/frank.png">
+						<h3>Francisco Fierro</h3>
+						<p>Web Developer</p>
+					</section>
+				</div>
+			</div>
 		</section>
+
 
 	</div>
 
