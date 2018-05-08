@@ -48,6 +48,7 @@ export class ChatroomPage {
     comment_control: FormGroup
     spamCount: any;
     cd: any;
+    show_accesscode: boolean = false;
     @ViewChild('comments') comments_list: CommentslistComponent;
     onPause_sub: Subscription;
     onResume_sub: Subscription;
@@ -252,5 +253,14 @@ export class ChatroomPage {
         });
         alert.present();
       }
+
+    showAccessCodeDesktop(){
+        if (this.show_accesscode == false) {
+            this.show_accesscode = true;
+        }
+        else {
+            this.show_accesscode = false;
+        }
+    }
     
 }

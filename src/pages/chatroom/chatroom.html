@@ -7,6 +7,15 @@
 <ion-header>
   <!-- instructor tool bar -->
   <ion-navbar id="InstructorHeader" *ngIf="is_instructor" text-center>
+    <ion-title>
+      <span>{{(course_obvs | async)?.name}}</span>
+      <span class="float-right" *ngIf="show_accesscode">Access Code:{{access_code_string}}</span>
+    </ion-title>
+    <ion-buttons end>
+      <button ion-button icon-only solid (click)="showAccessCodeDesktop()" hideWhen="android, ios" class="toggleChatList">
+          <ion-icon name="key"></ion-icon>
+      </button>
+    </ion-buttons>
     <ion-buttons end>
       <button ion-button icon-only solid (click)="showStudentList()" hideWhen="android, ios" class="toggleChatList">
         <ion-icon name="people"></ion-icon>
@@ -17,13 +26,10 @@
         <ion-icon name="people"></ion-icon>
       </button>
     </ion-buttons>
-    <ion-title>
-      <span>{{(course_obvs | async)?.name}}</span>
-      <span hideWhen="android, ios" class="float-right"> Access Code: {{access_code_string}}</span>
-    </ion-title>
+
     <ion-buttons end>
       <button ion-button showWhen="ios,android" (click)="showAccessCode()">
-        <ion-icon name="key" ></ion-icon>
+        <ion-icon name="key"></ion-icon>
       </button>
       <button ion-button (click)="chatroomSettings()">
         <ion-icon name="settings"></ion-icon>
@@ -37,8 +43,8 @@
     <ion-title>{{(course_obvs | async)?.name}}</ion-title>
   </ion-navbar>
   <ion-navbar *ngIf="!is_instructor" showWhen="ios,android">
-      <ion-title>{{(course_obvs | async)?.name}}</ion-title>
-    </ion-navbar>
+    <ion-title>{{(course_obvs | async)?.name}}</ion-title>
+  </ion-navbar>
 </ion-header>
 
 <ion-content>
@@ -60,18 +66,12 @@
 
 <ion-footer>
   <ion-toolbar id="CommentInputToolbar">
-    <ion-buttons class="ion-start">
-      <button ion-button>
-        <ion-icon name="happy"></ion-icon>
-      </button>
-    </ion-buttons>
+      <span class="limit-counter">{{comment_input.length}}/{{comment_max_length}}</span>
     <form (ngSubmit)="addComment()" [formGroup]="comment_control">
       <ion-input id="CommentInput" type="text" placeholder="Type comments here..." name="comment_input" [(ngModel)]="comment_input"
         formControlName="comment_input">
       </ion-input>
-      
       <ion-buttons id="SendButton" class="ion-end">
-          <span>{{comment_input.length}}/{{comment_max_length}}</span>
         <button ion-button type="submit" [disabled]="comment_control.invalid">
           <ion-icon ios="ios-send" md="md-send"></ion-icon>
         </button>
